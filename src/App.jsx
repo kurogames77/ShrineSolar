@@ -2,30 +2,30 @@ import './App.css'
 
 function App() {
   return (
-    <div className="min-h-screen bg-white flex flex-col">
+    <div className="min-h-screen bg-gray-300 flex flex-col">
       {/* Header Section */}
-      <header className="w-full bg-gray-200 p-6 flex justify-between items-center shadow-sm">
+      <header className="w-full max-w-7xl mx-auto pt-16 px-12 flex justify-between items-start">
         {/* Logo Placeholder */}
-        <div className="w-32 h-32 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold text-xl shadow-md">
+        <div className="w-48 h-48 bg-gray-100 border-2 border-gray-400 rounded-full flex items-center justify-center text-gray-700 font-bold text-2xl shadow-sm">
           Logo
         </div>
 
         {/* Navigation Buttons */}
-        <nav className="flex gap-6 pr-8">
-          <a href="#" className="px-8 py-3 bg-blue-500 text-white rounded-full font-medium hover:bg-blue-600 transition-colors shadow-sm">
+        <nav className="flex gap-8 pt-8">
+          <a href="#" className="w-40 py-5 bg-gray-100 border-2 border-gray-400 text-gray-700 rounded-[40px] font-medium text-center hover:bg-white transition-colors shadow-sm">
             Home
           </a>
-          <a href="#" className="px-8 py-3 bg-blue-500 text-white rounded-full font-medium hover:bg-blue-600 transition-colors shadow-sm">
+          <a href="#" className="w-40 py-5 bg-gray-100 border-2 border-gray-400 text-gray-700 rounded-[40px] font-medium text-center hover:bg-white transition-colors shadow-sm">
             Shop
           </a>
-          <a href="#" className="px-8 py-3 bg-blue-500 text-white rounded-full font-medium hover:bg-blue-600 transition-colors shadow-sm">
+          <a href="#" className="w-40 py-5 bg-gray-100 border-2 border-gray-400 text-gray-700 rounded-[40px] font-medium text-center hover:bg-white transition-colors shadow-sm">
             Inquiry
           </a>
         </nav>
       </header>
 
       {/* Main Content Area */}
-      <main className="flex-grow flex flex-col items-center justify-center p-8 bg-gray-300">
+      <main className="flex-grow flex flex-col items-center justify-center p-8">
         <p className="text-gray-600 text-lg">
           {/* Shrine Solar — Content will go here */}
           Main Content Area
