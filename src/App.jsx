@@ -22,20 +22,20 @@ function App() {
     <div className="min-h-screen bg-[#a8a8a8] flex flex-col">
       {/* Header Layout (No visible container) */}
       {isHome && (
-        <header className="w-full max-w-7xl mx-auto px-16 pt-24 pb-8 flex justify-between items-center">
+        <header className="w-full max-w-7xl mx-auto px-4 sm:px-16 pt-8 sm:pt-24 pb-4 sm:pb-8 flex flex-col sm:flex-row justify-between items-center gap-4">
 
         {/* Logo */}
-        <img src="/logo.png" alt="Shrine Solar Logo" className="h-14 w-auto" />
+        <img src="/logo.png" alt="Shrine Solar Logo" className="h-10 sm:h-14 w-auto" />
 
         {/* Navigation Buttons */}
-        <nav className="flex gap-10">
-          <button onClick={() => navigate('/')} className="w-44 py-5 bg-[#909090] border-2 border-gray-500 text-black rounded-full font-medium text-center shadow-sm hover:bg-[#808080] transition-colors">
+        <nav className="flex gap-3 sm:gap-10">
+          <button onClick={() => navigate('/')} className="w-28 sm:w-44 py-3 sm:py-5 bg-[#909090] border-2 border-gray-500 text-black rounded-full font-medium text-center text-sm sm:text-base shadow-sm hover:bg-[#808080] transition-colors">
             Home
           </button>
-          <button onClick={() => setIsShopOpen(true)} className="w-44 py-5 bg-[#909090] border-2 border-gray-500 text-black rounded-full font-medium text-center shadow-sm hover:bg-[#808080] transition-colors">
+          <button onClick={() => setIsShopOpen(true)} className="w-28 sm:w-44 py-3 sm:py-5 bg-[#909090] border-2 border-gray-500 text-black rounded-full font-medium text-center text-sm sm:text-base shadow-sm hover:bg-[#808080] transition-colors">
             Shop
           </button>
-          <button onClick={() => setIsInquiryOpen(true)} className="w-44 py-5 bg-[#909090] border-2 border-gray-500 text-black rounded-full font-medium text-center shadow-sm hover:bg-[#808080] transition-colors">
+          <button onClick={() => setIsInquiryOpen(true)} className="w-28 sm:w-44 py-3 sm:py-5 bg-[#909090] border-2 border-gray-500 text-black rounded-full font-medium text-center text-sm sm:text-base shadow-sm hover:bg-[#808080] transition-colors">
             Inquiry
           </button>
         </nav>
@@ -53,21 +53,21 @@ function App() {
       </main>
       {/* Shop Modal */}
       {isHome && isShopOpen && (
-        <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50" onClick={() => setIsShopOpen(false)}>
-          <div className="bg-[#a8a8a8] border-4 border-gray-600 rounded-3xl w-11/12 max-w-5xl h-[60vh] min-h-[500px] flex items-center justify-center gap-12 shadow-2xl relative" onClick={(e) => e.stopPropagation()}>
+        <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 p-4" onClick={() => setIsShopOpen(false)}>
+          <div className="bg-[#a8a8a8] border-4 border-gray-600 rounded-3xl w-full max-w-5xl h-auto min-h-[300px] sm:h-[60vh] sm:min-h-[500px] flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-12 p-8 sm:p-12 shadow-2xl relative" onClick={(e) => e.stopPropagation()}>
             <button 
               onClick={() => setIsShopOpen(false)}
-              className="absolute top-6 right-6 text-gray-700 hover:text-black hover:bg-gray-300 w-12 h-12 rounded-full flex items-center justify-center text-2xl font-bold transition-colors"
+              className="absolute top-4 right-4 sm:top-6 sm:right-6 text-gray-700 hover:text-black hover:bg-gray-300 w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center text-xl sm:text-2xl font-bold transition-colors"
             >
               ✕
             </button>
-            <button onClick={() => handleNavigation('/solar-panel')} className="w-56 h-56 bg-[#909090] border-2 border-gray-500 text-black font-semibold text-2xl rounded-2xl flex items-center justify-center shadow-lg hover:bg-[#808080] hover:scale-105 transition-all">
+            <button onClick={() => handleNavigation('/solar-panel')} className="w-40 h-40 sm:w-56 sm:h-56 bg-[#909090] border-2 border-gray-500 text-black font-semibold text-xl sm:text-2xl rounded-2xl flex items-center justify-center shadow-lg hover:bg-[#808080] hover:scale-105 transition-all">
               Solar Panel
             </button>
-            <button onClick={() => handleNavigation('/battery')} className="w-56 h-56 bg-[#909090] border-2 border-gray-500 text-black font-semibold text-2xl rounded-2xl flex items-center justify-center shadow-lg hover:bg-[#808080] hover:scale-105 transition-all">
+            <button onClick={() => handleNavigation('/battery')} className="w-40 h-40 sm:w-56 sm:h-56 bg-[#909090] border-2 border-gray-500 text-black font-semibold text-xl sm:text-2xl rounded-2xl flex items-center justify-center shadow-lg hover:bg-[#808080] hover:scale-105 transition-all">
               Battery
             </button>
-            <button onClick={() => handleNavigation('/accessories')} className="w-56 h-56 bg-[#909090] border-2 border-gray-500 text-black font-semibold text-2xl rounded-2xl flex items-center justify-center shadow-lg hover:bg-[#808080] hover:scale-105 transition-all">
+            <button onClick={() => handleNavigation('/accessories')} className="w-40 h-40 sm:w-56 sm:h-56 bg-[#909090] border-2 border-gray-500 text-black font-semibold text-xl sm:text-2xl rounded-2xl flex items-center justify-center shadow-lg hover:bg-[#808080] hover:scale-105 transition-all">
               Accessories
             </button>
           </div>
@@ -75,27 +75,27 @@ function App() {
       )}
       {/* Inquiry Modal */}
       {isHome && isInquiryOpen && (
-        <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50" onClick={() => setIsInquiryOpen(false)}>
-          <div className="bg-[#a8a8a8] border-4 border-gray-600 rounded-3xl w-11/12 max-w-5xl h-[60vh] min-h-[500px] flex flex-col items-center justify-center gap-12 shadow-2xl relative" onClick={(e) => e.stopPropagation()}>
+        <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 p-4" onClick={() => setIsInquiryOpen(false)}>
+          <div className="bg-[#a8a8a8] border-4 border-gray-600 rounded-3xl w-full max-w-5xl h-auto min-h-[300px] sm:h-[60vh] sm:min-h-[500px] flex flex-col items-center justify-center gap-6 sm:gap-12 p-8 sm:p-12 shadow-2xl relative" onClick={(e) => e.stopPropagation()}>
             <button 
               onClick={() => setIsInquiryOpen(false)}
-              className="absolute top-6 right-6 text-gray-700 hover:text-black hover:bg-gray-300 w-12 h-12 rounded-full flex items-center justify-center text-2xl font-bold transition-colors"
+              className="absolute top-4 right-4 sm:top-6 sm:right-6 text-gray-700 hover:text-black hover:bg-gray-300 w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center text-xl sm:text-2xl font-bold transition-colors"
             >
               ✕
             </button>
-            <h2 className="text-4xl font-bold text-black tracking-wider">Contact Information</h2>
-            <div className="flex gap-12">
-              <a href="https://www.facebook.com/shrinesolarservices" target="_blank" rel="noopener noreferrer" className="w-56 h-56 bg-[#909090] border-2 border-gray-500 rounded-2xl flex flex-col items-center justify-center shadow-lg p-6 hover:bg-[#808080] hover:scale-105 transition-all">
-                <span className="text-2xl font-bold text-black">Facebook</span>
-                <span className="text-sm text-gray-700 mt-4 text-center">ShrineSolar</span>
+            <h2 className="text-2xl sm:text-4xl font-bold text-black tracking-wider">Contact Information</h2>
+            <div className="flex flex-col sm:flex-row gap-6 sm:gap-12">
+              <a href="https://www.facebook.com/shrinesolarservices" target="_blank" rel="noopener noreferrer" className="w-44 h-44 sm:w-56 sm:h-56 bg-[#909090] border-2 border-gray-500 rounded-2xl flex flex-col items-center justify-center shadow-lg p-4 sm:p-6 hover:bg-[#808080] hover:scale-105 transition-all">
+                <span className="text-xl sm:text-2xl font-bold text-black">Facebook</span>
+                <span className="text-sm text-gray-700 mt-2 sm:mt-4 text-center">ShrineSolar</span>
               </a>
-              <button onClick={() => navigator.clipboard.writeText('09171842499')} className="w-56 h-56 bg-[#909090] border-2 border-gray-500 rounded-2xl flex flex-col items-center justify-center shadow-lg p-6 hover:bg-[#808080] hover:scale-105 transition-all">
-                <span className="text-2xl font-bold text-black">Mobile No.</span>
-                <span className="text-sm text-gray-700 mt-4 text-center">09171842499</span>
+              <button onClick={() => navigator.clipboard.writeText('09171842499')} className="w-44 h-44 sm:w-56 sm:h-56 bg-[#909090] border-2 border-gray-500 rounded-2xl flex flex-col items-center justify-center shadow-lg p-4 sm:p-6 hover:bg-[#808080] hover:scale-105 transition-all">
+                <span className="text-xl sm:text-2xl font-bold text-black">Mobile No.</span>
+                <span className="text-sm text-gray-700 mt-2 sm:mt-4 text-center">09171842499</span>
               </button>
-              <a href="https://mail.google.com/mail/?view=cm&fs=1&to=Shrinesolar2022@gmail.com" target="_blank" rel="noopener noreferrer" className="w-56 h-56 bg-[#909090] border-2 border-gray-500 rounded-2xl flex flex-col items-center justify-center shadow-lg p-6 hover:bg-[#808080] hover:scale-105 transition-all">
-                <span className="text-2xl font-bold text-black">Gmail</span>
-                <span className="text-sm text-gray-700 mt-4 text-center break-all">Shrinesolar2022@gmail.com</span>
+              <a href="https://mail.google.com/mail/?view=cm&fs=1&to=Shrinesolar2022@gmail.com" target="_blank" rel="noopener noreferrer" className="w-44 h-44 sm:w-56 sm:h-56 bg-[#909090] border-2 border-gray-500 rounded-2xl flex flex-col items-center justify-center shadow-lg p-4 sm:p-6 hover:bg-[#808080] hover:scale-105 transition-all">
+                <span className="text-xl sm:text-2xl font-bold text-black">Gmail</span>
+                <span className="text-xs sm:text-sm text-gray-700 mt-2 sm:mt-4 text-center break-all">Shrinesolar2022@gmail.com</span>
               </a>
             </div>
           </div>
