@@ -7,7 +7,7 @@ function App() {
       <header className="w-full max-w-7xl mx-auto px-16 pt-24 pb-8 flex justify-between items-center">
 
         {/* Logo */}
-        <img src="/logo.png" alt="Shrine Solar Logo" className="h-20 w-auto" />
+        <img src="/logo.png" alt="Shrine Solar Logo" className="h-14 w-auto" />
 
         {/* Navigation Buttons */}
         <nav className="flex gap-10">
