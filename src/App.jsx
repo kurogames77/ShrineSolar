@@ -1,8 +1,18 @@
 import { useState } from 'react'
+import { Routes, Route, useNavigate } from 'react-router-dom'
+import SolarPanel from './pages/SolarPanel'
+import Battery from './pages/Battery'
+import Accessories from './pages/Accessories'
 import './App.css'
 
 function App() {
   const [isShopOpen, setIsShopOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const handleNavigation = (path) => {
+    setIsShopOpen(false);
+    navigate(path);
+  };
 
   return (
     <div className="min-h-screen bg-[#a8a8a8] flex flex-col">
@@ -14,12 +24,12 @@ function App() {
 
         {/* Navigation Buttons */}
         <nav className="flex gap-10">
-          <a href="#" className="w-44 py-5 bg-[#909090] border-2 border-gray-500 text-black rounded-full font-medium text-center shadow-sm hover:bg-[#808080] transition-colors">
+          <button onClick={() => navigate('/')} className="w-44 py-5 bg-[#909090] border-2 border-gray-500 text-black rounded-full font-medium text-center shadow-sm hover:bg-[#808080] transition-colors">
             Home
-          </a>
-          <a href="#" onClick={(e) => { e.preventDefault(); setIsShopOpen(true); }} className="w-44 py-5 bg-[#909090] border-2 border-gray-500 text-black rounded-full font-medium text-center shadow-sm hover:bg-[#808080] transition-colors">
+          </button>
+          <button onClick={() => setIsShopOpen(true)} className="w-44 py-5 bg-[#909090] border-2 border-gray-500 text-black rounded-full font-medium text-center shadow-sm hover:bg-[#808080] transition-colors">
             Shop
-          </a>
+          </button>
           <a href="#" className="w-44 py-5 bg-[#909090] border-2 border-gray-500 text-black rounded-full font-medium text-center shadow-sm hover:bg-[#808080] transition-colors">
             Inquiry
           </a>
@@ -28,21 +38,30 @@ function App() {
 
       {/* Main Content Area */}
       <main className="flex-grow flex flex-col items-center justify-center p-8 w-full">
-        <p className="text-gray-600 text-lg">
-          {/* Shrine Solar — Content will go here */}
-        </p>
+        <Routes>
+          <Route path="/" element={<p className="text-gray-600 text-lg">{/* Shrine Solar — Content will go here */}</p>} />
+          <Route path="/solar-panel" element={<SolarPanel />} />
+          <Route path="/battery" element={<Battery />} />
+          <Route path="/accessories" element={<Accessories />} />
+        </Routes>
       </main>
       {/* Shop Modal */}
       {isShopOpen && (
         <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50" onClick={() => setIsShopOpen(false)}>
-          <div className="bg-[#a8a8a8] border-4 border-gray-600 rounded-3xl w-11/12 max-w-5xl h-[60vh] min-h-[500px] flex items-center justify-center gap-12 shadow-2xl" onClick={(e) => e.stopPropagation()}>
-            <button className="w-56 h-56 bg-[#909090] border-2 border-gray-500 text-black font-semibold text-2xl rounded-2xl flex items-center justify-center shadow-lg hover:bg-[#808080] hover:scale-105 transition-all">
+          <div className="bg-[#a8a8a8] border-4 border-gray-600 rounded-3xl w-11/12 max-w-5xl h-[60vh] min-h-[500px] flex items-center justify-center gap-12 shadow-2xl relative" onClick={(e) => e.stopPropagation()}>
+            <button 
+              onClick={() => setIsShopOpen(false)}
+              className="absolute top-6 right-6 text-gray-700 hover:text-black hover:bg-gray-300 w-12 h-12 rounded-full flex items-center justify-center text-2xl font-bold transition-colors"
+            >
+              ✕
+            </button>
+            <button onClick={() => handleNavigation('/solar-panel')} className="w-56 h-56 bg-[#909090] border-2 border-gray-500 text-black font-semibold text-2xl rounded-2xl flex items-center justify-center shadow-lg hover:bg-[#808080] hover:scale-105 transition-all">
               Solar Panel
             </button>
-            <button className="w-56 h-56 bg-[#909090] border-2 border-gray-500 text-black font-semibold text-2xl rounded-2xl flex items-center justify-center shadow-lg hover:bg-[#808080] hover:scale-105 transition-all">
+            <button onClick={() => handleNavigation('/battery')} className="w-56 h-56 bg-[#909090] border-2 border-gray-500 text-black font-semibold text-2xl rounded-2xl flex items-center justify-center shadow-lg hover:bg-[#808080] hover:scale-105 transition-all">
               Battery
             </button>
-            <button className="w-56 h-56 bg-[#909090] border-2 border-gray-500 text-black font-semibold text-2xl rounded-2xl flex items-center justify-center shadow-lg hover:bg-[#808080] hover:scale-105 transition-all">
+            <button onClick={() => handleNavigation('/accessories')} className="w-56 h-56 bg-[#909090] border-2 border-gray-500 text-black font-semibold text-2xl rounded-2xl flex items-center justify-center shadow-lg hover:bg-[#808080] hover:scale-105 transition-all">
               Accessories
             </button>
           </div>
