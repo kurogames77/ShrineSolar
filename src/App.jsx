@@ -4,7 +4,10 @@ function App() {
   return (
     <div className="min-h-screen bg-[#a8a8a8] flex flex-col">
       {/* Header Layout (No visible container) */}
-      <header className="w-full max-w-7xl mx-auto px-16 pt-24 pb-8 flex justify-end items-center">
+      <header className="w-full max-w-7xl mx-auto px-16 pt-24 pb-8 flex justify-between items-center">
+
+        {/* Logo */}
+        <img src="/logo.png" alt="Shrine Solar Logo" className="h-20 w-auto" />
 
         {/* Navigation Buttons */}
         <nav className="flex gap-10">
