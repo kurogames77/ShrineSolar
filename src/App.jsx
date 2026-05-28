@@ -85,9 +85,9 @@ function App() {
             >
               ✕
             </button>
-            <div className="flex-grow flex flex-col items-center justify-center p-8 pt-16 sm:p-12 sm:pt-16 w-full overflow-y-auto">
-              <h2 className="text-2xl sm:text-4xl font-bold text-black tracking-wider mb-6 sm:mb-12 text-center">Contact Information</h2>
-              <div className="flex flex-col md:flex-row gap-6 sm:gap-12 w-full items-center justify-center">
+            <div className="flex flex-col w-full overflow-y-auto flex-grow">
+              <h2 className="text-2xl sm:text-4xl font-bold text-black tracking-wider pt-6 sm:pt-8 pb-4 sm:pb-6 text-center flex-shrink-0">Contact Information</h2>
+              <div className="flex-grow flex flex-col md:flex-row gap-6 sm:gap-12 w-full items-center justify-center px-8 pb-8 sm:px-12 sm:pb-12">
                 <a href="https://www.facebook.com/shrinesolarservices" target="_blank" rel="noopener noreferrer" className="w-full max-w-[200px] sm:max-w-none sm:w-56 h-32 sm:h-56 bg-[#909090] border-2 border-gray-500 rounded-2xl flex flex-col items-center justify-center shadow-lg p-4 sm:p-6 hover:bg-[#808080] hover:scale-105 transition-all flex-shrink-0">
                   <span className="text-xl sm:text-2xl font-bold text-black">Facebook</span>
                   <span className="text-sm text-gray-700 mt-2 sm:mt-4 text-center">ShrineSolar</span>
