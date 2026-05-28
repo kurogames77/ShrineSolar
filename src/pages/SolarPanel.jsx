@@ -3,9 +3,9 @@ import { useNavigate } from 'react-router-dom';
 export default function SolarPanel() {
   const navigate = useNavigate();
   return (
-    <div className="w-full flex-grow flex flex-col pt-8 sm:pt-16 px-4 sm:px-8 pb-8 items-center">
+    <div className="w-full pt-8 sm:pt-16 px-4 sm:px-8 pb-8">
       {/* Header */}
-      <header className="w-full max-w-7xl flex justify-center items-center mb-8 sm:mb-16 px-2 sm:px-8 relative">
+      <header className="w-full max-w-7xl mx-auto flex justify-center items-center mb-8 sm:mb-16 px-2 sm:px-8 relative">
         <h1 className="text-3xl sm:text-5xl font-bold text-black tracking-wider text-center">Solar Panel</h1>
         <button 
           onClick={() => navigate('/')}
@@ -16,7 +16,7 @@ export default function SolarPanel() {
       </header>
 
       {/* Main Content Modal */}
-      <div className="bg-[#a8a8a8] border-4 border-gray-600 rounded-3xl w-full max-w-7xl p-4 sm:p-10 flex-grow shadow-2xl flex justify-center my-4 sm:my-8">
+      <div className="bg-[#a8a8a8] border-4 border-gray-600 rounded-3xl w-full max-w-7xl mx-auto p-4 sm:p-10 shadow-2xl flex justify-center my-4 sm:my-8">
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4 sm:gap-12 w-full max-w-5xl h-fit">
           {[1, 2, 3, 4, 5, 6].map((item) => (
             <div key={item} className="bg-[#909090] border-2 border-gray-500 rounded-2xl sm:rounded-3xl min-h-[200px] sm:min-h-[350px] flex flex-col items-center justify-between p-3 sm:p-6 shadow-lg hover:scale-105 transition-transform">
