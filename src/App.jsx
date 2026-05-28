@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Routes, Route, useNavigate } from 'react-router-dom'
+import { Routes, Route, useNavigate, useLocation } from 'react-router-dom'
 import SolarPanel from './pages/SolarPanel'
 import Battery from './pages/Battery'
 import Accessories from './pages/Accessories'
@@ -8,16 +8,20 @@ import './App.css'
 function App() {
   const [isShopOpen, setIsShopOpen] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleNavigation = (path) => {
     setIsShopOpen(false);
     navigate(path);
   };
 
+  const isHome = location.pathname === '/';
+
   return (
     <div className="min-h-screen bg-[#a8a8a8] flex flex-col">
       {/* Header Layout (No visible container) */}
-      <header className="w-full max-w-7xl mx-auto px-16 pt-24 pb-8 flex justify-between items-center">
+      {isHome && (
+        <header className="w-full max-w-7xl mx-auto px-16 pt-24 pb-8 flex justify-between items-center">
 
         {/* Logo */}
         <img src="/logo.png" alt="Shrine Solar Logo" className="h-14 w-auto" />
@@ -35,9 +39,10 @@ function App() {
           </a>
         </nav>
       </header>
+      )}
 
       {/* Main Content Area */}
-      <main className="flex-grow flex flex-col items-center justify-center p-8 w-full">
+      <main className="flex-grow flex flex-col w-full">
         <Routes>
           <Route path="/" element={<p className="text-gray-600 text-lg">{/* Shrine Solar — Content will go here */}</p>} />
           <Route path="/solar-panel" element={<SolarPanel />} />
@@ -46,7 +51,7 @@ function App() {
         </Routes>
       </main>
       {/* Shop Modal */}
-      {isShopOpen && (
+      {isHome && isShopOpen && (
         <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50" onClick={() => setIsShopOpen(false)}>
           <div className="bg-[#a8a8a8] border-4 border-gray-600 rounded-3xl w-11/12 max-w-5xl h-[60vh] min-h-[500px] flex items-center justify-center gap-12 shadow-2xl relative" onClick={(e) => e.stopPropagation()}>
             <button 
