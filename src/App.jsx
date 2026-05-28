@@ -93,7 +93,7 @@ function App() {
                 <span className="text-2xl font-bold text-black">Mobile No.</span>
                 <span className="text-sm text-gray-700 mt-4 text-center">09171842499</span>
               </button>
-              <a href="mailto:Shrinesolar2022@gmail.com" className="w-56 h-56 bg-[#909090] border-2 border-gray-500 rounded-2xl flex flex-col items-center justify-center shadow-lg p-6 hover:bg-[#808080] hover:scale-105 transition-all">
+              <a href="https://mail.google.com/mail/?view=cm&fs=1&to=Shrinesolar2022@gmail.com" target="_blank" rel="noopener noreferrer" className="w-56 h-56 bg-[#909090] border-2 border-gray-500 rounded-2xl flex flex-col items-center justify-center shadow-lg p-6 hover:bg-[#808080] hover:scale-105 transition-all">
                 <span className="text-2xl font-bold text-black">Gmail</span>
                 <span className="text-sm text-gray-700 mt-4 text-center break-all">Shrinesolar2022@gmail.com</span>
               </a>
