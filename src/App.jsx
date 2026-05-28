@@ -61,18 +61,16 @@ function App() {
             >
               ✕
             </button>
-            <div className="overflow-y-auto flex-grow flex flex-col p-8 pt-16 sm:p-12 sm:pt-24 w-full">
-              <div className="my-auto flex flex-col md:flex-row items-center justify-center gap-6 sm:gap-12 w-full">
-                <button onClick={() => handleNavigation('/solar-panel')} className="w-full max-w-[200px] sm:max-w-none sm:w-56 h-32 sm:h-56 bg-[#909090] border-2 border-gray-500 text-black font-semibold text-xl sm:text-2xl rounded-2xl flex items-center justify-center shadow-lg hover:bg-[#808080] hover:scale-105 transition-all flex-shrink-0">
-                  Solar Panel
-                </button>
-                <button onClick={() => handleNavigation('/battery')} className="w-full max-w-[200px] sm:max-w-none sm:w-56 h-32 sm:h-56 bg-[#909090] border-2 border-gray-500 text-black font-semibold text-xl sm:text-2xl rounded-2xl flex items-center justify-center shadow-lg hover:bg-[#808080] hover:scale-105 transition-all flex-shrink-0">
-                  Battery
-                </button>
-                <button onClick={() => handleNavigation('/accessories')} className="w-full max-w-[200px] sm:max-w-none sm:w-56 h-32 sm:h-56 bg-[#909090] border-2 border-gray-500 text-black font-semibold text-xl sm:text-2xl rounded-2xl flex items-center justify-center shadow-lg hover:bg-[#808080] hover:scale-105 transition-all flex-shrink-0">
-                  Accessories
-                </button>
-              </div>
+            <div className="flex-grow flex flex-col md:flex-row items-center justify-center gap-6 sm:gap-12 p-8 pt-16 sm:p-12 sm:pt-24 w-full overflow-y-auto">
+              <button onClick={() => handleNavigation('/solar-panel')} className="w-full max-w-[200px] sm:max-w-none sm:w-56 h-32 sm:h-56 bg-[#909090] border-2 border-gray-500 text-black font-semibold text-xl sm:text-2xl rounded-2xl flex items-center justify-center shadow-lg hover:bg-[#808080] hover:scale-105 transition-all flex-shrink-0">
+                Solar Panel
+              </button>
+              <button onClick={() => handleNavigation('/battery')} className="w-full max-w-[200px] sm:max-w-none sm:w-56 h-32 sm:h-56 bg-[#909090] border-2 border-gray-500 text-black font-semibold text-xl sm:text-2xl rounded-2xl flex items-center justify-center shadow-lg hover:bg-[#808080] hover:scale-105 transition-all flex-shrink-0">
+                Battery
+              </button>
+              <button onClick={() => handleNavigation('/accessories')} className="w-full max-w-[200px] sm:max-w-none sm:w-56 h-32 sm:h-56 bg-[#909090] border-2 border-gray-500 text-black font-semibold text-xl sm:text-2xl rounded-2xl flex items-center justify-center shadow-lg hover:bg-[#808080] hover:scale-105 transition-all flex-shrink-0">
+                Accessories
+              </button>
             </div>
           </div>
         </div>
@@ -87,23 +85,21 @@ function App() {
             >
               ✕
             </button>
-            <div className="overflow-y-auto flex-grow flex flex-col p-8 pt-16 sm:p-12 sm:pt-24 w-full">
-              <div className="my-auto flex flex-col items-center w-full">
-                <h2 className="text-2xl sm:text-4xl font-bold text-black tracking-wider mb-6 sm:mb-12 text-center">Contact Information</h2>
-                <div className="flex flex-col md:flex-row gap-6 sm:gap-12 w-full items-center justify-center">
-                  <a href="https://www.facebook.com/shrinesolarservices" target="_blank" rel="noopener noreferrer" className="w-full max-w-[200px] sm:max-w-none sm:w-56 h-32 sm:h-56 bg-[#909090] border-2 border-gray-500 rounded-2xl flex flex-col items-center justify-center shadow-lg p-4 sm:p-6 hover:bg-[#808080] hover:scale-105 transition-all flex-shrink-0">
-                    <span className="text-xl sm:text-2xl font-bold text-black">Facebook</span>
-                    <span className="text-sm text-gray-700 mt-2 sm:mt-4 text-center">ShrineSolar</span>
-                  </a>
-                  <button onClick={() => navigator.clipboard.writeText('09171842499')} className="w-full max-w-[200px] sm:max-w-none sm:w-56 h-32 sm:h-56 bg-[#909090] border-2 border-gray-500 rounded-2xl flex flex-col items-center justify-center shadow-lg p-4 sm:p-6 hover:bg-[#808080] hover:scale-105 transition-all flex-shrink-0">
-                    <span className="text-xl sm:text-2xl font-bold text-black">Mobile No.</span>
-                    <span className="text-sm text-gray-700 mt-2 sm:mt-4 text-center">09171842499</span>
-                  </button>
-                  <a href="https://mail.google.com/mail/?view=cm&fs=1&to=Shrinesolar2022@gmail.com" target="_blank" rel="noopener noreferrer" className="w-full max-w-[200px] sm:max-w-none sm:w-56 h-32 sm:h-56 bg-[#909090] border-2 border-gray-500 rounded-2xl flex flex-col items-center justify-center shadow-lg p-4 sm:p-6 hover:bg-[#808080] hover:scale-105 transition-all flex-shrink-0">
-                    <span className="text-xl sm:text-2xl font-bold text-black">Gmail</span>
-                    <span className="text-xs sm:text-sm text-gray-700 mt-2 sm:mt-4 text-center break-all">Shrinesolar2022@gmail.com</span>
-                  </a>
-                </div>
+            <div className="flex-grow flex flex-col items-center justify-center p-8 pt-16 sm:p-12 sm:pt-16 w-full overflow-y-auto">
+              <h2 className="text-2xl sm:text-4xl font-bold text-black tracking-wider mb-6 sm:mb-12 text-center">Contact Information</h2>
+              <div className="flex flex-col md:flex-row gap-6 sm:gap-12 w-full items-center justify-center">
+                <a href="https://www.facebook.com/shrinesolarservices" target="_blank" rel="noopener noreferrer" className="w-full max-w-[200px] sm:max-w-none sm:w-56 h-32 sm:h-56 bg-[#909090] border-2 border-gray-500 rounded-2xl flex flex-col items-center justify-center shadow-lg p-4 sm:p-6 hover:bg-[#808080] hover:scale-105 transition-all flex-shrink-0">
+                  <span className="text-xl sm:text-2xl font-bold text-black">Facebook</span>
+                  <span className="text-sm text-gray-700 mt-2 sm:mt-4 text-center">ShrineSolar</span>
+                </a>
+                <button onClick={() => navigator.clipboard.writeText('09171842499')} className="w-full max-w-[200px] sm:max-w-none sm:w-56 h-32 sm:h-56 bg-[#909090] border-2 border-gray-500 rounded-2xl flex flex-col items-center justify-center shadow-lg p-4 sm:p-6 hover:bg-[#808080] hover:scale-105 transition-all flex-shrink-0">
+                  <span className="text-xl sm:text-2xl font-bold text-black">Mobile No.</span>
+                  <span className="text-sm text-gray-700 mt-2 sm:mt-4 text-center">09171842499</span>
+                </button>
+                <a href="https://mail.google.com/mail/?view=cm&fs=1&to=Shrinesolar2022@gmail.com" target="_blank" rel="noopener noreferrer" className="w-full max-w-[200px] sm:max-w-none sm:w-56 h-32 sm:h-56 bg-[#909090] border-2 border-gray-500 rounded-2xl flex flex-col items-center justify-center shadow-lg p-4 sm:p-6 hover:bg-[#808080] hover:scale-105 transition-all flex-shrink-0">
+                  <span className="text-xl sm:text-2xl font-bold text-black">Gmail</span>
+                  <span className="text-xs sm:text-sm text-gray-700 mt-2 sm:mt-4 text-center break-all">Shrinesolar2022@gmail.com</span>
+                </a>
               </div>
             </div>
           </div>
