@@ -7,6 +7,7 @@ import './App.css'
 
 function App() {
   const [isShopOpen, setIsShopOpen] = useState(false);
+  const [isInquiryOpen, setIsInquiryOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -34,9 +35,9 @@ function App() {
           <button onClick={() => setIsShopOpen(true)} className="w-44 py-5 bg-[#909090] border-2 border-gray-500 text-black rounded-full font-medium text-center shadow-sm hover:bg-[#808080] transition-colors">
             Shop
           </button>
-          <a href="#" className="w-44 py-5 bg-[#909090] border-2 border-gray-500 text-black rounded-full font-medium text-center shadow-sm hover:bg-[#808080] transition-colors">
+          <button onClick={() => setIsInquiryOpen(true)} className="w-44 py-5 bg-[#909090] border-2 border-gray-500 text-black rounded-full font-medium text-center shadow-sm hover:bg-[#808080] transition-colors">
             Inquiry
-          </a>
+          </button>
         </nav>
       </header>
       )}
@@ -69,6 +70,37 @@ function App() {
             <button onClick={() => handleNavigation('/accessories')} className="w-56 h-56 bg-[#909090] border-2 border-gray-500 text-black font-semibold text-2xl rounded-2xl flex items-center justify-center shadow-lg hover:bg-[#808080] hover:scale-105 transition-all">
               Accessories
             </button>
+          </div>
+        </div>
+      )}
+      {/* Inquiry Modal */}
+      {isHome && isInquiryOpen && (
+        <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50" onClick={() => setIsInquiryOpen(false)}>
+          <div className="bg-[#a8a8a8] border-4 border-gray-600 rounded-3xl w-11/12 max-w-5xl h-[60vh] min-h-[500px] flex flex-col items-center shadow-2xl relative" onClick={(e) => e.stopPropagation()}>
+            <button 
+              onClick={() => setIsInquiryOpen(false)}
+              className="absolute top-6 right-6 text-gray-700 hover:text-black hover:bg-gray-300 w-12 h-12 rounded-full flex items-center justify-center text-2xl font-bold transition-colors"
+            >
+              ✕
+            </button>
+            <h2 className="text-4xl font-bold text-black tracking-wider mt-16 mb-auto">Contact Information</h2>
+            <div className="flex gap-12 mb-auto">
+              <div className="w-56 h-56 bg-[#909090] border-2 border-gray-500 rounded-2xl flex flex-col items-center justify-center shadow-lg p-6">
+                <span className="text-4xl mb-4">📘</span>
+                <span className="text-lg font-bold text-black">Facebook</span>
+                <span className="text-sm text-gray-700 mt-2">ShrineSolar</span>
+              </div>
+              <div className="w-56 h-56 bg-[#909090] border-2 border-gray-500 rounded-2xl flex flex-col items-center justify-center shadow-lg p-6">
+                <span className="text-4xl mb-4">📱</span>
+                <span className="text-lg font-bold text-black">Mobile No.</span>
+                <span className="text-sm text-gray-700 mt-2">+63 912 345 6789</span>
+              </div>
+              <div className="w-56 h-56 bg-[#909090] border-2 border-gray-500 rounded-2xl flex flex-col items-center justify-center shadow-lg p-6">
+                <span className="text-4xl mb-4">📧</span>
+                <span className="text-lg font-bold text-black">Gmail</span>
+                <span className="text-sm text-gray-700 mt-2">shrinesolar@gmail.com</span>
+              </div>
+            </div>
           </div>
         </div>
       )}
