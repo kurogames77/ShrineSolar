@@ -76,30 +76,27 @@ function App() {
       {/* Inquiry Modal */}
       {isHome && isInquiryOpen && (
         <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50" onClick={() => setIsInquiryOpen(false)}>
-          <div className="bg-[#a8a8a8] border-4 border-gray-600 rounded-3xl w-11/12 max-w-5xl h-[60vh] min-h-[500px] flex flex-col items-center shadow-2xl relative" onClick={(e) => e.stopPropagation()}>
+          <div className="bg-[#a8a8a8] border-4 border-gray-600 rounded-3xl w-11/12 max-w-5xl h-[60vh] min-h-[500px] flex flex-col items-center justify-center gap-12 shadow-2xl relative" onClick={(e) => e.stopPropagation()}>
             <button 
               onClick={() => setIsInquiryOpen(false)}
               className="absolute top-6 right-6 text-gray-700 hover:text-black hover:bg-gray-300 w-12 h-12 rounded-full flex items-center justify-center text-2xl font-bold transition-colors"
             >
               ✕
             </button>
-            <h2 className="text-4xl font-bold text-black tracking-wider mt-16 mb-auto">Contact Information</h2>
-            <div className="flex gap-12 mb-auto">
-              <div className="w-56 h-56 bg-[#909090] border-2 border-gray-500 rounded-2xl flex flex-col items-center justify-center shadow-lg p-6">
-                <span className="text-4xl mb-4">📘</span>
-                <span className="text-lg font-bold text-black">Facebook</span>
-                <span className="text-sm text-gray-700 mt-2">ShrineSolar</span>
-              </div>
-              <div className="w-56 h-56 bg-[#909090] border-2 border-gray-500 rounded-2xl flex flex-col items-center justify-center shadow-lg p-6">
-                <span className="text-4xl mb-4">📱</span>
-                <span className="text-lg font-bold text-black">Mobile No.</span>
-                <span className="text-sm text-gray-700 mt-2">+63 912 345 6789</span>
-              </div>
-              <div className="w-56 h-56 bg-[#909090] border-2 border-gray-500 rounded-2xl flex flex-col items-center justify-center shadow-lg p-6">
-                <span className="text-4xl mb-4">📧</span>
-                <span className="text-lg font-bold text-black">Gmail</span>
-                <span className="text-sm text-gray-700 mt-2">shrinesolar@gmail.com</span>
-              </div>
+            <h2 className="text-4xl font-bold text-black tracking-wider">Contact Information</h2>
+            <div className="flex gap-12">
+              <a href="https://www.facebook.com/shrinesolarservices" target="_blank" rel="noopener noreferrer" className="w-56 h-56 bg-[#909090] border-2 border-gray-500 rounded-2xl flex flex-col items-center justify-center shadow-lg p-6 hover:bg-[#808080] hover:scale-105 transition-all">
+                <span className="text-2xl font-bold text-black">Facebook</span>
+                <span className="text-sm text-gray-700 mt-4 text-center">ShrineSolar</span>
+              </a>
+              <button onClick={() => navigator.clipboard.writeText('09171842499')} className="w-56 h-56 bg-[#909090] border-2 border-gray-500 rounded-2xl flex flex-col items-center justify-center shadow-lg p-6 hover:bg-[#808080] hover:scale-105 transition-all">
+                <span className="text-2xl font-bold text-black">Mobile No.</span>
+                <span className="text-sm text-gray-700 mt-4 text-center">09171842499</span>
+              </button>
+              <a href="mailto:Shrinesolar2022@gmail.com" className="w-56 h-56 bg-[#909090] border-2 border-gray-500 rounded-2xl flex flex-col items-center justify-center shadow-lg p-6 hover:bg-[#808080] hover:scale-105 transition-all">
+                <span className="text-2xl font-bold text-black">Gmail</span>
+                <span className="text-sm text-gray-700 mt-4 text-center break-all">Shrinesolar2022@gmail.com</span>
+              </a>
             </div>
           </div>
         </div>
