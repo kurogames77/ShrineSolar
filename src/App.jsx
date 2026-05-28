@@ -5,11 +5,6 @@ function App() {
     <div className="min-h-screen bg-[#a8a8a8] flex flex-col">
       {/* Header Layout (No visible container) */}
       <header className="w-full max-w-7xl mx-auto px-16 pt-24 pb-8 flex justify-between items-center">
-        
-        {/* Logo Placeholder */}
-        <div className="w-48 h-48 bg-[#909090] border-2 border-gray-500 rounded-full flex items-center justify-center text-black font-medium text-xl shadow-sm">
-          Logo
-        </div>
 
         {/* Navigation Buttons */}
         <nav className="flex gap-10">
