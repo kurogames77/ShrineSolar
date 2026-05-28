@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 export default function SolarPanel() {
   const navigate = useNavigate();
   return (
-    <div className="w-full flex flex-col pt-16 px-8 pb-16 items-center">
+    <div className="w-full flex-grow flex flex-col pt-16 px-8 pb-8 items-center">
       {/* Header */}
       <header className="w-full max-w-7xl flex justify-center items-center mb-16 px-8 relative">
         <h1 className="text-5xl font-bold text-black tracking-wider text-center">Solar Panel</h1>
@@ -16,7 +16,7 @@ export default function SolarPanel() {
       </header>
 
       {/* Main Content Modal */}
-      <div className="bg-[#a8a8a8] border-4 border-gray-600 rounded-3xl w-full max-w-7xl p-10 shadow-2xl mt-8 mb-16">
+      <div className="bg-[#a8a8a8] border-4 border-gray-600 rounded-3xl w-full max-w-7xl p-10 flex-grow shadow-2xl flex items-center justify-center mt-16 mb-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 w-full max-w-5xl">
           {[1, 2, 3, 4, 5, 6].map((item) => (
             <div key={item} className="bg-[#909090] border-2 border-gray-500 rounded-3xl aspect-square flex flex-col items-center justify-between p-6 shadow-lg hover:scale-105 transition-transform">
