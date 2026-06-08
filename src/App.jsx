@@ -3,13 +3,24 @@ import { Routes, Route, useNavigate, useLocation } from 'react-router-dom'
 import SolarPanel from './pages/SolarPanel'
 import Battery from './pages/Battery'
 import Accessories from './pages/Accessories'
+import CinematicIntro from './pages/CinematicIntro'
 import './App.css'
 
 function App() {
+  // Only show intro once per session (so navigating back to "/" doesn't replay it)
+  const [showIntro, setShowIntro] = useState(() => {
+    if (sessionStorage.getItem('shrine_intro_seen')) return false;
+    return true;
+  });
   const [isShopOpen, setIsShopOpen] = useState(false);
   const [isInquiryOpen, setIsInquiryOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
+
+  const handleIntroComplete = () => {
+    sessionStorage.setItem('shrine_intro_seen', '1');
+    setShowIntro(false);
+  };
 
   const handleNavigation = (path) => {
     setIsShopOpen(false);
@@ -17,6 +28,15 @@ function App() {
   };
 
   const isHome = location.pathname === '/';
+
+  // Show cinematic intro fullscreen before revealing the app
+  if (showIntro && isHome) {
+    return (
+      <div className="fixed inset-0 z-[9999]" style={{ width: '100vw', height: '100vh' }}>
+        <CinematicIntro onComplete={handleIntroComplete} />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-[#a8a8a8] flex flex-col">

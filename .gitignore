@@ -25,3 +25,7 @@ dist-ssr
 
 # Project Planning / Baseline
 project_baseline.md
+
+.vercel
+.env*.local
+.env*
