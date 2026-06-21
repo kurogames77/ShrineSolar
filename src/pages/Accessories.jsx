@@ -72,23 +72,27 @@ export default function Accessories() {
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4 sm:gap-12 w-full max-w-5xl">
           {[1, 2, 3, 4, 5, 6].map((item) => (
             <div key={item} className="relative bg-[#909090] border-2 border-gray-500 rounded-2xl sm:rounded-3xl min-h-[200px] sm:min-h-[350px] flex flex-col items-center justify-between p-3 sm:p-6 shadow-lg hover:scale-105 transition-transform">
-              {/* Cart Icon */}
-              <button
-                onClick={() => openQuantityModal(item)}
-                className="absolute top-2 right-2 sm:top-4 sm:right-4 w-8 h-8 sm:w-10 sm:h-10 bg-white/80 hover:bg-amber-400 rounded-full flex items-center justify-center shadow-md transition-colors z-10"
-                title="Add to Cart"
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 sm:w-5 sm:h-5 text-gray-800" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 100 4 2 2 0 000-4z" />
-                </svg>
-              </button>
-              <div className="w-full flex-grow bg-gray-400/50 rounded-lg sm:rounded-xl flex items-center justify-center text-gray-700 font-medium text-sm sm:text-base mb-3 sm:mb-6 gap-2">
-                Product {item}
-                {isInCart(item) && (
-                  <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 text-green-600" viewBox="0 0 20 20" fill="currentColor" title="Added to Cart">
-                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+              {/* Cart Icon & Badge */}
+              <div className="absolute top-2 right-2 sm:top-4 sm:right-4 z-10">
+                <button
+                  onClick={() => openQuantityModal(item)}
+                  className="w-8 h-8 sm:w-10 sm:h-10 bg-white/80 hover:bg-amber-400 rounded-full flex items-center justify-center shadow-md transition-colors"
+                  title="Add to Cart"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 sm:w-5 sm:h-5 text-gray-800" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 100 4 2 2 0 000-4z" />
                   </svg>
+                </button>
+                {isInCart(item) && (
+                  <div className="absolute -top-1 -right-1 bg-white rounded-full">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 sm:w-5 sm:h-5 text-green-600" viewBox="0 0 20 20" fill="currentColor" title="Added to Cart">
+                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                    </svg>
+                  </div>
                 )}
+              </div>
+              <div className="w-full flex-grow bg-gray-400/50 rounded-lg sm:rounded-xl flex items-center justify-center text-gray-700 font-medium text-sm sm:text-base mb-3 sm:mb-6">
+                Product {item}
               </div>
               <button
                 onClick={() => setSelectedProduct(item)}
