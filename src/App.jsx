@@ -3,6 +3,7 @@ import { Routes, Route, useNavigate, useLocation } from 'react-router-dom'
 import SolarPanel from './pages/SolarPanel'
 import Battery from './pages/Battery'
 import Accessories from './pages/Accessories'
+import MyCart from './pages/MyCart'
 import CinematicIntro from './pages/CinematicIntro'
 import './App.css'
 
@@ -57,6 +58,9 @@ function App() {
               <button onClick={() => setIsInquiryOpen(true)} className="w-28 sm:w-44 py-3 sm:py-5 bg-[#909090] border-2 border-gray-500 text-black rounded-full font-medium text-center text-sm sm:text-base shadow-sm hover:bg-[#808080] transition-colors">
                 Inquiry
               </button>
+              <button onClick={() => navigate('/my-cart')} className="w-28 sm:w-44 py-3 sm:py-5 bg-[#909090] border-2 border-gray-500 text-black rounded-full font-medium text-center text-sm sm:text-base shadow-sm hover:bg-[#808080] transition-colors">
+                My Carts
+              </button>
             </nav>
           </header>
         )}
@@ -68,6 +72,7 @@ function App() {
             <Route path="/solar-panel" element={<SolarPanel />} />
             <Route path="/battery" element={<Battery />} />
             <Route path="/accessories" element={<Accessories />} />
+            <Route path="/my-cart" element={<MyCart />} />
           </Routes>
         </main>
         {/* Shop Modal */}

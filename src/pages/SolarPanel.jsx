@@ -7,6 +7,9 @@ export default function SolarPanel() {
   const [selectedProduct, setSelectedProduct] = useState(null);
 
   const handleAddToCart = (item) => {
+    const cart = JSON.parse(localStorage.getItem('shrine_cart') || '[]');
+    cart.push({ name: `Product ${item}`, category: 'Solar Panel', price: 0 });
+    localStorage.setItem('shrine_cart', JSON.stringify(cart));
     Swal.fire({
       icon: 'success',
       title: 'Added to Cart!',
@@ -22,12 +25,23 @@ export default function SolarPanel() {
       {/* Header */}
       <header className="w-full max-w-7xl flex justify-center items-center mb-8 sm:mb-16 px-2 sm:px-8 relative">
         <h1 className="text-3xl sm:text-5xl font-bold text-black tracking-wider text-center">Solar Panel</h1>
-        <button
-          onClick={() => navigate('/')}
-          className="absolute right-2 sm:right-8 text-gray-700 hover:text-black hover:bg-gray-400 w-12 h-12 sm:w-16 sm:h-16 rounded-full flex items-center justify-center text-2xl sm:text-3xl font-bold transition-colors"
-        >
-          ✕
-        </button>
+        <div className="absolute right-2 sm:right-8 flex items-center gap-2">
+          <button
+            onClick={() => navigate('/my-cart')}
+            className="text-gray-700 hover:text-black hover:bg-gray-400 w-12 h-12 sm:w-16 sm:h-16 rounded-full flex items-center justify-center transition-colors"
+            title="My Cart"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 sm:w-8 sm:h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 100 4 2 2 0 000-4z" />
+            </svg>
+          </button>
+          <button
+            onClick={() => navigate('/')}
+            className="text-gray-700 hover:text-black hover:bg-gray-400 w-12 h-12 sm:w-16 sm:h-16 rounded-full flex items-center justify-center text-2xl sm:text-3xl font-bold transition-colors"
+          >
+            ✕
+          </button>
+        </div>
       </header>
 
       {/* Main Content Modal */}
