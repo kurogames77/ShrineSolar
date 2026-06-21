@@ -5,15 +5,29 @@ import Swal from 'sweetalert2';
 export default function Battery() {
   const navigate = useNavigate();
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const [quantityModal, setQuantityModal] = useState(null);
+  const [quantity, setQuantity] = useState(1);
 
-  const handleAddToCart = (item) => {
+  const openQuantityModal = (item) => {
+    setQuantity(1);
+    setQuantityModal(item);
+  };
+
+  const confirmAddToCart = () => {
+    const item = quantityModal;
     const cart = JSON.parse(localStorage.getItem('shrine_cart') || '[]');
-    cart.push({ name: `Product ${item}`, category: 'Battery', price: 0 });
+    const existingIndex = cart.findIndex(c => c.name === `Product ${item}` && c.category === 'Battery');
+    if (existingIndex !== -1) {
+      cart[existingIndex].quantity += quantity;
+    } else {
+      cart.push({ name: `Product ${item}`, category: 'Battery', price: 0, quantity });
+    }
     localStorage.setItem('shrine_cart', JSON.stringify(cart));
+    setQuantityModal(null);
     Swal.fire({
       icon: 'success',
       title: 'Added to Cart!',
-      text: `Product ${item} has been added to your cart successfully!`,
+      text: `Product ${item} (x${quantity}) has been added to your cart successfully!`,
       confirmButtonColor: '#f59e0b',
       timer: 2000,
       timerProgressBar: true,
@@ -51,7 +65,7 @@ export default function Battery() {
             <div key={item} className="relative bg-[#909090] border-2 border-gray-500 rounded-2xl sm:rounded-3xl min-h-[200px] sm:min-h-[350px] flex flex-col items-center justify-between p-3 sm:p-6 shadow-lg hover:scale-105 transition-transform">
               {/* Cart Icon */}
               <button
-                onClick={() => handleAddToCart(item)}
+                onClick={() => openQuantityModal(item)}
                 className="absolute top-2 right-2 sm:top-4 sm:right-4 w-8 h-8 sm:w-10 sm:h-10 bg-white/80 hover:bg-amber-400 rounded-full flex items-center justify-center shadow-md transition-colors z-10"
                 title="Add to Cart"
               >
@@ -77,7 +91,6 @@ export default function Battery() {
       {selectedProduct && (
         <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50" onClick={() => setSelectedProduct(null)}>
           <div className="bg-white w-full h-full sm:h-[90vh] sm:max-w-4xl sm:rounded-3xl shadow-2xl overflow-y-auto" onClick={(e) => e.stopPropagation()}>
-            {/* Close button */}
             <div className="relative">
               <button
                 onClick={() => setSelectedProduct(null)}
@@ -85,21 +98,18 @@ export default function Battery() {
               >
                 ✕
               </button>
-              {/* Empty Image Placeholder */}
               <div className="w-full h-64 sm:h-[400px] bg-gray-300 flex items-center justify-center">
                 <svg xmlns="http://www.w3.org/2000/svg" className="w-20 h-20 sm:w-28 sm:h-28 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                 </svg>
               </div>
             </div>
-            {/* Product Info */}
             <div className="p-6 sm:p-10">
               <h2 className="text-2xl sm:text-4xl font-bold text-gray-900 mb-2">Product {selectedProduct}</h2>
               <p className="text-xl sm:text-2xl font-semibold text-amber-600 mb-4">₱0.00</p>
               <p className="text-base sm:text-lg text-gray-500 mb-8">No Description Provided</p>
-              {/* Add to Cart Button */}
               <button
-                onClick={() => handleAddToCart(selectedProduct)}
+                onClick={() => { setSelectedProduct(null); openQuantityModal(selectedProduct); }}
                 className="w-full py-4 sm:py-5 bg-amber-500 hover:bg-amber-600 text-white font-bold text-lg sm:text-xl rounded-xl transition-colors shadow-lg flex items-center justify-center gap-3"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 sm:w-7 sm:h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -108,6 +118,37 @@ export default function Battery() {
                 Add to Cart
               </button>
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* Quantity Selection Modal */}
+      {quantityModal && (
+        <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-[60] p-4" onClick={() => setQuantityModal(null)}>
+          <div className="bg-white rounded-2xl shadow-2xl w-full max-w-sm p-6 sm:p-8" onClick={(e) => e.stopPropagation()}>
+            <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2 text-center">Add to Cart</h3>
+            <p className="text-gray-500 text-center mb-6">Product {quantityModal} — Battery</p>
+            <div className="flex items-center justify-center gap-4 mb-6">
+              <button
+                onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                className="w-12 h-12 bg-gray-200 hover:bg-gray-300 rounded-full flex items-center justify-center text-2xl font-bold text-gray-700 transition-colors"
+              >
+                −
+              </button>
+              <span className="text-3xl font-bold text-gray-900 w-16 text-center">{quantity}</span>
+              <button
+                onClick={() => setQuantity(quantity + 1)}
+                className="w-12 h-12 bg-gray-200 hover:bg-gray-300 rounded-full flex items-center justify-center text-2xl font-bold text-gray-700 transition-colors"
+              >
+                +
+              </button>
+            </div>
+            <button
+              onClick={confirmAddToCart}
+              className="w-full py-3 sm:py-4 bg-amber-500 hover:bg-amber-600 text-white font-bold text-lg rounded-xl transition-colors shadow-lg"
+            >
+              Confirm
+            </button>
           </div>
         </div>
       )}

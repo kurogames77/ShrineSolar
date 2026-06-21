@@ -82,7 +82,9 @@ export default function MyCart() {
                                         return (
                                             <div key={idx} className="bg-gray-400/50 rounded-xl p-3 sm:p-4 flex items-center justify-between">
                                                 <div>
-                                                    <p className="font-semibold text-black text-sm sm:text-base">{item.name}</p>
+                                                    <p className="font-semibold text-black text-sm sm:text-base">
+                                                        {item.name} <span className="text-gray-700 font-normal ml-2">x{item.quantity}</span>
+                                                    </p>
                                                     <p className="text-amber-700 font-medium text-xs sm:text-sm">₱0.00</p>
                                                 </div>
                                                 <button
