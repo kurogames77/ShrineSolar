@@ -1,8 +1,10 @@
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
 export default function SolarPanel() {
   const navigate = useNavigate();
+  const [selectedProduct, setSelectedProduct] = useState(null);
 
   const handleAddToCart = (item) => {
     Swal.fire({
@@ -46,13 +48,55 @@ export default function SolarPanel() {
               <div className="w-full flex-grow bg-gray-400/50 rounded-lg sm:rounded-xl flex items-center justify-center text-gray-700 font-medium text-sm sm:text-base mb-3 sm:mb-6">
                 Product {item}
               </div>
-              <button className="w-24 sm:w-40 py-2 sm:py-3 bg-[#a8a8a8] border-2 border-gray-600 text-black font-bold text-sm sm:text-lg rounded-full hover:bg-gray-300 transition-colors shadow-md mb-1 sm:mb-2 flex-shrink-0">
+              <button
+                onClick={() => setSelectedProduct(item)}
+                className="w-24 sm:w-40 py-2 sm:py-3 bg-[#a8a8a8] border-2 border-gray-600 text-black font-bold text-sm sm:text-lg rounded-full hover:bg-gray-300 transition-colors shadow-md mb-1 sm:mb-2 flex-shrink-0"
+              >
                 View
               </button>
             </div>
           ))}
         </div>
       </div>
+
+      {/* Product Detail Modal */}
+      {selectedProduct && (
+        <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4" onClick={() => setSelectedProduct(null)}>
+          <div className="bg-white rounded-2xl sm:rounded-3xl w-full max-w-md shadow-2xl overflow-hidden" onClick={(e) => e.stopPropagation()}>
+            {/* Close button */}
+            <div className="relative">
+              <button
+                onClick={() => setSelectedProduct(null)}
+                className="absolute top-3 right-3 w-8 h-8 bg-black/40 hover:bg-black/60 text-white rounded-full flex items-center justify-center text-lg font-bold transition-colors z-10"
+              >
+                ✕
+              </button>
+              {/* Empty Image Placeholder */}
+              <div className="w-full h-52 sm:h-64 bg-gray-300 flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" className="w-16 h-16 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+              </div>
+            </div>
+            {/* Product Info */}
+            <div className="p-5 sm:p-6">
+              <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-1">Product {selectedProduct}</h2>
+              <p className="text-lg sm:text-xl font-semibold text-amber-600 mb-3">₱0.00</p>
+              <p className="text-sm sm:text-base text-gray-500 mb-6">No Description Provided</p>
+              {/* Add to Cart Button */}
+              <button
+                onClick={() => handleAddToCart(selectedProduct)}
+                className="w-full py-3 sm:py-4 bg-amber-500 hover:bg-amber-600 text-white font-bold text-base sm:text-lg rounded-xl transition-colors shadow-lg flex items-center justify-center gap-2"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 sm:w-6 sm:h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 100 4 2 2 0 000-4z" />
+                </svg>
+                Add to Cart
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
