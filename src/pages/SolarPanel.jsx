@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
@@ -7,9 +7,15 @@ export default function SolarPanel() {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [quantityModal, setQuantityModal] = useState(null);
   const [quantity, setQuantity] = useState(1);
+  const [cartItems, setCartItems] = useState([]);
+
+  useEffect(() => {
+    setCartItems(JSON.parse(localStorage.getItem('shrine_cart') || '[]'));
+  }, []);
 
   const openQuantityModal = (item) => {
-    setQuantity(1);
+    const existing = cartItems.find(c => c.name === `Product ${item}` && c.category === 'Solar Panel');
+    setQuantity(existing ? existing.quantity : 1);
     setQuantityModal(item);
   };
 
@@ -18,11 +24,12 @@ export default function SolarPanel() {
     const cart = JSON.parse(localStorage.getItem('shrine_cart') || '[]');
     const existingIndex = cart.findIndex(c => c.name === `Product ${item}` && c.category === 'Solar Panel');
     if (existingIndex !== -1) {
-      cart[existingIndex].quantity += quantity;
+      cart[existingIndex].quantity = quantity;
     } else {
       cart.push({ name: `Product ${item}`, category: 'Solar Panel', price: 0, quantity });
     }
     localStorage.setItem('shrine_cart', JSON.stringify(cart));
+    setCartItems(cart);
     setQuantityModal(null);
     Swal.fire({
       icon: 'success',
@@ -33,6 +40,8 @@ export default function SolarPanel() {
       timerProgressBar: true,
     });
   };
+
+  const isInCart = (item) => cartItems.some(c => c.name === `Product ${item}` && c.category === 'Solar Panel');
 
   return (
     <div className="w-full flex-grow flex flex-col pt-8 sm:pt-16 px-4 sm:px-8 pb-8 items-center">
@@ -73,8 +82,13 @@ export default function SolarPanel() {
                   <path strokeLinecap="round" strokeLinejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 100 4 2 2 0 000-4z" />
                 </svg>
               </button>
-              <div className="w-full flex-grow bg-gray-400/50 rounded-lg sm:rounded-xl flex items-center justify-center text-gray-700 font-medium text-sm sm:text-base mb-3 sm:mb-6">
+              <div className="w-full flex-grow bg-gray-400/50 rounded-lg sm:rounded-xl flex items-center justify-center text-gray-700 font-medium text-sm sm:text-base mb-3 sm:mb-6 gap-2">
                 Product {item}
+                {isInCart(item) && (
+                  <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 text-green-600" viewBox="0 0 20 20" fill="currentColor" title="Added to Cart">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                  </svg>
+                )}
               </div>
               <button
                 onClick={() => setSelectedProduct(item)}
@@ -105,7 +119,14 @@ export default function SolarPanel() {
               </div>
             </div>
             <div className="p-6 sm:p-10">
-              <h2 className="text-2xl sm:text-4xl font-bold text-gray-900 mb-2">Product {selectedProduct}</h2>
+              <div className="flex items-center gap-4 mb-2">
+                <h2 className="text-2xl sm:text-4xl font-bold text-gray-900">Product {selectedProduct}</h2>
+                {isInCart(selectedProduct) && (
+                  <svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8 text-green-600" viewBox="0 0 20 20" fill="currentColor">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                  </svg>
+                )}
+              </div>
               <p className="text-xl sm:text-2xl font-semibold text-amber-600 mb-4">₱0.00</p>
               <p className="text-base sm:text-lg text-gray-500 mb-8">No Description Provided</p>
               <button
@@ -115,7 +136,7 @@ export default function SolarPanel() {
                 <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 sm:w-7 sm:h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 100 4 2 2 0 000-4z" />
                 </svg>
-                Add to Cart
+                {isInCart(selectedProduct) ? 'Update Cart' : 'Add to Cart'}
               </button>
             </div>
           </div>
@@ -126,7 +147,7 @@ export default function SolarPanel() {
       {quantityModal && (
         <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-[60] p-4" onClick={() => setQuantityModal(null)}>
           <div className="bg-white rounded-2xl shadow-2xl w-full max-w-sm p-6 sm:p-8" onClick={(e) => e.stopPropagation()}>
-            <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2 text-center">Add to Cart</h3>
+            <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2 text-center">{isInCart(quantityModal) ? 'Update Quantity' : 'Add to Cart'}</h3>
             <p className="text-gray-500 text-center mb-6">Product {quantityModal} — Solar Panel</p>
             <div className="flex items-center justify-center gap-4 mb-6">
               <button
