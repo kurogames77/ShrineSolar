@@ -73,18 +73,20 @@ export default function MyCart() {
         });
 
         try {
+            // Generate a UUID for the customer so we don't need to SELECT it back
+            const customerId = crypto.randomUUID();
+
             // 1. Insert Customer
-            const { data: customer, error: customerError } = await supabase
+            const { error: customerError } = await supabase
                 .from('customers')
                 .insert({
+                    id: customerId,
                     first_name: firstName,
                     last_name: lastName,
                     email: email,
                     phone: formData.contactNumber,
                     address_line1: formData.address
-                })
-                .select()
-                .single();
+                });
 
             if (customerError) throw customerError;
 
@@ -92,18 +94,19 @@ export default function MyCart() {
             // Compile product details into a string
             const productDetails = cartItems.map(item => `${item.name} (x${item.quantity})`).join(', ');
             const totalQty = cartItems.reduce((acc, item) => acc + (parseInt(item.quantity) || 1), 0);
+            
+            const orderId = crypto.randomUUID();
 
-            const { data: order, error: orderError } = await supabase
+            const { error: orderError } = await supabase
                 .from('orders')
                 .insert({
-                    customer_id: customer.id,
+                    id: orderId,
+                    customer_id: customerId,
                     order_category: 'Website Cart',
                     product_details: productDetails,
                     size_or_qty: totalQty,
                     total_amount: 0 // You can calculate this if you have prices later
-                })
-                .select()
-                .single();
+                });
 
             if (orderError) throw orderError;
 
