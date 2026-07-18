@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
-
+import { supabase } from '../supabaseClient';
 export default function MyCart() {
     const navigate = useNavigate();
     const [cartItems, setCartItems] = useState([]);
@@ -33,6 +33,120 @@ export default function MyCart() {
 
     const handleInputChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
+
+    const handleProceed = async () => {
+        if (!formData.fullname || !formData.contactNumber) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Incomplete',
+                text: 'Please fill in your Fullname and Contact Number.',
+                confirmButtonColor: '#f59e0b',
+            });
+            return;
+        }
+        if (cartItems.length === 0) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Empty Cart',
+                text: 'Your cart is empty. Please add items before proceeding.',
+                confirmButtonColor: '#f59e0b',
+            });
+            return;
+        }
+
+        // Split fullname into first_name and last_name
+        const nameParts = formData.fullname.trim().split(' ');
+        const firstName = nameParts[0];
+        const lastName = nameParts.length > 1 ? nameParts.slice(1).join(' ') : 'Unknown';
+
+        // Provide a fallback email since your schema requires a UNIQUE, NOT NULL email
+        const email = formData.gmail ? formData.gmail : `${Date.now()}@no-email.com`;
+
+        Swal.fire({
+            title: 'Processing...',
+            text: 'Saving your order.',
+            allowOutsideClick: false,
+            didOpen: () => {
+                Swal.showLoading();
+            }
+        });
+
+        try {
+            // 1. Insert Customer
+            const { data: customer, error: customerError } = await supabase
+                .from('customers')
+                .insert({
+                    first_name: firstName,
+                    last_name: lastName,
+                    email: email,
+                    phone: formData.contactNumber,
+                    address_line1: formData.address
+                })
+                .select()
+                .single();
+
+            if (customerError) throw customerError;
+
+            // 2. Insert Order
+            // Compile product details into a string
+            const productDetails = cartItems.map(item => `${item.name} (x${item.quantity})`).join(', ');
+            const totalQty = cartItems.reduce((acc, item) => acc + (parseInt(item.quantity) || 1), 0);
+
+            const { data: order, error: orderError } = await supabase
+                .from('orders')
+                .insert({
+                    customer_id: customer.id,
+                    order_category: 'Website Cart',
+                    product_details: productDetails,
+                    size_or_qty: totalQty,
+                    total_amount: 0 // You can calculate this if you have prices later
+                })
+                .select()
+                .single();
+
+            if (orderError) throw orderError;
+
+            // 3. Insert Activity Log
+            const { error: logError } = await supabase
+                .from('activity_log')
+                .insert({
+                    action: 'Placed New Order',
+                    entity_type: 'Order',
+                    entity_name: `Order by ${formData.fullname}`,
+                    details: `Products: ${productDetails}`
+                    // user_id is omitted because this is a public user
+                });
+
+            if (logError) throw logError;
+
+            // Clear Cart
+            localStorage.removeItem('shrine_cart');
+            setCartItems([]);
+
+            // Success & Redirect
+            Swal.fire({
+                icon: 'success',
+                title: 'Order Placed!',
+                text: 'Redirecting to Facebook...',
+                showConfirmButton: false,
+                timer: 2000
+            });
+
+            setTimeout(() => {
+                // REPLACE THIS LINK with your actual Facebook page or Messenger link!
+                window.location.href = 'https://www.facebook.com'; 
+            }, 2000);
+
+        } catch (error) {
+            console.error('Supabase Error:', error);
+            Swal.fire({
+                icon: 'error',
+                title: 'Error Saving Order',
+                text: 'Please make sure your Supabase RLS policies allow public inserts. See console for details.',
+                confirmButtonColor: '#f59e0b',
+            });
+        }
     };
 
     // Group cart items by category
@@ -142,6 +256,7 @@ export default function MyCart() {
                     </div>
                     {/* Proceed Button */}
                     <button
+                        onClick={handleProceed}
                         className="w-full mt-6 sm:mt-8 py-4 sm:py-5 bg-amber-500 hover:bg-amber-600 text-white font-bold text-lg sm:text-xl rounded-full transition-colors shadow-lg flex items-center justify-center gap-3"
                     >
                         Proceed to Facebook
