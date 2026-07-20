@@ -2,9 +2,11 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { supabase } from '../supabaseClient';
+import { Turnstile } from '@marsidev/react-turnstile';
 export default function MyCart() {
     const navigate = useNavigate();
     const [cartItems, setCartItems] = useState([]);
+    const [turnstileToken, setTurnstileToken] = useState(null);
     const [formData, setFormData] = useState({
         fullname: '',
         contactNumber: '',
@@ -41,6 +43,15 @@ export default function MyCart() {
                 icon: 'error',
                 title: 'Incomplete',
                 text: 'Please fill in your Fullname and Contact Number.',
+                confirmButtonColor: '#f59e0b',
+            });
+            return;
+        }
+        if (!turnstileToken) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Captcha Required',
+                text: 'Please complete the Cloudflare captcha before proceeding.',
                 confirmButtonColor: '#f59e0b',
             });
             return;
@@ -255,6 +266,14 @@ export default function MyCart() {
                             value={formData.gmail}
                             onChange={handleInputChange}
                             className="w-full py-3 sm:py-4 px-4 sm:px-6 bg-gray-400/50 border-2 border-gray-500 rounded-full text-black font-medium text-sm sm:text-base placeholder-gray-600 focus:outline-none focus:border-amber-500 transition-colors"
+                        />
+                    </div>
+                    {/* Cloudflare Turnstile */}
+                    <div className="mt-4 flex justify-center w-full">
+                        <Turnstile 
+                            siteKey="0x4AAAAAAAD5TN93fLM-OyEjz" 
+                            onSuccess={(token) => setTurnstileToken(token)}
+                            options={{ theme: 'light' }}
                         />
                     </div>
                     {/* Proceed Button */}
