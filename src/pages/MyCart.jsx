@@ -271,7 +271,7 @@ export default function MyCart() {
                     {/* Cloudflare Turnstile */}
                     <div className="mt-4 flex justify-center w-full">
                         <Turnstile 
-                            siteKey="0x4AAAAAAAD5TN93fLM-OyEjz" 
+                            siteKey="0x4AAAAAAD6EPzOFjE9_pvVF" 
                             onSuccess={(token) => setTurnstileToken(token)}
                             options={{ theme: 'light' }}
                         />
