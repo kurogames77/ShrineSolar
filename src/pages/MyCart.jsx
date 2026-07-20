@@ -171,9 +171,9 @@ export default function MyCart() {
     }, {});
 
     return (
-        <div className="w-full min-h-screen bg-[#a8a8a8] flex flex-col">
+        <div className="w-full min-h-screen bg-[#a8a8a8] flex flex-col items-center">
             {/* Header */}
-            <header className="w-full max-w-5xl mx-auto flex justify-center items-center pt-8 sm:pt-12 pb-4 sm:pb-8 px-4 sm:px-8 relative">
+            <header className="w-full max-w-7xl flex justify-center items-center pt-8 sm:pt-12 pb-4 sm:pb-8 px-4 sm:px-8 relative">
                 <div className="flex items-center gap-3">
                     <svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8 sm:w-10 sm:h-10 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                         <path strokeLinecap="round" strokeLinejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 100 4 2 2 0 000-4z" />
@@ -189,9 +189,9 @@ export default function MyCart() {
             </header>
 
             {/* Main Content */}
-            <div className="flex-grow w-full max-w-5xl mx-auto px-4 sm:px-8 pb-8 flex flex-col lg:flex-row gap-6 sm:gap-8 justify-center">
+            <div className="flex-grow w-full max-w-7xl px-4 sm:px-8 pb-8 flex flex-col lg:flex-row gap-6 sm:gap-12 justify-center items-start">
                 {/* Left: Cart Items */}
-                <div className="w-full lg:w-1/2 bg-[#909090] border-2 border-gray-500 rounded-2xl sm:rounded-3xl p-4 sm:p-6 shadow-lg overflow-y-auto max-h-[60vh] lg:max-h-[70vh]">
+                <div className="w-full mx-auto lg:mx-0 max-w-[550px] bg-[#909090] border-2 border-gray-500 rounded-2xl sm:rounded-3xl p-4 sm:p-6 shadow-lg overflow-y-auto max-h-[60vh] lg:max-h-[70vh]">
                     <h2 className="text-xl sm:text-2xl font-bold text-black mb-4 sm:mb-6">Cart Items</h2>
                     {cartItems.length === 0 ? (
                         <div className="flex flex-col items-center justify-center h-48 text-gray-600">
@@ -232,7 +232,7 @@ export default function MyCart() {
                 </div>
 
                 {/* Right: Customer Info Form */}
-                <div className="w-full lg:w-1/2 bg-[#909090] border-2 border-gray-500 rounded-2xl sm:rounded-3xl p-4 sm:p-6 shadow-lg flex flex-col">
+                <div className="w-full mx-auto lg:mx-0 max-w-[550px] bg-[#909090] border-2 border-gray-500 rounded-2xl sm:rounded-3xl p-4 sm:p-6 shadow-lg flex flex-col">
                     <h2 className="text-xl sm:text-2xl font-bold text-black mb-4 sm:mb-6">Customer Information</h2>
                     <div className="flex flex-col gap-3 sm:gap-4 flex-grow">
                         <input
