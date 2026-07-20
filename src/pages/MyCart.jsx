@@ -232,7 +232,7 @@ export default function MyCart() {
                 </div>
 
                 {/* Right: Customer Info Form */}
-                <div className="w-full mx-auto lg:mx-0 max-w-[550px] bg-[#909090] border-2 border-gray-500 rounded-2xl sm:rounded-3xl p-4 sm:p-6 shadow-lg flex flex-col">
+                <div className="w-full mx-auto lg:mx-0 max-w-[550px] bg-[#909090] border-2 border-gray-500 rounded-2xl sm:rounded-3xl p-4 sm:p-6 shadow-lg flex flex-col items-center">
                     <h2 className="text-xl sm:text-2xl font-bold text-black mb-4 sm:mb-6 text-center">Customer Information</h2>
                     <div className="flex flex-col gap-4 sm:gap-5 w-full max-w-[400px] mx-auto">
                         <input
@@ -269,7 +269,7 @@ export default function MyCart() {
                         />
                     </div>
                     {/* Cloudflare Turnstile */}
-                    <div className="mt-8 mb-6 flex justify-center w-full">
+                    <div className="mt-8 mb-8 min-h-[100px] flex items-center justify-center w-full">
                         <Turnstile 
                             siteKey="0x4AAAAAAD6EPzOFjE9_pvVF" 
                             onSuccess={(token) => setTurnstileToken(token)}
