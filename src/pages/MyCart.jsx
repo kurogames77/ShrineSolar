@@ -189,7 +189,7 @@ export default function MyCart() {
             </header>
 
             {/* Main Content */}
-            <div className="flex-grow w-full max-w-7xl px-4 sm:px-8 pb-8 flex flex-col lg:flex-row gap-6 sm:gap-12 justify-center items-start">
+            <div className="flex-grow w-full max-w-7xl px-4 sm:px-8 pb-8 pt-6 sm:pt-10 flex flex-col lg:flex-row gap-6 sm:gap-12 justify-center items-start">
                 {/* Left: Cart Items */}
                 <div className="w-full mx-auto lg:mx-0 max-w-[550px] bg-[#909090] border-2 border-gray-500 rounded-2xl sm:rounded-3xl p-4 sm:p-6 shadow-lg overflow-y-auto max-h-[60vh] lg:max-h-[70vh]">
                     <h2 className="text-xl sm:text-2xl font-bold text-black mb-4 sm:mb-6">Cart Items</h2>
@@ -233,8 +233,8 @@ export default function MyCart() {
 
                 {/* Right: Customer Info Form */}
                 <div className="w-full mx-auto lg:mx-0 max-w-[550px] bg-[#909090] border-2 border-gray-500 rounded-2xl sm:rounded-3xl p-4 sm:p-6 shadow-lg flex flex-col">
-                    <h2 className="text-xl sm:text-2xl font-bold text-black mb-4 sm:mb-6">Customer Information</h2>
-                    <div className="flex flex-col gap-3 sm:gap-4 flex-grow">
+                    <h2 className="text-xl sm:text-2xl font-bold text-black mb-4 sm:mb-6 text-center">Customer Information</h2>
+                    <div className="flex flex-col gap-4 sm:gap-5 w-full max-w-[400px] mx-auto">
                         <input
                             type="text"
                             name="fullname"
@@ -269,7 +269,7 @@ export default function MyCart() {
                         />
                     </div>
                     {/* Cloudflare Turnstile */}
-                    <div className="mt-4 flex justify-center w-full">
+                    <div className="mt-8 mb-6 flex justify-center w-full">
                         <Turnstile 
                             siteKey="0x4AAAAAAD6EPzOFjE9_pvVF" 
                             onSuccess={(token) => setTurnstileToken(token)}
@@ -279,7 +279,7 @@ export default function MyCart() {
                     {/* Proceed Button */}
                     <button
                         onClick={handleProceed}
-                        className="w-full mt-6 sm:mt-8 py-4 sm:py-5 bg-amber-500 hover:bg-amber-600 text-white font-bold text-lg sm:text-xl rounded-full transition-colors shadow-lg flex items-center justify-center gap-3"
+                        className="w-full max-w-[400px] mx-auto mt-auto py-4 sm:py-5 bg-amber-500 hover:bg-amber-600 text-white font-bold text-lg sm:text-xl rounded-full transition-colors shadow-lg flex items-center justify-center gap-3"
                     >
                         Proceed to Facebook
                     </button>
