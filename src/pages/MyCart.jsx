@@ -192,7 +192,7 @@ export default function MyCart() {
             <div className="flex-grow w-full max-w-7xl px-4 sm:px-8 pb-8 pt-6 sm:pt-10 flex flex-col lg:flex-row gap-6 sm:gap-12 justify-center items-start">
                 {/* Left: Cart Items */}
                 <div className="w-full mx-auto lg:mx-0 max-w-[550px] bg-[#909090] border-2 border-gray-500 rounded-2xl sm:rounded-3xl p-4 sm:p-6 shadow-lg overflow-y-auto max-h-[60vh] lg:max-h-[70vh]">
-                    <h2 className="text-xl sm:text-2xl font-bold text-black mb-4 sm:mb-6">Cart Items</h2>
+                    <h2 className="text-xl sm:text-2xl font-bold text-black mb-4 sm:mb-6 text-center">Cart Items</h2>
                     {cartItems.length === 0 ? (
                         <div className="flex flex-col items-center justify-center h-48 text-gray-600">
                             <svg xmlns="http://www.w3.org/2000/svg" className="w-16 h-16 text-gray-400 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1}>
