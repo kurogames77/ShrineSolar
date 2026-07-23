@@ -74,9 +74,9 @@ function App() {
                 <p className="mb-8 text-center max-w-[600px] font-medium">
                   Check out our latest updates, photos, and posts directly from our Facebook page below!
                 </p>
-                <div className="bg-white p-2.5 sm:p-5 rounded-xl shadow-[0_4px_12px_rgba(0,0,0,0.1)] max-w-full flex justify-center overflow-hidden">
+                <div className="bg-white p-2.5 sm:p-5 rounded-xl shadow-[0_4px_12px_rgba(0,0,0,0.1)] w-full max-w-[540px] flex justify-center overflow-hidden">
                   <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fshrinesolarservices&tabs=timeline&width=500&height=700&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId" 
-                          className="w-[320px] h-[500px] sm:w-[500px] sm:h-[700px]" 
+                          className="w-full h-[500px] sm:h-[700px]" 
                           style={{ border: 'none', overflow: 'hidden' }}
                           scrolling="no" 
                           frameBorder="0" 
