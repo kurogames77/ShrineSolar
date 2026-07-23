@@ -14,6 +14,7 @@ function App() {
     return true;
   });
   const [isShopOpen, setIsShopOpen] = useState(false);
+  const [isFacebookOpen, setIsFacebookOpen] = useState(false);
   const [isInquiryOpen, setIsInquiryOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
@@ -25,6 +26,7 @@ function App() {
 
   const handleNavigation = (path) => {
     setIsShopOpen(false);
+    setIsFacebookOpen(false);
     navigate(path);
   };
 
@@ -52,6 +54,9 @@ function App() {
               <button onClick={() => navigate('/')} className="w-28 sm:w-44 py-3 sm:py-5 bg-[#909090] border-2 border-gray-500 text-black rounded-full font-medium text-center text-sm sm:text-base shadow-sm hover:bg-[#808080] transition-colors">
                 Home
               </button>
+              <button onClick={() => setIsFacebookOpen(true)} className="w-28 sm:w-44 py-3 sm:py-5 bg-[#909090] border-2 border-gray-500 text-black rounded-full font-medium text-center text-sm sm:text-base shadow-sm hover:bg-[#808080] transition-colors">
+                Facebook post
+              </button>
               <button onClick={() => setIsShopOpen(true)} className="w-28 sm:w-44 py-3 sm:py-5 bg-[#909090] border-2 border-gray-500 text-black rounded-full font-medium text-center text-sm sm:text-base shadow-sm hover:bg-[#808080] transition-colors">
                 Shop
               </button>
@@ -68,12 +73,25 @@ function App() {
         {/* Main Content Area */}
         <main className="flex-grow flex flex-col w-full">
           <Routes>
-            <Route path="/" element={
-              <div className="flex flex-col items-center p-4 sm:p-10 w-full text-[#333]">
-                <h1 className="text-[#1a73e8] mb-5 text-center text-2xl sm:text-3xl font-bold">Shrine Solar Services</h1>
-                <p className="mb-8 text-center max-w-[600px] font-medium">
-                  Check out our latest updates, photos, and posts directly from our Facebook page below!
-                </p>
+            <Route path="/" element={<p className="text-gray-600 text-lg">{/* Shrine Solar — Content will go here */}</p>} />
+            <Route path="/solar-panel" element={<SolarPanel />} />
+            <Route path="/battery" element={<Battery />} />
+            <Route path="/accessories" element={<Accessories />} />
+            <Route path="/my-cart" element={<MyCart />} />
+          </Routes>
+        </main>
+        {/* Facebook Modal */}
+        {isHome && isFacebookOpen && (
+          <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 p-4" onClick={() => setIsFacebookOpen(false)}>
+            <div className="bg-[#a8a8a8] border-4 border-gray-600 rounded-3xl w-full max-w-2xl h-[85vh] sm:h-[75vh] flex flex-col shadow-2xl relative" onClick={(e) => e.stopPropagation()}>
+              <button
+                onClick={() => setIsFacebookOpen(false)}
+                className="absolute top-4 right-4 sm:top-6 sm:right-6 text-gray-700 hover:text-black hover:bg-gray-300 w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center text-xl sm:text-2xl font-bold transition-colors z-10"
+              >
+                ✕
+              </button>
+              <h2 className="text-xl sm:text-2xl font-bold text-black tracking-wider text-center pr-14 sm:pr-20 pl-14 sm:pl-20 flex items-center justify-center h-[58px] sm:h-[72px] flex-shrink-0">Facebook Post</h2>
+              <div className="flex-grow flex flex-col w-full items-center justify-start px-4 pb-4 sm:px-8 sm:pb-8 overflow-y-auto">
                 <div className="bg-white p-2.5 sm:p-5 rounded-xl shadow-[0_4px_12px_rgba(0,0,0,0.1)] w-full max-w-[540px] flex justify-center overflow-hidden">
                   <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fshrinesolarservices&tabs=timeline&width=500&height=700&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId" 
                           className="w-full h-[500px] sm:h-[700px]" 
@@ -85,13 +103,9 @@ function App() {
                   </iframe>
                 </div>
               </div>
-            } />
-            <Route path="/solar-panel" element={<SolarPanel />} />
-            <Route path="/battery" element={<Battery />} />
-            <Route path="/accessories" element={<Accessories />} />
-            <Route path="/my-cart" element={<MyCart />} />
-          </Routes>
-        </main>
+            </div>
+          </div>
+        )}
         {/* Shop Modal */}
         {isHome && isShopOpen && (
           <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 p-4" onClick={() => setIsShopOpen(false)}>
