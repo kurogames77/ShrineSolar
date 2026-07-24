@@ -5,6 +5,7 @@ import Battery from './pages/Battery'
 import Accessories from './pages/Accessories'
 import MyCart from './pages/MyCart'
 import CinematicIntro from './pages/CinematicIntro'
+import ScrollAnimation from './pages/ScrollAnimation'
 import './App.css'
 
 function App() {
@@ -73,7 +74,7 @@ function App() {
         {/* Main Content Area */}
         <main className="flex-grow flex flex-col w-full">
           <Routes>
-            <Route path="/" element={<p className="text-gray-600 text-lg">{/* Shrine Solar — Content will go here */}</p>} />
+            <Route path="/" element={<ScrollAnimation />} />
             <Route path="/solar-panel" element={<SolarPanel />} />
             <Route path="/battery" element={<Battery />} />
             <Route path="/accessories" element={<Accessories />} />
@@ -93,13 +94,13 @@ function App() {
               <h2 className="text-xl sm:text-2xl font-bold text-black tracking-wider text-center pr-14 sm:pr-20 pl-14 sm:pl-20 flex items-center justify-center h-[58px] sm:h-[72px] flex-shrink-0">Facebook Post</h2>
               <div className="flex-grow flex flex-col w-full items-center justify-start px-4 pb-4 sm:px-8 sm:pb-8 overflow-y-auto">
                 <div className="bg-white p-2.5 sm:p-5 rounded-xl shadow-[0_4px_12px_rgba(0,0,0,0.1)] w-full max-w-[540px] flex justify-center overflow-hidden">
-                  <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fshrinesolarservices&tabs=timeline&width=500&height=700&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId" 
-                          className="w-full h-[500px] sm:h-[700px]" 
-                          style={{ border: 'none', overflow: 'hidden' }}
-                          scrolling="no" 
-                          frameBorder="0" 
-                          allowFullScreen={true} 
-                          allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
+                  <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fshrinesolarservices&tabs=timeline&width=500&height=700&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId"
+                    className="w-full h-[500px] sm:h-[700px]"
+                    style={{ border: 'none', overflow: 'hidden' }}
+                    scrolling="no"
+                    frameBorder="0"
+                    allowFullScreen={true}
+                    allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
                   </iframe>
                 </div>
               </div>
