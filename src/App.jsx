@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Routes, Route, useNavigate, useLocation } from 'react-router-dom'
 import SolarPanel from './pages/SolarPanel'
 import Battery from './pages/Battery'
@@ -33,6 +33,16 @@ function App() {
 
   const isHome = location.pathname === '/';
 
+  const [scrollY, setScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => setScrollY(window.scrollY);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const heroOpacity = Math.max(0, 1 - scrollY / 400);
+
   return (
     <>
       {/* Cinematic intro overlay — homepage renders underneath */}
@@ -43,32 +53,63 @@ function App() {
       )}
 
       <div className="min-h-screen bg-[#a8a8a8] flex flex-col">
-        {/* Header Layout (No visible container) */}
+        {/* Cinematic Navbar */}
         {isHome && (
-          <header className="w-full max-w-7xl mx-auto px-4 sm:px-16 pt-8 sm:pt-24 pb-4 sm:pb-8 flex flex-col sm:flex-row justify-between items-center gap-4">
+          <nav
+            className="fixed top-0 left-0 w-full z-40 transition-opacity duration-500"
+            style={{ opacity: heroOpacity, pointerEvents: heroOpacity < 0.1 ? 'none' : 'auto' }}
+          >
+            <div className="w-full max-w-7xl mx-auto px-4 sm:px-12 py-4 sm:py-6 flex items-center justify-between">
+              <img src="/logo.png" alt="Shrine Solar Logo" className="h-9 sm:h-12 w-auto drop-shadow-lg" />
+              <div className="flex items-center gap-3 sm:gap-8">
+                <button onClick={() => navigate('/')} className="hidden sm:block text-white/90 hover:text-white text-sm sm:text-base font-medium tracking-wide transition-colors" style={{ textShadow: '0 1px 6px rgba(0,0,0,0.5)' }}>Home</button>
+                <button onClick={() => setIsShopOpen(true)} className="text-white/90 hover:text-white text-xs sm:text-base font-medium tracking-wide transition-colors" style={{ textShadow: '0 1px 6px rgba(0,0,0,0.5)' }}>Shop</button>
+                <button onClick={() => navigate('/my-cart')} className="text-white/90 hover:text-white text-xs sm:text-base font-medium tracking-wide transition-colors" style={{ textShadow: '0 1px 6px rgba(0,0,0,0.5)' }}>My Carts</button>
+                <button onClick={() => setIsInquiryOpen(true)} className="bg-blue-600 hover:bg-blue-700 text-white text-xs sm:text-base font-semibold px-4 sm:px-7 py-2 sm:py-2.5 rounded-lg transition-all shadow-md hover:shadow-lg tracking-wide">Inquiry</button>
+              </div>
+            </div>
+          </nav>
+        )}
 
-            {/* Logo */}
-            <img src="/logo.png" alt="Shrine Solar Logo" className="h-10 sm:h-14 w-auto" />
+        {/* Hero Overlay */}
+        {isHome && (
+          <div
+            className="fixed inset-0 z-30 flex flex-col justify-center transition-opacity duration-300"
+            style={{
+              opacity: heroOpacity,
+              pointerEvents: heroOpacity < 0.1 ? 'none' : 'auto',
+              background: 'linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.35) 50%, rgba(0,0,0,0.1) 100%)',
+            }}
+          >
+            <div className="w-full max-w-7xl mx-auto px-6 sm:px-16 lg:px-24">
+              <h1
+                className="text-white text-2xl sm:text-4xl lg:text-[3.5rem] font-bold leading-snug sm:leading-tight max-w-3xl"
+                style={{ textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}
+              >
+                Empowering homes and businesses to cut electricity cost with solar
+              </h1>
+              <p
+                className="text-gray-300 text-xs sm:text-base lg:text-lg mt-3 sm:mt-5 max-w-2xl font-light"
+                style={{ textShadow: '0 1px 10px rgba(0,0,0,0.7)' }}
+              >
+                #1 Panel & Electrical Installations and Maintenance Services in Dapitan City
+              </p>
+              <button
+                onClick={() => setIsFacebookOpen(true)}
+                className="mt-5 sm:mt-8 bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs sm:text-base px-5 sm:px-8 py-2.5 sm:py-3.5 rounded-lg transition-all hover:scale-105 shadow-lg shadow-blue-600/30"
+              >
+                View Facebook Post
+              </button>
+            </div>
 
-            {/* Navigation Buttons */}
-            <nav className="flex gap-3 sm:gap-10">
-              <button onClick={() => navigate('/')} className="w-28 sm:w-44 py-3 sm:py-5 bg-[#909090] border-2 border-gray-500 text-black rounded-full font-medium text-center text-sm sm:text-base shadow-sm hover:bg-[#808080] transition-colors">
-                Home
-              </button>
-              <button onClick={() => setIsFacebookOpen(true)} className="w-28 sm:w-44 py-3 sm:py-5 bg-[#909090] border-2 border-gray-500 text-black rounded-full font-medium text-center text-sm sm:text-base shadow-sm hover:bg-[#808080] transition-colors">
-                Facebook post
-              </button>
-              <button onClick={() => setIsShopOpen(true)} className="w-28 sm:w-44 py-3 sm:py-5 bg-[#909090] border-2 border-gray-500 text-black rounded-full font-medium text-center text-sm sm:text-base shadow-sm hover:bg-[#808080] transition-colors">
-                Shop
-              </button>
-              <button onClick={() => setIsInquiryOpen(true)} className="w-28 sm:w-44 py-3 sm:py-5 bg-[#909090] border-2 border-gray-500 text-black rounded-full font-medium text-center text-sm sm:text-base shadow-sm hover:bg-[#808080] transition-colors">
-                Inquiry
-              </button>
-              <button onClick={() => navigate('/my-cart')} className="w-28 sm:w-44 py-3 sm:py-5 bg-[#909090] border-2 border-gray-500 text-black rounded-full font-medium text-center text-sm sm:text-base shadow-sm hover:bg-[#808080] transition-colors">
-                My Carts
-              </button>
-            </nav>
-          </header>
+            {/* Scroll to Begin */}
+            <div className="absolute bottom-6 sm:bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce">
+              <span className="text-white/70 text-[10px] sm:text-xs font-medium tracking-[0.25em] uppercase" style={{ textShadow: '0 1px 8px rgba(0,0,0,0.6)' }}>Scroll to Begin</span>
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 sm:h-5 sm:w-5 text-white/60" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+              </svg>
+            </div>
+          </div>
         )}
 
         {/* Main Content Area */}
