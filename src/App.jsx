@@ -60,18 +60,15 @@ function App() {
             style={{
               opacity: 1,
               pointerEvents: 'auto',
-              background: `rgba(0, 0, 0, ${Math.min(scrollY / 150, 0.3)})`,
-              backdropFilter: scrollY > 20 ? 'blur(6px)' : 'none',
-              transition: 'background 0.3s ease, backdrop-filter 0.3s ease',
             }}
           >
             <div style={{ width: '100%', paddingLeft: '40px', paddingRight: '40px', paddingTop: '16px', paddingBottom: '16px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-              <img src="/logo.png" alt="Shrine Solar Logo" className="h-9 sm:h-12 w-auto drop-shadow-lg" />
+              <img src="/logo.png" alt="Shrine Solar Logo" className="h-9 sm:h-12 w-auto drop-shadow-2xl" style={{ filter: 'drop-shadow(0 4px 6px rgba(0,0,0,0.8))' }} />
               <div className="flex items-center gap-3 sm:gap-8">
-                <button onClick={() => navigate('/')} className="animate-fade-in hidden sm:block text-white/90 hover:text-white text-sm sm:text-base font-medium tracking-wide transition-colors" style={{ textShadow: '0 1px 6px rgba(0,0,0,0.5)', animationDelay: '0.1s' }}>Home</button>
-                <button onClick={() => setIsShopOpen(true)} className="animate-fade-in text-white/90 hover:text-white text-xs sm:text-base font-medium tracking-wide transition-colors" style={{ textShadow: '0 1px 6px rgba(0,0,0,0.5)', animationDelay: '0.2s' }}>Shop</button>
-                <button onClick={() => navigate('/my-cart')} className="animate-fade-in text-white/90 hover:text-white text-xs sm:text-base font-medium tracking-wide transition-colors" style={{ textShadow: '0 1px 6px rgba(0,0,0,0.5)', animationDelay: '0.3s' }}>My Carts</button>
-                <button onClick={() => setIsInquiryOpen(true)} className="animate-fade-in text-white/90 hover:text-white text-xs sm:text-base font-medium tracking-wide transition-colors" style={{ textShadow: '0 1px 6px rgba(0,0,0,0.5)', animationDelay: '0.4s' }}>Inquiry</button>
+                <button onClick={() => navigate('/')} className="animate-fade-in hidden sm:block text-white hover:text-gray-200 text-sm sm:text-base font-bold tracking-wide transition-colors" style={{ textShadow: '0 2px 10px rgba(0,0,0,1), 0 1px 4px rgba(0,0,0,0.8)', animationDelay: '0.1s' }}>Home</button>
+                <button onClick={() => setIsShopOpen(true)} className="animate-fade-in text-white hover:text-gray-200 text-xs sm:text-base font-bold tracking-wide transition-colors" style={{ textShadow: '0 2px 10px rgba(0,0,0,1), 0 1px 4px rgba(0,0,0,0.8)', animationDelay: '0.2s' }}>Shop</button>
+                <button onClick={() => navigate('/my-cart')} className="animate-fade-in text-white hover:text-gray-200 text-xs sm:text-base font-bold tracking-wide transition-colors" style={{ textShadow: '0 2px 10px rgba(0,0,0,1), 0 1px 4px rgba(0,0,0,0.8)', animationDelay: '0.3s' }}>My Carts</button>
+                <button onClick={() => setIsInquiryOpen(true)} className="animate-fade-in text-white hover:text-gray-200 text-xs sm:text-base font-bold tracking-wide transition-colors" style={{ textShadow: '0 2px 10px rgba(0,0,0,1), 0 1px 4px rgba(0,0,0,0.8)', animationDelay: '0.4s' }}>Inquiry</button>
               </div>
             </div>
           </nav>
