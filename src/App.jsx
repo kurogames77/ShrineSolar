@@ -59,7 +59,7 @@ function App() {
             className="fixed top-0 left-0 w-full z-40"
             style={{ opacity: 1, pointerEvents: 'auto' }}
           >
-            <div style={{ width: '100%', paddingLeft: '40px', paddingRight: '40px', paddingTop: '20px', paddingBottom: '20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+            <div className="flex items-center justify-center sm:justify-between w-full" style={{ paddingLeft: '40px', paddingRight: '40px', paddingTop: '20px', paddingBottom: '20px' }}>
               <img src="/logo.png" alt="Shrine Solar Logo" className="hidden sm:block h-9 sm:h-12 w-auto drop-shadow-2xl" style={{ filter: 'drop-shadow(0 4px 6px rgba(0,0,0,0.8))' }} />
               <div style={{ display: 'flex', alignItems: 'center', gap: '32px' }}>
                 <button onClick={() => navigate('/')} className="animate-fade-in hidden sm:block text-white font-bold tracking-wide transition-colors hover:text-gray-200 text-xs sm:text-base" style={{ textShadow: '0 2px 10px rgba(0,0,0,1), 0 1px 4px rgba(0,0,0,0.8)', animationDelay: '0.1s' }}>Home</button>
