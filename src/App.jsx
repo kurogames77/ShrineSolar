@@ -81,7 +81,7 @@ function App() {
               background: 'linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.35) 50%, rgba(0,0,0,0.1) 100%)',
             }}
           >
-            <div className="w-full max-w-7xl mx-auto px-6 sm:px-16 lg:px-24">
+            <div className="w-full max-w-7xl mx-auto px-6 sm:px-16 lg:px-24 flex flex-col items-center text-center">
               <h1
                 className="animate-slide-up text-white text-2xl sm:text-4xl lg:text-[3.5rem] font-bold leading-snug sm:leading-tight max-w-3xl"
                 style={{ textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}
