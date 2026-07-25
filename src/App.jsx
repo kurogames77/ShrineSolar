@@ -68,6 +68,13 @@ function App() {
     return () => { window.removeEventListener('keydown', handleKey); clearTimeout(timer); };
   }, [isHome, showFacebook, heroExiting]);
 
+  // Lock body scroll when any modal or Facebook embed is open
+  useEffect(() => {
+    const isAnyOpen = isShopOpen || isFacebookOpen || isInquiryOpen || showFacebook;
+    document.body.style.overflow = isAnyOpen ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [isShopOpen, isFacebookOpen, isInquiryOpen, showFacebook]);
+
   const heroOpacity = Math.max(0, 1 - scrollY / 400);
 
   const doTriggerFacebook = () => {
@@ -128,8 +135,8 @@ function App() {
           <div
             className="fixed inset-0 z-30 flex flex-col justify-center transition-opacity duration-300"
             style={{
-              opacity: heroOpacity,
-              pointerEvents: heroOpacity < 0.1 ? 'none' : 'auto',
+              opacity: showFacebook ? 1 : heroOpacity,
+              pointerEvents: (!showFacebook && heroOpacity < 0.1) ? 'none' : 'auto',
               background: 'linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.35) 50%, rgba(0,0,0,0.1) 100%)',
               cursor: !showFacebook && !heroExiting ? 'pointer' : 'default',
             }}
@@ -150,7 +157,7 @@ function App() {
                 >
                   #1 Panel & Electrical Installations and Maintenance Services in Dapitan City
                 </p>
-                <div className={`mt-6 sm:mt-10 ${heroExiting ? 'hero-sub-exit' : (!showIntro ? 'animate-slide-up' : '')}`} style={{ animationDelay: '0.4s' }}>
+                <div className={`mt-3 sm:mt-4 ${heroExiting ? 'hero-sub-exit' : (!showIntro ? 'animate-slide-up' : '')}`} style={{ animationDelay: '0.4s' }}>
                   <p className="text-white/80 text-sm sm:text-base font-light tracking-widest animate-pulse" style={{ textShadow: '0 1px 8px rgba(0,0,0,0.8)', letterSpacing: '0.15em' }}>
                     Press any key to see Facebook Posts
                   </p>
