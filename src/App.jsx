@@ -81,20 +81,20 @@ function App() {
               background: 'linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.35) 50%, rgba(0,0,0,0.1) 100%)',
             }}
           >
-            <div className="w-full max-w-7xl mx-auto px-6 sm:px-16 lg:px-24 mt-16 sm:mt-24">
+            <div className="w-full max-w-7xl mx-auto px-6 sm:px-16 lg:px-24">
               <h1
-                className="text-white text-2xl sm:text-4xl lg:text-[3.5rem] font-bold leading-snug sm:leading-tight max-w-3xl ml-4 sm:ml-8"
+                className="animate-slide-up text-white text-2xl sm:text-4xl lg:text-[3.5rem] font-bold leading-snug sm:leading-tight max-w-3xl"
                 style={{ textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}
               >
                 Empowering homes and businesses to cut electricity cost with solar
               </h1>
               <p
-                className="text-gray-300 text-xs sm:text-base lg:text-lg mt-3 sm:mt-5 max-w-2xl font-light ml-4 sm:ml-8"
-                style={{ textShadow: '0 1px 10px rgba(0,0,0,0.7)' }}
+                className="animate-slide-up text-gray-300 text-xs sm:text-base lg:text-lg mt-3 sm:mt-5 max-w-2xl font-light"
+                style={{ textShadow: '0 1px 10px rgba(0,0,0,0.7)', animationDelay: '0.2s' }}
               >
                 #1 Panel & Electrical Installations and Maintenance Services in Dapitan City
               </p>
-              <div className="ml-4 sm:ml-8 mt-6 sm:mt-10">
+              <div className="mt-6 sm:mt-10 animate-slide-up" style={{ animationDelay: '0.4s' }}>
                 <button
                   onClick={() => setIsFacebookOpen(true)}
                   className="bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs sm:text-base px-8 sm:px-12 py-3 sm:py-4 rounded-lg transition-all hover:scale-105 shadow-lg shadow-blue-600/30 w-fit min-w-[200px]"
