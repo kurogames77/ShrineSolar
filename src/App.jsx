@@ -57,18 +57,15 @@ function App() {
         {isHome && (
           <nav
             className="fixed top-0 left-0 w-full z-40"
-            style={{
-              opacity: 1,
-              pointerEvents: 'auto',
-            }}
+            style={{ opacity: 1, pointerEvents: 'auto' }}
           >
-            <div style={{ width: '100%', paddingLeft: '40px', paddingRight: '40px', paddingTop: '16px', paddingBottom: '16px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+            <div style={{ width: '100%', paddingLeft: '40px', paddingRight: '40px', paddingTop: '20px', paddingBottom: '20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
               <img src="/logo.png" alt="Shrine Solar Logo" className="h-9 sm:h-12 w-auto drop-shadow-2xl" style={{ filter: 'drop-shadow(0 4px 6px rgba(0,0,0,0.8))' }} />
-              <div style={{ display: 'flex', alignItems: 'center', gap: '4px', background: 'rgba(10,10,10,0.65)', backdropFilter: 'blur(16px)', border: '1px solid rgba(255,255,255,0.12)', padding: '8px 12px', borderRadius: '9999px', boxShadow: '0 8px 32px rgba(0,0,0,0.5)' }}>
-                <button onClick={() => { setIsShopOpen(false); setIsInquiryOpen(false); navigate('/'); }} className={`animate-fade-in hidden sm:block rounded-full text-white font-bold tracking-wide transition-all duration-300 ${!isShopOpen && !isInquiryOpen && location.pathname === '/' ? 'bg-yellow-400/80 text-black' : 'hover:bg-white/10'}`} style={{ fontSize: '15px', padding: '12px 28px', textShadow: '0 1px 4px rgba(0,0,0,0.5)', animationDelay: '0.1s' }}>Home</button>
-                <button onClick={() => setIsShopOpen(true)} className={`animate-fade-in rounded-full text-white font-bold tracking-wide transition-all duration-300 ${isShopOpen ? 'bg-yellow-400/80 text-black' : 'hover:bg-white/10'}`} style={{ fontSize: '15px', padding: '12px 28px', textShadow: '0 1px 4px rgba(0,0,0,0.5)', animationDelay: '0.2s' }}>Shop</button>
-                <button onClick={() => navigate('/my-cart')} className={`animate-fade-in rounded-full text-white font-bold tracking-wide transition-all duration-300 ${location.pathname === '/my-cart' ? 'bg-yellow-400/80 text-black' : 'hover:bg-white/10'}`} style={{ fontSize: '15px', padding: '12px 28px', textShadow: '0 1px 4px rgba(0,0,0,0.5)', animationDelay: '0.3s' }}>My Carts</button>
-                <button onClick={() => setIsInquiryOpen(true)} className={`animate-fade-in rounded-full text-white font-bold tracking-wide transition-all duration-300 ${isInquiryOpen ? 'bg-yellow-400/80 text-black' : 'hover:bg-white/10'}`} style={{ fontSize: '15px', padding: '12px 28px', textShadow: '0 1px 4px rgba(0,0,0,0.5)', animationDelay: '0.4s' }}>Inquiry</button>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '32px' }}>
+                <button onClick={() => navigate('/')} className="animate-fade-in hidden sm:block text-white font-bold tracking-wide transition-colors hover:text-gray-200" style={{ fontSize: '16px', textShadow: '0 2px 10px rgba(0,0,0,1), 0 1px 4px rgba(0,0,0,0.8)', animationDelay: '0.1s' }}>Home</button>
+                <button onClick={() => setIsShopOpen(true)} className="animate-fade-in text-white font-bold tracking-wide transition-colors hover:text-gray-200" style={{ fontSize: '16px', textShadow: '0 2px 10px rgba(0,0,0,1), 0 1px 4px rgba(0,0,0,0.8)', animationDelay: '0.2s' }}>Shop</button>
+                <button onClick={() => navigate('/my-cart')} className="animate-fade-in text-white font-bold tracking-wide transition-colors hover:text-gray-200" style={{ fontSize: '16px', textShadow: '0 2px 10px rgba(0,0,0,1), 0 1px 4px rgba(0,0,0,0.8)', animationDelay: '0.3s' }}>My Carts</button>
+                <button onClick={() => setIsInquiryOpen(true)} className="animate-fade-in text-white font-bold tracking-wide transition-colors hover:text-gray-200" style={{ fontSize: '16px', textShadow: '0 2px 10px rgba(0,0,0,1), 0 1px 4px rgba(0,0,0,0.8)', animationDelay: '0.4s' }}>Inquiry</button>
               </div>
             </div>
           </nav>
