@@ -60,7 +60,7 @@ function App() {
             style={{
               opacity: 1,
               pointerEvents: 'auto',
-              background: `rgba(0, 0, 0, ${Math.min(scrollY / 150, 0.65)})`,
+              background: `rgba(0, 0, 0, ${Math.min(scrollY / 150, 0.3)})`,
               backdropFilter: scrollY > 20 ? 'blur(6px)' : 'none',
               transition: 'background 0.3s ease, backdrop-filter 0.3s ease',
             }}
