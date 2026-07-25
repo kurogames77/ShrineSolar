@@ -41,6 +41,8 @@ function App() {
   const isHome = location.pathname === '/';
 
   const [scrollY, setScrollY] = useState(0);
+  const [showFacebook, setShowFacebook] = useState(false);
+  const [heroExiting, setHeroExiting] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
@@ -48,7 +50,31 @@ function App() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Reset Facebook view when leaving home
+  useEffect(() => {
+    if (!isHome) { setShowFacebook(false); setHeroExiting(false); }
+  }, [isHome]);
+
+  // Any keypress triggers the Facebook transition
+  useEffect(() => {
+    if (!isHome || showFacebook || heroExiting) return;
+    let timer;
+    const handleKey = (e) => {
+      if (['Tab', 'Escape', 'Shift', 'Control', 'Alt', 'Meta'].includes(e.key)) return;
+      setHeroExiting(true);
+      timer = setTimeout(() => { setShowFacebook(true); setHeroExiting(false); }, 600);
+    };
+    window.addEventListener('keydown', handleKey);
+    return () => { window.removeEventListener('keydown', handleKey); clearTimeout(timer); };
+  }, [isHome, showFacebook, heroExiting]);
+
   const heroOpacity = Math.max(0, 1 - scrollY / 400);
+
+  const doTriggerFacebook = () => {
+    if (showFacebook || heroExiting) return;
+    setHeroExiting(true);
+    setTimeout(() => { setShowFacebook(true); setHeroExiting(false); }, 600);
+  };
 
   return (
     <>
@@ -105,37 +131,58 @@ function App() {
               opacity: heroOpacity,
               pointerEvents: heroOpacity < 0.1 ? 'none' : 'auto',
               background: 'linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.35) 50%, rgba(0,0,0,0.1) 100%)',
+              cursor: !showFacebook && !heroExiting ? 'pointer' : 'default',
             }}
+            onClick={doTriggerFacebook}
           >
-            <div className="w-full px-6 sm:px-16 lg:px-24 flex flex-col items-center text-center">
-              <h1
-                className={`${!showIntro ? 'animate-slide-up' : ''} text-white text-3xl sm:text-5xl lg:text-[4rem] font-bold leading-snug sm:leading-tight max-w-4xl`}
-                style={{ fontFamily: "'Playfair Display', serif", textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}
-              >
-                Empowering homes and businesses to cut electricity cost with solar
-              </h1>
-              <p
-                className={`${!showIntro ? 'animate-slide-up' : ''} text-gray-300 text-xs sm:text-base lg:text-lg mt-3 sm:mt-5 max-w-2xl font-light`}
-                style={{ textShadow: '0 1px 10px rgba(0,0,0,0.7)', animationDelay: '0.2s' }}
-              >
-                #1 Panel & Electrical Installations and Maintenance Services in Dapitan City
-              </p>
-              <div className={`mt-6 sm:mt-10 ${!showIntro ? 'animate-slide-up' : ''}`} style={{ animationDelay: '0.4s' }}>
-                <button
-                  onClick={() => setIsFacebookOpen(true)}
-                  className="bg-blue-600 hover:bg-blue-700 text-white font-semibold text-sm px-12 py-10 rounded-lg transition-all hover:scale-105 shadow-lg shadow-blue-600/30 w-fit min-w-[200px] border-2 border-white"
+            {/* Default hero content */}
+            {!showFacebook && (
+              <div className="w-full px-6 sm:px-16 lg:px-24 flex flex-col items-center text-center">
+                <h1
+                  className={`${heroExiting ? 'hero-text-exit' : (!showIntro ? 'animate-slide-up' : '')} text-white text-3xl sm:text-5xl lg:text-[4rem] font-bold leading-snug sm:leading-tight max-w-4xl`}
+                  style={{ fontFamily: "'Playfair Display', serif", textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}
                 >
-                  View Facebook Post
-                </button>
+                  Empowering homes and businesses to cut electricity cost with solar
+                </h1>
+                <p
+                  className={`${heroExiting ? 'hero-sub-exit' : (!showIntro ? 'animate-slide-up' : '')} text-gray-300 text-xs sm:text-base lg:text-lg mt-3 sm:mt-5 max-w-2xl font-light`}
+                  style={{ textShadow: '0 1px 10px rgba(0,0,0,0.7)', animationDelay: '0.2s' }}
+                >
+                  #1 Panel & Electrical Installations and Maintenance Services in Dapitan City
+                </p>
+                <div className={`mt-6 sm:mt-10 ${heroExiting ? 'hero-sub-exit' : (!showIntro ? 'animate-slide-up' : '')}`} style={{ animationDelay: '0.4s' }}>
+                  <p className="text-white/80 text-sm sm:text-base font-light tracking-widest animate-pulse" style={{ textShadow: '0 1px 8px rgba(0,0,0,0.8)', letterSpacing: '0.15em' }}>
+                    Press any key to see Facebook Posts
+                  </p>
+                </div>
+                {/* Scroll to Begin */}
+                <div className={`mt-8 flex flex-col items-center gap-2 animate-bounce ${heroExiting ? 'hero-sub-exit' : ''}`}>
+                  <span className="text-white/70 text-[10px] sm:text-xs font-medium tracking-[0.25em] uppercase" style={{ textShadow: '0 1px 8px rgba(0,0,0,0.6)' }}>Scroll to Begin</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 sm:h-5 sm:w-5 text-white/60" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </div>
               </div>
-            </div>
-            {/* Scroll to Begin */}
-            <div className="absolute bottom-6 sm:bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce">
-              <span className="text-white/70 text-[10px] sm:text-xs font-medium tracking-[0.25em] uppercase" style={{ textShadow: '0 1px 8px rgba(0,0,0,0.6)' }}>Scroll to Begin</span>
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 sm:h-5 sm:w-5 text-white/60" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-              </svg>
-            </div>
+            )}
+            {/* Facebook embed — fades in after hero exits */}
+            {showFacebook && (
+              <div className="w-full flex flex-col items-center justify-center px-4 facebook-enter" onClick={(e) => e.stopPropagation()}>
+                <div className="bg-white/95 backdrop-blur-sm rounded-3xl shadow-2xl p-4 sm:p-6 w-full max-w-lg overflow-y-auto" style={{ maxHeight: '75vh' }}>
+                  <h2 className="text-xl font-bold text-black text-center mb-4 tracking-wide">Facebook Post</h2>
+                  <div className="flex justify-center">
+                    <iframe
+                      src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fshrinesolarservices&tabs=timeline&width=500&height=700&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId"
+                      className="w-full"
+                      style={{ border: 'none', overflow: 'hidden', height: '500px' }}
+                      scrolling="no"
+                      frameBorder="0"
+                      allowFullScreen={true}
+                      allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+                    />
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         )}
 
