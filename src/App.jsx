@@ -47,7 +47,7 @@ function App() {
     <>
       {/* Cinematic intro overlay — homepage renders underneath */}
       {showIntro && isHome && (
-        <div className="fixed inset-0 z-[9999]" style={{ width: '100vw', height: '100vh' }}>
+        <div className="fixed inset-0 z-[9999]" style={{ width: '100%', height: '100vh' }}>
           <CinematicIntro onComplete={handleIntroComplete} />
         </div>
       )}
