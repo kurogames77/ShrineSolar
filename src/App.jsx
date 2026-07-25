@@ -59,7 +59,7 @@ function App() {
             className="fixed top-0 left-0 w-full z-40 transition-opacity duration-500"
             style={{ opacity: heroOpacity, pointerEvents: heroOpacity < 0.1 ? 'none' : 'auto' }}
           >
-            <div className="w-full max-w-7xl mx-auto px-4 sm:px-12 py-4 sm:py-6 flex items-center justify-between">
+            <div className="w-full px-4 sm:px-12 py-4 sm:py-6 flex items-center justify-between">
               <img src="/logo.png" alt="Shrine Solar Logo" className="h-9 sm:h-12 w-auto drop-shadow-lg" />
               <div className="flex items-center gap-3 sm:gap-8">
                 <button onClick={() => navigate('/')} className="animate-fade-in hidden sm:block text-white/90 hover:text-white text-sm sm:text-base font-medium tracking-wide transition-colors" style={{ textShadow: '0 1px 6px rgba(0,0,0,0.5)', animationDelay: '0.1s' }}>Home</button>
@@ -81,7 +81,7 @@ function App() {
               background: 'linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.35) 50%, rgba(0,0,0,0.1) 100%)',
             }}
           >
-            <div className="w-full max-w-7xl mx-auto px-6 sm:px-16 lg:px-24 flex flex-col items-center text-center">
+            <div className="w-full px-6 sm:px-16 lg:px-24 flex flex-col items-center text-center">
               <h1
                 className={`${!showIntro ? 'animate-slide-up' : ''} text-white text-3xl sm:text-5xl lg:text-[4rem] font-bold leading-snug sm:leading-tight max-w-4xl`}
                 style={{ fontFamily: "'Playfair Display', serif", textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}
