@@ -71,6 +71,13 @@ function App() {
           </nav>
         )}
 
+        {/* Mobile-only icon below navbar */}
+        {isHome && (
+          <div className="block sm:hidden fixed z-40 w-full flex justify-center" style={{ top: '64px' }}>
+            <img src="/apple-touch-icon.png" alt="Shrine Solar Icon" className="h-12 w-12 drop-shadow-2xl" style={{ filter: 'drop-shadow(0 4px 6px rgba(0,0,0,0.8))' }} />
+          </div>
+        )}
+
         {/* Hero Overlay */}
         {isHome && (
           <div
