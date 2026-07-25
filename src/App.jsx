@@ -61,6 +61,7 @@ function App() {
     let timer;
     const handleKey = (e) => {
       if (['Tab', 'Escape', 'Shift', 'Control', 'Alt', 'Meta'].includes(e.key)) return;
+      window.scrollTo({ top: 0 });
       setHeroExiting(true);
       timer = setTimeout(() => { setShowFacebook(true); setHeroExiting(false); }, 600);
     };
@@ -79,6 +80,7 @@ function App() {
 
   const doTriggerFacebook = () => {
     if (showFacebook || heroExiting) return;
+    window.scrollTo({ top: 0 });
     setHeroExiting(true);
     setTimeout(() => { setShowFacebook(true); setHeroExiting(false); }, 600);
   };
@@ -135,8 +137,8 @@ function App() {
           <div
             className="fixed inset-0 z-30 flex flex-col justify-center transition-opacity duration-300"
             style={{
-              opacity: showFacebook ? 1 : heroOpacity,
-              pointerEvents: (!showFacebook && heroOpacity < 0.1) ? 'none' : 'auto',
+              opacity: (showFacebook || heroExiting) ? 1 : heroOpacity,
+              pointerEvents: (!showFacebook && !heroExiting && heroOpacity < 0.1) ? 'none' : 'auto',
               background: 'linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.35) 50%, rgba(0,0,0,0.1) 100%)',
               cursor: !showFacebook && !heroExiting ? 'pointer' : 'default',
             }}
