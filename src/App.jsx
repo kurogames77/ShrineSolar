@@ -74,7 +74,7 @@ function App() {
         {/* Mobile-only icon below navbar */}
         {isHome && (
           <div className="block sm:hidden fixed z-40 w-full flex justify-center" style={{ top: '90px', opacity: heroOpacity, transition: 'opacity 0.3s ease', pointerEvents: heroOpacity < 0.1 ? 'none' : 'auto' }}>
-            <img src="/apple-touch-icon.png" alt="Shrine Solar Icon" style={{ width: '150px', height: '150px', filter: 'drop-shadow(0 4px 6px rgba(0,0,0,0.8))' }} />
+            <img src="/apple-touch-icon.png" alt="Shrine Solar Icon" style={{ width: '130px', height: '130px', filter: 'drop-shadow(0 4px 6px rgba(0,0,0,0.8))' }} />
           </div>
         )}
 
