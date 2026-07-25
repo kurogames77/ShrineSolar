@@ -83,8 +83,8 @@ function App() {
           >
             <div className="w-full max-w-7xl mx-auto px-6 sm:px-16 lg:px-24 flex flex-col items-center text-center">
               <h1
-                className={`${!showIntro ? 'animate-slide-up' : ''} text-white text-2xl sm:text-4xl lg:text-[3.5rem] font-bold leading-snug sm:leading-tight max-w-3xl`}
-                style={{ textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}
+                className={`${!showIntro ? 'animate-slide-up' : ''} text-white text-3xl sm:text-5xl lg:text-[4rem] font-bold leading-snug sm:leading-tight max-w-4xl`}
+                style={{ fontFamily: "'Playfair Display', serif", textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}
               >
                 Empowering homes and businesses to cut electricity cost with solar
               </h1>
