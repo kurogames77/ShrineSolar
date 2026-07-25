@@ -58,15 +58,12 @@ function App() {
   // Any keypress triggers the Facebook transition
   useEffect(() => {
     if (!isHome || showFacebook || heroExiting) return;
-    let timer;
     const handleKey = (e) => {
       if (['Tab', 'Escape', 'Shift', 'Control', 'Alt', 'Meta'].includes(e.key)) return;
-      window.scrollTo({ top: 0 });
-      setHeroExiting(true);
-      timer = setTimeout(() => { setShowFacebook(true); setHeroExiting(false); }, 600);
+      doTriggerFacebook();
     };
     window.addEventListener('keydown', handleKey);
-    return () => { window.removeEventListener('keydown', handleKey); clearTimeout(timer); };
+    return () => window.removeEventListener('keydown', handleKey);
   }, [isHome, showFacebook, heroExiting]);
 
   // Lock body scroll when any modal or Facebook embed is open
