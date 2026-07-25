@@ -17,6 +17,13 @@ function App() {
   const [isShopOpen, setIsShopOpen] = useState(false);
   const [isFacebookOpen, setIsFacebookOpen] = useState(false);
   const [isInquiryOpen, setIsInquiryOpen] = useState(false);
+  const [isShopClosing, setIsShopClosing] = useState(false);
+  const [isFacebookClosing, setIsFacebookClosing] = useState(false);
+  const [isInquiryClosing, setIsInquiryClosing] = useState(false);
+
+  const closeShop = () => { setIsShopClosing(true); setTimeout(() => { setIsShopOpen(false); setIsShopClosing(false); }, 300); };
+  const closeFacebook = () => { setIsFacebookClosing(true); setTimeout(() => { setIsFacebookOpen(false); setIsFacebookClosing(false); }, 300); };
+  const closeInquiry = () => { setIsInquiryClosing(true); setTimeout(() => { setIsInquiryOpen(false); setIsInquiryClosing(false); }, 300); };
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -26,8 +33,8 @@ function App() {
   };
 
   const handleNavigation = (path) => {
-    setIsShopOpen(false);
-    setIsFacebookOpen(false);
+    setIsShopOpen(false); setIsShopClosing(false);
+    setIsFacebookOpen(false); setIsFacebookClosing(false);
     navigate(path);
   };
 
@@ -144,10 +151,10 @@ function App() {
         </main>
         {/* Facebook Modal */}
         {isHome && isFacebookOpen && (
-          <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 p-4" onClick={() => setIsFacebookOpen(false)}>
-            <div className="bg-[#a8a8a8] border-4 border-gray-600 rounded-3xl w-full max-w-2xl h-[85vh] sm:h-[75vh] flex flex-col shadow-2xl relative" onClick={(e) => e.stopPropagation()}>
+          <div className={`fixed inset-0 bg-black/40 flex items-center justify-center z-50 p-4 ${isFacebookClosing ? 'modal-backdrop-out' : 'modal-backdrop-in'}`} onClick={closeFacebook}>
+            <div className={`bg-[#a8a8a8] border-4 border-gray-600 rounded-3xl w-full max-w-2xl h-[85vh] sm:h-[75vh] flex flex-col shadow-2xl relative ${isFacebookClosing ? 'modal-panel-out' : 'modal-panel-in'}`} onClick={(e) => e.stopPropagation()}>
               <button
-                onClick={() => setIsFacebookOpen(false)}
+                onClick={closeFacebook}
                 className="absolute top-4 right-4 sm:top-6 sm:right-6 text-gray-700 hover:text-black hover:bg-gray-300 w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center text-xl sm:text-2xl font-bold transition-colors z-10"
               >
                 ✕
@@ -170,10 +177,10 @@ function App() {
         )}
         {/* Shop Modal */}
         {isHome && isShopOpen && (
-          <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 p-4" onClick={() => setIsShopOpen(false)}>
-            <div className="bg-[#a8a8a8] border-4 border-gray-600 rounded-3xl w-full max-w-5xl h-[85vh] sm:h-[75vh] flex flex-col shadow-2xl relative" onClick={(e) => e.stopPropagation()}>
+          <div className={`fixed inset-0 bg-black/40 flex items-center justify-center z-50 p-4 ${isShopClosing ? 'modal-backdrop-out' : 'modal-backdrop-in'}`} onClick={closeShop}>
+            <div className={`bg-[#a8a8a8] border-4 border-gray-600 rounded-3xl w-full max-w-5xl h-[85vh] sm:h-[75vh] flex flex-col shadow-2xl relative ${isShopClosing ? 'modal-panel-out' : 'modal-panel-in'}`} onClick={(e) => e.stopPropagation()}>
               <button
-                onClick={() => setIsShopOpen(false)}
+                onClick={closeShop}
                 className="absolute top-4 right-4 sm:top-6 sm:right-6 text-gray-700 hover:text-black hover:bg-gray-300 w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center text-xl sm:text-2xl font-bold transition-colors z-10"
               >
                 ✕
@@ -194,11 +201,11 @@ function App() {
         )}
         {/* Inquiry Modal */}
         {isHome && isInquiryOpen && (
-          <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 p-4" onClick={() => setIsInquiryOpen(false)}>
-            <div className="bg-[#a8a8a8] border-4 border-gray-600 rounded-3xl w-full max-w-5xl h-[85vh] sm:h-[75vh] flex flex-col shadow-2xl relative" onClick={(e) => e.stopPropagation()}>
+          <div className={`fixed inset-0 bg-black/40 flex items-center justify-center z-50 p-4 ${isInquiryClosing ? 'modal-backdrop-out' : 'modal-backdrop-in'}`} onClick={closeInquiry}>
+            <div className={`bg-[#a8a8a8] border-4 border-gray-600 rounded-3xl w-full max-w-5xl h-[85vh] sm:h-[75vh] flex flex-col shadow-2xl relative ${isInquiryClosing ? 'modal-panel-out' : 'modal-panel-in'}`} onClick={(e) => e.stopPropagation()}>
               {/* X button — absolute top-right */}
               <button
-                onClick={() => setIsInquiryOpen(false)}
+                onClick={closeInquiry}
                 className="absolute top-4 right-4 sm:top-6 sm:right-6 text-gray-700 hover:text-black hover:bg-gray-300 w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center text-xl sm:text-2xl font-bold transition-colors z-10"
               >
                 ✕
