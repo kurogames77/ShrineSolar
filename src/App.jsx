@@ -56,8 +56,14 @@ function App() {
         {/* Cinematic Navbar */}
         {isHome && (
           <nav
-            className="fixed top-0 left-0 w-full z-40 transition-opacity duration-500"
-            style={{ opacity: heroOpacity, pointerEvents: heroOpacity < 0.1 ? 'none' : 'auto' }}
+            className="fixed top-0 left-0 w-full z-40"
+            style={{
+              opacity: 1,
+              pointerEvents: 'auto',
+              background: `rgba(0, 0, 0, ${Math.min(scrollY / 150, 0.65)})`,
+              backdropFilter: scrollY > 20 ? 'blur(6px)' : 'none',
+              transition: 'background 0.3s ease, backdrop-filter 0.3s ease',
+            }}
           >
             <div style={{ width: '100%', paddingLeft: '40px', paddingRight: '40px', paddingTop: '16px', paddingBottom: '16px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
               <img src="/logo.png" alt="Shrine Solar Logo" className="h-9 sm:h-12 w-auto drop-shadow-lg" />
