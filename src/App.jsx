@@ -116,7 +116,7 @@ function App() {
               <div className={`mt-6 sm:mt-10 ${!showIntro ? 'animate-slide-up' : ''}`} style={{ animationDelay: '0.4s' }}>
                 <button
                   onClick={() => setIsFacebookOpen(true)}
-                  className="bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs sm:text-base px-8 sm:px-12 py-6 sm:py-8 rounded-lg transition-all hover:scale-105 shadow-lg shadow-blue-600/30 w-fit min-w-[200px]"
+                  className="bg-blue-600 hover:bg-blue-700 text-white font-semibold text-sm px-12 py-10 rounded-lg transition-all hover:scale-105 shadow-lg shadow-blue-600/30 w-fit min-w-[200px] border-2 border-white"
                 >
                   View Facebook Post
                 </button>
