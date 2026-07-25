@@ -59,13 +59,13 @@ function App() {
             className="fixed top-0 left-0 w-full z-40"
             style={{ opacity: 1, pointerEvents: 'auto' }}
           >
-            <div className="w-full px-2 sm:px-10 py-3 sm:py-5 flex items-center justify-center sm:justify-between">
-              <img src="/logo.png" alt="Shrine Solar Logo" className="hidden sm:block h-9 sm:h-12 w-auto drop-shadow-2xl" style={{ filter: 'drop-shadow(0 4px 6px rgba(0,0,0,0.8))' }} />
-              <div className="flex items-center justify-center gap-3 sm:gap-8 w-full sm:w-auto">
-                <button onClick={() => navigate('/')} className="animate-fade-in hidden sm:block text-white font-bold tracking-wide transition-colors hover:text-gray-200 text-sm sm:text-base" style={{ textShadow: '0 2px 10px rgba(0,0,0,1), 0 1px 4px rgba(0,0,0,0.8)', animationDelay: '0.1s' }}>Home</button>
-                <button onClick={() => setIsShopOpen(true)} className="animate-fade-in text-white font-bold tracking-wide transition-colors hover:text-gray-200 text-sm sm:text-base" style={{ textShadow: '0 2px 10px rgba(0,0,0,1), 0 1px 4px rgba(0,0,0,0.8)', animationDelay: '0.2s' }}>Shop</button>
-                <button onClick={() => navigate('/my-cart')} className="animate-fade-in text-white font-bold tracking-wide transition-colors hover:text-gray-200 text-sm sm:text-base" style={{ textShadow: '0 2px 10px rgba(0,0,0,1), 0 1px 4px rgba(0,0,0,0.8)', animationDelay: '0.3s' }}>My Carts</button>
-                <button onClick={() => setIsInquiryOpen(true)} className="animate-fade-in text-white font-bold tracking-wide transition-colors hover:text-gray-200 text-sm sm:text-base" style={{ textShadow: '0 2px 10px rgba(0,0,0,1), 0 1px 4px rgba(0,0,0,0.8)', animationDelay: '0.4s' }}>Inquiry</button>
+            <div style={{ width: '100%', paddingLeft: '40px', paddingRight: '40px', paddingTop: '20px', paddingBottom: '20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+              <img src="/logo.png" alt="Shrine Solar Logo" className="h-9 sm:h-12 w-auto drop-shadow-2xl" style={{ filter: 'drop-shadow(0 4px 6px rgba(0,0,0,0.8))' }} />
+              <div style={{ display: 'flex', alignItems: 'center', gap: '32px' }}>
+                <button onClick={() => navigate('/')} className="animate-fade-in hidden sm:block text-white font-bold tracking-wide transition-colors hover:text-gray-200" style={{ fontSize: '16px', textShadow: '0 2px 10px rgba(0,0,0,1), 0 1px 4px rgba(0,0,0,0.8)', animationDelay: '0.1s' }}>Home</button>
+                <button onClick={() => setIsShopOpen(true)} className="animate-fade-in text-white font-bold tracking-wide transition-colors hover:text-gray-200" style={{ fontSize: '16px', textShadow: '0 2px 10px rgba(0,0,0,1), 0 1px 4px rgba(0,0,0,0.8)', animationDelay: '0.2s' }}>Shop</button>
+                <button onClick={() => navigate('/my-cart')} className="animate-fade-in text-white font-bold tracking-wide transition-colors hover:text-gray-200" style={{ fontSize: '16px', textShadow: '0 2px 10px rgba(0,0,0,1), 0 1px 4px rgba(0,0,0,0.8)', animationDelay: '0.3s' }}>My Carts</button>
+                <button onClick={() => setIsInquiryOpen(true)} className="animate-fade-in text-white font-bold tracking-wide transition-colors hover:text-gray-200" style={{ fontSize: '16px', textShadow: '0 2px 10px rgba(0,0,0,1), 0 1px 4px rgba(0,0,0,0.8)', animationDelay: '0.4s' }}>Inquiry</button>
               </div>
             </div>
           </nav>
