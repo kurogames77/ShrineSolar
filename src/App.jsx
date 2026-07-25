@@ -116,8 +116,8 @@ function App() {
           </nav>
         )}
 
-        {/* Mobile-only icon below navbar */}
-        {isHome && (
+        {/* Mobile-only icon below navbar — hidden when Facebook embed is showing */}
+        {isHome && !showFacebook && (
           <div className="block sm:hidden fixed z-40 w-full flex justify-center" style={{ top: '90px', opacity: heroOpacity, transition: 'opacity 0.3s ease', pointerEvents: heroOpacity < 0.1 ? 'none' : 'auto' }}>
             <img src="/apple-touch-icon.png" alt="Shrine Solar Icon" style={{ width: '130px', height: '130px', filter: 'drop-shadow(0 4px 6px rgba(0,0,0,0.8))' }} />
           </div>
@@ -155,20 +155,29 @@ function App() {
                     Press any key to see Facebook Posts
                   </p>
                 </div>
-                {/* Scroll to Begin */}
-                <div className={`mt-8 flex flex-col items-center gap-2 animate-bounce ${heroExiting ? 'hero-sub-exit' : ''}`}>
-                  <span className="text-white/70 text-[10px] sm:text-xs font-medium tracking-[0.25em] uppercase" style={{ textShadow: '0 1px 8px rgba(0,0,0,0.6)' }}>Scroll to Begin</span>
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 sm:h-5 sm:w-5 text-white/60" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-                  </svg>
-                </div>
+              </div>
+            )}
+            {/* Scroll to Begin — absolute bottom center, hidden when Facebook embed shows */}
+            {!showFacebook && (
+              <div className={`absolute bottom-6 sm:bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce ${heroExiting ? 'hero-sub-exit' : ''}`}>
+                <span className="text-white/70 text-[10px] sm:text-xs font-medium tracking-[0.25em] uppercase" style={{ textShadow: '0 1px 8px rgba(0,0,0,0.6)' }}>Scroll to Begin</span>
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 sm:h-5 sm:w-5 text-white/60" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                </svg>
               </div>
             )}
             {/* Facebook embed — fades in after hero exits */}
             {showFacebook && (
               <div className="w-full flex flex-col items-center justify-center px-4 facebook-enter" onClick={(e) => e.stopPropagation()}>
-                <div className="bg-white/95 backdrop-blur-sm rounded-3xl shadow-2xl p-4 sm:p-6 w-full max-w-lg overflow-y-auto" style={{ maxHeight: '75vh' }}>
-                  <h2 className="text-xl font-bold text-black text-center mb-4 tracking-wide">Facebook Post</h2>
+                <div className="bg-white/95 backdrop-blur-sm rounded-3xl shadow-2xl p-4 sm:p-6 w-full max-w-lg overflow-y-auto relative" style={{ maxHeight: '75vh' }}>
+                  {/* X button to close and return to hero text */}
+                  <button
+                    onClick={(e) => { e.stopPropagation(); setShowFacebook(false); setHeroExiting(false); }}
+                    className="absolute top-3 right-3 sm:top-4 sm:right-4 bg-gray-200 hover:bg-gray-300 text-gray-700 hover:text-black w-9 h-9 rounded-full flex items-center justify-center text-lg font-bold transition-colors z-10"
+                  >
+                    ✕
+                  </button>
+                  <h2 className="text-xl font-bold text-black text-center mb-4 tracking-wide pr-8">Facebook Post</h2>
                   <div className="flex justify-center">
                     <iframe
                       src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fshrinesolarservices&tabs=timeline&width=500&height=700&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId"
