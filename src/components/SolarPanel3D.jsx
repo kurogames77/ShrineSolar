@@ -88,3 +88,6 @@ export default function SolarPanel3D() {
     </div>
   );
 }
+
+// Preload the 3D model so it is cached before the user scrolls to it
+useGLTF.preload('/3dsolarpanel.glb');

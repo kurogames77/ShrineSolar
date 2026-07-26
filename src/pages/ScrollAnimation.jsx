@@ -1,6 +1,5 @@
-import { useEffect, useRef, useState, useCallback, lazy, Suspense } from 'react';
-
-const SolarPanel3D = lazy(() => import('../components/SolarPanel3D'));
+import { useEffect, useRef, useState, useCallback, Suspense } from 'react';
+import SolarPanel3D from '../components/SolarPanel3D';
 
 const FRAME_COUNT = 300;
 
@@ -227,7 +226,7 @@ export default function ScrollAnimation() {
           }
         }
         
-        if (opacity <= 0) return null;
+        if (opacity < 0) opacity = 0;
         
         return (
           <div
@@ -239,7 +238,8 @@ export default function ScrollAnimation() {
               alignItems: 'center',
               justifyContent: 'center',
               opacity,
-              transition: 'opacity 0.15s ease-out',
+              visibility: opacity <= 0 ? 'hidden' : 'visible',
+              transition: 'opacity 0.15s ease-out, visibility 0.15s ease-out',
               pointerEvents: opacity > 0.3 ? 'auto' : 'none',
             }}
           >
@@ -366,9 +366,9 @@ export default function ScrollAnimation() {
                     style={{
                       fontFamily: "'Inter', sans-serif",
                       fontSize: 'clamp(0.85rem, 1.2vw, 1.05rem)',
-                      fontWeight: 300,
+                      fontWeight: 400,
                       lineHeight: 1.8,
-                      color: 'rgba(255,255,255,0.8)',
+                      color: '#ffffff',
                       letterSpacing: '0.02em',
                     }}
                   >
