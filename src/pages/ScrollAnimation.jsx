@@ -183,7 +183,7 @@ export default function ScrollAnimation() {
            300 frames × 20px per frame = 6000vh worth of "scrubbing room". 
            We use a more moderate height for smoothness. 
            Extended to 700vh to accommodate the 3D showcase section. */
-        height: '700vh',
+        height: '900vh',
         position: 'relative',
       }}
     >
@@ -641,6 +641,200 @@ export default function ScrollAnimation() {
                       textTransform: 'uppercase',
                     }}>
                       Drag the carousel to explore
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+      })()}
+
+      {/* High-Quality Installation Showcase Overlay */}
+      {isLoaded && (() => {
+        // Show near the end of frames (scrollProgress ~0.85-0.95)
+        const showStart = 0.83;
+        const fadeInEnd = 0.87;
+        const fadeOutStart = 0.93;
+        const showEnd = 0.97;
+
+        let opacity = 0;
+        if (scrollProgress >= showStart && scrollProgress <= showEnd) {
+          if (scrollProgress < fadeInEnd) {
+            opacity = (scrollProgress - showStart) / (fadeInEnd - showStart);
+          } else if (scrollProgress > fadeOutStart) {
+            opacity = 1 - (scrollProgress - fadeOutStart) / (showEnd - fadeOutStart);
+          } else {
+            opacity = 1;
+          }
+        }
+
+        if (opacity < 0) opacity = 0;
+
+        return (
+          <div
+            style={{
+              position: 'fixed',
+              inset: 0,
+              zIndex: 20,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              opacity,
+              visibility: opacity <= 0 ? 'hidden' : 'visible',
+              transition: 'opacity 0.15s ease-out, visibility 0.15s ease-out',
+              pointerEvents: opacity > 0.3 ? 'auto' : 'none',
+            }}
+          >
+            {/* Content container */}
+            <div
+              style={{
+                position: 'relative',
+                zIndex: 1,
+                display: 'flex',
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '3rem',
+                width: '90%',
+                maxWidth: '1200px',
+                padding: '2rem',
+              }}
+              className="highqual-container"
+            >
+              {/* Polaroid Photo Stack - Left Side */}
+              <div
+                className="polaroid-stack"
+                style={{
+                  animation: opacity >= 0.9 ? 'fadeSlideInLeft 0.8s ease-out both' : 'none',
+                }}
+              >
+                <div><img src="/highqual1.jpg" alt="High quality installation 1" /></div>
+                <div><img src="/highqual2.jpg" alt="High quality installation 2" /></div>
+                <div><img src="/highqual3.jpg" alt="High quality installation 3" /></div>
+                <div><img src="/highqual4.jpg" alt="High quality installation 4" /></div>
+              </div>
+
+              {/* Info Card - Right Side */}
+              <div
+                className="highqual-glass-card"
+                style={{
+                  flex: '0 0 45%',
+                  position: 'relative',
+                  animation: opacity >= 0.9 ? 'fadeSlideInRight 0.8s ease-out 0.2s both' : 'none',
+                }}
+              >
+                {/* Spinning Border Layer */}
+                <div
+                  style={{
+                    position: 'absolute',
+                    inset: '-2px',
+                    borderRadius: '22px',
+                    padding: '2px',
+                    WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+                    WebkitMaskComposite: 'xor',
+                    mask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+                    maskComposite: 'exclude',
+                    overflow: 'hidden',
+                    filter: 'drop-shadow(0 0 8px rgba(255,255,255,0.5)) drop-shadow(0 0 15px rgba(255,215,0,0.5))',
+                    zIndex: 0,
+                  }}
+                >
+                  <div
+                    style={{
+                      position: 'absolute',
+                      top: '-75%',
+                      left: '50%',
+                      width: '250px',
+                      height: '250%',
+                      marginLeft: '-125px',
+                      background: 'linear-gradient(180deg, #ffffff, #FFD700)',
+                      animation: 'rotBGimg 4s linear infinite',
+                      transformOrigin: 'center center',
+                    }}
+                  />
+                </div>
+
+                {/* Glassmorphism Card */}
+                <div
+                  style={{
+                    position: 'relative',
+                    zIndex: 1,
+                    padding: '2.5rem',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    width: '100%',
+                    height: '100%',
+                    borderRadius: '20px',
+                    background: 'linear-gradient(135deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.05) 100%)',
+                    backdropFilter: 'blur(40px)',
+                    WebkitBackdropFilter: 'blur(40px)',
+                    border: '1px solid rgba(255,255,255,0.15)',
+                    boxShadow: '0 8px 32px rgba(0,0,0,0.4)',
+                  }}
+                >
+                  {/* Golden accent line */}
+                  <div style={{
+                    width: '60px',
+                    height: '3px',
+                    background: 'linear-gradient(90deg, #FFD700, #FFA500)',
+                    borderRadius: '2px',
+                    marginBottom: '1.5rem',
+                  }} />
+
+                  <h2
+                    style={{
+                      fontFamily: "'Playfair Display', serif",
+                      fontSize: 'clamp(1.5rem, 3vw, 2.2rem)',
+                      fontWeight: 700,
+                      lineHeight: 1.2,
+                      marginBottom: '1.25rem',
+                      background: 'linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #FFD700 100%)',
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent',
+                      backgroundClip: 'text',
+                    }}
+                  >
+                    Trusted, high-quality installation
+                  </h2>
+
+                  <p
+                    style={{
+                      fontFamily: "'Inter', sans-serif",
+                      fontSize: 'clamp(0.85rem, 1.2vw, 1.05rem)',
+                      fontWeight: 400,
+                      lineHeight: 1.8,
+                      color: '#ffffff',
+                      letterSpacing: '0.02em',
+                    }}
+                  >
+                    Solar is a long-term investment, and it deserves a team that treats it that way. Our installers use premium materials and proven techniques to make sure your system performs beautifully for years to come. From the first wire to the final switch, you can relax knowing your home is in skilled, reliable hands.
+                  </p>
+
+                  {/* Subtle interaction hint */}
+                  <div style={{
+                    marginTop: '1.5rem',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.5rem',
+                  }}>
+                    <span style={{
+                      display: 'inline-block',
+                      width: '6px',
+                      height: '6px',
+                      borderRadius: '50%',
+                      background: '#FFD700',
+                      animation: 'pulse 2s ease-in-out infinite',
+                    }} />
+                    <span style={{
+                      fontFamily: "'Inter', sans-serif",
+                      fontSize: '0.75rem',
+                      fontWeight: 400,
+                      color: 'rgba(255,215,0,0.7)',
+                      letterSpacing: '0.15em',
+                      textTransform: 'uppercase',
+                    }}>
+                      Hover to browse photos
                     </span>
                   </div>
                 </div>

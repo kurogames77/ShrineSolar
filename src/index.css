@@ -336,3 +336,87 @@ body {
     padding: 1.5rem !important;
   }
 }
+
+/* === Polaroid Photo Stack === */
+.polaroid-stack {
+  position: relative;
+  width: 280px;
+  height: 320px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 40%;
+}
+
+.polaroid-stack div {
+  position: absolute;
+  height: 220px;
+  width: 160px;
+  background-color: #1a1a1a;
+  border: 4px solid #FFD700;
+  border-bottom: 45px solid #FFD700;
+  left: 50%;
+  top: 50%;
+  translate: -50% -50%;
+  border-radius: 6px;
+  box-shadow: 0 4px 20px rgba(255, 215, 0, 0.3);
+  transform-origin: bottom left;
+  scale: 1;
+  transition: transform 500ms ease, scale 300ms ease, box-shadow 300ms ease;
+  overflow: hidden;
+}
+
+.polaroid-stack div img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+.polaroid-stack div:nth-child(n) {
+  transform: rotate(0deg) translate(0px, -8px);
+}
+
+.polaroid-stack div:hover {
+  scale: 1.1;
+  box-shadow: 0 8px 30px rgba(255, 215, 0, 0.6);
+}
+
+.polaroid-stack:hover div:nth-child(1) {
+  transform: rotate(-27deg) translate(0px, -8px);
+}
+.polaroid-stack:hover div:nth-child(2) {
+  transform: rotate(-9deg) translate(0px, -8px);
+}
+.polaroid-stack:hover div:nth-child(3) {
+  transform: rotate(9deg) translate(0px, -8px);
+}
+.polaroid-stack:hover div:nth-child(4) {
+  transform: rotate(27deg) translate(0px, -8px);
+}
+
+/* Mobile responsive for high-quality section */
+@media (max-width: 768px) {
+  .highqual-container {
+    flex-direction: column !important;
+    gap: 1.5rem !important;
+    padding: 1rem !important;
+  }
+  .polaroid-stack {
+    flex: none !important;
+    width: 100% !important;
+    height: 280px !important;
+  }
+  .polaroid-stack div {
+    height: 180px;
+    width: 130px;
+    border-bottom-width: 35px;
+  }
+  .highqual-glass-card {
+    flex: none !important;
+    width: 100% !important;
+  }
+  .highqual-glass-card > div {
+    padding: 1.5rem !important;
+  }
+}
