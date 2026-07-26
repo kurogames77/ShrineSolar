@@ -154,3 +154,54 @@ body {
 .contact-card-anim:hover::before {
   animation-duration: 1.5s;
 }
+
+/* 3D Solar Panel Showcase Animations */
+@keyframes fadeSlideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-60px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeSlideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(60px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.8); }
+}
+
+/* Mobile responsive: stack 3D section vertically */
+@media (max-width: 768px) {
+  .solar3d-container {
+    flex-direction: column !important;
+    gap: 1.5rem !important;
+    padding: 1rem !important;
+  }
+  .solar3d-viewer {
+    flex: none !important;
+    width: 100% !important;
+    height: 280px !important;
+  }
+  .solar3d-card {
+    flex: none !important;
+    width: 100% !important;
+    padding: 1.5rem !important;
+  }
+}

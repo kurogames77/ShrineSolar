@@ -1,4 +1,6 @@
-import { useEffect, useRef, useState, useCallback } from 'react';
+import { useEffect, useRef, useState, useCallback, lazy, Suspense } from 'react';
+
+const SolarPanel3D = lazy(() => import('../components/SolarPanel3D'));
 
 const FRAME_COUNT = 300;
 
@@ -14,6 +16,7 @@ export default function ScrollAnimation() {
   const rafRef = useRef(null);
   const [loadProgress, setLoadProgress] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
 
   // Draw a specific frame onto the canvas
   const drawFrame = useCallback((frameIndex) => {
@@ -97,6 +100,7 @@ export default function ScrollAnimation() {
         // How far we've scrolled through the container (0 → 1)
         const scrollTop = -rect.top;
         const progress = Math.min(Math.max(scrollTop / scrollableHeight, 0), 1);
+        setScrollProgress(progress);
 
         const frameIndex = Math.min(
           Math.floor(progress * (FRAME_COUNT - 1)),
@@ -138,8 +142,9 @@ export default function ScrollAnimation() {
       style={{
         /* The tall container creates the scroll distance that drives the animation.
            300 frames × 20px per frame = 6000vh worth of "scrubbing room". 
-           We use a more moderate height for smoothness. */
-        height: '500vh',
+           We use a more moderate height for smoothness. 
+           Extended to 700vh to accommodate the 3D showcase section. */
+        height: '700vh',
         position: 'relative',
       }}
     >
@@ -202,6 +207,166 @@ export default function ScrollAnimation() {
           display: 'block',
         }}
       />
+
+      {/* 3D Solar Panel Showcase Overlay */}
+      {isLoaded && (() => {
+        // Show between scroll progress 0.25 and 0.40 (around frame 88)
+        const showStart = 0.22;
+        const fadeInEnd = 0.27;
+        const fadeOutStart = 0.38;
+        const showEnd = 0.43;
+        
+        let opacity = 0;
+        if (scrollProgress >= showStart && scrollProgress <= showEnd) {
+          if (scrollProgress < fadeInEnd) {
+            opacity = (scrollProgress - showStart) / (fadeInEnd - showStart);
+          } else if (scrollProgress > fadeOutStart) {
+            opacity = 1 - (scrollProgress - fadeOutStart) / (showEnd - fadeOutStart);
+          } else {
+            opacity = 1;
+          }
+        }
+        
+        if (opacity <= 0) return null;
+        
+        return (
+          <div
+            style={{
+              position: 'fixed',
+              inset: 0,
+              zIndex: 20,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              opacity,
+              transition: 'opacity 0.15s ease-out',
+              pointerEvents: opacity > 0.3 ? 'auto' : 'none',
+            }}
+          >
+            {/* Dark cinematic overlay */}
+            <div style={{
+              position: 'absolute',
+              inset: 0,
+              background: 'linear-gradient(135deg, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0.3) 100%)',
+            }} />
+
+            {/* Content container */}
+            <div
+              style={{
+                position: 'relative',
+                zIndex: 1,
+                display: 'flex',
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '3rem',
+                width: '90%',
+                maxWidth: '1200px',
+                padding: '2rem',
+              }}
+              className="solar3d-container"
+            >
+              {/* 3D Viewer - Left Side */}
+              <div
+                className="solar3d-viewer"
+                style={{
+                  flex: '0 0 45%',
+                  height: '400px',
+                  borderRadius: '20px',
+                  overflow: 'hidden',
+                  background: 'radial-gradient(ellipse at center, rgba(255,215,0,0.08) 0%, transparent 70%)',
+                  animation: opacity >= 0.9 ? 'fadeSlideInLeft 0.8s ease-out both' : 'none',
+                }}
+              >
+                <Suspense fallback={<div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><span style={{ color: '#FFD700', fontFamily: 'Inter, sans-serif' }}>Loading 3D Model...</span></div>}>
+                  <SolarPanel3D />
+                </Suspense>
+              </div>
+
+              {/* Info Card - Right Side */}
+              <div
+                className="solar3d-card"
+                style={{
+                  flex: '0 0 45%',
+                  padding: '2.5rem',
+                  borderRadius: '20px',
+                  background: 'linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.05) 100%)',
+                  backdropFilter: 'blur(20px)',
+                  WebkitBackdropFilter: 'blur(20px)',
+                  border: '1px solid rgba(255,255,255,0.15)',
+                  boxShadow: '0 8px 32px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.1)',
+                  animation: opacity >= 0.9 ? 'fadeSlideInRight 0.8s ease-out 0.2s both' : 'none',
+                }}
+              >
+                {/* Golden accent line */}
+                <div style={{
+                  width: '60px',
+                  height: '3px',
+                  background: 'linear-gradient(90deg, #FFD700, #FFA500)',
+                  borderRadius: '2px',
+                  marginBottom: '1.5rem',
+                }} />
+
+                <h2
+                  style={{
+                    fontFamily: "'Playfair Display', serif",
+                    fontSize: 'clamp(1.5rem, 3vw, 2.2rem)',
+                    fontWeight: 700,
+                    lineHeight: 1.2,
+                    marginBottom: '1.25rem',
+                    background: 'linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #FFD700 100%)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    backgroundClip: 'text',
+                  }}
+                >
+                  Save up to 80% on your power bills
+                </h2>
+
+                <p
+                  style={{
+                    fontFamily: "'Inter', sans-serif",
+                    fontSize: 'clamp(0.85rem, 1.2vw, 1.05rem)',
+                    fontWeight: 300,
+                    lineHeight: 1.8,
+                    color: 'rgba(255,255,255,0.8)',
+                    letterSpacing: '0.02em',
+                  }}
+                >
+                  Imagine opening your electricity bill and actually smiling. With solar power, you stop renting energy from the grid and start owning it. Every ray of sunlight that hits your roof becomes money saved instead of money spent. Homes and businesses across Dapitan City are already cutting their power costs dramatically, and yours could be next.
+                </p>
+
+                {/* Subtle interaction hint */}
+                <div style={{
+                  marginTop: '1.5rem',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '0.5rem',
+                }}>
+                  <span style={{
+                    display: 'inline-block',
+                    width: '6px',
+                    height: '6px',
+                    borderRadius: '50%',
+                    background: '#FFD700',
+                    animation: 'pulse 2s ease-in-out infinite',
+                  }} />
+                  <span style={{
+                    fontFamily: "'Inter', sans-serif",
+                    fontSize: '0.75rem',
+                    fontWeight: 400,
+                    color: 'rgba(255,215,0,0.7)',
+                    letterSpacing: '0.15em',
+                    textTransform: 'uppercase',
+                  }}>
+                    Drag the panel to interact
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+      })()}
     </div>
   );
 }
