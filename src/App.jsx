@@ -21,6 +21,13 @@ function App() {
   const [isFacebookClosing, setIsFacebookClosing] = useState(false);
   const [isInquiryClosing, setIsInquiryClosing] = useState(false);
 
+  const [cursorLabel, setCursorLabel] = useState(null);
+  const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
+
+  const handleMouseMove = (e) => {
+    setCursorPos({ x: e.clientX, y: e.clientY });
+  };
+
   const closeShop = () => { setIsShopClosing(true); setTimeout(() => { setIsShopOpen(false); setIsShopClosing(false); }, 300); };
   const closeFacebook = () => { setIsFacebookClosing(true); setTimeout(() => { setIsFacebookOpen(false); setIsFacebookClosing(false); }, 300); };
   const closeInquiry = () => { setIsInquiryClosing(true); setTimeout(() => { setIsInquiryOpen(false); setIsInquiryClosing(false); }, 300); };
@@ -276,23 +283,36 @@ function App() {
               <h2 className="text-xl sm:text-2xl font-bold text-yellow-900 tracking-wider text-center pr-14 sm:pr-20 pl-14 sm:pl-20 flex items-center justify-center h-[58px] sm:h-[72px] flex-shrink-0">Contact Information</h2>
               {/* Cards centered in remaining space */}
               <div className="flex-grow flex flex-col md:flex-row gap-6 sm:gap-12 w-full items-center justify-center px-8 pb-8 sm:px-12 sm:pb-12 overflow-y-auto">
-                <a href="https://www.facebook.com/shrinesolarservices" target="_blank" rel="noopener noreferrer" className="contact-card-anim animate-slide-up w-full max-w-[200px] sm:max-w-none sm:w-56 h-32 sm:h-56 flex flex-col items-center justify-center shadow-lg p-4 sm:p-6 transition-all flex-shrink-0" style={{ animationDelay: '0.1s' }}>
-                  <span className="relative z-10 text-xl sm:text-2xl font-bold text-yellow-900">Facebook</span>
-                  <span className="relative z-10 text-sm text-yellow-700 mt-2 sm:mt-4 text-center">ShrineSolar</span>
+                <a href="https://www.facebook.com/shrinesolarservices" target="_blank" rel="noopener noreferrer" className="contact-card-anim animate-slide-up w-full max-w-[200px] sm:max-w-none sm:w-56 h-32 sm:h-56 flex flex-col items-center justify-center shadow-lg p-4 sm:p-6 transition-all flex-shrink-0" style={{ animationDelay: '0.1s' }} onMouseEnter={() => setCursorLabel('Click to see the Facebook Page')} onMouseLeave={() => setCursorLabel(null)} onMouseMove={handleMouseMove}>
+                  <span className="relative z-10 text-xl sm:text-2xl font-bold text-yellow-900 pointer-events-none">Facebook</span>
+                  <span className="relative z-10 text-sm text-yellow-700 mt-2 sm:mt-4 text-center pointer-events-none">ShrineSolar</span>
                 </a>
-                <button onClick={() => navigator.clipboard.writeText('09171842499')} className="contact-card-anim animate-slide-up w-full max-w-[200px] sm:max-w-none sm:w-56 h-32 sm:h-56 flex flex-col items-center justify-center shadow-lg p-4 sm:p-6 transition-all flex-shrink-0" style={{ animationDelay: '0.2s' }}>
-                  <span className="relative z-10 text-xl sm:text-2xl font-bold text-yellow-900">Mobile No.</span>
-                  <span className="relative z-10 text-sm text-yellow-700 mt-2 sm:mt-4 text-center">09171842499</span>
+                <button onClick={() => navigator.clipboard.writeText('09171842499')} className="contact-card-anim animate-slide-up w-full max-w-[200px] sm:max-w-none sm:w-56 h-32 sm:h-56 flex flex-col items-center justify-center shadow-lg p-4 sm:p-6 transition-all flex-shrink-0" style={{ animationDelay: '0.2s' }} onMouseEnter={() => setCursorLabel('Click to copy to Clipboard')} onMouseLeave={() => setCursorLabel(null)} onMouseMove={handleMouseMove}>
+                  <span className="relative z-10 text-xl sm:text-2xl font-bold text-yellow-900 pointer-events-none">Mobile No.</span>
+                  <span className="relative z-10 text-sm text-yellow-700 mt-2 sm:mt-4 text-center pointer-events-none">09171842499</span>
                 </button>
-                <a href="https://mail.google.com/mail/?view=cm&fs=1&to=Shrinesolar2022@gmail.com" target="_blank" rel="noopener noreferrer" className="contact-card-anim animate-slide-up w-full max-w-[200px] sm:max-w-none sm:w-56 h-32 sm:h-56 flex flex-col items-center justify-center shadow-lg p-4 sm:p-6 transition-all flex-shrink-0" style={{ animationDelay: '0.3s' }}>
-                  <span className="relative z-10 text-xl sm:text-2xl font-bold text-yellow-900">Gmail</span>
-                  <span className="relative z-10 text-xs sm:text-sm text-yellow-700 mt-2 sm:mt-4 text-center break-all">Shrinesolar2022@gmail.com</span>
+                <a href="https://mail.google.com/mail/?view=cm&fs=1&to=Shrinesolar2022@gmail.com" target="_blank" rel="noopener noreferrer" className="contact-card-anim animate-slide-up w-full max-w-[200px] sm:max-w-none sm:w-56 h-32 sm:h-56 flex flex-col items-center justify-center shadow-lg p-4 sm:p-6 transition-all flex-shrink-0" style={{ animationDelay: '0.3s' }} onMouseEnter={() => setCursorLabel('Click to message us in Gmail')} onMouseLeave={() => setCursorLabel(null)} onMouseMove={handleMouseMove}>
+                  <span className="relative z-10 text-xl sm:text-2xl font-bold text-yellow-900 pointer-events-none">Gmail</span>
+                  <span className="relative z-10 text-xs sm:text-sm text-yellow-700 mt-2 sm:mt-4 text-center break-all pointer-events-none">Shrinesolar2022@gmail.com</span>
                 </a>
               </div>
             </div>
           </div>
         )}
       </div>
+
+      {/* Global Custom Cursor Label */}
+      {cursorLabel && (
+        <div 
+          className="fixed pointer-events-none z-[9999] bg-yellow-100 border-2 border-yellow-400 text-yellow-900 px-3 py-1.5 rounded-full text-sm font-semibold shadow-xl whitespace-nowrap transition-opacity duration-200"
+          style={{ 
+            left: cursorPos.x + 15, 
+            top: cursorPos.y + 15
+          }}
+        >
+          {cursorLabel}
+        </div>
+      )}
     </>
   )
 }
