@@ -236,7 +236,9 @@ body {
 .solar3d-rotating-card::after {
   content: '';
   position: absolute;
-  background: #07182E;
+  background: rgba(0, 0, 0, 0.35); /* Low opacity dark tint */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   inset: 5px;
   border-radius: 15px;
   z-index: 1;
