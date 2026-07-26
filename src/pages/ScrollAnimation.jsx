@@ -652,11 +652,11 @@ export default function ScrollAnimation() {
 
       {/* High-Quality Installation Showcase Overlay */}
       {isLoaded && (() => {
-        // Show near the end of frames (scrollProgress ~0.85-0.95)
+        // Show near the end of frames and stay visible until the bottom
         const showStart = 0.83;
         const fadeInEnd = 0.87;
-        const fadeOutStart = 0.93;
-        const showEnd = 0.97;
+        const fadeOutStart = 1.0;
+        const showEnd = 1.1;
 
         let opacity = 0;
         if (scrollProgress >= showStart && scrollProgress <= showEnd) {
