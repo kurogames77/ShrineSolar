@@ -240,7 +240,7 @@ function App() {
         {/* Shop Modal */}
         {isHome && isShopOpen && (
           <div className={`fixed inset-0 bg-black/40 flex items-center justify-center z-50 p-4 ${isShopClosing ? 'modal-backdrop-out' : 'modal-backdrop-in'}`} onClick={closeShop}>
-            <div className={`border-4 border-yellow-300 rounded-3xl w-full max-w-5xl h-[85vh] sm:h-[75vh] flex flex-col shadow-2xl relative ${isShopClosing ? 'modal-panel-out' : 'modal-panel-in'}`} style={{ background: 'linear-gradient(160deg, #FFD700 0%, #FFE87C 35%, #FFFDE7 70%, #FFFFFF 100%)' }} onClick={(e) => e.stopPropagation()}>
+            <div className={`border-4 border-yellow-300 rounded-3xl w-full max-w-5xl h-[85vh] sm:h-[75vh] flex flex-col shadow-2xl relative ${isShopClosing ? 'modal-panel-out' : 'modal-panel-in'}`} style={{ background: 'linear-gradient(160deg, #FFF9C4 0%, #FFFFFF 40%, #FFFFFF 100%)' }} onClick={(e) => e.stopPropagation()}>
               <button
                 onClick={closeShop}
                 className="absolute top-4 right-4 sm:top-6 sm:right-6 text-yellow-800 hover:text-yellow-900 hover:bg-yellow-200 w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center text-xl sm:text-2xl font-bold transition-colors z-10"
@@ -264,7 +264,7 @@ function App() {
         {/* Inquiry Modal */}
         {isHome && isInquiryOpen && (
           <div className={`fixed inset-0 bg-black/40 flex items-center justify-center z-50 p-4 ${isInquiryClosing ? 'modal-backdrop-out' : 'modal-backdrop-in'}`} onClick={closeInquiry}>
-            <div className={`border-4 border-yellow-300 rounded-3xl w-full max-w-5xl h-[85vh] sm:h-[75vh] flex flex-col shadow-2xl relative ${isInquiryClosing ? 'modal-panel-out' : 'modal-panel-in'}`} style={{ background: 'linear-gradient(160deg, #FFD700 0%, #FFE87C 35%, #FFFDE7 70%, #FFFFFF 100%)' }} onClick={(e) => e.stopPropagation()}>
+            <div className={`border-4 border-yellow-300 rounded-3xl w-full max-w-5xl h-[85vh] sm:h-[75vh] flex flex-col shadow-2xl relative ${isInquiryClosing ? 'modal-panel-out' : 'modal-panel-in'}`} style={{ background: 'linear-gradient(160deg, #FFF9C4 0%, #FFFFFF 40%, #FFFFFF 100%)' }} onClick={(e) => e.stopPropagation()}>
               {/* X button — absolute top-right */}
               <button
                 onClick={closeInquiry}
