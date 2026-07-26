@@ -16,8 +16,6 @@ export default function ScrollAnimation() {
   const [loadProgress, setLoadProgress] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
-  const [selectedPolaroid, setSelectedPolaroid] = useState(null);
-  const [isPolaroidExpanded, setIsPolaroidExpanded] = useState(false);
 
   // Draw a specific frame onto the canvas
   const drawFrame = useCallback((frameIndex) => {
@@ -706,16 +704,15 @@ export default function ScrollAnimation() {
             >
               {/* Polaroid Photo Stack - Left Side */}
               <div
-                className={`polaroid-stack ${isPolaroidExpanded ? 'expanded' : ''}`}
+                className="polaroid-stack"
                 style={{
                   animation: opacity >= 0.9 ? 'fadeSlideInLeft 0.8s ease-out both' : 'none',
                 }}
-                onClick={() => setIsPolaroidExpanded(!isPolaroidExpanded)}
               >
-                <div onClick={(e) => { e.stopPropagation(); setSelectedPolaroid('/highqual1.jpg'); }}><img src="/highqual1.jpg" alt="High quality installation 1" /></div>
-                <div onClick={(e) => { e.stopPropagation(); setSelectedPolaroid('/highqual2.jpg'); }}><img src="/highqual2.jpg" alt="High quality installation 2" /></div>
-                <div onClick={(e) => { e.stopPropagation(); setSelectedPolaroid('/highqual3.jpg'); }}><img src="/highqual3.jpg" alt="High quality installation 3" /></div>
-                <div onClick={(e) => { e.stopPropagation(); setSelectedPolaroid('/highqual4.jpg'); }}><img src="/highqual4.jpg" alt="High quality installation 4" /></div>
+                <div><img src="/highqual1.jpg" alt="High quality installation 1" /></div>
+                <div><img src="/highqual2.jpg" alt="High quality installation 2" /></div>
+                <div><img src="/highqual3.jpg" alt="High quality installation 3" /></div>
+                <div><img src="/highqual4.jpg" alt="High quality installation 4" /></div>
               </div>
 
               {/* Info Card - Right Side */}
@@ -846,62 +843,6 @@ export default function ScrollAnimation() {
           </div>
         );
       })()}
-
-      {/* Full-screen Photo Overlay */}
-      {selectedPolaroid && (
-        <div
-          style={{
-            position: 'fixed',
-            inset: 0,
-            zIndex: 9999,
-            backgroundColor: 'rgba(0,0,0,0.85)',
-            backdropFilter: 'blur(10px)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            cursor: 'pointer',
-            animation: 'fadeIn 0.2s ease-out',
-          }}
-          onClick={() => setSelectedPolaroid(null)}
-        >
-          <img
-            src={selectedPolaroid}
-            alt="Full size installation"
-            style={{
-              maxHeight: '90vh',
-              maxWidth: '90vw',
-              objectFit: 'contain',
-              borderRadius: '8px',
-              boxShadow: '0 10px 40px rgba(0,0,0,0.6)',
-              animation: 'zoomIn 0.3s ease-out',
-            }}
-            onClick={(e) => e.stopPropagation()}
-          />
-          <button
-            style={{
-              position: 'absolute',
-              top: '20px',
-              right: '20px',
-              background: 'rgba(255,255,255,0.1)',
-              border: 'none',
-              color: 'white',
-              fontSize: '2rem',
-              width: '40px',
-              height: '40px',
-              borderRadius: '50%',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              cursor: 'pointer',
-              transition: 'background 0.2s',
-            }}
-            onMouseOver={(e) => e.currentTarget.style.background = 'rgba(255,255,255,0.2)'}
-            onMouseOut={(e) => e.currentTarget.style.background = 'rgba(255,255,255,0.1)'}
-          >
-            &times;
-          </button>
-        </div>
-      )}
     </div>
   );
 }
