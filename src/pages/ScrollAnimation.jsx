@@ -16,6 +16,22 @@ export default function ScrollAnimation() {
   const [loadProgress, setLoadProgress] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [slideIndex, setSlideIndex] = useState(0);
+
+  const slideshowImages = [
+    '/highqual1.jpg',
+    '/highqual2.jpg',
+    '/highqual3.jpg',
+    '/highqual4.jpg',
+  ];
+
+  // Auto-advance slideshow every 3 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setSlideIndex(prev => (prev + 1) % slideshowImages.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
 
   // Draw a specific frame onto the canvas
   const drawFrame = useCallback((frameIndex) => {
@@ -702,17 +718,31 @@ export default function ScrollAnimation() {
               }}
               className="highqual-container"
             >
-              {/* Polaroid Photo Stack - Left Side */}
+              {/* Image Slideshow - Left Side */}
               <div
-                className="polaroid-stack"
+                className="slideshow-card"
                 style={{
                   animation: opacity >= 0.9 ? 'fadeSlideInLeft 0.8s ease-out both' : 'none',
                 }}
               >
-                <div><img src="/highqual1.jpg" alt="High quality installation 1" /></div>
-                <div><img src="/highqual2.jpg" alt="High quality installation 2" /></div>
-                <div><img src="/highqual3.jpg" alt="High quality installation 3" /></div>
-                <div><img src="/highqual4.jpg" alt="High quality installation 4" /></div>
+                {slideshowImages.map((src, i) => (
+                  <img
+                    key={src}
+                    src={src}
+                    alt={`High quality installation ${i + 1}`}
+                    className={i === slideIndex ? 'active' : ''}
+                  />
+                ))}
+                <div className="slideshow-dots">
+                  {slideshowImages.map((_, i) => (
+                    <span
+                      key={i}
+                      className={i === slideIndex ? 'active' : ''}
+                      onClick={() => setSlideIndex(i)}
+                      style={{ cursor: 'pointer' }}
+                    />
+                  ))}
+                </div>
               </div>
 
               {/* Info Card - Right Side */}
