@@ -117,42 +117,40 @@ body {
   animation: modalPanelOut 0.3s ease-in forwards;
 }
 
-/* Animated Contact Card (Yellow-White Theme) */
+@keyframes borderSpin {
+  100% { transform: rotate(360deg); }
+}
+
+/* Animated Contact Card (Yellow-White Theme) - Spinning Border */
 .contact-card-anim {
   position: relative;
-  background: linear-gradient(135deg, rgba(255,255,255,0.85) 0%, rgba(255,235,59,0.45) 100%);
-  backdrop-filter: blur(4px);
-  border-radius: 16px;
+  border-radius: 20px;
+  overflow: hidden;
   z-index: 1;
 }
 
 .contact-card-anim::before {
   content: '';
   position: absolute;
-  top: -5px; left: -5px; right: -5px; bottom: -5px;
-  border-radius: 20px; 
-  background: linear-gradient(-45deg, #FFD700 0%, #FFFFFF 100%);
-  z-index: -10;
-  pointer-events: none;
-  transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  width: 200%;
+  height: 200%;
+  top: -50%;
+  left: -50%;
+  background: conic-gradient(from 0deg, transparent 0%, transparent 50%, #FFD700 80%, #FFFFFF 100%);
+  animation: borderSpin 4s linear infinite;
+  z-index: -2;
 }
 
 .contact-card-anim::after {
   content: "";
   position: absolute;
-  inset: 0;
+  inset: 5px; /* The border width */
+  border-radius: 15px; /* Inner radius */
+  background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(255,235,59,0.7) 100%);
   z-index: -1;
-  border-radius: 16px;
-  background: linear-gradient(-45deg, #FFD700 0%, #FFFDE7 100%);
-  transform: translate3d(0, 0, 0) scale(0.95);
-  filter: blur(20px);
-  transition: filter 0.3s;
-}
-
-.contact-card-anim:hover::after {
-  filter: blur(30px);
+  backdrop-filter: blur(4px);
 }
 
 .contact-card-anim:hover::before {
-  transform: rotate(-90deg) scaleX(1.05) scaleY(1.05);
+  animation-duration: 1.5s;
 }

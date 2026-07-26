@@ -276,17 +276,17 @@ function App() {
               <h2 className="text-xl sm:text-2xl font-bold text-yellow-900 tracking-wider text-center pr-14 sm:pr-20 pl-14 sm:pl-20 flex items-center justify-center h-[58px] sm:h-[72px] flex-shrink-0">Contact Information</h2>
               {/* Cards centered in remaining space */}
               <div className="flex-grow flex flex-col md:flex-row gap-6 sm:gap-12 w-full items-center justify-center px-8 pb-8 sm:px-12 sm:pb-12 overflow-y-auto">
-                <a href="https://www.facebook.com/shrinesolarservices" target="_blank" rel="noopener noreferrer" className="contact-card-anim animate-slide-up w-full max-w-[200px] sm:max-w-none sm:w-56 h-32 sm:h-56 border-2 border-yellow-400 flex flex-col items-center justify-center shadow-lg p-4 sm:p-6 transition-all flex-shrink-0" style={{ animationDelay: '0.1s' }}>
-                  <span className="text-xl sm:text-2xl font-bold text-yellow-900">Facebook</span>
-                  <span className="text-sm text-yellow-700 mt-2 sm:mt-4 text-center">ShrineSolar</span>
+                <a href="https://www.facebook.com/shrinesolarservices" target="_blank" rel="noopener noreferrer" className="contact-card-anim animate-slide-up w-full max-w-[200px] sm:max-w-none sm:w-56 h-32 sm:h-56 flex flex-col items-center justify-center shadow-lg p-4 sm:p-6 transition-all flex-shrink-0" style={{ animationDelay: '0.1s' }}>
+                  <span className="relative z-10 text-xl sm:text-2xl font-bold text-yellow-900">Facebook</span>
+                  <span className="relative z-10 text-sm text-yellow-700 mt-2 sm:mt-4 text-center">ShrineSolar</span>
                 </a>
-                <button onClick={() => navigator.clipboard.writeText('09171842499')} className="contact-card-anim animate-slide-up w-full max-w-[200px] sm:max-w-none sm:w-56 h-32 sm:h-56 border-2 border-yellow-400 flex flex-col items-center justify-center shadow-lg p-4 sm:p-6 transition-all flex-shrink-0" style={{ animationDelay: '0.2s' }}>
-                  <span className="text-xl sm:text-2xl font-bold text-yellow-900">Mobile No.</span>
-                  <span className="text-sm text-yellow-700 mt-2 sm:mt-4 text-center">09171842499</span>
+                <button onClick={() => navigator.clipboard.writeText('09171842499')} className="contact-card-anim animate-slide-up w-full max-w-[200px] sm:max-w-none sm:w-56 h-32 sm:h-56 flex flex-col items-center justify-center shadow-lg p-4 sm:p-6 transition-all flex-shrink-0" style={{ animationDelay: '0.2s' }}>
+                  <span className="relative z-10 text-xl sm:text-2xl font-bold text-yellow-900">Mobile No.</span>
+                  <span className="relative z-10 text-sm text-yellow-700 mt-2 sm:mt-4 text-center">09171842499</span>
                 </button>
-                <a href="https://mail.google.com/mail/?view=cm&fs=1&to=Shrinesolar2022@gmail.com" target="_blank" rel="noopener noreferrer" className="contact-card-anim animate-slide-up w-full max-w-[200px] sm:max-w-none sm:w-56 h-32 sm:h-56 border-2 border-yellow-400 flex flex-col items-center justify-center shadow-lg p-4 sm:p-6 transition-all flex-shrink-0" style={{ animationDelay: '0.3s' }}>
-                  <span className="text-xl sm:text-2xl font-bold text-yellow-900">Gmail</span>
-                  <span className="text-xs sm:text-sm text-yellow-700 mt-2 sm:mt-4 text-center break-all">Shrinesolar2022@gmail.com</span>
+                <a href="https://mail.google.com/mail/?view=cm&fs=1&to=Shrinesolar2022@gmail.com" target="_blank" rel="noopener noreferrer" className="contact-card-anim animate-slide-up w-full max-w-[200px] sm:max-w-none sm:w-56 h-32 sm:h-56 flex flex-col items-center justify-center shadow-lg p-4 sm:p-6 transition-all flex-shrink-0" style={{ animationDelay: '0.3s' }}>
+                  <span className="relative z-10 text-xl sm:text-2xl font-bold text-yellow-900">Gmail</span>
+                  <span className="relative z-10 text-xs sm:text-sm text-yellow-700 mt-2 sm:mt-4 text-center break-all">Shrinesolar2022@gmail.com</span>
                 </a>
               </div>
             </div>
