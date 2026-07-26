@@ -255,7 +255,7 @@ body {
   width: 160px;
   height: 200px;
   background-color: rgb(30, 30, 30);
-  border: solid 2px rgba(255, 215, 0, 0.3);
+  border: solid 2px #FFD700;
   border-radius: 0.75rem;
   top: 50%;
   left: 50%;
@@ -264,7 +264,10 @@ body {
   transition: transform 300ms ease, box-shadow 300ms ease;
   will-change: transform, filter;
   overflow: hidden;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 15px rgba(255, 215, 0, 0.5);
+  --rotate-y: 0deg;
+  --translate-z: 200px;
+  transform: translate(-50%, -50%) rotateY(var(--rotate-y)) translateZ(var(--translate-z));
 }
 
 .card-3d div img {
@@ -276,9 +279,9 @@ body {
 }
 
 .card-3d div:hover {
-  transform: translate(-50%, -60%) scale(1.08) !important;
-  box-shadow: 0 8px 30px rgba(255, 215, 0, 0.3);
-  border-color: rgba(255, 215, 0, 0.6);
+  transform: translate(-50%, -60%) rotateY(var(--rotate-y)) translateZ(var(--translate-z)) scale(1.08) !important;
+  box-shadow: 0 8px 30px rgba(255, 215, 0, 0.8);
+  border-color: #FFD700;
   z-index: 10;
 }
 
@@ -291,23 +294,23 @@ body {
 }
 
 .card-3d div:nth-child(1) {
-  transform: translate(-50%, -50%) rotateY(0deg) translateZ(200px);
+  --rotate-y: 0deg;
   animation-delay: 0s;
 }
 .card-3d div:nth-child(2) {
-  transform: translate(-50%, -50%) rotateY(72deg) translateZ(200px);
+  --rotate-y: 72deg;
   animation-delay: -4s;
 }
 .card-3d div:nth-child(3) {
-  transform: translate(-50%, -50%) rotateY(144deg) translateZ(200px);
+  --rotate-y: 144deg;
   animation-delay: -8s;
 }
 .card-3d div:nth-child(4) {
-  transform: translate(-50%, -50%) rotateY(216deg) translateZ(200px);
+  --rotate-y: 216deg;
   animation-delay: -12s;
 }
 .card-3d div:nth-child(5) {
-  transform: translate(-50%, -50%) rotateY(288deg) translateZ(200px);
+  --rotate-y: 288deg;
   animation-delay: -16s;
 }
 
@@ -330,12 +333,8 @@ body {
   .card-3d div {
     width: 120px;
     height: 150px;
+    --translate-z: 130px;
   }
-  .card-3d div:nth-child(1) { transform: translate(-50%, -50%) rotateY(0deg) translateZ(130px); }
-  .card-3d div:nth-child(2) { transform: translate(-50%, -50%) rotateY(72deg) translateZ(130px); }
-  .card-3d div:nth-child(3) { transform: translate(-50%, -50%) rotateY(144deg) translateZ(130px); }
-  .card-3d div:nth-child(4) { transform: translate(-50%, -50%) rotateY(216deg) translateZ(130px); }
-  .card-3d div:nth-child(5) { transform: translate(-50%, -50%) rotateY(288deg) translateZ(130px); }
   .consultation-glass-card {
     flex: none !important;
     width: 100% !important;
