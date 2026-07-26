@@ -248,14 +248,14 @@ function App() {
                 ✕
               </button>
               <div className="flex-grow flex flex-col md:flex-row items-center justify-center gap-6 sm:gap-12 p-8 pt-16 sm:p-12 sm:pt-24 w-full overflow-y-auto">
-                <button onClick={() => handleNavigation('/solar-panel')} className="animate-slide-up w-full max-w-[200px] sm:max-w-none sm:w-56 h-32 sm:h-56 border-2 border-yellow-400 text-yellow-900 font-semibold text-xl sm:text-2xl rounded-2xl flex items-center justify-center shadow-lg hover:scale-105 transition-all flex-shrink-0" style={{ background: 'linear-gradient(135deg, rgba(255,255,255,0.85) 0%, rgba(255,235,59,0.45) 100%)', backdropFilter: 'blur(4px)', animationDelay: '0.1s' }}>
-                  Solar Panel
+                <button onClick={() => handleNavigation('/solar-panel')} className="contact-card-anim animate-slide-up w-full max-w-[200px] sm:max-w-none sm:w-56 h-32 sm:h-56 flex items-center justify-center shadow-lg transition-all flex-shrink-0" style={{ animationDelay: '0.1s' }}>
+                  <span className="relative z-10 text-yellow-900 font-semibold text-xl sm:text-2xl">Solar Panel</span>
                 </button>
-                <button onClick={() => handleNavigation('/battery')} className="animate-slide-up w-full max-w-[200px] sm:max-w-none sm:w-56 h-32 sm:h-56 border-2 border-yellow-400 text-yellow-900 font-semibold text-xl sm:text-2xl rounded-2xl flex items-center justify-center shadow-lg hover:scale-105 transition-all flex-shrink-0" style={{ background: 'linear-gradient(135deg, rgba(255,255,255,0.85) 0%, rgba(255,235,59,0.45) 100%)', backdropFilter: 'blur(4px)', animationDelay: '0.2s' }}>
-                  Battery
+                <button onClick={() => handleNavigation('/battery')} className="contact-card-anim animate-slide-up w-full max-w-[200px] sm:max-w-none sm:w-56 h-32 sm:h-56 flex items-center justify-center shadow-lg transition-all flex-shrink-0" style={{ animationDelay: '0.2s' }}>
+                  <span className="relative z-10 text-yellow-900 font-semibold text-xl sm:text-2xl">Battery</span>
                 </button>
-                <button onClick={() => handleNavigation('/accessories')} className="animate-slide-up w-full max-w-[200px] sm:max-w-none sm:w-56 h-32 sm:h-56 border-2 border-yellow-400 text-yellow-900 font-semibold text-xl sm:text-2xl rounded-2xl flex items-center justify-center shadow-lg hover:scale-105 transition-all flex-shrink-0" style={{ background: 'linear-gradient(135deg, rgba(255,255,255,0.85) 0%, rgba(255,235,59,0.45) 100%)', backdropFilter: 'blur(4px)', animationDelay: '0.3s' }}>
-                  Accessories
+                <button onClick={() => handleNavigation('/accessories')} className="contact-card-anim animate-slide-up w-full max-w-[200px] sm:max-w-none sm:w-56 h-32 sm:h-56 flex items-center justify-center shadow-lg transition-all flex-shrink-0" style={{ animationDelay: '0.3s' }}>
+                  <span className="relative z-10 text-yellow-900 font-semibold text-xl sm:text-2xl">Accessories</span>
                 </button>
               </div>
             </div>
