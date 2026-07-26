@@ -280,19 +280,63 @@ export default function ScrollAnimation() {
 
               {/* Info Card - Right Side */}
               <div
-                className="solar3d-rotating-card"
+                className="solar3d-rotating-card-wrapper"
                 style={{
                   flex: '0 0 45%',
+                  position: 'relative',
                   animation: opacity >= 0.9 ? 'fadeSlideInRight 0.8s ease-out 0.2s both' : 'none',
                 }}
               >
-                <div style={{
-                  padding: '2.5rem',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  width: '100%',
-                  height: '100%'
-                }}>
+                {/* Spinning Border Layer (Masked to act strictly as a 2px border outside) */}
+                <div
+                  style={{
+                    position: 'absolute',
+                    inset: '-2px',
+                    borderRadius: '22px',
+                    padding: '2px',
+                    WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+                    WebkitMaskComposite: 'xor',
+                    mask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+                    maskComposite: 'exclude',
+                    overflow: 'hidden',
+                    filter: 'drop-shadow(0 0 8px rgba(255,255,255,0.5)) drop-shadow(0 0 15px rgba(255,215,0,0.5))',
+                    zIndex: 0,
+                  }}
+                >
+                  <div
+                    style={{
+                      position: 'absolute',
+                      top: '-75%',
+                      left: '50%',
+                      width: '250px',
+                      height: '250%',
+                      marginLeft: '-125px',
+                      background: 'linear-gradient(180deg, #ffffff, #FFD700)',
+                      animation: 'rotBGimg 4s linear infinite',
+                      transformOrigin: 'center center',
+                    }}
+                  />
+                </div>
+
+                {/* Glassmorphism Card (Restored original blur effect) */}
+                <div 
+                  className="solar3d-glass-card"
+                  style={{
+                    position: 'relative',
+                    zIndex: 1,
+                    padding: '2.5rem',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    width: '100%',
+                    height: '100%',
+                    borderRadius: '20px',
+                    background: 'linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.05) 100%)',
+                    backdropFilter: 'blur(20px)',
+                    WebkitBackdropFilter: 'blur(20px)',
+                    border: '1px solid rgba(255,255,255,0.1)',
+                    boxShadow: '0 8px 32px rgba(0,0,0,0.3)',
+                  }}
+                >
                   {/* Golden accent line */}
                   <div style={{
                     width: '60px',
