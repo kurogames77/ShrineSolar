@@ -62,11 +62,13 @@ function App() {
     if (!isHome) { setShowFacebook(false); setHeroExiting(false); }
   }, [isHome]);
 
-  // Any keypress triggers the Facebook transition
+  // Any keypress triggers the Facebook transition (only when near top of page)
   useEffect(() => {
     if (!isHome || showFacebook || heroExiting) return;
     const handleKey = (e) => {
       if (['Tab', 'Escape', 'Shift', 'Control', 'Alt', 'Meta'].includes(e.key)) return;
+      // Don't trigger if the user has scrolled down into the cinematic sequence
+      if (window.scrollY > 200) return;
       doTriggerFacebook();
     };
     window.addEventListener('keydown', handleKey);
