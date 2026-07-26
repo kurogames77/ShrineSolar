@@ -135,6 +135,46 @@ export default function ScrollAnimation() {
     return () => window.removeEventListener('resize', handleResize);
   }, [isLoaded, drawFrame]);
 
+  const carouselRef = useRef(null);
+  const carouselRotationRef = useRef(0);
+  const isDraggingCarouselRef = useRef(false);
+  const dragStartXRef = useRef(0);
+  const dragStartRotationRef = useRef(0);
+
+  // Rotate and drag logic for the consultation 3D carousel
+  useEffect(() => {
+    let animationFrameId;
+    const rotateCarousel = () => {
+      if (carouselRef.current && !isDraggingCarouselRef.current) {
+        carouselRotationRef.current -= 0.3; // Base rotation speed
+        carouselRef.current.style.transform = `perspective(800px) rotateY(${carouselRotationRef.current}deg)`;
+      }
+      animationFrameId = requestAnimationFrame(rotateCarousel);
+    };
+    rotateCarousel();
+
+    const handleMouseMove = (e) => {
+      if (isDraggingCarouselRef.current && carouselRef.current) {
+        const deltaX = e.clientX - dragStartXRef.current;
+        carouselRotationRef.current = dragStartRotationRef.current + deltaX * 0.5;
+        carouselRef.current.style.transform = `perspective(800px) rotateY(${carouselRotationRef.current}deg)`;
+      }
+    };
+    
+    const handleMouseUp = () => {
+      isDraggingCarouselRef.current = false;
+    };
+
+    document.addEventListener('mousemove', handleMouseMove);
+    document.addEventListener('mouseup', handleMouseUp);
+    
+    return () => {
+      cancelAnimationFrame(animationFrameId);
+      document.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('mouseup', handleMouseUp);
+    };
+  }, []);
+
   return (
     <div
       ref={containerRef}
@@ -467,34 +507,12 @@ export default function ScrollAnimation() {
                   animation: opacity >= 0.9 ? 'fadeSlideInLeft 0.8s ease-out both' : 'none',
                 }}
                 onMouseDown={(e) => {
-                  const carousel = e.currentTarget.querySelector('.card-3d');
-                  if (!carousel) return;
-                  carousel.style.animationPlayState = 'paused';
-                  const startX = e.clientX;
-                  const computedStyle = window.getComputedStyle(carousel);
-                  const matrix = new DOMMatrix(computedStyle.transform);
-                  // Extract current Y rotation roughly
-                  const currentRotation = Math.atan2(matrix.m13, matrix.m33) * (180 / Math.PI);
-                  let dragRotation = currentRotation;
-
-                  const onMove = (moveEvent) => {
-                    const deltaX = moveEvent.clientX - startX;
-                    dragRotation = currentRotation + deltaX * 0.5;
-                    carousel.style.transform = `perspective(800px) rotateY(${dragRotation}deg)`;
-                  };
-
-                  const onUp = () => {
-                    document.removeEventListener('mousemove', onMove);
-                    document.removeEventListener('mouseup', onUp);
-                    carousel.style.animationPlayState = '';
-                    carousel.style.transform = '';
-                  };
-
-                  document.addEventListener('mousemove', onMove);
-                  document.addEventListener('mouseup', onUp);
+                  isDraggingCarouselRef.current = true;
+                  dragStartXRef.current = e.clientX;
+                  dragStartRotationRef.current = carouselRotationRef.current;
                 }}
               >
-                <div className="card-3d">
+                <div className="card-3d" ref={carouselRef}>
                   <div><img src="/consultation1.jpg" alt="Consultation 1" /></div>
                   <div><img src="/consultation2.jpg" alt="Consultation 2" /></div>
                   <div><img src="/consultation3.jpg" alt="Consultation 3" /></div>

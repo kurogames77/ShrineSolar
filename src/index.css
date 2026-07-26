@@ -246,7 +246,6 @@ body {
   height: 220px;
   transform-style: preserve-3d;
   transform: perspective(800px);
-  animation: autoRun3d 20s linear infinite;
   will-change: transform;
 }
 
