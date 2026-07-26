@@ -330,11 +330,11 @@ export default function ScrollAnimation() {
                     width: '100%',
                     height: '100%',
                     borderRadius: '20px',
-                    background: 'linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.05) 100%)',
-                    backdropFilter: 'blur(20px)',
-                    WebkitBackdropFilter: 'blur(20px)',
-                    border: '1px solid rgba(255,255,255,0.1)',
-                    boxShadow: '0 8px 32px rgba(0,0,0,0.3)',
+                    background: 'linear-gradient(135deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.05) 100%)',
+                    backdropFilter: 'blur(40px)',
+                    WebkitBackdropFilter: 'blur(40px)',
+                    border: '1px solid rgba(255,255,255,0.15)',
+                    boxShadow: '0 8px 32px rgba(0,0,0,0.4)',
                   }}
                 >
                   {/* Golden accent line */}
