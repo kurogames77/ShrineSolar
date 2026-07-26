@@ -284,16 +284,19 @@ function App() {
               {/* Cards centered in remaining space */}
               <div className="flex-grow flex flex-col md:flex-row gap-6 sm:gap-12 w-full items-center justify-center px-8 pb-8 sm:px-12 sm:pb-12 overflow-y-auto">
                 <a href="https://www.facebook.com/shrinesolarservices" target="_blank" rel="noopener noreferrer" className="contact-card-anim animate-slide-up w-full max-w-[200px] sm:max-w-none sm:w-56 h-32 sm:h-56 flex flex-col items-center justify-center shadow-lg p-4 sm:p-6 transition-all flex-shrink-0" style={{ animationDelay: '0.1s' }} onMouseEnter={() => setCursorLabel('Click to see the Facebook Page')} onMouseLeave={() => setCursorLabel(null)} onMouseMove={handleMouseMove}>
+                  <img src="/fblogo.png" alt="Facebook" className="relative z-10 w-10 h-10 sm:w-14 sm:h-14 object-contain pointer-events-none mb-1 sm:mb-2" />
                   <span className="relative z-10 text-xl sm:text-2xl font-bold text-yellow-900 pointer-events-none">Facebook</span>
-                  <span className="relative z-10 text-sm text-yellow-700 mt-2 sm:mt-4 text-center pointer-events-none">ShrineSolar</span>
+                  <span className="relative z-10 text-sm text-yellow-700 mt-1 sm:mt-2 text-center pointer-events-none">ShrineSolar</span>
                 </a>
                 <button onClick={() => navigator.clipboard.writeText('09171842499')} className="contact-card-anim animate-slide-up w-full max-w-[200px] sm:max-w-none sm:w-56 h-32 sm:h-56 flex flex-col items-center justify-center shadow-lg p-4 sm:p-6 transition-all flex-shrink-0" style={{ animationDelay: '0.2s' }} onMouseEnter={() => setCursorLabel('Click to copy to Clipboard')} onMouseLeave={() => setCursorLabel(null)} onMouseMove={handleMouseMove}>
+                  <img src="/phonelogo.png" alt="Phone" className="relative z-10 w-10 h-10 sm:w-14 sm:h-14 object-contain pointer-events-none mb-1 sm:mb-2" />
                   <span className="relative z-10 text-xl sm:text-2xl font-bold text-yellow-900 pointer-events-none">Mobile No.</span>
-                  <span className="relative z-10 text-sm text-yellow-700 mt-2 sm:mt-4 text-center pointer-events-none">09171842499</span>
+                  <span className="relative z-10 text-sm text-yellow-700 mt-1 sm:mt-2 text-center pointer-events-none">09171842499</span>
                 </button>
                 <a href="https://mail.google.com/mail/?view=cm&fs=1&to=Shrinesolar2022@gmail.com" target="_blank" rel="noopener noreferrer" className="contact-card-anim animate-slide-up w-full max-w-[200px] sm:max-w-none sm:w-56 h-32 sm:h-56 flex flex-col items-center justify-center shadow-lg p-4 sm:p-6 transition-all flex-shrink-0" style={{ animationDelay: '0.3s' }} onMouseEnter={() => setCursorLabel('Click to message us in Gmail')} onMouseLeave={() => setCursorLabel(null)} onMouseMove={handleMouseMove}>
+                  <img src="/gmaillogo.png" alt="Gmail" className="relative z-10 w-10 h-10 sm:w-14 sm:h-14 object-contain pointer-events-none mb-1 sm:mb-2" />
                   <span className="relative z-10 text-xl sm:text-2xl font-bold text-yellow-900 pointer-events-none">Gmail</span>
-                  <span className="relative z-10 text-xs sm:text-sm text-yellow-700 mt-2 sm:mt-4 text-center break-all pointer-events-none">Shrinesolar2022@gmail.com</span>
+                  <span className="relative z-10 text-xs sm:text-sm text-yellow-700 mt-1 sm:mt-2 text-center break-all pointer-events-none">Shrinesolar2022@gmail.com</span>
                 </a>
               </div>
             </div>
