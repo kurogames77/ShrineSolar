@@ -243,12 +243,7 @@ export default function ScrollAnimation() {
               pointerEvents: opacity > 0.3 ? 'auto' : 'none',
             }}
           >
-            {/* Dark cinematic overlay */}
-            <div style={{
-              position: 'absolute',
-              inset: 0,
-              background: 'linear-gradient(135deg, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0.3) 100%)',
-            }} />
+            {/* Removed dark cinematic overlay */}
 
             {/* Content container */}
             <div
@@ -285,82 +280,83 @@ export default function ScrollAnimation() {
 
               {/* Info Card - Right Side */}
               <div
-                className="solar3d-card"
+                className="solar3d-rotating-card"
                 style={{
                   flex: '0 0 45%',
-                  padding: '2.5rem',
-                  borderRadius: '20px',
-                  background: 'linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.05) 100%)',
-                  backdropFilter: 'blur(20px)',
-                  WebkitBackdropFilter: 'blur(20px)',
-                  border: '1px solid rgba(255,255,255,0.15)',
-                  boxShadow: '0 8px 32px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.1)',
                   animation: opacity >= 0.9 ? 'fadeSlideInRight 0.8s ease-out 0.2s both' : 'none',
                 }}
               >
-                {/* Golden accent line */}
                 <div style={{
-                  width: '60px',
-                  height: '3px',
-                  background: 'linear-gradient(90deg, #FFD700, #FFA500)',
-                  borderRadius: '2px',
-                  marginBottom: '1.5rem',
-                }} />
-
-                <h2
-                  style={{
-                    fontFamily: "'Playfair Display', serif",
-                    fontSize: 'clamp(1.5rem, 3vw, 2.2rem)',
-                    fontWeight: 700,
-                    lineHeight: 1.2,
-                    marginBottom: '1.25rem',
-                    background: 'linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #FFD700 100%)',
-                    WebkitBackgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent',
-                    backgroundClip: 'text',
-                  }}
-                >
-                  Save up to 80% on your power bills
-                </h2>
-
-                <p
-                  style={{
-                    fontFamily: "'Inter', sans-serif",
-                    fontSize: 'clamp(0.85rem, 1.2vw, 1.05rem)',
-                    fontWeight: 300,
-                    lineHeight: 1.8,
-                    color: 'rgba(255,255,255,0.8)',
-                    letterSpacing: '0.02em',
-                  }}
-                >
-                  Imagine opening your electricity bill and actually smiling. With solar power, you stop renting energy from the grid and start owning it. Every ray of sunlight that hits your roof becomes money saved instead of money spent. Homes and businesses across Dapitan City are already cutting their power costs dramatically, and yours could be next.
-                </p>
-
-                {/* Subtle interaction hint */}
-                <div style={{
-                  marginTop: '1.5rem',
+                  padding: '2.5rem',
                   display: 'flex',
-                  alignItems: 'center',
-                  gap: '0.5rem',
+                  flexDirection: 'column',
+                  width: '100%',
+                  height: '100%'
                 }}>
-                  <span style={{
-                    display: 'inline-block',
-                    width: '6px',
-                    height: '6px',
-                    borderRadius: '50%',
-                    background: '#FFD700',
-                    animation: 'pulse 2s ease-in-out infinite',
+                  {/* Golden accent line */}
+                  <div style={{
+                    width: '60px',
+                    height: '3px',
+                    background: 'linear-gradient(90deg, #FFD700, #FFA500)',
+                    borderRadius: '2px',
+                    marginBottom: '1.5rem',
                   }} />
-                  <span style={{
-                    fontFamily: "'Inter', sans-serif",
-                    fontSize: '0.75rem',
-                    fontWeight: 400,
-                    color: 'rgba(255,215,0,0.7)',
-                    letterSpacing: '0.15em',
-                    textTransform: 'uppercase',
+
+                  <h2
+                    style={{
+                      fontFamily: "'Playfair Display', serif",
+                      fontSize: 'clamp(1.5rem, 3vw, 2.2rem)',
+                      fontWeight: 700,
+                      lineHeight: 1.2,
+                      marginBottom: '1.25rem',
+                      background: 'linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #FFD700 100%)',
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent',
+                      backgroundClip: 'text',
+                    }}
+                  >
+                    Save up to 80% on your power bills
+                  </h2>
+
+                  <p
+                    style={{
+                      fontFamily: "'Inter', sans-serif",
+                      fontSize: 'clamp(0.85rem, 1.2vw, 1.05rem)',
+                      fontWeight: 300,
+                      lineHeight: 1.8,
+                      color: 'rgba(255,255,255,0.8)',
+                      letterSpacing: '0.02em',
+                    }}
+                  >
+                    Imagine opening your electricity bill and actually smiling. With solar power, you stop renting energy from the grid and start owning it. Every ray of sunlight that hits your roof becomes money saved instead of money spent. Homes and businesses across Dapitan City are already cutting their power costs dramatically, and yours could be next.
+                  </p>
+
+                  {/* Subtle interaction hint */}
+                  <div style={{
+                    marginTop: '1.5rem',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.5rem',
                   }}>
-                    Drag the panel to interact
-                  </span>
+                    <span style={{
+                      display: 'inline-block',
+                      width: '6px',
+                      height: '6px',
+                      borderRadius: '50%',
+                      background: '#FFD700',
+                      animation: 'pulse 2s ease-in-out infinite',
+                    }} />
+                    <span style={{
+                      fontFamily: "'Inter', sans-serif",
+                      fontSize: '0.75rem',
+                      fontWeight: 400,
+                      color: 'rgba(255,215,0,0.7)',
+                      letterSpacing: '0.15em',
+                      textTransform: 'uppercase',
+                    }}>
+                      Drag the panel to interact
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>

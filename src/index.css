@@ -199,9 +199,55 @@ body {
     width: 100% !important;
     height: 280px !important;
   }
-  .solar3d-card {
+  .solar3d-rotating-card {
     flex: none !important;
     width: 100% !important;
+  }
+  .solar3d-rotating-card > div {
     padding: 1.5rem !important;
   }
+}
+
+/* Animated Rotating Border Card */
+.solar3d-rotating-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px;
+  background: transparent;
+  display: flex;
+  flex-direction: column;
+}
+
+.solar3d-rotating-card::before {
+  content: '';
+  position: absolute;
+  width: 250px;
+  height: 250%;
+  background-image: linear-gradient(180deg, white, yellow);
+  animation: rotBGimg 4s linear infinite;
+  top: -75%;
+  left: 50%;
+  margin-left: -125px; /* Centered horizontally */
+  transform-origin: center center;
+  box-shadow: 0 0 20px white, 0 0 40px yellow;
+  z-index: 0;
+}
+
+.solar3d-rotating-card::after {
+  content: '';
+  position: absolute;
+  background: #07182E;
+  inset: 5px;
+  border-radius: 15px;
+  z-index: 1;
+}
+
+.solar3d-rotating-card > div {
+  position: relative;
+  z-index: 2;
+}
+
+@keyframes rotBGimg {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
