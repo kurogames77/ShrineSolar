@@ -879,40 +879,13 @@ export default function ScrollAnimation() {
               />
             ))}
 
-            {/* Dark overlay so dots are readable */}
+            {/* Dark overlay — full cover like the first frame */}
             <div style={{
               position: 'absolute',
               inset: 0,
-              background: 'linear-gradient(to top, rgba(0,0,0,0.55) 0%, transparent 60%)',
+              background: 'rgba(0,0,0,0.55)',
               zIndex: 1,
             }} />
-
-            {/* Dot indicators */}
-            <div style={{
-              position: 'absolute',
-              bottom: '90px',
-              left: '50%',
-              transform: 'translateX(-50%)',
-              display: 'flex',
-              gap: '10px',
-              zIndex: 2,
-            }}>
-              {endPageImages.map((_, i) => (
-                <span
-                  key={i}
-                  onClick={() => setEndSlideIndex(i)}
-                  style={{
-                    width: i === endSlideIndex ? '28px' : '10px',
-                    height: '10px',
-                    borderRadius: '5px',
-                    background: i === endSlideIndex ? '#FFD700' : 'rgba(255,255,255,0.5)',
-                    cursor: 'pointer',
-                    transition: 'all 0.3s ease',
-                    display: 'inline-block',
-                  }}
-                />
-              ))}
-            </div>
           </div>
         );
       })()}
