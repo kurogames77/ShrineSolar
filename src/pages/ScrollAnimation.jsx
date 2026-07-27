@@ -841,32 +841,7 @@ export default function ScrollAnimation() {
                     Solar is a long-term investment, and it deserves a team that treats it that way. Our installers use premium materials and proven techniques to make sure your system performs beautifully for years to come. From the first wire to the final switch, you can relax knowing your home is in skilled, reliable hands.
                   </p>
 
-                  {/* Subtle interaction hint */}
-                  <div style={{
-                    marginTop: '1.5rem',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '0.5rem',
-                  }}>
-                    <span style={{
-                      display: 'inline-block',
-                      width: '6px',
-                      height: '6px',
-                      borderRadius: '50%',
-                      background: '#FFD700',
-                      animation: 'pulse 2s ease-in-out infinite',
-                    }} />
-                    <span style={{
-                      fontFamily: "'Inter', sans-serif",
-                      fontSize: '0.75rem',
-                      fontWeight: 400,
-                      color: 'rgba(255,215,0,0.7)',
-                      letterSpacing: '0.15em',
-                      textTransform: 'uppercase',
-                    }}>
-                      Hover to browse photos
-                    </span>
-                  </div>
+
                 </div>
               </div>
             </div>
