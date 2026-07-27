@@ -887,18 +887,19 @@ export default function ScrollAnimation() {
               zIndex: 1,
             }} />
 
-            {/* Shrine Solar logo — top-left, matching navbar position */}
+            {/* Circular Shrine Solar logo — top-center */}
             <img
-              src="/logo.png"
-              alt="Shrine Solar Logo"
+              src="/apple-touch-icon.png"
+              alt="Shrine Solar Icon"
               style={{
                 position: 'absolute',
-                top: '20px',
-                left: '40px',
-                height: '48px',
-                width: 'auto',
+                top: '90px',
+                left: '50%',
+                transform: 'translateX(-50%)',
+                width: '130px',
+                height: '130px',
                 zIndex: 2,
-                filter: 'drop-shadow(0 0 8px rgba(255,200,0,0.9)) drop-shadow(0 0 16px rgba(255,180,0,0.5))',
+                filter: 'drop-shadow(0 4px 10px rgba(0,0,0,0.8))',
               }}
             />
           </div>
