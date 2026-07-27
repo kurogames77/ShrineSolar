@@ -19,11 +19,11 @@ export default function Navbar({ isShopOpen, setIsShopOpen, isInquiryOpen, setIs
             className={`fixed top-0 left-0 w-full z-40 ${bgClass}`}
             style={{ opacity: 1, pointerEvents: 'auto', transition: 'background-color 0.3s ease' }}
         >
-            <div className="flex items-center justify-center sm:justify-between w-full" style={{ paddingLeft: '40px', paddingRight: '40px', paddingTop: '20px', paddingBottom: '20px' }}>
+            <div className="flex items-center justify-center sm:justify-between w-full px-6 sm:px-10 py-2 sm:py-3">
                 <img 
                     src="/logo.png" 
                     alt="Shrine Solar Logo" 
-                    className="hidden sm:block h-9 sm:h-12 w-auto cursor-pointer" 
+                    className="hidden sm:block h-8 sm:h-10 w-auto cursor-pointer" 
                     onClick={() => handleNavigation('/')} 
                     style={{ filter: 'drop-shadow(0 0 8px rgba(255,200,0,0.9)) drop-shadow(0 0 16px rgba(255,180,0,0.5))' }} 
                 />
