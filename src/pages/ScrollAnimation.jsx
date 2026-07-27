@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
 import SolarPanel3D from '../components/SolarPanel3D';
 
-const FRAME_COUNT = 300;
+const FRAME_COUNT = 280;
 
 // Build the frame source path for a given index (1-based)
 const frameSrc = (index) =>
