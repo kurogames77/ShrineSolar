@@ -17,6 +17,7 @@ export default function ScrollAnimation() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [slideIndex, setSlideIndex] = useState(0);
+  const [endSlideIndex, setEndSlideIndex] = useState(0);
   const [isMobile, setIsMobile] = useState(() => window.innerWidth <= 768);
 
   const slideshowImages = [
@@ -26,11 +27,26 @@ export default function ScrollAnimation() {
     '/highqual4.jpg',
   ];
 
-  // Auto-advance slideshow every 3 seconds
+  const endPageImages = [
+    '/endpage1.jpg',
+    '/endpage2.jpg',
+    '/endpage3.jpg',
+    '/endpage4.jpg',
+  ];
+
+  // Auto-advance main slideshow every 3 seconds
   useEffect(() => {
     const interval = setInterval(() => {
       setSlideIndex(prev => (prev + 1) % slideshowImages.length);
     }, 3000);
+    return () => clearInterval(interval);
+  }, []);
+
+  // Auto-advance end-page slideshow every 3.5 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setEndSlideIndex(prev => (prev + 1) % endPageImages.length);
+    }, 3500);
     return () => clearInterval(interval);
   }, []);
 
@@ -207,7 +223,7 @@ export default function ScrollAnimation() {
            300 frames × 20px per frame = 6000vh worth of "scrubbing room". 
            We use a more moderate height for smoothness. 
            Extended to 700vh to accommodate the 3D showcase section. */
-        height: '900vh',
+        height: '1050vh',
         position: 'relative',
       }}
     >
@@ -816,6 +832,86 @@ export default function ScrollAnimation() {
 
                 </div>
               </div>
+            </div>
+          </div>
+        );
+      })()}
+
+      {/* ── End-Page Slideshow ── fades in after the last frame */}
+      {isLoaded && (() => {
+        // Fades in from scrollProgress 0.95 → 1.0, then stays visible
+        const showStart = 0.95;
+        const fadeInEnd  = 1.0;
+
+        let opacity = 0;
+        if (scrollProgress >= showStart) {
+          opacity = Math.min((scrollProgress - showStart) / (fadeInEnd - showStart), 1);
+        }
+
+        return (
+          <div
+            style={{
+              position: 'fixed',
+              inset: 0,
+              zIndex: 30,           // sits above all existing overlays
+              opacity,
+              visibility: opacity <= 0 ? 'hidden' : 'visible',
+              transition: 'opacity 0.4s ease-out, visibility 0.4s ease-out',
+              pointerEvents: opacity > 0.5 ? 'auto' : 'none',
+              overflow: 'hidden',
+            }}
+          >
+            {/* Fullscreen background slideshow */}
+            {endPageImages.map((src, i) => (
+              <img
+                key={src}
+                src={src}
+                alt={`End page ${i + 1}`}
+                style={{
+                  position: 'absolute',
+                  inset: 0,
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover',
+                  opacity: i === endSlideIndex ? 1 : 0,
+                  transition: 'opacity 1s ease-in-out',
+                }}
+              />
+            ))}
+
+            {/* Dark overlay so dots are readable */}
+            <div style={{
+              position: 'absolute',
+              inset: 0,
+              background: 'linear-gradient(to top, rgba(0,0,0,0.55) 0%, transparent 60%)',
+              zIndex: 1,
+            }} />
+
+            {/* Dot indicators */}
+            <div style={{
+              position: 'absolute',
+              bottom: '90px',
+              left: '50%',
+              transform: 'translateX(-50%)',
+              display: 'flex',
+              gap: '10px',
+              zIndex: 2,
+            }}>
+              {endPageImages.map((_, i) => (
+                <span
+                  key={i}
+                  onClick={() => setEndSlideIndex(i)}
+                  style={{
+                    width: i === endSlideIndex ? '28px' : '10px',
+                    height: '10px',
+                    borderRadius: '5px',
+                    background: i === endSlideIndex ? '#FFD700' : 'rgba(255,255,255,0.5)',
+                    cursor: 'pointer',
+                    transition: 'all 0.3s ease',
+                    display: 'inline-block',
+                  }}
+                />
+              ))}
             </div>
           </div>
         );
