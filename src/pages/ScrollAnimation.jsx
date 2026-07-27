@@ -229,7 +229,7 @@ export default function ScrollAnimation() {
            300 frames × 20px per frame = 6000vh worth of "scrubbing room". 
            We use a more moderate height for smoothness. 
            Extended to 700vh to accommodate the 3D showcase section. */
-        height: '1050vh',
+        height: '1200vh',
         position: 'relative',
       }}
     >
@@ -845,14 +845,23 @@ export default function ScrollAnimation() {
 
       {/* ── End-Page Slideshow ── fades in after the last frame */}
       {isLoaded && (() => {
-        // Fades in from scrollProgress 0.95 → 1.0, then stays visible
+        // Fades in 0.95→1.0, stays visible, then fades out 1.08→1.14 for footer
         const showStart = 0.95;
         const fadeInEnd  = 1.0;
+        const fadeOutStart = 1.08;
+        const showEnd = 1.14;
 
         let opacity = 0;
-        if (scrollProgress >= showStart) {
-          opacity = Math.min((scrollProgress - showStart) / (fadeInEnd - showStart), 1);
+        if (scrollProgress >= showStart && scrollProgress <= showEnd) {
+          if (scrollProgress < fadeInEnd) {
+            opacity = (scrollProgress - showStart) / (fadeInEnd - showStart);
+          } else if (scrollProgress > fadeOutStart) {
+            opacity = 1 - (scrollProgress - fadeOutStart) / (showEnd - fadeOutStart);
+          } else {
+            opacity = 1;
+          }
         }
+        if (opacity < 0) opacity = 0;
 
         return (
           <div
@@ -944,6 +953,139 @@ export default function ScrollAnimation() {
           </div>
         );
       })()}
+
+      {/* ── Footer ── positioned at the very bottom of the scroll container */}
+      <footer
+        style={{
+          position: 'absolute',
+          bottom: 0,
+          left: 0,
+          right: 0,
+          zIndex: 5,
+          background: 'linear-gradient(180deg, #0a0a0a 0%, #111111 100%)',
+          borderTop: '1px solid rgba(255, 215, 0, 0.2)',
+        }}
+      >
+        {/* Gold accent line at top */}
+        <div style={{ width: '100%', height: '2px', background: 'linear-gradient(90deg, transparent 0%, #FFD700 50%, transparent 100%)' }} />
+
+        <div style={{
+          maxWidth: '1200px',
+          margin: '0 auto',
+          padding: '48px 40px 24px',
+          display: 'flex',
+          flexWrap: 'wrap',
+          gap: '40px',
+          justifyContent: 'space-between',
+        }}>
+          {/* Column 1: Logo & Description */}
+          <div style={{ flex: '1 1 280px', minWidth: '250px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '16px' }}>
+              <img src="/apple-touch-icon.png" alt="Shrine Solar" style={{ width: '50px', height: '50px', filter: 'drop-shadow(0 2px 6px rgba(0,0,0,0.5))' }} />
+              <span style={{
+                fontFamily: "'Playfair Display', serif",
+                fontSize: '1.4rem',
+                fontWeight: 700,
+                background: 'linear-gradient(135deg, #FFD700, #FFA500)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+              }}>SHRINE SOLAR</span>
+            </div>
+            <p style={{
+              fontFamily: "'Inter', sans-serif",
+              fontSize: '0.85rem',
+              lineHeight: 1.7,
+              color: 'rgba(255,255,255,0.55)',
+              maxWidth: '300px',
+            }}>
+              Empowering homes and businesses in Dapitan City with reliable, affordable solar energy solutions. Your trusted partner for panel installation and electrical maintenance.
+            </p>
+          </div>
+
+          {/* Column 2: Quick Links */}
+          <div style={{ flex: '0 1 160px' }}>
+            <h4 style={{
+              fontFamily: "'Inter', sans-serif",
+              fontSize: '0.85rem',
+              fontWeight: 700,
+              color: '#FFD700',
+              textTransform: 'uppercase',
+              letterSpacing: '0.1em',
+              marginBottom: '16px',
+            }}>Quick Links</h4>
+            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '10px' }}>
+              {['Home', 'Shop', 'My Carts', 'Inquiry'].map((link) => (
+                <li key={link}>
+                  <span style={{
+                    fontFamily: "'Inter', sans-serif",
+                    fontSize: '0.85rem',
+                    color: 'rgba(255,255,255,0.55)',
+                    cursor: 'pointer',
+                    transition: 'color 0.2s ease',
+                  }}
+                  onMouseOver={(e) => e.currentTarget.style.color = '#FFD700'}
+                  onMouseOut={(e) => e.currentTarget.style.color = 'rgba(255,255,255,0.55)'}
+                  >{link}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Column 3: Contact */}
+          <div style={{ flex: '0 1 250px' }}>
+            <h4 style={{
+              fontFamily: "'Inter', sans-serif",
+              fontSize: '0.85rem',
+              fontWeight: 700,
+              color: '#FFD700',
+              textTransform: 'uppercase',
+              letterSpacing: '0.1em',
+              marginBottom: '16px',
+            }}>Contact Us</h4>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+              <a href="https://www.facebook.com/shrinesolarservices" target="_blank" rel="noopener noreferrer" style={{
+                fontFamily: "'Inter', sans-serif", fontSize: '0.85rem', color: 'rgba(255,255,255,0.55)', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '10px', transition: 'color 0.2s',
+              }} onMouseOver={(e) => e.currentTarget.style.color = '#FFD700'} onMouseOut={(e) => e.currentTarget.style.color = 'rgba(255,255,255,0.55)'}>
+                <img src="/fblogo.png" alt="FB" style={{ width: '20px', height: '20px', objectFit: 'contain' }} />
+                ShrineSolar
+              </a>
+              <span style={{
+                fontFamily: "'Inter', sans-serif", fontSize: '0.85rem', color: 'rgba(255,255,255,0.55)', display: 'flex', alignItems: 'center', gap: '10px',
+              }}>
+                <img src="/phonelogo.png" alt="Phone" style={{ width: '20px', height: '20px', objectFit: 'contain' }} />
+                09171842499
+              </span>
+              <a href="https://mail.google.com/mail/?view=cm&fs=1&to=Shrinesolar2022@gmail.com" target="_blank" rel="noopener noreferrer" style={{
+                fontFamily: "'Inter', sans-serif", fontSize: '0.85rem', color: 'rgba(255,255,255,0.55)', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '10px', transition: 'color 0.2s',
+              }} onMouseOver={(e) => e.currentTarget.style.color = '#FFD700'} onMouseOut={(e) => e.currentTarget.style.color = 'rgba(255,255,255,0.55)'}>
+                <img src="/gmaillogo.png" alt="Gmail" style={{ width: '20px', height: '20px', objectFit: 'contain' }} />
+                Shrinesolar2022@gmail.com
+              </a>
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom bar */}
+        <div style={{
+          borderTop: '1px solid rgba(255,255,255,0.08)',
+          padding: '20px 40px',
+          display: 'flex',
+          flexWrap: 'wrap',
+          justifyContent: 'center',
+          alignItems: 'center',
+          gap: '8px',
+        }}>
+          <p style={{
+            fontFamily: "'Inter', sans-serif",
+            fontSize: '0.75rem',
+            color: 'rgba(255,255,255,0.35)',
+            textAlign: 'center',
+          }}>
+            © {new Date().getFullYear()} Shrine Solar. All rights reserved. · #1 Panel & Electrical Installations in Dapitan City
+          </p>
+        </div>
+      </footer>
 
       {/* Back to Top Button — standalone fixed element */}
       {isLoaded && scrollProgress >= 0.05 && (
