@@ -15,24 +15,10 @@ function App() {
     if (sessionStorage.getItem('shrine_intro_seen')) return false;
     return true;
   });
-  const [isShopOpen, setIsShopOpen] = useState(false);
   const [isFacebookOpen, setIsFacebookOpen] = useState(false);
-  const [isInquiryOpen, setIsInquiryOpen] = useState(false);
-  const [isShopClosing, setIsShopClosing] = useState(false);
   const [isFacebookClosing, setIsFacebookClosing] = useState(false);
-  const [isInquiryClosing, setIsInquiryClosing] = useState(false);
 
-  const [cursorLabel, setCursorLabel] = useState(null);
-  const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
-  const [phoneCopied, setPhoneCopied] = useState(false);
-
-  const handleMouseMove = (e) => {
-    setCursorPos({ x: e.clientX, y: e.clientY });
-  };
-
-  const closeShop = () => { setIsShopClosing(true); setTimeout(() => { setIsShopOpen(false); setIsShopClosing(false); }, 300); };
   const closeFacebook = () => { setIsFacebookClosing(true); setTimeout(() => { setIsFacebookOpen(false); setIsFacebookClosing(false); }, 300); };
-  const closeInquiry = () => { setIsInquiryClosing(true); setTimeout(() => { setIsInquiryOpen(false); setIsInquiryClosing(false); }, 300); };
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -42,7 +28,6 @@ function App() {
   };
 
   const handleNavigation = (path) => {
-    setIsShopOpen(false); setIsShopClosing(false);
     setIsFacebookOpen(false); setIsFacebookClosing(false);
     navigate(path);
   };
@@ -85,12 +70,14 @@ function App() {
     return () => window.removeEventListener('keydown', handleKey);
   }, [isHome, showFacebook, heroExiting]);
 
-  // Lock body scroll when any modal or Facebook embed is open
+  // Lock body scroll when Facebook embed is open
   useEffect(() => {
-    const isAnyOpen = isShopOpen || isFacebookOpen || isInquiryOpen || showFacebook;
+    const isAnyOpen = isFacebookOpen || showFacebook;
     document.body.style.overflow = isAnyOpen ? 'hidden' : '';
-    return () => { document.body.style.overflow = ''; };
-  }, [isShopOpen, isFacebookOpen, isInquiryOpen, showFacebook]);
+    // Let Navbar handle its own modals, but make sure they don't fight.
+    // If Facebook is closed, we clear the overflow unless Navbar is setting it.
+    // Cleanest way is to let Navbar clean up its own, and App clean up its own.
+  }, [isFacebookOpen, showFacebook]);
 
   const heroOpacity = Math.max(0, 1 - scrollY / 400);
 
@@ -112,12 +99,7 @@ function App() {
 
       <div className="min-h-screen bg-[#a8a8a8] flex flex-col">
         {/* Global Navbar */}
-        <Navbar 
-          isShopOpen={isShopOpen} 
-          setIsShopOpen={setIsShopOpen} 
-          isInquiryOpen={isInquiryOpen} 
-          setIsInquiryOpen={setIsInquiryOpen} 
-        />
+        <Navbar />
 
         {/* Mobile-only icon below navbar — hidden when Facebook embed is showing */}
         {isHome && !showFacebook && (
@@ -251,83 +233,7 @@ function App() {
             </div>
           </div>
         )}
-        {/* Shop Modal */}
-        {isHome && isShopOpen && (
-          <div className={`fixed inset-0 bg-black/40 flex items-center justify-center z-50 p-4 ${isShopClosing ? 'modal-backdrop-out' : 'modal-backdrop-in'}`} onClick={closeShop}>
-            <div className={`border-4 border-yellow-300 rounded-3xl w-full max-w-5xl h-[85vh] sm:h-[75vh] flex flex-col shadow-2xl relative ${isShopClosing ? 'modal-panel-out' : 'modal-panel-in'}`} style={{ background: 'linear-gradient(160deg, #FFF9C4 0%, #FFFFFF 40%, #FFFFFF 100%)' }} onClick={(e) => e.stopPropagation()}>
-              <button
-                onClick={closeShop}
-                className="absolute top-4 right-4 sm:top-6 sm:right-6 text-yellow-800 hover:text-yellow-900 hover:bg-yellow-200 w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center text-xl sm:text-2xl font-bold transition-colors z-10"
-              >
-                ✕
-              </button>
-              <div className="flex-grow flex flex-col md:flex-row items-center justify-center gap-6 sm:gap-12 p-8 pt-16 sm:p-12 sm:pt-24 w-full overflow-y-auto">
-                <button onClick={() => handleNavigation('/solar-panel')} className="contact-card-anim animate-slide-up w-full max-w-[200px] sm:max-w-none sm:w-56 h-32 sm:h-56 flex items-center justify-center shadow-lg transition-all flex-shrink-0" style={{ animationDelay: '0.1s' }}>
-                  <span className="relative z-10 text-yellow-900 font-semibold text-xl sm:text-2xl">Solar Panel</span>
-                </button>
-                <button onClick={() => handleNavigation('/battery')} className="contact-card-anim animate-slide-up w-full max-w-[200px] sm:max-w-none sm:w-56 h-32 sm:h-56 flex items-center justify-center shadow-lg transition-all flex-shrink-0" style={{ animationDelay: '0.2s' }}>
-                  <span className="relative z-10 text-yellow-900 font-semibold text-xl sm:text-2xl">Battery</span>
-                </button>
-                <button onClick={() => handleNavigation('/accessories')} className="contact-card-anim animate-slide-up w-full max-w-[200px] sm:max-w-none sm:w-56 h-32 sm:h-56 flex items-center justify-center shadow-lg transition-all flex-shrink-0" style={{ animationDelay: '0.3s' }}>
-                  <span className="relative z-10 text-yellow-900 font-semibold text-xl sm:text-2xl">Accessories</span>
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
-        {/* Inquiry Modal */}
-        {isHome && isInquiryOpen && (
-          <div className={`fixed inset-0 bg-black/40 flex items-center justify-center z-50 p-4 ${isInquiryClosing ? 'modal-backdrop-out' : 'modal-backdrop-in'}`} onClick={closeInquiry}>
-            <div className={`border-4 border-yellow-300 rounded-3xl w-full max-w-5xl h-[85vh] sm:h-[75vh] flex flex-col shadow-2xl relative ${isInquiryClosing ? 'modal-panel-out' : 'modal-panel-in'}`} style={{ background: 'linear-gradient(160deg, #FFF9C4 0%, #FFFFFF 40%, #FFFFFF 100%)' }} onClick={(e) => e.stopPropagation()}>
-              {/* X button — absolute top-right */}
-              <button
-                onClick={closeInquiry}
-                className="absolute top-4 right-4 sm:top-6 sm:right-6 text-yellow-800 hover:text-yellow-900 hover:bg-yellow-200 w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center text-xl sm:text-2xl font-bold transition-colors z-10"
-              >
-                ✕
-              </button>
-              {/* Title aligned to same line as X button using matching top padding and right padding */}
-              <h2 className="text-xl sm:text-2xl font-bold text-yellow-900 tracking-wider text-center pr-14 sm:pr-20 pl-14 sm:pl-20 flex items-center justify-center h-[58px] sm:h-[72px] flex-shrink-0">Contact Information</h2>
-              {/* Cards centered in remaining space */}
-              <div className="flex-grow flex flex-col md:flex-row gap-6 sm:gap-12 w-full items-center justify-center px-8 pb-8 sm:px-12 sm:pb-12 overflow-y-auto">
-                <a href="https://www.facebook.com/shrinesolarservices" target="_blank" rel="noopener noreferrer" className="contact-card-anim animate-slide-up w-full max-w-[200px] sm:max-w-none sm:w-56 h-32 sm:h-56 flex flex-col items-center justify-center shadow-lg p-4 sm:p-6 transition-all flex-shrink-0" style={{ animationDelay: '0.1s' }} onMouseEnter={() => setCursorLabel('Click to see the Facebook Page')} onMouseLeave={() => setCursorLabel(null)} onMouseMove={handleMouseMove}>
-                  <img src="/fblogo.png" alt="Facebook" className="relative z-10 w-10 h-10 sm:w-14 sm:h-14 object-contain pointer-events-none mb-1 sm:mb-2" />
-                  <span className="relative z-10 text-xl sm:text-2xl font-bold text-yellow-900 pointer-events-none">Facebook</span>
-                  <span className="relative z-10 text-sm text-yellow-700 mt-1 sm:mt-2 text-center pointer-events-none">ShrineSolar</span>
-                </a>
-                <button onClick={() => { navigator.clipboard.writeText('09171842499'); setPhoneCopied(true); }} className="contact-card-anim animate-slide-up w-full max-w-[200px] sm:max-w-none sm:w-56 h-32 sm:h-56 flex flex-col items-center justify-center shadow-lg p-4 sm:p-6 transition-all flex-shrink-0" style={{ animationDelay: '0.2s' }} onMouseEnter={() => setCursorLabel('Click to copy to Clipboard')} onMouseLeave={() => setCursorLabel(null)} onMouseMove={handleMouseMove}>
-                  <img src="/phonelogo.png" alt="Phone" className="relative z-10 w-10 h-10 sm:w-14 sm:h-14 object-contain pointer-events-none mb-1 sm:mb-2" />
-                  <span className="relative z-10 text-xl sm:text-2xl font-bold text-yellow-900 pointer-events-none">Mobile No.</span>
-                  <span className="relative z-10 text-sm text-yellow-700 mt-1 sm:mt-2 text-center pointer-events-none">09171842499</span>
-                  {phoneCopied && (
-                    <span className="relative z-10 text-xs text-green-600 font-bold mt-1 text-center pointer-events-none animate-fade-in">
-                      Copied to Clipboard
-                    </span>
-                  )}
-                </button>
-                <a href="https://mail.google.com/mail/?view=cm&fs=1&to=Shrinesolar2022@gmail.com" target="_blank" rel="noopener noreferrer" className="contact-card-anim animate-slide-up w-full max-w-[200px] sm:max-w-none sm:w-56 h-32 sm:h-56 flex flex-col items-center justify-center shadow-lg p-4 sm:p-6 transition-all flex-shrink-0" style={{ animationDelay: '0.3s' }} onMouseEnter={() => setCursorLabel('Click to message us in Gmail')} onMouseLeave={() => setCursorLabel(null)} onMouseMove={handleMouseMove}>
-                  <img src="/gmaillogo.png" alt="Gmail" className="relative z-10 w-10 h-10 sm:w-14 sm:h-14 object-contain pointer-events-none mb-1 sm:mb-2" />
-                  <span className="relative z-10 text-xl sm:text-2xl font-bold text-yellow-900 pointer-events-none">Gmail</span>
-                  <span className="relative z-10 text-xs sm:text-sm text-yellow-700 mt-1 sm:mt-2 text-center break-all pointer-events-none">Shrinesolar2022@gmail.com</span>
-                </a>
-              </div>
-            </div>
-          </div>
-        )}
       </div>
-
-      {/* Global Custom Cursor Label */}
-      {cursorLabel && (
-        <div 
-          className="fixed pointer-events-none z-[9999] bg-yellow-100 border-2 border-yellow-400 text-yellow-900 px-3 py-1.5 rounded-full text-sm font-semibold shadow-xl whitespace-nowrap transition-opacity duration-200"
-          style={{ 
-            left: cursorPos.x + 15, 
-            top: cursorPos.y + 15
-          }}
-        >
-          {cursorLabel}
-        </div>
-      )}
     </>
   )
 }
