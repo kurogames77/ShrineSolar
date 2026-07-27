@@ -39,7 +39,7 @@ export default function Navbar({ isShopOpen, setIsShopOpen, isInquiryOpen, setIs
                     alt="Shrine Solar Logo"
                     className="hidden sm:block h-7 sm:h-8 w-auto cursor-pointer"
                     onClick={() => handleNavigation('/')}
-                    style={{ filter: 'drop-shadow(0 0 8px rgba(255,200,0,0.9)) drop-shadow(0 0 16px rgba(255,180,0,0.5))' }}
+                    style={{ filter: isHome ? 'drop-shadow(0 0 8px rgba(255,200,0,0.9)) drop-shadow(0 0 16px rgba(255,180,0,0.5))' : 'none' }}
                 />
                 <div style={{ display: 'flex', alignItems: 'center', gap: '32px' }}>
                     <button
