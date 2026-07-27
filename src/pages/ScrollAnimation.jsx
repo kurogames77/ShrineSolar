@@ -659,8 +659,8 @@ export default function ScrollAnimation() {
         // Show near the end of frames and stay visible until the bottom
         const showStart = 0.83;
         const fadeInEnd = 0.87;
-        const fadeOutStart = 1.0;
-        const showEnd = 1.1;
+        const fadeOutStart = 0.90;  // start fading out before end-page slideshow at 0.95
+        const showEnd = 0.96;       // fully gone before end-page slideshow fades in
 
         let opacity = 0;
         if (scrollProgress >= showStart && scrollProgress <= showEnd) {
