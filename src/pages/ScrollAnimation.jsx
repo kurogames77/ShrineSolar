@@ -17,6 +17,7 @@ export default function ScrollAnimation() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [slideIndex, setSlideIndex] = useState(0);
+  const [isMobile, setIsMobile] = useState(() => window.innerWidth <= 768);
 
   const slideshowImages = [
     '/highqual1.jpg',
@@ -31,6 +32,13 @@ export default function ScrollAnimation() {
       setSlideIndex(prev => (prev + 1) % slideshowImages.length);
     }, 3000);
     return () => clearInterval(interval);
+  }, []);
+
+  // Track mobile breakpoint
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   // Draw a specific frame onto the canvas
@@ -431,32 +439,7 @@ export default function ScrollAnimation() {
                     Imagine opening your electricity bill and actually smiling. With solar power, you stop renting energy from the grid and start owning it. Every ray of sunlight that hits your roof becomes money saved instead of money spent. Homes and businesses across Dapitan City are already cutting their power costs dramatically, and yours could be next.
                   </p>
 
-                  {/* Subtle interaction hint */}
-                  <div style={{
-                    marginTop: '1.5rem',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '0.5rem',
-                  }}>
-                    <span style={{
-                      display: 'inline-block',
-                      width: '6px',
-                      height: '6px',
-                      borderRadius: '50%',
-                      background: '#FFD700',
-                      animation: 'pulse 2s ease-in-out infinite',
-                    }} />
-                    <span style={{
-                      fontFamily: "'Inter', sans-serif",
-                      fontSize: '0.75rem',
-                      fontWeight: 400,
-                      color: 'rgba(255,215,0,0.7)',
-                      letterSpacing: '0.15em',
-                      textTransform: 'uppercase',
-                    }}>
-                      Drag the panel to interact
-                    </span>
-                  </div>
+
                 </div>
               </div>
             </div>
@@ -633,32 +616,7 @@ export default function ScrollAnimation() {
                     Not sure if solar is right for you? Let's find out together, with zero cost and zero pressure. Our experts will visit your property, assess your energy needs, and design a system that fits your budget and lifestyle. You'll walk away with real numbers and real answers, so you can make a decision with total confidence.
                   </p>
 
-                  {/* Subtle interaction hint */}
-                  <div style={{
-                    marginTop: '1.5rem',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '0.5rem',
-                  }}>
-                    <span style={{
-                      display: 'inline-block',
-                      width: '6px',
-                      height: '6px',
-                      borderRadius: '50%',
-                      background: '#FFD700',
-                      animation: 'pulse 2s ease-in-out infinite',
-                    }} />
-                    <span style={{
-                      fontFamily: "'Inter', sans-serif",
-                      fontSize: '0.75rem',
-                      fontWeight: 400,
-                      color: 'rgba(255,215,0,0.7)',
-                      letterSpacing: '0.15em',
-                      textTransform: 'uppercase',
-                    }}>
-                      Drag the carousel to explore
-                    </span>
-                  </div>
+
                 </div>
               </div>
             </div>
@@ -850,7 +808,7 @@ export default function ScrollAnimation() {
       })()}
 
       {/* Back to Top Button — standalone fixed element */}
-      {isLoaded && scrollProgress >= 0.88 && (
+      {isLoaded && scrollProgress >= 0.05 && (
         <div
           style={{
             position: 'fixed',
@@ -860,34 +818,64 @@ export default function ScrollAnimation() {
             zIndex: 9999,
           }}
         >
-          <button
-            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            style={{
-              padding: '14px 36px',
-              background: 'linear-gradient(135deg, #FFD700 0%, #FFA500 100%)',
-              color: '#1a1a1a',
-              border: 'none',
-              borderRadius: '30px',
-              fontFamily: "'Inter', sans-serif",
-              fontWeight: 800,
-              fontSize: '1rem',
-              letterSpacing: '0.05em',
-              textTransform: 'uppercase',
-              cursor: 'pointer',
-              boxShadow: '0 4px 20px rgba(255, 165, 0, 0.5), 0 0 15px rgba(255, 215, 0, 0.3)',
-              transition: 'all 0.2s ease',
-            }}
-            onMouseOver={(e) => {
-              e.currentTarget.style.transform = 'scale(1.08)';
-              e.currentTarget.style.boxShadow = '0 6px 30px rgba(255, 165, 0, 0.7), 0 0 20px rgba(255, 215, 0, 0.5)';
-            }}
-            onMouseOut={(e) => {
-              e.currentTarget.style.transform = 'scale(1)';
-              e.currentTarget.style.boxShadow = '0 4px 20px rgba(255, 165, 0, 0.5), 0 0 15px rgba(255, 215, 0, 0.3)';
-            }}
-          >
-            ↑ Back to Top
-          </button>
+          {isMobile ? (
+            /* Mobile: solid yellow circle with arrow */
+            <button
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+              style={{
+                width: '52px',
+                height: '52px',
+                borderRadius: '50%',
+                background: '#FFD700',
+                border: '2px solid #FFD700',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontSize: '1.4rem',
+                color: '#1a1a1a',
+                fontWeight: 900,
+                boxShadow: '0 4px 20px rgba(255, 215, 0, 0.5)',
+                transition: 'all 0.2s ease',
+              }}
+            >
+              ↑
+            </button>
+          ) : (
+            /* Desktop: transparent with yellow oval border */
+            <button
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+              style={{
+                padding: '12px 32px',
+                background: 'transparent',
+                color: '#FFD700',
+                border: '2px solid #FFD700',
+                borderRadius: '30px',
+                fontFamily: "'Inter', sans-serif",
+                fontWeight: 700,
+                fontSize: '0.9rem',
+                letterSpacing: '0.1em',
+                textTransform: 'uppercase',
+                cursor: 'pointer',
+                boxShadow: '0 0 12px rgba(255, 215, 0, 0.25)',
+                backdropFilter: 'blur(4px)',
+                WebkitBackdropFilter: 'blur(4px)',
+                transition: 'all 0.2s ease',
+              }}
+              onMouseOver={(e) => {
+                e.currentTarget.style.background = 'rgba(255, 215, 0, 0.15)';
+                e.currentTarget.style.boxShadow = '0 0 20px rgba(255, 215, 0, 0.5)';
+                e.currentTarget.style.transform = 'scale(1.05)';
+              }}
+              onMouseOut={(e) => {
+                e.currentTarget.style.background = 'transparent';
+                e.currentTarget.style.boxShadow = '0 0 12px rgba(255, 215, 0, 0.25)';
+                e.currentTarget.style.transform = 'scale(1)';
+              }}
+            >
+              ↑ Back to Top
+            </button>
+          )}
         </div>
       )}
     </div>
