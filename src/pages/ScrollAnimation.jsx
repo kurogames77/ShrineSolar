@@ -222,7 +222,8 @@ export default function ScrollAnimation() {
   }, []);
 
   return (
-    <div
+    <>
+      <div
       ref={containerRef}
       style={{
         /* The tall container creates the scroll distance that drives the animation.
@@ -845,29 +846,23 @@ export default function ScrollAnimation() {
 
       {/* ── End-Page Slideshow ── fades in after the last frame */}
       {isLoaded && (() => {
-        // Fades in 0.95→1.0, stays visible, then fades out 1.08→1.14 for footer
+        // Fades in 0.95→1.0, and stays visible
         const showStart = 0.95;
         const fadeInEnd  = 1.0;
-        const fadeOutStart = 1.08;
-        const showEnd = 1.14;
 
         let opacity = 0;
-        if (scrollProgress >= showStart && scrollProgress <= showEnd) {
-          if (scrollProgress < fadeInEnd) {
-            opacity = (scrollProgress - showStart) / (fadeInEnd - showStart);
-          } else if (scrollProgress > fadeOutStart) {
-            opacity = 1 - (scrollProgress - fadeOutStart) / (showEnd - fadeOutStart);
-          } else {
-            opacity = 1;
-          }
+        if (scrollProgress >= showStart) {
+          opacity = Math.min((scrollProgress - showStart) / (fadeInEnd - showStart), 1);
         }
-        if (opacity < 0) opacity = 0;
 
         return (
           <div
             style={{
-              position: 'fixed',
-              inset: 0,
+              position: 'sticky',
+              top: 0,
+              height: '100vh',
+              width: '100%',
+              left: 0,
               zIndex: 30,           // sits above all existing overlays
               opacity,
               visibility: opacity <= 0 ? 'hidden' : 'visible',
@@ -954,13 +949,14 @@ export default function ScrollAnimation() {
         );
       })()}
 
-      {/* ── Footer ── positioned at the very bottom of the scroll container */}
+      {/* Close the 1200vh scroll container */}
+      </div>
+
+      {/* ── Footer ── flows naturally after the 1200vh scroll container */}
       <footer
         style={{
-          position: 'absolute',
-          bottom: 0,
-          left: 0,
-          right: 0,
+          position: 'relative',
+          width: '100%',
           zIndex: 5,
           background: 'linear-gradient(180deg, #0a0a0a 0%, #111111 100%)',
           borderTop: '1px solid rgba(255, 215, 0, 0.2)',
@@ -1173,6 +1169,6 @@ export default function ScrollAnimation() {
           {cursorLabel}
         </div>
       )}
-    </div>
+    </>
   );
 }
