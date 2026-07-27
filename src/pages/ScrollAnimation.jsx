@@ -1022,19 +1022,19 @@ export default function ScrollAnimation() {
               <li>
                 <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.85rem', color: 'rgba(255,255,255,0.55)', cursor: 'pointer', transition: 'color 0.2s ease' }}
                   onMouseOver={(e) => e.currentTarget.style.color = '#FFD700'} onMouseOut={(e) => e.currentTarget.style.color = 'rgba(255,255,255,0.55)'}
-                  onClick={() => { window.scrollTo(0,0); Array.from(document.querySelectorAll('nav button')).find(b => b.textContent.includes('Shop'))?.click(); }}
+                  onClick={() => { Array.from(document.querySelectorAll('nav button')).find(b => b.textContent.includes('Shop'))?.click(); }}
                 >Shop</span>
               </li>
               <li>
                 <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.85rem', color: 'rgba(255,255,255,0.55)', cursor: 'pointer', transition: 'color 0.2s ease' }}
                   onMouseOver={(e) => e.currentTarget.style.color = '#FFD700'} onMouseOut={(e) => e.currentTarget.style.color = 'rgba(255,255,255,0.55)'}
-                  onClick={() => { window.scrollTo(0,0); navigate('/my-cart'); }}
+                  onClick={() => { navigate('/my-cart'); }}
                 >My Carts</span>
               </li>
               <li>
                 <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.85rem', color: 'rgba(255,255,255,0.55)', cursor: 'pointer', transition: 'color 0.2s ease' }}
                   onMouseOver={(e) => e.currentTarget.style.color = '#FFD700'} onMouseOut={(e) => e.currentTarget.style.color = 'rgba(255,255,255,0.55)'}
-                  onClick={() => { window.scrollTo(0,0); Array.from(document.querySelectorAll('nav button')).find(b => b.textContent.includes('Inquiry'))?.click(); }}
+                  onClick={() => { Array.from(document.querySelectorAll('nav button')).find(b => b.textContent.includes('Inquiry'))?.click(); }}
                 >Inquiry</span>
               </li>
             </ul>
@@ -1104,7 +1104,7 @@ export default function ScrollAnimation() {
             ...(isMobile
               ? { right: '20px', left: 'auto', transform: 'none' }
               : { left: '50%', transform: 'translateX(-50%)' }),
-            zIndex: 9999,
+            zIndex: 40,
           }}
         >
           {isMobile ? (
