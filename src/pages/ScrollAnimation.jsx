@@ -466,11 +466,11 @@ export default function ScrollAnimation() {
 
       {/* Consultation Showcase Overlay */}
       {isLoaded && (() => {
-        // Show around frame 210 (scrollProgress ~0.70)
-        const showStart = 0.63;
-        const fadeInEnd = 0.68;
-        const fadeOutStart = 0.78;
-        const showEnd = 0.83;
+        // Show around frame 180 (scrollProgress ~0.60)
+        const showStart = 0.53;
+        const fadeInEnd = 0.58;
+        const fadeOutStart = 0.68;
+        const showEnd = 0.73;
 
         let opacity = 0;
         if (scrollProgress >= showStart && scrollProgress <= showEnd) {
