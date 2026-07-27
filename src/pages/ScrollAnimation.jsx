@@ -886,6 +886,21 @@ export default function ScrollAnimation() {
               background: 'rgba(0,0,0,0.25)',
               zIndex: 1,
             }} />
+
+            {/* Shrine Solar logo — top-left, matching navbar position */}
+            <img
+              src="/logo.png"
+              alt="Shrine Solar Logo"
+              style={{
+                position: 'absolute',
+                top: '20px',
+                left: '40px',
+                height: '48px',
+                width: 'auto',
+                zIndex: 2,
+                filter: 'drop-shadow(0 0 8px rgba(255,200,0,0.9)) drop-shadow(0 0 16px rgba(255,180,0,0.5))',
+              }}
+            />
           </div>
         );
       })()}
