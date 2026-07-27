@@ -851,24 +851,27 @@ export default function ScrollAnimation() {
             <div
               style={{
                 position: 'absolute',
-                bottom: '8%',
+                bottom: '40px',
                 left: '50%',
                 transform: 'translateX(-50%)',
-                zIndex: 10,
-                animation: opacity >= 0.9 ? 'fadeSlideUp 0.8s ease-out 0.4s both' : 'none',
+                zIndex: 50,
+                opacity: opacity >= 0.9 ? 1 : 0,
+                visibility: opacity >= 0.9 ? 'visible' : 'hidden',
+                transition: 'opacity 0.4s ease-out, visibility 0.4s ease-out',
+                pointerEvents: opacity >= 0.9 ? 'auto' : 'none',
               }}
             >
               <button
                 onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
                 style={{
-                  padding: '12px 30px',
+                  padding: '14px 36px',
                   background: 'linear-gradient(135deg, #FFD700 0%, #FFA500 100%)',
                   color: '#1a1a1a',
                   border: 'none',
                   borderRadius: '30px',
                   fontFamily: "'Inter', sans-serif",
-                  fontWeight: 700,
-                  fontSize: '0.9rem',
+                  fontWeight: 800,
+                  fontSize: '1rem',
                   letterSpacing: '0.05em',
                   textTransform: 'uppercase',
                   cursor: 'pointer',
