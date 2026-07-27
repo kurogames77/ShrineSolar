@@ -966,7 +966,7 @@ export default function ScrollAnimation() {
           position: 'relative',
           width: '100%',
           zIndex: 5,
-          background: 'linear-gradient(180deg, #0a0a0a 0%, #111111 100%)',
+          background: 'linear-gradient(180deg, #FFF9C4 0%, #FFFFFF 100%)',
           borderTop: '1px solid rgba(255, 215, 0, 0.2)',
         }}
       >
@@ -1000,7 +1000,7 @@ export default function ScrollAnimation() {
               fontFamily: "'Inter', sans-serif",
               fontSize: '0.85rem',
               lineHeight: 1.7,
-              color: 'rgba(255,255,255,0.55)',
+              color: 'rgba(0,0,0,0.65)',
               maxWidth: '300px',
             }}>
               Empowering homes and businesses in Dapitan City with reliable, affordable solar energy solutions. Your trusted partner for panel installation and electrical maintenance.
@@ -1020,26 +1020,26 @@ export default function ScrollAnimation() {
             }}>Quick Links</h4>
             <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '10px' }}>
               <li>
-                <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.85rem', color: 'rgba(255,255,255,0.55)', cursor: 'pointer', transition: 'color 0.2s ease' }}
-                  onMouseOver={(e) => e.currentTarget.style.color = '#FFD700'} onMouseOut={(e) => e.currentTarget.style.color = 'rgba(255,255,255,0.55)'}
+                <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.85rem', color: 'rgba(0,0,0,0.65)', cursor: 'pointer', transition: 'color 0.2s ease' }}
+                  onMouseOver={(e) => e.currentTarget.style.color = '#B8860B'} onMouseOut={(e) => e.currentTarget.style.color = 'rgba(0,0,0,0.65)'}
                   onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
                 >Home</span>
               </li>
               <li>
-                <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.85rem', color: 'rgba(255,255,255,0.55)', cursor: 'pointer', transition: 'color 0.2s ease' }}
-                  onMouseOver={(e) => e.currentTarget.style.color = '#FFD700'} onMouseOut={(e) => e.currentTarget.style.color = 'rgba(255,255,255,0.55)'}
+                <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.85rem', color: 'rgba(0,0,0,0.65)', cursor: 'pointer', transition: 'color 0.2s ease' }}
+                  onMouseOver={(e) => e.currentTarget.style.color = '#B8860B'} onMouseOut={(e) => e.currentTarget.style.color = 'rgba(0,0,0,0.65)'}
                   onClick={() => { Array.from(document.querySelectorAll('nav button')).find(b => b.textContent.includes('Shop'))?.click(); }}
                 >Shop</span>
               </li>
               <li>
-                <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.85rem', color: 'rgba(255,255,255,0.55)', cursor: 'pointer', transition: 'color 0.2s ease' }}
-                  onMouseOver={(e) => e.currentTarget.style.color = '#FFD700'} onMouseOut={(e) => e.currentTarget.style.color = 'rgba(255,255,255,0.55)'}
+                <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.85rem', color: 'rgba(0,0,0,0.65)', cursor: 'pointer', transition: 'color 0.2s ease' }}
+                  onMouseOver={(e) => e.currentTarget.style.color = '#B8860B'} onMouseOut={(e) => e.currentTarget.style.color = 'rgba(0,0,0,0.65)'}
                   onClick={() => { navigate('/my-cart'); }}
                 >My Carts</span>
               </li>
               <li>
-                <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.85rem', color: 'rgba(255,255,255,0.55)', cursor: 'pointer', transition: 'color 0.2s ease' }}
-                  onMouseOver={(e) => e.currentTarget.style.color = '#FFD700'} onMouseOut={(e) => e.currentTarget.style.color = 'rgba(255,255,255,0.55)'}
+                <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.85rem', color: 'rgba(0,0,0,0.65)', cursor: 'pointer', transition: 'color 0.2s ease' }}
+                  onMouseOver={(e) => e.currentTarget.style.color = '#B8860B'} onMouseOut={(e) => e.currentTarget.style.color = 'rgba(0,0,0,0.65)'}
                   onClick={() => { Array.from(document.querySelectorAll('nav button')).find(b => b.textContent.includes('Inquiry'))?.click(); }}
                 >Inquiry</span>
               </li>
@@ -1059,20 +1059,20 @@ export default function ScrollAnimation() {
             }}>Contact Us</h4>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
               <a href="https://www.facebook.com/shrinesolarservices" target="_blank" rel="noopener noreferrer" style={{
-                fontFamily: "'Inter', sans-serif", fontSize: '0.85rem', color: 'rgba(255,255,255,0.55)', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '10px', transition: 'color 0.2s',
-              }} onMouseOver={(e) => e.currentTarget.style.color = '#FFD700'} onMouseOut={(e) => e.currentTarget.style.color = 'rgba(255,255,255,0.55)'}>
+                fontFamily: "'Inter', sans-serif", fontSize: '0.85rem', color: 'rgba(0,0,0,0.65)', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '10px', transition: 'color 0.2s',
+              }} onMouseOver={(e) => e.currentTarget.style.color = '#B8860B'} onMouseOut={(e) => e.currentTarget.style.color = 'rgba(0,0,0,0.65)'}>
                 <img src="/fblogo.png" alt="FB" style={{ width: '20px', height: '20px', objectFit: 'contain' }} />
                 ShrineSolar
               </a>
               <span style={{
-                fontFamily: "'Inter', sans-serif", fontSize: '0.85rem', color: 'rgba(255,255,255,0.55)', display: 'flex', alignItems: 'center', gap: '10px',
+                fontFamily: "'Inter', sans-serif", fontSize: '0.85rem', color: 'rgba(0,0,0,0.65)', display: 'flex', alignItems: 'center', gap: '10px',
               }}>
                 <img src="/phonelogo.png" alt="Phone" style={{ width: '20px', height: '20px', objectFit: 'contain' }} />
                 09171842499
               </span>
               <a href="https://mail.google.com/mail/?view=cm&fs=1&to=Shrinesolar2022@gmail.com" target="_blank" rel="noopener noreferrer" style={{
-                fontFamily: "'Inter', sans-serif", fontSize: '0.85rem', color: 'rgba(255,255,255,0.55)', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '10px', transition: 'color 0.2s',
-              }} onMouseOver={(e) => e.currentTarget.style.color = '#FFD700'} onMouseOut={(e) => e.currentTarget.style.color = 'rgba(255,255,255,0.55)'}>
+                fontFamily: "'Inter', sans-serif", fontSize: '0.85rem', color: 'rgba(0,0,0,0.65)', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '10px', transition: 'color 0.2s',
+              }} onMouseOver={(e) => e.currentTarget.style.color = '#B8860B'} onMouseOut={(e) => e.currentTarget.style.color = 'rgba(0,0,0,0.65)'}>
                 <img src="/gmaillogo.png" alt="Gmail" style={{ width: '20px', height: '20px', objectFit: 'contain' }} />
                 Shrinesolar2022@gmail.com
               </a>
@@ -1082,7 +1082,7 @@ export default function ScrollAnimation() {
 
         {/* Bottom bar */}
         <div style={{
-          borderTop: '1px solid rgba(255,255,255,0.08)',
+          borderTop: '1px solid rgba(0,0,0,0.1)',
           padding: '20px 40px',
           display: 'flex',
           flexWrap: 'wrap',
@@ -1093,7 +1093,7 @@ export default function ScrollAnimation() {
           <p style={{
             fontFamily: "'Inter', sans-serif",
             fontSize: '0.75rem',
-            color: 'rgba(255,255,255,0.35)',
+            color: 'rgba(0,0,0,0.5)',
             textAlign: 'center',
           }}>
             © {new Date().getFullYear()} Shrine Solar. All rights reserved. · #1 Panel & Electrical Installations in Dapitan City
