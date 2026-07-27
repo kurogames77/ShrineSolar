@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, useCallback, Suspense } from 'react';
+import { useEffect, useRef, useState, useCallback } from 'react';
 import SolarPanel3D from '../components/SolarPanel3D';
 
 const FRAME_COUNT = 300;
@@ -271,9 +271,9 @@ export default function ScrollAnimation() {
         }}
       />
 
-      {/* 3D Solar Panel Showcase Overlay */}
-      {isLoaded && (() => {
-        // Show between scroll progress 0.25 and 0.40 (around frame 88)
+      {/* 3D Solar Panel Showcase Overlay — always mounted to pre-warm WebGL */}
+      {(() => {
+        // Show between scroll progress 0.22 and 0.43 (around frame 88)
         const showStart = 0.22;
         const fadeInEnd = 0.27;
         const fadeOutStart = 0.38;
@@ -302,13 +302,11 @@ export default function ScrollAnimation() {
               alignItems: 'center',
               justifyContent: 'center',
               opacity,
-              visibility: opacity <= 0 ? 'hidden' : 'visible',
-              transition: 'opacity 0.15s ease-out, visibility 0.15s ease-out',
+              // Never use visibility:hidden — it causes WebGL context loss
               pointerEvents: opacity > 0.3 ? 'auto' : 'none',
+              transition: 'opacity 0.15s ease-out',
             }}
           >
-            {/* Removed dark cinematic overlay */}
-
             {/* Content container */}
             <div
               style={{
@@ -337,9 +335,8 @@ export default function ScrollAnimation() {
                   animation: opacity >= 0.9 ? 'fadeSlideInLeft 0.8s ease-out both' : 'none',
                 }}
               >
-                <Suspense fallback={<div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><span style={{ color: '#FFD700', fontFamily: 'Inter, sans-serif' }}>Loading 3D Model...</span></div>}>
-                  <SolarPanel3D />
-                </Suspense>
+                {/* SolarPanel3D handles its own Suspense/loading internally */}
+                <SolarPanel3D />
               </div>
 
               {/* Info Card - Right Side */}
@@ -351,7 +348,7 @@ export default function ScrollAnimation() {
                   animation: opacity >= 0.9 ? 'fadeSlideInRight 0.8s ease-out 0.2s both' : 'none',
                 }}
               >
-                {/* Spinning Border Layer (Masked to act strictly as a 2px border outside) */}
+                {/* Spinning Border Layer */}
                 <div
                   style={{
                     position: 'absolute',
@@ -382,7 +379,7 @@ export default function ScrollAnimation() {
                   />
                 </div>
 
-                {/* Glassmorphism Card (Restored original blur effect) */}
+                {/* Glassmorphism Card */}
                 <div 
                   className="solar3d-glass-card"
                   style={{
@@ -438,7 +435,6 @@ export default function ScrollAnimation() {
                   >
                     Imagine opening your electricity bill and actually smiling. With solar power, you stop renting energy from the grid and start owning it. Every ray of sunlight that hits your roof becomes money saved instead of money spent. Homes and businesses across Dapitan City are already cutting their power costs dramatically, and yours could be next.
                   </p>
-
 
                 </div>
               </div>
