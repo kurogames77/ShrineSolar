@@ -843,7 +843,49 @@ export default function ScrollAnimation() {
 
 
                 </div>
+                </div>
               </div>
+            </div>
+
+            {/* Back to Top Button */}
+            <div
+              style={{
+                position: 'absolute',
+                bottom: '8%',
+                left: '50%',
+                transform: 'translateX(-50%)',
+                zIndex: 10,
+                animation: opacity >= 0.9 ? 'fadeSlideUp 0.8s ease-out 0.4s both' : 'none',
+              }}
+            >
+              <button
+                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                style={{
+                  padding: '12px 30px',
+                  background: 'linear-gradient(135deg, #FFD700 0%, #FFA500 100%)',
+                  color: '#1a1a1a',
+                  border: 'none',
+                  borderRadius: '30px',
+                  fontFamily: "'Inter', sans-serif",
+                  fontWeight: 700,
+                  fontSize: '0.9rem',
+                  letterSpacing: '0.05em',
+                  textTransform: 'uppercase',
+                  cursor: 'pointer',
+                  boxShadow: '0 4px 20px rgba(255, 165, 0, 0.4)',
+                  transition: 'all 0.2s ease',
+                }}
+                onMouseOver={(e) => {
+                  e.currentTarget.style.transform = 'scale(1.05)';
+                  e.currentTarget.style.boxShadow = '0 6px 25px rgba(255, 165, 0, 0.6)';
+                }}
+                onMouseOut={(e) => {
+                  e.currentTarget.style.transform = 'scale(1)';
+                  e.currentTarget.style.boxShadow = '0 4px 20px rgba(255, 165, 0, 0.4)';
+                }}
+              >
+                Back to Top
+              </button>
             </div>
           </div>
         );
