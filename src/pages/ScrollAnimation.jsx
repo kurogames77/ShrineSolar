@@ -902,10 +902,10 @@ export default function ScrollAnimation() {
                 src="/apple-touch-icon.png"
                 alt="Shrine Solar Icon"
                 style={{
-                  width: '90px',
-                  height: '90px',
+                  width: '130px',
+                  height: '130px',
                   filter: 'drop-shadow(0 4px 10px rgba(0,0,0,0.8))',
-                  marginBottom: '16px',
+                  marginBottom: '24px',
                 }}
               />
               <h1
