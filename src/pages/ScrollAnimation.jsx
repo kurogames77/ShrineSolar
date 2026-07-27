@@ -989,11 +989,8 @@ export default function ScrollAnimation() {
               <span style={{
                 fontFamily: "'Playfair Display', serif",
                 fontSize: '1.4rem',
-                fontWeight: 700,
-                background: 'linear-gradient(135deg, #FFD700, #FFA500)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text',
+                fontWeight: 900,
+                color: '#111111',
               }}>SHRINE SOLAR</span>
             </div>
             <p style={{
@@ -1012,8 +1009,8 @@ export default function ScrollAnimation() {
             <h4 style={{
               fontFamily: "'Inter', sans-serif",
               fontSize: '0.85rem',
-              fontWeight: 700,
-              color: '#FFD700',
+              fontWeight: 800,
+              color: '#111111',
               textTransform: 'uppercase',
               letterSpacing: '0.1em',
               marginBottom: '16px',
@@ -1051,8 +1048,8 @@ export default function ScrollAnimation() {
             <h4 style={{
               fontFamily: "'Inter', sans-serif",
               fontSize: '0.85rem',
-              fontWeight: 700,
-              color: '#FFD700',
+              fontWeight: 800,
+              color: '#111111',
               textTransform: 'uppercase',
               letterSpacing: '0.1em',
               marginBottom: '16px',
