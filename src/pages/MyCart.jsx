@@ -171,37 +171,9 @@ export default function MyCart() {
     }, {});
 
     return (
-        <div className="w-full min-h-screen bg-[#a8a8a8] flex flex-col items-center pt-24">
-            {/* Navbar copied from landing page */}
-            <nav
-                className="fixed top-0 left-0 w-full z-40 bg-white/90 backdrop-blur-md shadow-lg border-b border-gray-200"
-                style={{ opacity: 1, pointerEvents: 'auto' }}
-            >
-                <div className="flex items-center justify-center sm:justify-between w-full" style={{ paddingLeft: '40px', paddingRight: '40px', paddingTop: '20px', paddingBottom: '20px' }}>
-                    <img src="/logo.png" alt="Shrine Solar Logo" className="hidden sm:block h-9 sm:h-12 w-auto cursor-pointer" onClick={() => navigate('/')} style={{ filter: 'drop-shadow(0 0 8px rgba(255,200,0,0.5))' }} />
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '32px' }}>
-                        <button onClick={() => navigate('/')} className="relative animate-fade-in text-gray-800 font-bold tracking-wide transition-colors hover:text-black text-xs sm:text-base group" style={{ animationDelay: '0.1s' }}>
-                            Home
-                            <span className="absolute left-0 -bottom-1 h-[2px] bg-yellow-500 transition-all duration-300 w-0 group-hover:w-full"></span>
-                        </button>
-                        <button onClick={() => navigate('/')} className="relative animate-fade-in text-gray-800 font-bold tracking-wide transition-colors hover:text-black text-xs sm:text-base group" style={{ animationDelay: '0.2s' }}>
-                            Shop
-                            <span className="absolute left-0 -bottom-1 h-[2px] bg-yellow-500 transition-all duration-300 w-0 group-hover:w-full"></span>
-                        </button>
-                        <button onClick={() => navigate('/my-cart')} className="relative animate-fade-in text-gray-800 font-bold tracking-wide transition-colors hover:text-black text-xs sm:text-base group" style={{ animationDelay: '0.3s' }}>
-                            My Carts
-                            <span className="absolute left-0 -bottom-1 h-[2px] bg-yellow-500 transition-all duration-300 w-full"></span>
-                        </button>
-                        <button onClick={() => navigate('/')} className="relative animate-fade-in text-gray-800 font-bold tracking-wide transition-colors hover:text-black text-xs sm:text-base group" style={{ animationDelay: '0.4s' }}>
-                            Inquiry
-                            <span className="absolute left-0 -bottom-1 h-[2px] bg-yellow-500 transition-all duration-300 w-0 group-hover:w-full"></span>
-                        </button>
-                    </div>
-                </div>
-            </nav>
-
+        <div className="w-full min-h-screen bg-[#a8a8a8] flex flex-col items-center">
             {/* Header */}
-            <header className="w-full max-w-7xl flex justify-center items-center pb-4 sm:pb-8 px-4 sm:px-8 relative">
+            <header className="w-full max-w-7xl flex justify-center items-center pt-8 sm:pt-12 pb-4 sm:pb-8 px-4 sm:px-8 relative">
                 <div className="flex items-center gap-3">
                     <svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8 sm:w-10 sm:h-10 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                         <path strokeLinecap="round" strokeLinejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 100 4 2 2 0 000-4z" />
@@ -217,7 +189,7 @@ export default function MyCart() {
             </header>
 
             {/* Main Content */}
-            <div className="flex-grow w-full max-w-7xl px-4 sm:px-8 pb-8 pt-2 sm:pt-6 flex flex-col lg:flex-row gap-6 sm:gap-12 justify-center items-start">
+            <div className="flex-grow w-full max-w-7xl px-4 sm:px-8 pb-8 pt-6 sm:pt-10 flex flex-col lg:flex-row gap-6 sm:gap-12 justify-center items-start">
                 {/* Left: Cart Items */}
                 <div className="w-full mx-auto lg:mx-0 max-w-[550px] bg-[#909090] border-2 border-gray-500 rounded-2xl sm:rounded-3xl p-4 sm:p-6 shadow-lg overflow-y-auto max-h-[60vh] lg:max-h-[70vh]">
                     <h2 className="text-xl sm:text-2xl font-bold text-black mb-4 sm:mb-6 text-center">Cart Items</h2>
