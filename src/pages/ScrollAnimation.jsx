@@ -846,53 +846,51 @@ export default function ScrollAnimation() {
                 </div>
               </div>
             </div>
-
-            {/* Back to Top Button */}
-            <div
-              style={{
-                position: 'absolute',
-                bottom: '40px',
-                left: '50%',
-                transform: 'translateX(-50%)',
-                zIndex: 50,
-                opacity: opacity >= 0.9 ? 1 : 0,
-                visibility: opacity >= 0.9 ? 'visible' : 'hidden',
-                transition: 'opacity 0.4s ease-out, visibility 0.4s ease-out',
-                pointerEvents: opacity >= 0.9 ? 'auto' : 'none',
-              }}
-            >
-              <button
-                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                style={{
-                  padding: '14px 36px',
-                  background: 'linear-gradient(135deg, #FFD700 0%, #FFA500 100%)',
-                  color: '#1a1a1a',
-                  border: 'none',
-                  borderRadius: '30px',
-                  fontFamily: "'Inter', sans-serif",
-                  fontWeight: 800,
-                  fontSize: '1rem',
-                  letterSpacing: '0.05em',
-                  textTransform: 'uppercase',
-                  cursor: 'pointer',
-                  boxShadow: '0 4px 20px rgba(255, 165, 0, 0.4)',
-                  transition: 'all 0.2s ease',
-                }}
-                onMouseOver={(e) => {
-                  e.currentTarget.style.transform = 'scale(1.05)';
-                  e.currentTarget.style.boxShadow = '0 6px 25px rgba(255, 165, 0, 0.6)';
-                }}
-                onMouseOut={(e) => {
-                  e.currentTarget.style.transform = 'scale(1)';
-                  e.currentTarget.style.boxShadow = '0 4px 20px rgba(255, 165, 0, 0.4)';
-                }}
-              >
-                Back to Top
-              </button>
-            </div>
           </div>
         );
       })()}
+
+      {/* Back to Top Button — standalone fixed element */}
+      {isLoaded && scrollProgress >= 0.88 && (
+        <div
+          style={{
+            position: 'fixed',
+            bottom: '40px',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            zIndex: 9999,
+          }}
+        >
+          <button
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            style={{
+              padding: '14px 36px',
+              background: 'linear-gradient(135deg, #FFD700 0%, #FFA500 100%)',
+              color: '#1a1a1a',
+              border: 'none',
+              borderRadius: '30px',
+              fontFamily: "'Inter', sans-serif",
+              fontWeight: 800,
+              fontSize: '1rem',
+              letterSpacing: '0.05em',
+              textTransform: 'uppercase',
+              cursor: 'pointer',
+              boxShadow: '0 4px 20px rgba(255, 165, 0, 0.5), 0 0 15px rgba(255, 215, 0, 0.3)',
+              transition: 'all 0.2s ease',
+            }}
+            onMouseOver={(e) => {
+              e.currentTarget.style.transform = 'scale(1.08)';
+              e.currentTarget.style.boxShadow = '0 6px 30px rgba(255, 165, 0, 0.7), 0 0 20px rgba(255, 215, 0, 0.5)';
+            }}
+            onMouseOut={(e) => {
+              e.currentTarget.style.transform = 'scale(1)';
+              e.currentTarget.style.boxShadow = '0 4px 20px rgba(255, 165, 0, 0.5), 0 0 15px rgba(255, 215, 0, 0.3)';
+            }}
+          >
+            ↑ Back to Top
+          </button>
+        </div>
+      )}
     </div>
   );
 }
