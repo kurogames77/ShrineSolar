@@ -887,21 +887,35 @@ export default function ScrollAnimation() {
               zIndex: 1,
             }} />
 
-            {/* Circular Shrine Solar logo — top-center */}
-            <img
-              src="/apple-touch-icon.png"
-              alt="Shrine Solar Icon"
-              style={{
-                position: 'absolute',
-                top: '90px',
-                left: '50%',
-                transform: 'translateX(-50%)',
-                width: '130px',
-                height: '130px',
-                zIndex: 2,
-                filter: 'drop-shadow(0 4px 10px rgba(0,0,0,0.8))',
-              }}
-            />
+            {/* Circular logo and Text — centered */}
+            <div
+              className="absolute inset-0 flex flex-col items-center justify-center text-center z-10 px-6 sm:px-16 lg:px-24"
+              style={{ top: '-10%' }}
+            >
+              <img
+                src="/apple-touch-icon.png"
+                alt="Shrine Solar Icon"
+                style={{
+                  width: '130px',
+                  height: '130px',
+                  filter: 'drop-shadow(0 4px 10px rgba(0,0,0,0.8))',
+                  marginBottom: '24px',
+                }}
+              />
+              <h1
+                className="text-white text-3xl sm:text-5xl lg:text-[4rem] font-bold leading-snug sm:leading-tight max-w-4xl"
+                style={{ fontFamily: "'Playfair Display', serif", textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}
+              >
+                Ready to make the switch to smart, sustainable power?<br />
+                Message us today for a free consultation and assessment!
+              </h1>
+              <p
+                className="text-gray-300 text-xs sm:text-base lg:text-lg mt-3 sm:mt-5 max-w-2xl font-light"
+                style={{ textShadow: '0 1px 10px rgba(0,0,0,0.7)' }}
+              >
+                #ShrineSolar
+              </p>
+            </div>
           </div>
         );
       })()}
