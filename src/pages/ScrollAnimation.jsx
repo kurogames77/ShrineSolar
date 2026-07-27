@@ -879,11 +879,11 @@ export default function ScrollAnimation() {
               />
             ))}
 
-            {/* Dark overlay — full cover like the first frame */}
+            {/* Dark overlay — subtle tint so images remain clearly visible */}
             <div style={{
               position: 'absolute',
               inset: 0,
-              background: 'rgba(0,0,0,0.55)',
+              background: 'rgba(0,0,0,0.25)',
               zIndex: 1,
             }} />
           </div>
