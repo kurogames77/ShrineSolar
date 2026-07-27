@@ -1100,7 +1100,7 @@ export default function ScrollAnimation() {
         <div
           style={{
             position: 'fixed',
-            bottom: isMobile ? '24px' : '75px',
+            bottom: isMobile ? '24px' : '50px',
             ...(isMobile
               ? { right: '20px', left: 'auto', transform: 'none' }
               : { left: '50%', transform: 'translateX(-50%)' }),
