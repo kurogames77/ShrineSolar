@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 import SolarPanel3D from '../components/SolarPanel3D';
 
 const FRAME_COUNT = 280;
@@ -19,6 +20,7 @@ export default function ScrollAnimation() {
   const [slideIndex, setSlideIndex] = useState(0);
   const [endSlideIndex, setEndSlideIndex] = useState(0);
   const [isMobile, setIsMobile] = useState(() => window.innerWidth <= 768);
+  const navigate = useNavigate();
   const [cursorLabel, setCursorLabel] = useState(null);
   const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
 
@@ -1011,20 +1013,30 @@ export default function ScrollAnimation() {
               marginBottom: '16px',
             }}>Quick Links</h4>
             <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '10px' }}>
-              {['Home', 'Shop', 'My Carts', 'Inquiry'].map((link) => (
-                <li key={link}>
-                  <span style={{
-                    fontFamily: "'Inter', sans-serif",
-                    fontSize: '0.85rem',
-                    color: 'rgba(255,255,255,0.55)',
-                    cursor: 'pointer',
-                    transition: 'color 0.2s ease',
-                  }}
-                  onMouseOver={(e) => e.currentTarget.style.color = '#FFD700'}
-                  onMouseOut={(e) => e.currentTarget.style.color = 'rgba(255,255,255,0.55)'}
-                  >{link}</span>
-                </li>
-              ))}
+              <li>
+                <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.85rem', color: 'rgba(255,255,255,0.55)', cursor: 'pointer', transition: 'color 0.2s ease' }}
+                  onMouseOver={(e) => e.currentTarget.style.color = '#FFD700'} onMouseOut={(e) => e.currentTarget.style.color = 'rgba(255,255,255,0.55)'}
+                  onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                >Home</span>
+              </li>
+              <li>
+                <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.85rem', color: 'rgba(255,255,255,0.55)', cursor: 'pointer', transition: 'color 0.2s ease' }}
+                  onMouseOver={(e) => e.currentTarget.style.color = '#FFD700'} onMouseOut={(e) => e.currentTarget.style.color = 'rgba(255,255,255,0.55)'}
+                  onClick={() => { window.scrollTo(0,0); Array.from(document.querySelectorAll('nav button')).find(b => b.textContent.includes('Shop'))?.click(); }}
+                >Shop</span>
+              </li>
+              <li>
+                <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.85rem', color: 'rgba(255,255,255,0.55)', cursor: 'pointer', transition: 'color 0.2s ease' }}
+                  onMouseOver={(e) => e.currentTarget.style.color = '#FFD700'} onMouseOut={(e) => e.currentTarget.style.color = 'rgba(255,255,255,0.55)'}
+                  onClick={() => { window.scrollTo(0,0); navigate('/my-cart'); }}
+                >My Carts</span>
+              </li>
+              <li>
+                <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.85rem', color: 'rgba(255,255,255,0.55)', cursor: 'pointer', transition: 'color 0.2s ease' }}
+                  onMouseOver={(e) => e.currentTarget.style.color = '#FFD700'} onMouseOut={(e) => e.currentTarget.style.color = 'rgba(255,255,255,0.55)'}
+                  onClick={() => { window.scrollTo(0,0); Array.from(document.querySelectorAll('nav button')).find(b => b.textContent.includes('Inquiry'))?.click(); }}
+                >Inquiry</span>
+              </li>
             </ul>
           </div>
 
@@ -1088,7 +1100,7 @@ export default function ScrollAnimation() {
         <div
           style={{
             position: 'fixed',
-            bottom: '24px',
+            bottom: isMobile ? '24px' : '75px',
             ...(isMobile
               ? { right: '20px', left: 'auto', transform: 'none' }
               : { left: '50%', transform: 'translateX(-50%)' }),
