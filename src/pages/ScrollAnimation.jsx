@@ -19,6 +19,12 @@ export default function ScrollAnimation() {
   const [slideIndex, setSlideIndex] = useState(0);
   const [endSlideIndex, setEndSlideIndex] = useState(0);
   const [isMobile, setIsMobile] = useState(() => window.innerWidth <= 768);
+  const [cursorLabel, setCursorLabel] = useState(null);
+  const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
+
+  const handleMouseMove = (e) => {
+    setCursorPos({ x: e.clientX, y: e.clientY });
+  };
 
   const slideshowImages = [
     '/highqual1.jpg',
@@ -903,18 +909,37 @@ export default function ScrollAnimation() {
                 }}
               />
               <h1
-                className="text-white text-3xl sm:text-5xl lg:text-[4rem] font-bold leading-snug sm:leading-tight max-w-4xl"
+                className="text-white text-xl sm:text-3xl lg:text-4xl font-bold leading-snug sm:leading-tight max-w-4xl"
                 style={{ fontFamily: "'Playfair Display', serif", textShadow: '0 2px 30px rgba(0,0,0,0.5)' }}
               >
                 Ready to make the switch to smart, sustainable power?<br />
                 Message us today for a free consultation and assessment!
               </h1>
               <p
-                className="text-gray-300 text-xs sm:text-base lg:text-lg mt-3 sm:mt-5 max-w-2xl font-light"
+                className="text-gray-300 text-xs sm:text-sm lg:text-base mt-2 sm:mt-3 max-w-2xl font-light mb-6 sm:mb-10"
                 style={{ textShadow: '0 1px 10px rgba(0,0,0,0.7)' }}
               >
                 #ShrineSolar
               </p>
+
+              {/* Contact Cards */}
+              <div className="flex flex-col md:flex-row gap-4 sm:gap-8 w-full items-center justify-center">
+                <a href="https://www.facebook.com/shrinesolarservices" target="_blank" rel="noopener noreferrer" className="contact-card-anim w-full max-w-[200px] sm:max-w-none sm:w-48 h-28 sm:h-48 flex flex-col items-center justify-center shadow-lg p-3 sm:p-5 transition-all flex-shrink-0 bg-gradient-to-br from-[#FFF9C4] to-[#FFFFFF] border-4 border-yellow-300 rounded-2xl" onMouseEnter={() => setCursorLabel('Click to see the Facebook Page')} onMouseLeave={() => setCursorLabel(null)} onMouseMove={handleMouseMove}>
+                  <img src="/fblogo.png" alt="Facebook" className="relative z-10 w-8 h-8 sm:w-12 sm:h-12 object-contain pointer-events-none mb-1 sm:mb-2" />
+                  <span className="relative z-10 text-lg sm:text-xl font-bold text-yellow-900 pointer-events-none">Facebook</span>
+                  <span className="relative z-10 text-xs sm:text-sm text-yellow-700 mt-1 sm:mt-2 text-center pointer-events-none">ShrineSolar</span>
+                </a>
+                <button onClick={() => navigator.clipboard.writeText('09171842499')} className="contact-card-anim w-full max-w-[200px] sm:max-w-none sm:w-48 h-28 sm:h-48 flex flex-col items-center justify-center shadow-lg p-3 sm:p-5 transition-all flex-shrink-0 bg-gradient-to-br from-[#FFF9C4] to-[#FFFFFF] border-4 border-yellow-300 rounded-2xl" onMouseEnter={() => setCursorLabel('Click to copy to Clipboard')} onMouseLeave={() => setCursorLabel(null)} onMouseMove={handleMouseMove}>
+                  <img src="/phonelogo.png" alt="Phone" className="relative z-10 w-8 h-8 sm:w-12 sm:h-12 object-contain pointer-events-none mb-1 sm:mb-2" />
+                  <span className="relative z-10 text-lg sm:text-xl font-bold text-yellow-900 pointer-events-none">Mobile No.</span>
+                  <span className="relative z-10 text-xs sm:text-sm text-yellow-700 mt-1 sm:mt-2 text-center pointer-events-none">09171842499</span>
+                </button>
+                <a href="https://mail.google.com/mail/?view=cm&fs=1&to=Shrinesolar2022@gmail.com" target="_blank" rel="noopener noreferrer" className="contact-card-anim w-full max-w-[200px] sm:max-w-none sm:w-48 h-28 sm:h-48 flex flex-col items-center justify-center shadow-lg p-3 sm:p-5 transition-all flex-shrink-0 bg-gradient-to-br from-[#FFF9C4] to-[#FFFFFF] border-4 border-yellow-300 rounded-2xl" onMouseEnter={() => setCursorLabel('Click to message us in Gmail')} onMouseLeave={() => setCursorLabel(null)} onMouseMove={handleMouseMove}>
+                  <img src="/gmaillogo.png" alt="Gmail" className="relative z-10 w-8 h-8 sm:w-12 sm:h-12 object-contain pointer-events-none mb-1 sm:mb-2" />
+                  <span className="relative z-10 text-lg sm:text-xl font-bold text-yellow-900 pointer-events-none">Gmail</span>
+                  <span className="relative z-10 text-[10px] sm:text-xs text-yellow-700 mt-1 sm:mt-2 text-center break-all pointer-events-none">Shrinesolar2022@gmail.com</span>
+                </a>
+              </div>
             </div>
           </div>
         );
@@ -992,6 +1017,18 @@ export default function ScrollAnimation() {
               ↑ Back to Top
             </button>
           )}
+        </div>
+      )}
+      {/* Global Custom Cursor Label */}
+      {cursorLabel && (
+        <div 
+          className="fixed pointer-events-none z-[9999] bg-yellow-100 border-2 border-yellow-400 text-yellow-900 px-3 py-1.5 rounded-full text-sm font-semibold shadow-xl whitespace-nowrap transition-opacity duration-200"
+          style={{ 
+            left: cursorPos.x + 15, 
+            top: cursorPos.y + 15
+          }}
+        >
+          {cursorLabel}
         </div>
       )}
     </div>
