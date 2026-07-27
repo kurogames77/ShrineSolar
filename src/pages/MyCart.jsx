@@ -174,27 +174,27 @@ export default function MyCart() {
         <div className="w-full min-h-screen bg-[#a8a8a8] flex flex-col items-center pt-24">
             {/* Navbar copied from landing page */}
             <nav
-                className="fixed top-0 left-0 w-full z-40 bg-black/80 backdrop-blur-md shadow-lg border-b border-white/10"
+                className="fixed top-0 left-0 w-full z-40 bg-white/90 backdrop-blur-md shadow-lg border-b border-gray-200"
                 style={{ opacity: 1, pointerEvents: 'auto' }}
             >
                 <div className="flex items-center justify-center sm:justify-between w-full" style={{ paddingLeft: '40px', paddingRight: '40px', paddingTop: '20px', paddingBottom: '20px' }}>
-                    <img src="/logo.png" alt="Shrine Solar Logo" className="hidden sm:block h-9 sm:h-12 w-auto cursor-pointer" onClick={() => navigate('/')} style={{ filter: 'drop-shadow(0 0 8px rgba(255,200,0,0.9)) drop-shadow(0 0 16px rgba(255,180,0,0.5))' }} />
+                    <img src="/logo.png" alt="Shrine Solar Logo" className="hidden sm:block h-9 sm:h-12 w-auto cursor-pointer" onClick={() => navigate('/')} style={{ filter: 'drop-shadow(0 0 8px rgba(255,200,0,0.5))' }} />
                     <div style={{ display: 'flex', alignItems: 'center', gap: '32px' }}>
-                        <button onClick={() => navigate('/')} className="relative animate-fade-in text-white font-bold tracking-wide transition-colors hover:text-gray-200 text-xs sm:text-base group" style={{ textShadow: '0 2px 10px rgba(0,0,0,1), 0 1px 4px rgba(0,0,0,0.8)', animationDelay: '0.1s' }}>
+                        <button onClick={() => navigate('/')} className="relative animate-fade-in text-gray-800 font-bold tracking-wide transition-colors hover:text-black text-xs sm:text-base group" style={{ animationDelay: '0.1s' }}>
                             Home
-                            <span className="absolute left-0 -bottom-1 h-[2px] bg-yellow-400 transition-all duration-300 w-0 group-hover:w-full"></span>
+                            <span className="absolute left-0 -bottom-1 h-[2px] bg-yellow-500 transition-all duration-300 w-0 group-hover:w-full"></span>
                         </button>
-                        <button onClick={() => navigate('/')} className="relative animate-fade-in text-white font-bold tracking-wide transition-colors hover:text-gray-200 text-xs sm:text-base group" style={{ textShadow: '0 2px 10px rgba(0,0,0,1), 0 1px 4px rgba(0,0,0,0.8)', animationDelay: '0.2s' }}>
+                        <button onClick={() => navigate('/')} className="relative animate-fade-in text-gray-800 font-bold tracking-wide transition-colors hover:text-black text-xs sm:text-base group" style={{ animationDelay: '0.2s' }}>
                             Shop
-                            <span className="absolute left-0 -bottom-1 h-[2px] bg-yellow-400 transition-all duration-300 w-0 group-hover:w-full"></span>
+                            <span className="absolute left-0 -bottom-1 h-[2px] bg-yellow-500 transition-all duration-300 w-0 group-hover:w-full"></span>
                         </button>
-                        <button onClick={() => navigate('/my-cart')} className="relative animate-fade-in text-white font-bold tracking-wide transition-colors hover:text-gray-200 text-xs sm:text-base group" style={{ textShadow: '0 2px 10px rgba(0,0,0,1), 0 1px 4px rgba(0,0,0,0.8)', animationDelay: '0.3s' }}>
+                        <button onClick={() => navigate('/my-cart')} className="relative animate-fade-in text-gray-800 font-bold tracking-wide transition-colors hover:text-black text-xs sm:text-base group" style={{ animationDelay: '0.3s' }}>
                             My Carts
-                            <span className="absolute left-0 -bottom-1 h-[2px] bg-yellow-400 transition-all duration-300 w-full"></span>
+                            <span className="absolute left-0 -bottom-1 h-[2px] bg-yellow-500 transition-all duration-300 w-full"></span>
                         </button>
-                        <button onClick={() => navigate('/')} className="relative animate-fade-in text-white font-bold tracking-wide transition-colors hover:text-gray-200 text-xs sm:text-base group" style={{ textShadow: '0 2px 10px rgba(0,0,0,1), 0 1px 4px rgba(0,0,0,0.8)', animationDelay: '0.4s' }}>
+                        <button onClick={() => navigate('/')} className="relative animate-fade-in text-gray-800 font-bold tracking-wide transition-colors hover:text-black text-xs sm:text-base group" style={{ animationDelay: '0.4s' }}>
                             Inquiry
-                            <span className="absolute left-0 -bottom-1 h-[2px] bg-yellow-400 transition-all duration-300 w-0 group-hover:w-full"></span>
+                            <span className="absolute left-0 -bottom-1 h-[2px] bg-yellow-500 transition-all duration-300 w-0 group-hover:w-full"></span>
                         </button>
                     </div>
                 </div>
