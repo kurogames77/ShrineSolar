@@ -190,7 +190,7 @@ body {
 /* Mobile responsive: stack 3D section vertically */
 @media (max-width: 768px) {
   .solar3d-container {
-    flex-direction: column !important;
+    flex-direction: column-reverse !important; /* Put image below text */
     gap: 1.5rem !important;
     padding: 1rem !important;
   }
@@ -199,13 +199,14 @@ body {
     width: 100% !important;
     height: 280px !important;
   }
-  .solar3d-rotating-card {
+  .solar3d-rotating-card-wrapper {
     flex: none !important;
     width: 100% !important;
   }
-  .solar3d-rotating-card > div {
+  .solar3d-glass-card {
     padding: 1.5rem !important;
   }
+
 }
 
 
