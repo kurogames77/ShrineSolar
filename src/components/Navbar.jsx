@@ -23,14 +23,14 @@ export default function Navbar({ isShopOpen, setIsShopOpen, isInquiryOpen, setIs
                 <img 
                     src="/logo.png" 
                     alt="Shrine Solar Logo" 
-                    className="hidden sm:block h-9 sm:h-12 w-auto cursor-pointer" 
+                    className="hidden sm:block h-9 sm:h-10 w-auto cursor-pointer" 
                     onClick={() => handleNavigation('/')} 
                     style={{ filter: 'drop-shadow(0 0 8px rgba(255,200,0,0.9)) drop-shadow(0 0 16px rgba(255,180,0,0.5))' }} 
                 />
                 <div style={{ display: 'flex', alignItems: 'center', gap: '32px' }}>
                     <button 
                         onClick={() => handleNavigation('/')} 
-                        className="relative animate-fade-in text-white font-bold tracking-wide transition-colors hover:text-gray-200 text-xs sm:text-base group" 
+                        className="relative animate-fade-in text-white font-bold tracking-wide transition-colors hover:text-gray-200 text-xs sm:text-sm group" 
                         style={{ textShadow: '0 2px 10px rgba(0,0,0,1), 0 1px 4px rgba(0,0,0,0.8)', animationDelay: '0.1s' }}
                     >
                         Home
@@ -38,7 +38,7 @@ export default function Navbar({ isShopOpen, setIsShopOpen, isInquiryOpen, setIs
                     </button>
                     <button 
                         onClick={() => { setIsInquiryOpen(false); setIsShopOpen(true); }} 
-                        className="relative animate-fade-in text-white font-bold tracking-wide transition-colors hover:text-gray-200 text-xs sm:text-base group" 
+                        className="relative animate-fade-in text-white font-bold tracking-wide transition-colors hover:text-gray-200 text-xs sm:text-sm group" 
                         style={{ textShadow: '0 2px 10px rgba(0,0,0,1), 0 1px 4px rgba(0,0,0,0.8)', animationDelay: '0.2s' }}
                     >
                         Shop
@@ -46,7 +46,7 @@ export default function Navbar({ isShopOpen, setIsShopOpen, isInquiryOpen, setIs
                     </button>
                     <button 
                         onClick={() => handleNavigation('/my-cart')} 
-                        className="relative animate-fade-in text-white font-bold tracking-wide transition-colors hover:text-gray-200 text-xs sm:text-base group" 
+                        className="relative animate-fade-in text-white font-bold tracking-wide transition-colors hover:text-gray-200 text-xs sm:text-sm group" 
                         style={{ textShadow: '0 2px 10px rgba(0,0,0,1), 0 1px 4px rgba(0,0,0,0.8)', animationDelay: '0.3s' }}
                     >
                         My Carts
@@ -54,7 +54,7 @@ export default function Navbar({ isShopOpen, setIsShopOpen, isInquiryOpen, setIs
                     </button>
                     <button 
                         onClick={() => { setIsShopOpen(false); setIsInquiryOpen(true); }} 
-                        className="relative animate-fade-in text-white font-bold tracking-wide transition-colors hover:text-gray-200 text-xs sm:text-base group" 
+                        className="relative animate-fade-in text-white font-bold tracking-wide transition-colors hover:text-gray-200 text-xs sm:text-sm group" 
                         style={{ textShadow: '0 2px 10px rgba(0,0,0,1), 0 1px 4px rgba(0,0,0,0.8)', animationDelay: '0.4s' }}
                     >
                         Inquiry
