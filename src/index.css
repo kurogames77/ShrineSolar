@@ -187,6 +187,12 @@ body {
   50% { opacity: 0.4; transform: scale(0.8); }
 }
 
+@keyframes floating {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-15px); }
+  100% { transform: translateY(0px); }
+}
+
 /* Mobile responsive: stack 3D section vertically */
 @media (max-width: 768px) {
   .solar3d-container {

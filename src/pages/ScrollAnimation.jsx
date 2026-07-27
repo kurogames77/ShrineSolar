@@ -344,6 +344,7 @@ export default function ScrollAnimation() {
                       height: '100%',
                       objectFit: 'contain',
                       borderRadius: '20px',
+                      animation: 'floating 4s ease-in-out infinite',
                     }}
                   />
                 ) : (
