@@ -323,7 +323,6 @@ export default function ScrollAnimation() {
               }}
               className="solar3d-container"
             >
-              {/* 3D Viewer - Left Side */}
               <div
                 className="solar3d-viewer"
                 style={{
@@ -335,7 +334,13 @@ export default function ScrollAnimation() {
                   animation: opacity >= 0.9 ? 'fadeSlideInLeft 0.8s ease-out both' : 'none',
                 }}
               >
-                <SolarPanel3D />
+                {/* 
+                  Only mount WebGL when nearby to save mobile GPU memory & prevent context loss.
+                  We mount at 0.15 (well before 0.22 fade-in) so it has time to compile shaders without stuttering.
+                */}
+                {scrollProgress > 0.15 && scrollProgress < 0.50 && (
+                  <SolarPanel3D />
+                )}
               </div>
 
               {/* Info Card - Right Side */}
