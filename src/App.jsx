@@ -208,7 +208,7 @@ function App() {
         )}
 
         {/* Main Content Area */}
-        <main className="flex-grow flex flex-col w-full" style={{ paddingTop: !isHome ? '100px' : '0' }}>
+        <main className="flex-grow flex flex-col w-full" style={{ paddingTop: !isHome ? '64px' : '0' }}>
           <Routes>
             <Route path="/" element={<ScrollAnimation />} />
             <Route path="/solar-panel" element={<SolarPanel />} />
