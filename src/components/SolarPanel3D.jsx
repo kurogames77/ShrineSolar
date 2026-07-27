@@ -27,7 +27,7 @@ class ThreeDErrorBoundary extends Component {
           borderRadius: '20px',
         }}>
           <img
-            src="/solar-panel-fallback.webp"
+            src="/solar-panel-fallback.png"
             alt="Solar Panel"
             style={{
               width: '100%',
