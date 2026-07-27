@@ -23,6 +23,7 @@ export default function ScrollAnimation() {
   const navigate = useNavigate();
   const [cursorLabel, setCursorLabel] = useState(null);
   const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
+  const [phoneCopied, setPhoneCopied] = useState(false);
 
   const handleMouseMove = (e) => {
     setCursorPos({ x: e.clientX, y: e.clientY });
@@ -935,10 +936,15 @@ export default function ScrollAnimation() {
                   <span className="relative z-10 text-base sm:text-lg font-bold text-yellow-900 pointer-events-none">Facebook</span>
                   <span className="relative z-10 text-[10px] sm:text-xs text-yellow-700 mt-1 text-center pointer-events-none">ShrineSolar</span>
                 </a>
-                <button onClick={() => navigator.clipboard.writeText('09171842499')} className="contact-card-anim w-full max-w-[150px] sm:max-w-none sm:w-40 h-20 sm:h-32 flex flex-col items-center justify-center shadow-lg p-2 sm:p-4 transition-all flex-shrink-0 bg-gradient-to-br from-[#FFF9C4] to-[#FFFFFF] border-4 border-yellow-300 rounded-2xl" onMouseEnter={() => setCursorLabel('Click to copy to Clipboard')} onMouseLeave={() => setCursorLabel(null)} onMouseMove={handleMouseMove}>
-                  <img src="/phonelogo.png" alt="Phone" className="relative z-10 w-6 h-6 sm:w-10 sm:h-10 object-contain pointer-events-none mb-1" />
-                  <span className="relative z-10 text-base sm:text-lg font-bold text-yellow-900 pointer-events-none">Mobile No.</span>
+                <button onClick={() => { navigator.clipboard.writeText('09171842499'); setPhoneCopied(true); }} className="contact-card-anim w-full max-w-[150px] sm:max-w-none sm:w-40 h-20 sm:h-32 flex flex-col items-center justify-center shadow-lg p-2 sm:p-4 transition-all flex-shrink-0 bg-gradient-to-br from-[#FFF9C4] to-[#FFFFFF] border-4 border-yellow-300 rounded-2xl" onMouseEnter={() => setCursorLabel('Click to copy to Clipboard')} onMouseLeave={() => setCursorLabel(null)} onMouseMove={handleMouseMove}>
+                  <img src="/phonelogo.png" alt="Phone" className="relative z-10 w-8 h-8 sm:w-12 sm:h-12 object-contain pointer-events-none mb-1 sm:mb-2" />
+                  <span className="relative z-10 text-sm sm:text-lg font-bold text-yellow-900 pointer-events-none">Mobile No.</span>
                   <span className="relative z-10 text-[10px] sm:text-xs text-yellow-700 mt-1 text-center pointer-events-none">09171842499</span>
+                  {phoneCopied && (
+                    <span className="relative z-10 text-[8px] sm:text-[10px] text-green-600 font-bold mt-1 text-center pointer-events-none animate-fade-in">
+                      Copied to Clipboard
+                    </span>
+                  )}
                 </button>
                 <a href="https://mail.google.com/mail/?view=cm&fs=1&to=Shrinesolar2022@gmail.com" target="_blank" rel="noopener noreferrer" className="contact-card-anim w-full max-w-[150px] sm:max-w-none sm:w-40 h-20 sm:h-32 flex flex-col items-center justify-center shadow-lg p-2 sm:p-4 transition-all flex-shrink-0 bg-gradient-to-br from-[#FFF9C4] to-[#FFFFFF] border-4 border-yellow-300 rounded-2xl" onMouseEnter={() => setCursorLabel('Click to message us in Gmail')} onMouseLeave={() => setCursorLabel(null)} onMouseMove={handleMouseMove}>
                   <img src="/gmaillogo.png" alt="Gmail" className="relative z-10 w-6 h-6 sm:w-10 sm:h-10 object-contain pointer-events-none mb-1" />
