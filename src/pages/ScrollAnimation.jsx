@@ -843,7 +843,6 @@ export default function ScrollAnimation() {
 
 
                 </div>
-                </div>
               </div>
             </div>
           </div>
