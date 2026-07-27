@@ -208,7 +208,7 @@ function App() {
         )}
 
         {/* Main Content Area */}
-        <main className={`flex-grow flex flex-col w-full ${!isHome ? 'pt-[90px]' : ''}`}>
+        <main className={`flex-grow flex flex-col w-full ${!isHome ? 'pt-20' : ''}`}>
           <Routes>
             <Route path="/" element={<ScrollAnimation />} />
             <Route path="/solar-panel" element={<SolarPanel />} />
