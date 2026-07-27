@@ -334,12 +334,25 @@ export default function ScrollAnimation() {
                   animation: opacity >= 0.9 ? 'fadeSlideInLeft 0.8s ease-out both' : 'none',
                 }}
               >
-                {/* 
-                  Only mount WebGL when nearby to save mobile GPU memory & prevent context loss.
-                  We mount at 0.15 (well before 0.22 fade-in) so it has time to compile shaders without stuttering.
-                */}
-                {scrollProgress > 0.15 && scrollProgress < 0.50 && (
-                  <SolarPanel3D />
+                {isMobile ? (
+                  /* Static transparent image on mobile */
+                  <img
+                    src="/solar-panel-fallback.png"
+                    alt="Solar Panel"
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'contain',
+                      borderRadius: '20px',
+                    }}
+                  />
+                ) : (
+                  /* 
+                    Desktop only: Mount WebGL when nearby to save memory & prevent context loss.
+                  */
+                  scrollProgress > 0.15 && scrollProgress < 0.50 && (
+                    <SolarPanel3D />
+                  )
                 )}
               </div>
 
