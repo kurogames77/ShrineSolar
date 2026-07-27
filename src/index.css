@@ -311,29 +311,39 @@ body {
 @media (max-width: 768px) {
   .consultation-container {
     flex-direction: column !important;
-    gap: 1.5rem !important;
-    padding: 1rem !important;
+    gap: 1rem !important;
+    padding: 0.75rem !important;
+    overflow-y: auto;
+    max-height: 100vh;
   }
   .card-3d-wrapper {
     flex: none !important;
     width: 100% !important;
-    height: 300px !important;
+    height: 200px !important;
   }
   .card-3d {
-    width: 250px;
-    height: 180px;
+    width: 220px;
+    height: 160px;
   }
   .card-3d div {
-    width: 120px;
-    height: 150px;
-    --translate-z: 130px;
+    width: 100px;
+    height: 130px;
+    --translate-z: 110px;
   }
   .consultation-glass-card {
     flex: none !important;
     width: 100% !important;
   }
   .consultation-glass-card > div {
-    padding: 1.5rem !important;
+    padding: 1rem !important;
+  }
+  .consultation-glass-card h2 {
+    font-size: 1.2rem !important;
+    margin-bottom: 0.75rem !important;
+  }
+  .consultation-glass-card p {
+    font-size: 0.8rem !important;
+    line-height: 1.6 !important;
   }
 }
 
@@ -393,18 +403,28 @@ body {
 @media (max-width: 768px) {
   .highqual-container {
     flex-direction: column !important;
-    gap: 1.5rem !important;
-    padding: 1rem !important;
+    gap: 1rem !important;
+    padding: 0.75rem !important;
+    overflow-y: auto;
+    max-height: 100vh;
   }
   .slideshow-card {
     width: 100% !important;
-    height: 220px !important;
+    height: 180px !important;
   }
   .highqual-glass-card {
     flex: none !important;
     width: 100% !important;
   }
   .highqual-glass-card > div {
-    padding: 1.5rem !important;
+    padding: 1rem !important;
+  }
+  .highqual-glass-card h2 {
+    font-size: 1.2rem !important;
+    margin-bottom: 0.75rem !important;
+  }
+  .highqual-glass-card p {
+    font-size: 0.8rem !important;
+    line-height: 1.6 !important;
   }
 }

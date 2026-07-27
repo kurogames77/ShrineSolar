@@ -812,9 +812,10 @@ export default function ScrollAnimation() {
         <div
           style={{
             position: 'fixed',
-            bottom: '40px',
-            left: '50%',
-            transform: 'translateX(-50%)',
+            bottom: '24px',
+            ...(isMobile
+              ? { right: '20px', left: 'auto', transform: 'none' }
+              : { left: '50%', transform: 'translateX(-50%)' }),
             zIndex: 9999,
           }}
         >
