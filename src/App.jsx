@@ -57,6 +57,14 @@ function App() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Scroll to top on page refresh
+  useEffect(() => {
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+    window.scrollTo(0, 0);
+  }, []);
+
   // Reset Facebook view when leaving home
   useEffect(() => {
     if (!isHome) { setShowFacebook(false); setHeroExiting(false); }
