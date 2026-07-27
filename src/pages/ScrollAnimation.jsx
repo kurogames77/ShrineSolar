@@ -335,21 +335,7 @@ export default function ScrollAnimation() {
                   animation: opacity >= 0.9 ? 'fadeSlideInLeft 0.8s ease-out both' : 'none',
                 }}
               >
-                {isMobile ? (
-                  /* Static image on mobile — avoids WebGL GPU conflict with scroll canvas */
-                  <img
-                    src="/TrinaSolarPannel.jpg"
-                    alt="Solar Panel"
-                    style={{
-                      width: '100%',
-                      height: '100%',
-                      objectFit: 'cover',
-                      borderRadius: '20px',
-                    }}
-                  />
-                ) : (
-                  <SolarPanel3D />
-                )}
+                <SolarPanel3D />
               </div>
 
               {/* Info Card - Right Side */}
