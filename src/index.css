@@ -190,7 +190,7 @@ body {
 /* Mobile responsive: stack 3D section vertically */
 @media (max-width: 768px) {
   .solar3d-container {
-    flex-direction: column-reverse !important; /* Put image below text */
+    flex-direction: column !important;
     gap: 1.5rem !important;
     padding: 1rem !important;
   }

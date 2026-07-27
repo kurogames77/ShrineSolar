@@ -450,7 +450,7 @@ export default function ScrollAnimation() {
                       letterSpacing: '0.02em',
                     }}
                   >
-                    Imagine opening your electricity bill and actually smiling. With solar power, you stop renting energy from the grid and start owning it. Every ray of sunlight that hits your roof becomes money saved instead of money spent. Homes and businesses across Dapitan City are already cutting their power costs dramatically, and yours could be next.
+                    Imagine opening your electricity bill and actually smiling. With solar power, you stop renting energy from the grid and start owning it. Homes and businesses across Dapitan City are already cutting their power costs dramatically, and yours could be next.
                   </p>
 
                 </div>
