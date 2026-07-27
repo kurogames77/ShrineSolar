@@ -6,6 +6,7 @@ import Accessories from './pages/Accessories'
 import MyCart from './pages/MyCart'
 import CinematicIntro from './pages/CinematicIntro'
 import ScrollAnimation from './pages/ScrollAnimation'
+import Navbar from './components/Navbar'
 import './App.css'
 
 function App() {
@@ -110,35 +111,13 @@ function App() {
       )}
 
       <div className="min-h-screen bg-[#a8a8a8] flex flex-col">
-        {/* Cinematic Navbar */}
-        {isHome && (
-          <nav
-            className="fixed top-0 left-0 w-full z-40"
-            style={{ opacity: 1, pointerEvents: 'auto' }}
-          >
-            <div className="flex items-center justify-center sm:justify-between w-full" style={{ paddingLeft: '40px', paddingRight: '40px', paddingTop: '20px', paddingBottom: '20px' }}>
-              <img src="/logo.png" alt="Shrine Solar Logo" className="hidden sm:block h-9 sm:h-12 w-auto" style={{ filter: 'drop-shadow(0 0 8px rgba(255,200,0,0.9)) drop-shadow(0 0 16px rgba(255,180,0,0.5))' }} />
-              <div style={{ display: 'flex', alignItems: 'center', gap: '32px' }}>
-                <button onClick={() => navigate('/')} className="relative animate-fade-in text-white font-bold tracking-wide transition-colors hover:text-gray-200 text-xs sm:text-base group" style={{ textShadow: '0 2px 10px rgba(0,0,0,1), 0 1px 4px rgba(0,0,0,0.8)', animationDelay: '0.1s' }}>
-                  Home
-                  <span className={`absolute left-0 -bottom-1 h-[2px] bg-yellow-400 transition-all duration-300 ${!isShopOpen && !isInquiryOpen && location.pathname === '/' ? 'w-full' : 'w-0 group-hover:w-full'}`}></span>
-                </button>
-                <button onClick={() => setIsShopOpen(true)} className="relative animate-fade-in text-white font-bold tracking-wide transition-colors hover:text-gray-200 text-xs sm:text-base group" style={{ textShadow: '0 2px 10px rgba(0,0,0,1), 0 1px 4px rgba(0,0,0,0.8)', animationDelay: '0.2s' }}>
-                  Shop
-                  <span className={`absolute left-0 -bottom-1 h-[2px] bg-yellow-400 transition-all duration-300 ${isShopOpen ? 'w-full' : 'w-0 group-hover:w-full'}`}></span>
-                </button>
-                <button onClick={() => navigate('/my-cart')} className="relative animate-fade-in text-white font-bold tracking-wide transition-colors hover:text-gray-200 text-xs sm:text-base group" style={{ textShadow: '0 2px 10px rgba(0,0,0,1), 0 1px 4px rgba(0,0,0,0.8)', animationDelay: '0.3s' }}>
-                  My Carts
-                  <span className={`absolute left-0 -bottom-1 h-[2px] bg-yellow-400 transition-all duration-300 ${location.pathname === '/my-cart' ? 'w-full' : 'w-0 group-hover:w-full'}`}></span>
-                </button>
-                <button onClick={() => setIsInquiryOpen(true)} className="relative animate-fade-in text-white font-bold tracking-wide transition-colors hover:text-gray-200 text-xs sm:text-base group" style={{ textShadow: '0 2px 10px rgba(0,0,0,1), 0 1px 4px rgba(0,0,0,0.8)', animationDelay: '0.4s' }}>
-                  Inquiry
-                  <span className={`absolute left-0 -bottom-1 h-[2px] bg-yellow-400 transition-all duration-300 ${isInquiryOpen ? 'w-full' : 'w-0 group-hover:w-full'}`}></span>
-                </button>
-              </div>
-            </div>
-          </nav>
-        )}
+        {/* Global Navbar */}
+        <Navbar 
+          isShopOpen={isShopOpen} 
+          setIsShopOpen={setIsShopOpen} 
+          isInquiryOpen={isInquiryOpen} 
+          setIsInquiryOpen={setIsInquiryOpen} 
+        />
 
         {/* Mobile-only icon below navbar — hidden when Facebook embed is showing */}
         {isHome && !showFacebook && (
@@ -229,7 +208,7 @@ function App() {
         )}
 
         {/* Main Content Area */}
-        <main className="flex-grow flex flex-col w-full">
+        <main className={`flex-grow flex flex-col w-full ${!isHome ? 'pt-[90px]' : ''}`}>
           <Routes>
             <Route path="/" element={<ScrollAnimation />} />
             <Route path="/solar-panel" element={<SolarPanel />} />
