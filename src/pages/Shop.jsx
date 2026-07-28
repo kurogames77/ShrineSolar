@@ -46,10 +46,10 @@ export default function Shop() {
 
   return (
     <div className="w-full min-h-screen bg-[#eef2f7] flex flex-col items-center">
-      <div className="w-full flex-grow flex flex-col px-2 sm:px-8 pb-16 items-center" style={{ paddingTop: '100px' }}>
+      <div className="w-full flex-grow flex flex-col sm:px-8 pb-16 items-center" style={{ paddingTop: '100px', paddingLeft: '8px', paddingRight: '8px' }}>
       {/* Header with Search Bar and Filter */}
-      <header className="fixed top-[56px] left-0 right-0 z-30 bg-transparent w-full flex items-center justify-center px-2 sm:px-8 py-4 min-h-[72px]">
-        <div className="w-full max-w-7xl flex items-center justify-between gap-2 sm:gap-0 relative">
+      <header className="fixed top-[56px] left-0 right-0 z-30 bg-transparent w-full flex items-center justify-center sm:px-8 py-3 sm:py-4" style={{ paddingLeft: '8px', paddingRight: '8px' }}>
+        <div className="w-full max-w-7xl flex items-center gap-2 sm:gap-0 relative" style={{ overflow: 'hidden' }}>
 
         {/* Back Button — left */}
         <button
@@ -63,7 +63,7 @@ export default function Shop() {
         </button>
 
         {/* Center Group: Search Bar and Filter */}
-        <div className="flex flex-1 items-center gap-2 sm:gap-3 w-full sm:w-auto sm:max-w-[560px] sm:justify-center sm:absolute sm:left-1/2 sm:-translate-x-1/2">
+        <div className="flex flex-1 items-center gap-2 sm:gap-3 min-w-0 sm:max-w-[560px] sm:justify-center sm:absolute sm:left-1/2 sm:-translate-x-1/2">
           {/* Search Bar */}
           <div
             className="flex items-center flex-1 min-w-0 bg-white rounded-full shadow-md border border-gray-200 gap-2 transition-all duration-200 hover:shadow-lg"
