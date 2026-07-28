@@ -48,12 +48,12 @@ export default function Shop() {
     <div className="w-full min-h-screen bg-[#eef2f7] flex flex-col items-center">
       <div className="w-full flex-grow flex flex-col pt-8 sm:pt-16 px-4 sm:px-8 pb-16 items-center">
       {/* Header with Search Bar and Filter */}
-      <header className="w-full max-w-7xl flex items-center justify-center mb-6 sm:mb-10 px-4 sm:px-8 pt-2 relative min-h-[64px]">
+      <header className="w-full max-w-7xl flex items-center justify-between mb-6 sm:mb-10 px-4 sm:px-8 pt-2 min-h-[64px]">
 
-        {/* Back Button — absolute left */}
+        {/* Back Button — left */}
         <button
             onClick={() => navigate('/')}
-            className="absolute left-4 sm:left-8 text-[#64748b] hover:text-[#1a2332] border-2 border-[#cbd5e1] hover:border-[#94a3b8] hover:bg-white/60 w-12 h-12 rounded-full flex items-center justify-center transition-colors flex-shrink-0"
+            className="text-[#64748b] hover:text-[#1a2332] border-2 border-[#cbd5e1] hover:border-[#94a3b8] hover:bg-white/60 w-12 h-12 rounded-full flex items-center justify-center transition-colors flex-shrink-0"
             title="Go Back"
         >
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 sm:w-6 sm:h-6">
@@ -61,47 +61,50 @@ export default function Shop() {
             </svg>
         </button>
 
-        {/* Search Bar — centered */}
-        <div className="flex items-center w-full max-w-[500px] bg-white rounded-full shadow-md border border-gray-200 px-4 gap-2 transition-all duration-200 hover:shadow-lg">
-          <input
-            type="text"
-            value={searchText}
-            onChange={(e) => setSearchText(e.target.value)}
-            className="flex-1 py-4 text-base text-gray-700 bg-transparent focus:outline-none placeholder-gray-400"
-            placeholder="Search..."
-          />
-          {/* Clear X Button */}
-          {searchText && (
+        {/* Center Group: Search Bar and Filter */}
+        <div className="flex items-center gap-3 w-full max-w-[560px] justify-center absolute left-1/2 -translate-x-1/2">
+          {/* Search Bar */}
+          <div className="flex items-center w-full bg-white rounded-full shadow-md border border-gray-200 px-3 py-1 gap-2 transition-all duration-200 hover:shadow-lg min-h-[50px]">
+            <input
+              type="text"
+              value={searchText}
+              onChange={(e) => setSearchText(e.target.value)}
+              className="flex-1 py-2 pl-4 text-base text-gray-700 bg-transparent focus:outline-none placeholder-gray-400"
+              placeholder="Search..."
+            />
+            {/* Clear X Button */}
+            {searchText && (
+              <button
+                onClick={() => setSearchText('')}
+                className="w-7 h-7 flex items-center justify-center rounded-full text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-colors flex-shrink-0"
+                title="Clear"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            )}
+            {/* Circular Search Icon Button (Smaller & Orange) */}
             <button
-              onClick={() => setSearchText('')}
-              className="w-7 h-7 flex items-center justify-center rounded-full text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-colors flex-shrink-0"
-              title="Clear"
+              className="w-9 h-9 flex-shrink-0 rounded-full bg-orange-500 hover:bg-orange-600 flex items-center justify-center shadow transition-colors"
+              title="Search"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
+              <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 text-white" viewBox="0 0 20 20" fill="currentColor">
+                <path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd" />
               </svg>
             </button>
-          )}
-          {/* Circular Search Icon Button */}
+          </div>
+
+          {/* Filter Button */}
           <button
-            className="w-10 h-10 flex-shrink-0 rounded-full bg-[#e8457a] hover:bg-[#d63a6e] flex items-center justify-center shadow transition-colors"
-            title="Search"
+            className="flex items-center justify-center w-12 h-12 bg-white rounded-full shadow-md border border-gray-200 transition-all duration-150 ease-in-out hover:scale-105 hover:shadow-lg text-gray-500 hover:text-orange-500 focus:outline-none flex-shrink-0"
+            title="Filter"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 text-white" viewBox="0 0 20 20" fill="currentColor">
-              <path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd" />
+            <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
             </svg>
           </button>
         </div>
-
-        {/* Filter Button — absolute right */}
-        <button
-          className="absolute right-4 sm:right-8 flex items-center justify-center w-12 h-12 bg-white rounded-full shadow-md border border-gray-200 transition-all duration-150 ease-in-out hover:scale-105 hover:shadow-lg text-gray-500 hover:text-[#e8457a] focus:outline-none flex-shrink-0"
-          title="Filter"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
-          </svg>
-        </button>
       </header>
 
       {/* Main Content Modal */}
