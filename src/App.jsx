@@ -4,6 +4,7 @@ import SolarPanel from './pages/SolarPanel'
 import Battery from './pages/Battery'
 import Accessories from './pages/Accessories'
 import MyCart from './pages/MyCart'
+import Shop from './pages/Shop'
 import CinematicIntro from './pages/CinematicIntro'
 import ScrollAnimation from './pages/ScrollAnimation'
 import Navbar from './components/Navbar'
@@ -196,6 +197,7 @@ function App() {
             <Route path="/solar-panel" element={<SolarPanel />} />
             <Route path="/battery" element={<Battery />} />
             <Route path="/accessories" element={<Accessories />} />
+            <Route path="/shop" element={<Shop />} />
             <Route path="/my-cart" element={<MyCart />} />
           </Routes>
         </main>
