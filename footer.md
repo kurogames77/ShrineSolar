@@ -9,7 +9,7 @@ This is the standard, responsive light-themed footer component designed for the 
           position: 'relative',
           width: '100%',
           zIndex: 5,
-          background: 'linear-gradient(180deg, #FFF9C4 0%, #FFFFFF 100%)',
+          background: '#ffffff',
           borderTop: '1px solid rgba(255, 215, 0, 0.2)',
         }}
       >

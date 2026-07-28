@@ -207,7 +207,7 @@ export default function MyCart() {
     }, {});
 
     return (
-        <div className="w-full min-h-screen bg-[#eef2f7] flex flex-col items-center">
+        <div className="w-full min-h-screen bg-white flex flex-col items-center">
             {/* Header */}
             <header className="w-full max-w-7xl flex justify-center items-center pt-8 sm:pt-12 pb-4 sm:pb-8 px-4 sm:px-8 relative">
                 {/* Invisible spacer to preserve header height */}
@@ -384,7 +384,7 @@ export default function MyCart() {
                     position: 'relative',
                     width: '100%',
                     zIndex: 5,
-                    background: 'linear-gradient(180deg, #FFF9C4 0%, #FFFFFF 100%)',
+                    background: '#ffffff',
                     borderTop: '1px solid rgba(255, 215, 0, 0.2)',
                     marginTop: '48px',
                 }}
