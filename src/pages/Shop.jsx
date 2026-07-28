@@ -10,6 +10,10 @@ export default function Shop() {
   const [cartItems, setCartItems] = useState([]);
   const [searchText, setSearchText] = useState('');
 
+  const filteredItems = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].filter((item) =>
+    `Product ${item}`.toLowerCase().includes(searchText.toLowerCase())
+  );
+
   useEffect(() => {
     setCartItems(JSON.parse(localStorage.getItem('shrine_cart') || '[]'));
   }, []);
@@ -114,10 +118,15 @@ export default function Shop() {
 
       {/* Main Content */}
       <div className="w-full max-w-7xl flex-grow my-4 sm:my-8">
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4 w-full">
-          {[1, 2].map((item) => (
-            <div
-              key={item}
+        {filteredItems.length === 0 ? (
+          <div className="w-full flex items-center justify-center py-20">
+            <p className="text-gray-500 text-lg">No products found matching "{searchText}"</p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4 w-full">
+            {filteredItems.map((item) => (
+              <div
+                key={item}
               className="group relative bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer border border-white"
               onClick={() => setSelectedProduct(item)}
             >
@@ -166,6 +175,7 @@ export default function Shop() {
             </div>
           ))}
         </div>
+        )}
       </div>
 
       {/* Product Detail Modal */}
