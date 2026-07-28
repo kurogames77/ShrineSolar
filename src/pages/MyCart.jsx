@@ -269,7 +269,7 @@ export default function MyCart() {
                                                     className="w-14 h-14 sm:w-16 sm:h-16 object-cover rounded-xl shadow-sm border border-[#e2e8f0] flex-shrink-0 bg-white"
                                                 />
                                                 {/* Product Details Box */}
-                                                <div className="flex-1 min-w-0 bg-[#f8fafc] border border-[#e2e8f0] rounded-xl p-3 sm:p-4 hover:shadow-sm transition-shadow" style={{ paddingLeft: '1rem', paddingRight: '1rem' }}>
+                                                <div className="flex-1 min-w-0 p-3 sm:p-4">
                                                     <p className="font-semibold text-[#1a2332] text-sm sm:text-base truncate">
                                                         {item.name} <span className="text-[#64748b] font-normal ml-2">x{item.quantity}</span>
                                                     </p>
@@ -277,7 +277,7 @@ export default function MyCart() {
                                                 </div>
                                                 <button
                                                     onClick={() => handleRemoveItem(globalIndex)}
-                                                    className="w-10 h-10 sm:w-12 sm:h-12 bg-red-500 hover:bg-red-600 text-white rounded-full flex items-center justify-center transition-colors flex-shrink-0"
+                                                    className="w-10 h-10 sm:w-12 sm:h-12 bg-red-500 hover:bg-red-600 text-white rounded-xl flex items-center justify-center transition-colors flex-shrink-0"
                                                     title="Remove"
                                                 >
                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5 sm:w-6 sm:h-6">
