@@ -54,7 +54,7 @@ export default function Shop() {
         {/* Back Button — left */}
         <button
             onClick={() => navigate('/')}
-            className="text-[#64748b] hover:text-[#1a2332] border-2 border-[#cbd5e1] hover:border-[#94a3b8] hover:bg-white/60 w-12 h-12 rounded-full flex items-center justify-center transition-colors flex-shrink-0"
+            className="text-[#64748b] hover:text-[#1a2332] border-2 border-[#cbd5e1] hover:border-[#94a3b8] hover:bg-white/60 w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center transition-colors flex-shrink-0"
             title="Go Back"
         >
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 sm:w-6 sm:h-6">
@@ -66,8 +66,8 @@ export default function Shop() {
         <div className="flex flex-1 items-center gap-2 sm:gap-3 w-full sm:w-auto sm:max-w-[560px] sm:justify-center sm:absolute sm:left-1/2 sm:-translate-x-1/2">
           {/* Search Bar */}
           <div
-            className="flex items-center w-full bg-white rounded-full shadow-md border border-gray-200 gap-2 transition-all duration-200 hover:shadow-lg"
-            style={{ paddingLeft: '28px', paddingRight: '8px', paddingTop: '8px', paddingBottom: '8px', minHeight: '56px' }}
+            className="flex items-center flex-1 min-w-0 bg-white rounded-full shadow-md border border-gray-200 gap-2 transition-all duration-200 hover:shadow-lg"
+            style={{ paddingLeft: '16px', paddingRight: '6px', paddingTop: '6px', paddingBottom: '6px', minHeight: '44px' }}
           >
             <input
               type="text"
@@ -101,7 +101,7 @@ export default function Shop() {
 
           {/* Filter Button */}
           <button
-            className="flex items-center justify-center w-11 h-11 bg-white rounded-full shadow-md border border-gray-200 transition-all duration-150 ease-in-out hover:scale-105 hover:shadow-lg text-gray-500 hover:text-yellow-500 focus:outline-none flex-shrink-0"
+            className="flex items-center justify-center w-10 h-10 sm:w-11 sm:h-11 bg-white rounded-full shadow-md border border-gray-200 transition-all duration-150 ease-in-out hover:scale-105 hover:shadow-lg text-gray-500 hover:text-yellow-500 focus:outline-none flex-shrink-0"
             title="Filter"
           >
             <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
