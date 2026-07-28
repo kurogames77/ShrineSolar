@@ -472,7 +472,7 @@ body {
 }
 
 .mycart-input:focus ~ .mycart-user-label,
-.mycart-input:valid ~ .mycart-user-label {
+.mycart-input:not(:placeholder-shown) ~ .mycart-user-label {
   transform: translateY(-50%) scale(0.8);
   background-color: #ffffff;
   padding: 0 0.25em;
