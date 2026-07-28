@@ -48,15 +48,35 @@ export default function Shop() {
       {/* Header */}
       <header className="w-full max-w-7xl flex justify-center items-center mb-8 sm:mb-16 px-2 sm:px-8 relative">
         <h1 className="text-3xl sm:text-5xl font-bold tracking-wider text-center invisible" aria-hidden="true">Shop</h1>
-        <div className="absolute right-2 sm:right-8 flex items-center gap-2">
-          <button
+        <button
             onClick={() => navigate('/')}
-            className="text-gray-700 hover:text-black hover:bg-gray-400 w-12 h-12 sm:w-16 sm:h-16 rounded-full flex items-center justify-center text-2xl sm:text-3xl font-bold transition-colors"
-          >
-            ✕
-          </button>
-        </div>
+            className="absolute left-4 sm:left-8 text-[#64748b] hover:text-[#1a2332] border-2 border-[#cbd5e1] hover:border-[#94a3b8] hover:bg-white/60 w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center transition-colors"
+            title="Go Back"
+        >
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 sm:w-6 sm:h-6">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+            </svg>
+        </button>
       </header>
+
+      {/* Search and Filter */}
+      <div className="w-full max-w-7xl flex justify-center items-center gap-3 px-4 mb-4 sm:mb-8">
+        <div className="relative w-full max-w-md">
+          <input
+            type="text"
+            placeholder="Search products..."
+            className="w-full pl-10 pr-4 py-2 sm:py-3 rounded-full border-2 border-gray-500 bg-white focus:outline-none focus:border-gray-800 transition-colors shadow text-gray-800 font-medium"
+          />
+          <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+        </div>
+        <button className="p-2 sm:p-3 bg-white rounded-full shadow hover:bg-gray-200 transition-colors border-2 border-gray-500 text-gray-700 hover:text-black flex-shrink-0" title="Filter">
+          <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 sm:w-6 sm:h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
+          </svg>
+        </button>
+      </div>
 
       {/* Main Content Modal */}
       <div className="w-full max-w-7xl flex-grow flex items-center justify-center my-4 sm:my-8">
