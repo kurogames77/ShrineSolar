@@ -223,7 +223,16 @@ export default function Shop() {
       {/* Quantity Selection Modal */}
       {quantityModal && (
         <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-[60] p-4" onClick={() => setQuantityModal(null)}>
-          <div className="bg-white rounded-2xl shadow-2xl w-full max-w-sm" style={{ padding: '24px' }} onClick={(e) => e.stopPropagation()}>
+          <div className="bg-white rounded-2xl shadow-2xl w-full max-w-sm relative" style={{ padding: '24px' }} onClick={(e) => e.stopPropagation()}>
+            <button
+              onClick={() => setQuantityModal(null)}
+              className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors bg-gray-100 hover:bg-gray-200 rounded-full w-8 h-8 flex items-center justify-center"
+              title="Close"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
             <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4 text-center">{isInCart(quantityModal) ? 'Update Quantity' : 'Add to Cart'}</h3>
 
             {/* Product Image */}
