@@ -254,7 +254,7 @@ export default function MyCart() {
                         Object.entries(grouped).map(([category, items]) => (
                             <div key={category} className="mb-5 sm:mb-7">
                                 <h3 className="text-lg sm:text-xl font-semibold text-[#1a2332] mb-3 sm:mb-4 border-b border-[#e2e8f0] pb-2">{category}</h3>
-                                <div className="flex flex-col gap-2.5 sm:gap-3">
+                                <div className="flex flex-col gap-2.5 sm:gap-3 px-3 sm:px-5">
                                     {items.map((item, idx) => {
                                         const globalIndex = cartItems.indexOf(item);
                                         return (
@@ -284,7 +284,7 @@ export default function MyCart() {
                 {/* Right: Customer Info Form */}
                 <div className="w-full mx-auto lg:mx-0 max-w-[550px] bg-white border border-[#e2e8f0] rounded-2xl px-7 py-6 sm:px-9 sm:py-8 shadow-[0_1px_3px_rgba(0,0,0,0.08)] flex flex-col items-start">
                     <h2 className="text-xl sm:text-2xl font-bold text-[#1a2332] mb-6 sm:mb-8">Customer Information</h2>
-                    <div className="flex flex-col gap-4 sm:gap-5 w-full">
+                    <div className="flex flex-col gap-4 sm:gap-5 w-full px-3 sm:px-5">
                         <input
                             type="text"
                             name="fullname"
