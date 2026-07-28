@@ -350,9 +350,9 @@ export default function MyCart() {
                     {/* Proceed Button */}
                     <button
                         onClick={handleProceed}
-                        className="w-full mt-auto py-4 sm:py-5 bg-[#f59e0b] hover:bg-[#d97706] text-white font-bold text-lg sm:text-xl rounded-xl transition-colors shadow-[0_2px_8px_rgba(245,158,11,0.3)] hover:shadow-[0_4px_12px_rgba(245,158,11,0.4)] flex items-center justify-center gap-3"
+                        className="fb-button type1"
                     >
-                        Proceed to Facebook
+                        <span className="fb-btn-txt">Proceed to Facebook</span>
                     </button>
                 </div>
             </div>

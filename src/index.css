@@ -479,3 +479,53 @@ body {
   color: #f59e0b;
   font-weight: 600;
 }
+
+/* Proceed to Facebook Uiverse Button */
+.fb-button {
+  height: 60px;
+  width: 100%;
+  position: relative;
+  background-color: transparent;
+  cursor: pointer;
+  border: 2px solid #f59e0b;
+  overflow: hidden;
+  border-radius: 12px;
+  color: #f59e0b;
+  transition: all 0.5s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: auto;
+}
+
+.fb-btn-txt {
+  z-index: 1;
+  font-weight: 800;
+  letter-spacing: 2px;
+  font-size: 1.125rem;
+}
+
+.fb-button.type1::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  transition: all 0.5s ease-in-out;
+  background-color: #f59e0b;
+  border-radius: 12px;
+  visibility: hidden;
+  height: 10px;
+  width: 10px;
+  z-index: -1;
+}
+
+.fb-button:hover {
+  box-shadow: 1px 1px 200px #f59e0b;
+  color: #fff;
+  border: none;
+}
+
+.fb-button.type1:hover::after {
+  visibility: visible;
+  transform: scale(100) translateX(2px);
+}
