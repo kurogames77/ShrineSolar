@@ -46,7 +46,7 @@ export default function Shop() {
 
   return (
     <div className="w-full min-h-screen bg-[#eef2f7] flex flex-col items-center">
-      <div className="w-full flex-grow flex flex-col px-4 sm:px-8 pb-16 items-center" style={{ paddingTop: '180px' }}>
+      <div className="w-full flex-grow flex flex-col px-4 sm:px-8 pb-16 items-center" style={{ paddingTop: '140px' }}>
       {/* Header with Search Bar and Filter */}
       <header className="fixed top-[56px] left-0 right-0 z-30 bg-transparent w-full flex items-center justify-center px-4 sm:px-8 py-4 min-h-[72px]">
         <div className="w-full max-w-7xl flex items-center justify-between relative">
