@@ -227,9 +227,10 @@ export default function MyCart() {
             {/* Main Content */}
             <div className="flex-grow w-full max-w-7xl px-4 sm:px-8 pb-8 pt-6 sm:pt-10 flex flex-col lg:flex-row gap-6 sm:gap-10 justify-center items-start">
                 {/* Left: Cart Items */}
-                <div className="w-full mx-auto lg:mx-0 max-w-[550px] bg-white border border-[#e2e8f0] rounded-2xl p-5 sm:p-7 shadow-[0_1px_3px_rgba(0,0,0,0.08)] overflow-y-auto max-h-[60vh] lg:max-h-[70vh]">
-                    <div className="flex items-center justify-center mb-5 sm:mb-7 relative">
-                        <div className="absolute left-0 flex gap-1 sm:gap-2">
+                <div className="w-full mx-auto lg:mx-0 max-w-[550px] bg-white border border-[#e2e8f0] rounded-2xl p-6 sm:p-8 lg:p-10 shadow-[0_1px_3px_rgba(0,0,0,0.08)] overflow-y-auto max-h-[60vh] lg:max-h-[70vh]">
+                    <div className="flex items-center justify-between mb-6 sm:mb-8 w-full">
+                        <h2 className="text-xl sm:text-2xl font-bold text-[#1a2332] m-0">Cart Items</h2>
+                        <div className="flex gap-2">
                             <button onClick={undo} disabled={past.length === 0} className="p-1.5 sm:p-2 text-[#1a2332] hover:bg-[#eef2f7] rounded-lg disabled:opacity-30 transition-colors cursor-pointer disabled:cursor-default" title="Undo">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5 sm:w-6 sm:h-6">
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3" />
@@ -241,7 +242,6 @@ export default function MyCart() {
                                 </svg>
                             </button>
                         </div>
-                        <h2 className="text-xl sm:text-2xl font-bold text-[#1a2332] text-center m-0">Cart Items</h2>
                     </div>
                     {cartItems.length === 0 ? (
                         <div className="flex flex-col items-center justify-center h-48 text-[#94a3b8]">
@@ -282,9 +282,9 @@ export default function MyCart() {
                 </div>
 
                 {/* Right: Customer Info Form */}
-                <div className="w-full mx-auto lg:mx-0 max-w-[550px] bg-white border border-[#e2e8f0] rounded-2xl p-5 sm:p-7 shadow-[0_1px_3px_rgba(0,0,0,0.08)] flex flex-col items-center">
-                    <h2 className="text-xl sm:text-2xl font-bold text-[#1a2332] mb-5 sm:mb-7 text-center">Customer Information</h2>
-                    <div className="flex flex-col gap-4 sm:gap-5 w-full max-w-[400px] mx-auto">
+                <div className="w-full mx-auto lg:mx-0 max-w-[550px] bg-white border border-[#e2e8f0] rounded-2xl p-6 sm:p-8 lg:p-10 shadow-[0_1px_3px_rgba(0,0,0,0.08)] flex flex-col items-start">
+                    <h2 className="text-xl sm:text-2xl font-bold text-[#1a2332] mb-6 sm:mb-8">Customer Information</h2>
+                    <div className="flex flex-col gap-4 sm:gap-5 w-full">
                         <input
                             type="text"
                             name="fullname"
@@ -329,7 +329,7 @@ export default function MyCart() {
                     {/* Proceed Button */}
                     <button
                         onClick={handleProceed}
-                        className="w-full max-w-[400px] mx-auto mt-auto py-4 sm:py-5 bg-[#f59e0b] hover:bg-[#d97706] text-white font-bold text-lg sm:text-xl rounded-xl transition-colors shadow-[0_2px_8px_rgba(245,158,11,0.3)] hover:shadow-[0_4px_12px_rgba(245,158,11,0.4)] flex items-center justify-center gap-3"
+                        className="w-full mt-auto py-4 sm:py-5 bg-[#f59e0b] hover:bg-[#d97706] text-white font-bold text-lg sm:text-xl rounded-xl transition-colors shadow-[0_2px_8px_rgba(245,158,11,0.3)] hover:shadow-[0_4px_12px_rgba(245,158,11,0.4)] flex items-center justify-center gap-3"
                     >
                         Proceed to Facebook
                     </button>
