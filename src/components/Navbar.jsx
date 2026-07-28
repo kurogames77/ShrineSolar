@@ -37,7 +37,7 @@ export default function Navbar() {
     // Transparent on home (hero image shows through), white on all other pages
     const bgClass = isHome
         ? 'bg-transparent'
-        : 'bg-white shadow-md border-b border-gray-200';
+        : 'bg-white shadow-md';
 
     // White text on home (over hero image), dark text on other pages
     const textClass = isHome
