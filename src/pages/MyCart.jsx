@@ -210,11 +210,10 @@ export default function MyCart() {
         <div className="w-full min-h-screen bg-[#eef2f7] flex flex-col items-center">
             {/* Header */}
             <header className="w-full max-w-7xl flex justify-center items-center pt-8 sm:pt-12 pb-4 sm:pb-8 px-4 sm:px-8 relative">
-                <div className="flex items-center gap-3">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8 sm:w-10 sm:h-10 text-[#1a2332]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 100 4 2 2 0 000-4z" />
-                    </svg>
-                    <h1 className="text-3xl sm:text-5xl font-bold text-[#1a2332] tracking-wider">My Cart</h1>
+                {/* Invisible spacer to preserve header height */}
+                <div className="flex items-center gap-3 invisible" aria-hidden="true">
+                    <div className="w-8 h-8 sm:w-10 sm:h-10" />
+                    <div className="text-3xl sm:text-5xl font-bold tracking-wider">My Cart</div>
                 </div>
                 <button
                     onClick={() => navigate(-1)}
