@@ -14,7 +14,7 @@ export default function Shop() {
   }, []);
 
   const openQuantityModal = (item) => {
-    const existing = cartItems.find(c => c.name === `Product ${item}` && c.category === 'Solar Panel');
+    const existing = cartItems.find(c => c.name === `Product ${item}` && c.category === 'Shop');
     setQuantity(existing ? existing.quantity : 1);
     setQuantityModal(item);
   };
@@ -22,11 +22,11 @@ export default function Shop() {
   const confirmAddToCart = () => {
     const item = quantityModal;
     const cart = JSON.parse(localStorage.getItem('shrine_cart') || '[]');
-    const existingIndex = cart.findIndex(c => c.name === `Product ${item}` && c.category === 'Solar Panel');
+    const existingIndex = cart.findIndex(c => c.name === `Product ${item}` && c.category === 'Shop');
     if (existingIndex !== -1) {
       cart[existingIndex].quantity = quantity;
     } else {
-      cart.push({ name: `Product ${item}`, category: 'Solar Panel', price: 0, quantity });
+      cart.push({ name: `Product ${item}`, category: 'Shop', price: 0, quantity });
     }
     localStorage.setItem('shrine_cart', JSON.stringify(cart));
     setCartItems(cart);
@@ -41,13 +41,13 @@ export default function Shop() {
     });
   };
 
-  const isInCart = (item) => cartItems.some(c => c.name === `Product ${item}` && c.category === 'Solar Panel');
+  const isInCart = (item) => cartItems.some(c => c.name === `Product ${item}` && c.category === 'Shop');
 
   return (
     <div className="w-full flex-grow flex flex-col pt-8 sm:pt-16 px-4 sm:px-8 pb-8 items-center">
       {/* Header */}
       <header className="w-full max-w-7xl flex justify-center items-center mb-8 sm:mb-16 px-2 sm:px-8 relative">
-        <h1 className="text-3xl sm:text-5xl font-bold text-black tracking-wider text-center">Solar Panel</h1>
+        <h1 className="text-3xl sm:text-5xl font-bold text-black tracking-wider text-center">Shop</h1>
         <div className="absolute right-2 sm:right-8 flex items-center gap-2">
           <button
             onClick={() => navigate('/my-cart')}
