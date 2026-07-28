@@ -485,20 +485,46 @@ body {
   height: 60px;
   width: 100%;
   position: relative;
-  background-color: transparent;
+  background-color: #f59e0b;
   cursor: pointer;
-  border: 2px solid #f59e0b;
+  border: none;
   overflow: hidden;
   border-radius: 12px;
-  color: #f59e0b;
+  color: #fff;
+  transition: box-shadow 0.5s ease-in-out;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-top: auto;
+  z-index: 1;
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
 }
 
 .fb-btn-txt {
-  font-weight: 800;
-  letter-spacing: 2px;
+  z-index: 2;
+  font-weight: 700;
+  letter-spacing: 1.5px;
   font-size: 1.125rem;
+}
+
+.fb-button::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  transition: transform 0.5s ease-in-out;
+  background-color: #d97706;
+  border-radius: 50%;
+  width: 800px;
+  height: 800px;
+  z-index: -1;
+}
+
+.fb-button:hover::after {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.fb-button:hover {
+  box-shadow: 0 6px 18px rgba(245, 158, 11, 0.5);
 }
