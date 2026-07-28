@@ -253,7 +253,7 @@ export default function MyCart() {
                     ) : (
                         Object.entries(grouped).map(([category, items]) => (
                             <div key={category} className="mb-5 sm:mb-7">
-                                <h3 className="text-lg sm:text-xl font-semibold text-[#1a2332] mb-3 sm:mb-4 border-b border-[#e2e8f0] pb-2">{category}</h3>
+                                <h3 className="text-lg sm:text-xl font-semibold text-[#1a2332] mb-3 sm:mb-4">{category}</h3>
                                 <div className="flex flex-col gap-2.5 sm:gap-3">
                                     {items.map((item, idx) => {
                                         const globalIndex = cartItems.indexOf(item);
