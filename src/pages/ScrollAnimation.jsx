@@ -248,7 +248,7 @@ export default function ScrollAnimation() {
             flexDirection: 'column',
             alignItems: 'center',
             justifyContent: 'center',
-            background: '#a8a8a8',
+            background: '#eef2f7',
           }}
         >
           <div
