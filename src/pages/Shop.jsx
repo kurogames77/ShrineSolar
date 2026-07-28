@@ -47,17 +47,8 @@ export default function Shop() {
     <div className="w-full flex-grow flex flex-col pt-8 sm:pt-16 px-4 sm:px-8 pb-8 items-center">
       {/* Header */}
       <header className="w-full max-w-7xl flex justify-center items-center mb-8 sm:mb-16 px-2 sm:px-8 relative">
-        <h1 className="text-3xl sm:text-5xl font-bold text-black tracking-wider text-center">Shop</h1>
+        <h1 className="text-3xl sm:text-5xl font-bold tracking-wider text-center invisible" aria-hidden="true">Shop</h1>
         <div className="absolute right-2 sm:right-8 flex items-center gap-2">
-          <button
-            onClick={() => navigate('/my-cart')}
-            className="text-gray-700 hover:text-black hover:bg-gray-400 w-12 h-12 sm:w-16 sm:h-16 rounded-full flex items-center justify-center transition-colors"
-            title="My Cart"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 sm:w-8 sm:h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 100 4 2 2 0 000-4z" />
-            </svg>
-          </button>
           <button
             onClick={() => navigate('/')}
             className="text-gray-700 hover:text-black hover:bg-gray-400 w-12 h-12 sm:w-16 sm:h-16 rounded-full flex items-center justify-center text-2xl sm:text-3xl font-bold transition-colors"
@@ -68,9 +59,9 @@ export default function Shop() {
       </header>
 
       {/* Main Content Modal */}
-      <div className="bg-[#a8a8a8] border-4 border-gray-600 rounded-3xl w-full max-w-7xl p-4 sm:p-10 flex-grow shadow-2xl flex items-center justify-center my-4 sm:my-8">
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 sm:gap-12 w-full max-w-5xl">
-          {[1, 2, 3, 4, 5, 6].map((item) => (
+      <div className="w-full max-w-7xl flex-grow flex items-center justify-center my-4 sm:my-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-12 w-full max-w-5xl justify-items-center">
+          {[1].map((item) => (
             <div key={item} className="relative bg-[#909090] border-2 border-gray-500 rounded-2xl sm:rounded-3xl min-h-[200px] sm:min-h-[350px] flex flex-col items-center justify-between p-3 sm:p-6 shadow-lg hover:scale-105 transition-transform">
               {/* Cart Icon & Badge */}
               <div className="absolute top-2 right-2 sm:top-4 sm:right-4 z-10">
