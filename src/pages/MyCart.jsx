@@ -217,10 +217,13 @@ export default function MyCart() {
                     <h1 className="text-3xl sm:text-5xl font-bold text-[#1a2332] tracking-wider">My Cart</h1>
                 </div>
                 <button
-                    onClick={() => navigate('/')}
-                    className="absolute right-4 sm:right-8 text-[#64748b] hover:text-[#1a2332] hover:bg-white/60 w-12 h-12 sm:w-16 sm:h-16 rounded-full flex items-center justify-center text-2xl sm:text-3xl font-bold transition-colors"
+                    onClick={() => navigate(-1)}
+                    className="absolute left-4 sm:left-8 text-[#64748b] hover:text-[#1a2332] border-2 border-[#cbd5e1] hover:border-[#94a3b8] hover:bg-white/60 w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center transition-colors"
+                    title="Go Back"
                 >
-                    ✕
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 sm:w-6 sm:h-6">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+                    </svg>
                 </button>
             </header>
 
