@@ -8,6 +8,7 @@ export default function Shop() {
   const [quantityModal, setQuantityModal] = useState(null);
   const [quantity, setQuantity] = useState(1);
   const [cartItems, setCartItems] = useState([]);
+  const [searchText, setSearchText] = useState('');
 
   useEffect(() => {
     setCartItems(JSON.parse(localStorage.getItem('shrine_cart') || '[]'));
@@ -47,11 +48,12 @@ export default function Shop() {
     <div className="w-full min-h-screen bg-[#eef2f7] flex flex-col items-center">
       <div className="w-full flex-grow flex flex-col pt-8 sm:pt-16 px-4 sm:px-8 pb-16 items-center">
       {/* Header with Search Bar and Filter */}
-      <header className="w-full max-w-7xl flex items-center gap-4 mb-6 sm:mb-10 px-4 sm:px-8 pt-2 relative">
-        {/* Back Button */}
+      <header className="w-full max-w-7xl flex items-center justify-center mb-6 sm:mb-10 px-4 sm:px-8 pt-2 relative min-h-[64px]">
+
+        {/* Back Button — absolute left */}
         <button
             onClick={() => navigate('/')}
-            className="text-[#64748b] hover:text-[#1a2332] border-2 border-[#cbd5e1] hover:border-[#94a3b8] hover:bg-white/60 w-12 h-12 rounded-full flex items-center justify-center transition-colors flex-shrink-0"
+            className="absolute left-4 sm:left-8 text-[#64748b] hover:text-[#1a2332] border-2 border-[#cbd5e1] hover:border-[#94a3b8] hover:bg-white/60 w-12 h-12 rounded-full flex items-center justify-center transition-colors flex-shrink-0"
             title="Go Back"
         >
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 sm:w-6 sm:h-6">
@@ -59,24 +61,41 @@ export default function Shop() {
             </svg>
         </button>
 
-        {/* Search Bar */}
-        <div className="relative flex-1 max-w-[560px] min-h-[60px] bg-white rounded-2xl shadow-md border border-gray-200 flex items-center px-4 gap-3 transition-all duration-150 hover:shadow-lg hover:scale-[1.01]">
-          <svg className="h-5 w-5 text-gray-400 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-            <path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd" />
-          </svg>
+        {/* Search Bar — centered */}
+        <div className="flex items-center w-full max-w-[500px] bg-white rounded-full shadow-md border border-gray-200 px-4 gap-2 transition-all duration-200 hover:shadow-lg">
           <input
             type="text"
-            className="flex-1 py-5 text-base text-gray-700 bg-transparent focus:outline-none placeholder-gray-400"
-            placeholder="Search products..."
+            value={searchText}
+            onChange={(e) => setSearchText(e.target.value)}
+            className="flex-1 py-4 text-base text-gray-700 bg-transparent focus:outline-none placeholder-gray-400"
+            placeholder="Search..."
           />
-          <button className="py-3 px-5 bg-[#5044e4] hover:bg-[#3f35d4] text-white text-sm font-semibold rounded-xl transition-colors flex-shrink-0 focus:outline-none focus:ring-2 focus:ring-[#5044e4] focus:ring-offset-1">
-            Search
+          {/* Clear X Button */}
+          {searchText && (
+            <button
+              onClick={() => setSearchText('')}
+              className="w-7 h-7 flex items-center justify-center rounded-full text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-colors flex-shrink-0"
+              title="Clear"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          )}
+          {/* Circular Search Icon Button */}
+          <button
+            className="w-10 h-10 flex-shrink-0 rounded-full bg-[#e8457a] hover:bg-[#d63a6e] flex items-center justify-center shadow transition-colors"
+            title="Search"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 text-white" viewBox="0 0 20 20" fill="currentColor">
+              <path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd" />
+            </svg>
           </button>
         </div>
 
-        {/* Filter Button */}
+        {/* Filter Button — absolute right */}
         <button
-          className="flex items-center justify-center w-12 h-12 bg-white rounded-2xl shadow-md border border-gray-200 transition-all duration-150 ease-in-out hover:scale-105 hover:shadow-lg text-gray-500 hover:text-[#5044e4] focus:outline-none flex-shrink-0"
+          className="absolute right-4 sm:right-8 flex items-center justify-center w-12 h-12 bg-white rounded-full shadow-md border border-gray-200 transition-all duration-150 ease-in-out hover:scale-105 hover:shadow-lg text-gray-500 hover:text-[#e8457a] focus:outline-none flex-shrink-0"
           title="Filter"
         >
           <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
