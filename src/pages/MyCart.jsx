@@ -262,7 +262,14 @@ export default function MyCart() {
                                         const globalIndex = cartItems.indexOf(item);
                                         return (
                                             <div key={idx} className="flex items-center gap-3 sm:gap-4">
-                                                <div className="flex-1 min-w-0 bg-[#f8fafc] border border-[#e2e8f0] rounded-xl px-4 py-3 sm:px-5 sm:py-4 hover:shadow-sm transition-shadow">
+                                                {/* Product Image */}
+                                                <img 
+                                                    src={item.image || "/apple-touch-icon.png"} 
+                                                    alt={item.name} 
+                                                    className="w-14 h-14 sm:w-16 sm:h-16 object-cover rounded-xl shadow-sm border border-[#e2e8f0] flex-shrink-0 bg-white"
+                                                />
+                                                {/* Product Details Box */}
+                                                <div className="flex-1 min-w-0 bg-[#f8fafc] border border-[#e2e8f0] rounded-xl p-3 sm:p-4 hover:shadow-sm transition-shadow" style={{ paddingLeft: '1rem', paddingRight: '1rem' }}>
                                                     <p className="font-semibold text-[#1a2332] text-sm sm:text-base truncate">
                                                         {item.name} <span className="text-[#64748b] font-normal ml-2">x{item.quantity}</span>
                                                     </p>
