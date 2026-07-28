@@ -46,9 +46,9 @@ export default function Shop() {
 
   return (
     <div className="w-full min-h-screen bg-[#eef2f7] flex flex-col items-center">
-      <div className="w-full flex-grow flex flex-col px-4 sm:px-8 pb-16 items-center" style={{ paddingTop: '100px' }}>
+      <div className="w-full flex-grow flex flex-col pb-16 items-center" style={{ paddingTop: '100px', paddingLeft: '16px', paddingRight: '16px' }}>
       {/* Header with Search Bar and Filter */}
-      <header className="fixed top-[56px] left-0 right-0 z-30 bg-transparent w-full flex items-center justify-center px-4 sm:px-8 py-3 sm:py-4">
+      <header className="fixed top-[56px] left-0 right-0 z-30 bg-transparent w-full flex items-center justify-center py-3 sm:py-4" style={{ paddingLeft: '16px', paddingRight: '16px' }}>
         <div className="w-full max-w-7xl flex items-center gap-2 sm:gap-0 relative">
 
         {/* Back Button — left */}
