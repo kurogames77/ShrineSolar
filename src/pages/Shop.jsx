@@ -112,39 +112,57 @@ export default function Shop() {
         </div>
       </header>
 
-      {/* Main Content Modal */}
-      <div className="w-full max-w-7xl flex-grow flex items-center justify-center my-4 sm:my-8">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-12 w-full max-w-5xl justify-items-center">
+      {/* Main Content */}
+      <div className="w-full max-w-7xl flex-grow my-4 sm:my-8">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4 w-full">
           {[1].map((item) => (
-            <div key={item} className="relative bg-[#909090] border-2 border-gray-500 rounded-2xl sm:rounded-3xl min-h-[200px] sm:min-h-[350px] flex flex-col items-center justify-between p-3 sm:p-6 shadow-lg hover:scale-105 transition-transform">
-              {/* Cart Icon & Badge */}
-              <div className="absolute top-2 right-2 sm:top-4 sm:right-4 z-10">
-                <button
-                  onClick={() => openQuantityModal(item)}
-                  className="w-8 h-8 sm:w-10 sm:h-10 bg-white/80 hover:bg-amber-400 rounded-full flex items-center justify-center shadow-md transition-colors"
-                  title="Add to Cart"
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 sm:w-5 sm:h-5 text-gray-800" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 100 4 2 2 0 000-4z" />
-                  </svg>
-                </button>
-                {isInCart(item) && (
-                  <div className="absolute -top-1 -right-1 bg-white rounded-full">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 sm:w-5 sm:h-5 text-green-600" viewBox="0 0 20 20" fill="currentColor" title="Added to Cart">
-                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+            <div
+              key={item}
+              className="group relative bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer border border-gray-100"
+              onClick={() => setSelectedProduct(item)}
+            >
+              {/* Product Image Area */}
+              <div className="relative w-full aspect-square bg-gray-100 flex items-center justify-center overflow-hidden">
+                <svg xmlns="http://www.w3.org/2000/svg" className="w-16 h-16 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+
+                {/* Cart Icon & Badge — top right */}
+                <div className="absolute top-2 right-2 z-10">
+                  <button
+                    onClick={(e) => { e.stopPropagation(); openQuantityModal(item); }}
+                    className="w-8 h-8 bg-white/90 hover:bg-amber-400 rounded-full flex items-center justify-center shadow-md transition-colors"
+                    title="Add to Cart"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 100 4 2 2 0 000-4z" />
                     </svg>
+                  </button>
+                  {isInCart(item) && (
+                    <div className="absolute -top-1 -right-1 bg-white rounded-full">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 text-green-600" viewBox="0 0 20 20" fill="currentColor" title="Added to Cart">
+                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                      </svg>
+                    </div>
+                  )}
+                </div>
+
+                {/* Orange Hover Overlay with "View Product" */}
+                <div className="absolute inset-0 bg-orange-500/0 group-hover:bg-orange-500/20 transition-all duration-300 flex items-end justify-center">
+                  <div className="w-full bg-orange-500 text-white text-center py-2.5 font-semibold text-sm translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                    View Product
                   </div>
-                )}
+                </div>
               </div>
-              <div className="w-full flex-grow bg-gray-400/50 rounded-lg sm:rounded-xl flex items-center justify-center text-gray-700 font-medium text-sm sm:text-base mb-3 sm:mb-6">
-                Product {item}
+
+              {/* Product Info */}
+              <div className="p-3">
+                <h3 className="text-sm font-medium text-gray-800 leading-tight mb-1 line-clamp-2" style={{ minHeight: '2.5em' }}>
+                  Product {item}
+                </h3>
+                <p className="text-base font-bold text-orange-600 mb-1">₱0.00</p>
+                <p className="text-xs text-gray-400">100 Stocks</p>
               </div>
-              <button
-                onClick={() => setSelectedProduct(item)}
-                className="w-24 sm:w-40 py-2 sm:py-3 bg-[#a8a8a8] border-2 border-gray-600 text-black font-bold text-sm sm:text-lg rounded-full hover:bg-gray-300 transition-colors shadow-md mb-1 sm:mb-2 flex-shrink-0"
-              >
-                View
-              </button>
             </div>
           ))}
         </div>
