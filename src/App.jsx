@@ -98,7 +98,7 @@ function App() {
         </div>
       )}
 
-      <div className={`min-h-screen ${location.pathname === '/my-cart' ? 'bg-[#eef2f7]' : 'bg-[#a8a8a8]'} flex flex-col`}>
+      <div className={`min-h-screen ${location.pathname === '/my-cart' || location.pathname === '/shop' ? 'bg-[#eef2f7]' : 'bg-[#a8a8a8]'} flex flex-col`}>
         {/* Global Navbar */}
         <Navbar />
 
