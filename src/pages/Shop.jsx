@@ -46,10 +46,10 @@ export default function Shop() {
 
   return (
     <div className="w-full min-h-screen bg-[#eef2f7] flex flex-col items-center">
-      <div className="w-full flex-grow flex flex-col sm:px-8 pb-16 items-center" style={{ paddingTop: '100px', paddingLeft: '8px', paddingRight: '8px' }}>
+      <div className="w-full flex-grow flex flex-col px-4 sm:px-8 pb-16 items-center" style={{ paddingTop: '100px' }}>
       {/* Header with Search Bar and Filter */}
-      <header className="fixed top-[56px] left-0 right-0 z-30 bg-transparent w-full flex items-center justify-center sm:px-8 py-3 sm:py-4" style={{ paddingLeft: '8px', paddingRight: '8px' }}>
-        <div className="w-full max-w-7xl flex items-center gap-2 sm:gap-0 relative" style={{ overflow: 'hidden' }}>
+      <header className="fixed top-[56px] left-0 right-0 z-30 bg-transparent w-full flex items-center justify-center px-4 sm:px-8 py-3 sm:py-4">
+        <div className="w-full max-w-7xl flex items-center gap-2 sm:gap-0 relative">
 
         {/* Back Button — left */}
         <button
@@ -66,7 +66,7 @@ export default function Shop() {
         <div className="flex flex-1 items-center gap-2 sm:gap-3 min-w-0 w-full sm:max-w-[560px] sm:justify-center sm:absolute sm:left-1/2 sm:-translate-x-1/2">
           {/* Search Bar */}
           <div
-            className="flex items-center flex-1 min-w-0 bg-white rounded-full shadow-md border border-gray-200 gap-2 transition-all duration-200 hover:shadow-lg"
+            className="flex items-center flex-1 min-w-0 bg-white rounded-full border border-gray-300 gap-2 transition-all duration-200"
             style={{ paddingLeft: '16px', paddingRight: '6px', paddingTop: '6px', paddingBottom: '6px', minHeight: '44px' }}
           >
             <input
@@ -101,7 +101,7 @@ export default function Shop() {
 
           {/* Filter Button */}
           <button
-            className="flex items-center justify-center w-10 h-10 sm:w-11 sm:h-11 bg-white rounded-full shadow-md border border-gray-200 transition-all duration-150 ease-in-out hover:scale-105 hover:shadow-lg text-gray-500 hover:text-yellow-500 focus:outline-none flex-shrink-0"
+            className="flex items-center justify-center w-10 h-10 sm:w-11 sm:h-11 bg-white rounded-full border border-gray-300 transition-all duration-150 ease-in-out hover:scale-105 text-gray-500 hover:text-yellow-500 focus:outline-none flex-shrink-0"
             title="Filter"
           >
             <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
