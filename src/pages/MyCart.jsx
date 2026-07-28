@@ -207,7 +207,7 @@ export default function MyCart() {
     }, {});
 
     return (
-        <div className="w-full min-h-screen bg-white flex flex-col items-center">
+        <div className="w-full min-h-screen bg-[#eef2f7] flex flex-col items-center">
             {/* Header */}
             <header className="w-full max-w-7xl flex justify-center items-center pt-8 sm:pt-12 pb-4 sm:pb-8 px-4 sm:px-8 relative">
                 {/* Invisible spacer to preserve header height */}
