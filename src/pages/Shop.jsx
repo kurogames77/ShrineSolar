@@ -64,12 +64,12 @@ export default function Shop() {
         {/* Center Group: Search Bar and Filter */}
         <div className="flex items-center gap-3 w-full max-w-[560px] justify-center absolute left-1/2 -translate-x-1/2">
           {/* Search Bar */}
-          <div className="flex items-center w-full bg-white rounded-full shadow-md border border-gray-200 px-3 py-1 gap-2 transition-all duration-200 hover:shadow-lg min-h-[50px]">
+          <div className="flex items-center w-full bg-white rounded-full shadow-md border border-gray-200 p-2 pl-6 gap-2 transition-all duration-200 hover:shadow-lg min-h-[56px]">
             <input
               type="text"
               value={searchText}
               onChange={(e) => setSearchText(e.target.value)}
-              className="flex-1 py-2 pl-4 text-base text-gray-700 bg-transparent focus:outline-none placeholder-gray-400"
+              className="flex-1 py-2 text-base text-gray-700 bg-transparent focus:outline-none placeholder-gray-400"
               placeholder="Search..."
             />
             {/* Clear X Button */}
@@ -84,12 +84,12 @@ export default function Shop() {
                 </svg>
               </button>
             )}
-            {/* Circular Search Icon Button (Smaller & Orange) */}
+            {/* Circular Search Icon Button (Matches Filter Button Size) */}
             <button
-              className="w-9 h-9 flex-shrink-0 rounded-full bg-orange-500 hover:bg-orange-600 flex items-center justify-center shadow transition-colors"
+              className="w-11 h-11 flex-shrink-0 rounded-full bg-[#f87171] hover:bg-[#ef4444] flex items-center justify-center shadow transition-colors"
               title="Search"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 text-white" viewBox="0 0 20 20" fill="currentColor">
+              <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 text-white" viewBox="0 0 20 20" fill="currentColor">
                 <path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd" />
               </svg>
             </button>
@@ -97,7 +97,7 @@ export default function Shop() {
 
           {/* Filter Button */}
           <button
-            className="flex items-center justify-center w-12 h-12 bg-white rounded-full shadow-md border border-gray-200 transition-all duration-150 ease-in-out hover:scale-105 hover:shadow-lg text-gray-500 hover:text-orange-500 focus:outline-none flex-shrink-0"
+            className="flex items-center justify-center w-11 h-11 bg-white rounded-full shadow-md border border-gray-200 transition-all duration-150 ease-in-out hover:scale-105 hover:shadow-lg text-gray-500 hover:text-[#f87171] focus:outline-none flex-shrink-0"
             title="Filter"
           >
             <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
