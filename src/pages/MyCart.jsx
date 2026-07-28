@@ -6,6 +6,8 @@ import { Turnstile } from '@marsidev/react-turnstile';
 export default function MyCart() {
     const navigate = useNavigate();
     const [cartItems, setCartItems] = useState([]);
+    const [past, setPast] = useState([]);
+    const [future, setFuture] = useState([]);
     const [turnstileToken, setTurnstileToken] = useState(null);
     const [formData, setFormData] = useState({
         fullname: '',
@@ -20,17 +22,51 @@ export default function MyCart() {
     }, []);
 
     const handleRemoveItem = (index) => {
-        const updated = cartItems.filter((_, i) => i !== index);
-        setCartItems(updated);
-        localStorage.setItem('shrine_cart', JSON.stringify(updated));
         Swal.fire({
-            icon: 'info',
-            title: 'Removed',
-            text: 'Item removed from cart.',
-            confirmButtonColor: '#f59e0b',
-            timer: 1500,
-            timerProgressBar: true,
+            title: 'Are you sure?',
+            text: "Do you want to remove this item from the cart?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Yes, remove it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                setPast(prev => [...prev, cartItems]);
+                setFuture([]);
+                
+                const updated = cartItems.filter((_, i) => i !== index);
+                setCartItems(updated);
+                localStorage.setItem('shrine_cart', JSON.stringify(updated));
+                
+                Swal.fire({
+                    icon: 'info',
+                    title: 'Removed',
+                    text: 'Item removed from cart.',
+                    confirmButtonColor: '#f59e0b',
+                    timer: 1500,
+                    timerProgressBar: true,
+                });
+            }
         });
+    };
+
+    const undo = () => {
+        if (past.length === 0) return;
+        const previous = past[past.length - 1];
+        setPast(prev => prev.slice(0, prev.length - 1));
+        setFuture(prev => [cartItems, ...prev]);
+        setCartItems(previous);
+        localStorage.setItem('shrine_cart', JSON.stringify(previous));
+    };
+
+    const redo = () => {
+        if (future.length === 0) return;
+        const next = future[0];
+        setFuture(prev => prev.slice(1));
+        setPast(prev => [...prev, cartItems]);
+        setCartItems(next);
+        localStorage.setItem('shrine_cart', JSON.stringify(next));
     };
 
     const handleInputChange = (e) => {
@@ -192,7 +228,21 @@ export default function MyCart() {
             <div className="flex-grow w-full max-w-7xl px-4 sm:px-8 pb-8 pt-6 sm:pt-10 flex flex-col lg:flex-row gap-6 sm:gap-12 justify-center items-start">
                 {/* Left: Cart Items */}
                 <div className="w-full mx-auto lg:mx-0 max-w-[550px] bg-[#909090] border-2 border-gray-500 rounded-2xl sm:rounded-3xl p-4 sm:p-6 shadow-lg overflow-y-auto max-h-[60vh] lg:max-h-[70vh]">
-                    <h2 className="text-xl sm:text-2xl font-bold text-black mb-4 sm:mb-6 text-center">Cart Items</h2>
+                    <div className="flex items-center justify-center mb-4 sm:mb-6 relative">
+                        <div className="absolute left-0 flex gap-1 sm:gap-2">
+                            <button onClick={undo} disabled={past.length === 0} className="p-1 sm:p-2 text-black hover:bg-gray-400 rounded-full disabled:opacity-30 transition-colors cursor-pointer disabled:cursor-default" title="Undo">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5 sm:w-6 sm:h-6">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3" />
+                                </svg>
+                            </button>
+                            <button onClick={redo} disabled={future.length === 0} className="p-1 sm:p-2 text-black hover:bg-gray-400 rounded-full disabled:opacity-30 transition-colors cursor-pointer disabled:cursor-default" title="Redo">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5 sm:w-6 sm:h-6">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M15 15l6-6m0 0l-6-6m6 6H9a6 6 0 000 12h3" />
+                                </svg>
+                            </button>
+                        </div>
+                        <h2 className="text-xl sm:text-2xl font-bold text-black text-center m-0">Cart Items</h2>
+                    </div>
                     {cartItems.length === 0 ? (
                         <div className="flex flex-col items-center justify-center h-48 text-gray-600">
                             <svg xmlns="http://www.w3.org/2000/svg" className="w-16 h-16 text-gray-400 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1}>
