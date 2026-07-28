@@ -115,10 +115,10 @@ export default function Shop() {
       {/* Main Content */}
       <div className="w-full max-w-7xl flex-grow my-4 sm:my-8">
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4 w-full">
-          {[1].map((item) => (
+          {[1, 2].map((item) => (
             <div
               key={item}
-              className="group relative bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer border border-gray-100"
+              className="group relative bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer border border-white"
               onClick={() => setSelectedProduct(item)}
             >
               {/* Product Image Area */}
@@ -156,7 +156,7 @@ export default function Shop() {
               </div>
 
               {/* Product Info */}
-              <div className="p-3">
+              <div style={{ padding: '8px' }}>
                 <h3 className="text-sm font-medium text-gray-800 leading-tight mb-1 line-clamp-2" style={{ minHeight: '2.5em' }}>
                   Product {item}
                 </h3>
