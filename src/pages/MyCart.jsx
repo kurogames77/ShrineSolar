@@ -207,63 +207,63 @@ export default function MyCart() {
     }, {});
 
     return (
-        <div className="w-full min-h-screen bg-[#a8a8a8] flex flex-col items-center">
+        <div className="w-full min-h-screen bg-[#eef2f7] flex flex-col items-center">
             {/* Header */}
             <header className="w-full max-w-7xl flex justify-center items-center pt-8 sm:pt-12 pb-4 sm:pb-8 px-4 sm:px-8 relative">
                 <div className="flex items-center gap-3">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8 sm:w-10 sm:h-10 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8 sm:w-10 sm:h-10 text-[#1a2332]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                         <path strokeLinecap="round" strokeLinejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 100 4 2 2 0 000-4z" />
                     </svg>
-                    <h1 className="text-3xl sm:text-5xl font-bold text-black tracking-wider">My Cart</h1>
+                    <h1 className="text-3xl sm:text-5xl font-bold text-[#1a2332] tracking-wider">My Cart</h1>
                 </div>
                 <button
                     onClick={() => navigate('/')}
-                    className="absolute right-4 sm:right-8 text-gray-700 hover:text-black hover:bg-gray-400 w-12 h-12 sm:w-16 sm:h-16 rounded-full flex items-center justify-center text-2xl sm:text-3xl font-bold transition-colors"
+                    className="absolute right-4 sm:right-8 text-[#64748b] hover:text-[#1a2332] hover:bg-white/60 w-12 h-12 sm:w-16 sm:h-16 rounded-full flex items-center justify-center text-2xl sm:text-3xl font-bold transition-colors"
                 >
                     ✕
                 </button>
             </header>
 
             {/* Main Content */}
-            <div className="flex-grow w-full max-w-7xl px-4 sm:px-8 pb-8 pt-6 sm:pt-10 flex flex-col lg:flex-row gap-6 sm:gap-12 justify-center items-start">
+            <div className="flex-grow w-full max-w-7xl px-4 sm:px-8 pb-8 pt-6 sm:pt-10 flex flex-col lg:flex-row gap-6 sm:gap-10 justify-center items-start">
                 {/* Left: Cart Items */}
-                <div className="w-full mx-auto lg:mx-0 max-w-[550px] bg-[#909090] border-2 border-gray-500 rounded-2xl sm:rounded-3xl p-4 sm:p-6 shadow-lg overflow-y-auto max-h-[60vh] lg:max-h-[70vh]">
-                    <div className="flex items-center justify-center mb-4 sm:mb-6 relative">
+                <div className="w-full mx-auto lg:mx-0 max-w-[550px] bg-white border border-[#e2e8f0] rounded-2xl p-5 sm:p-7 shadow-[0_1px_3px_rgba(0,0,0,0.08)] overflow-y-auto max-h-[60vh] lg:max-h-[70vh]">
+                    <div className="flex items-center justify-center mb-5 sm:mb-7 relative">
                         <div className="absolute left-0 flex gap-1 sm:gap-2">
-                            <button onClick={undo} disabled={past.length === 0} className="p-1 sm:p-2 text-black hover:bg-gray-400 rounded-full disabled:opacity-30 transition-colors cursor-pointer disabled:cursor-default" title="Undo">
+                            <button onClick={undo} disabled={past.length === 0} className="p-1.5 sm:p-2 text-[#1a2332] hover:bg-[#eef2f7] rounded-lg disabled:opacity-30 transition-colors cursor-pointer disabled:cursor-default" title="Undo">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5 sm:w-6 sm:h-6">
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3" />
                                 </svg>
                             </button>
-                            <button onClick={redo} disabled={future.length === 0} className="p-1 sm:p-2 text-black hover:bg-gray-400 rounded-full disabled:opacity-30 transition-colors cursor-pointer disabled:cursor-default" title="Redo">
+                            <button onClick={redo} disabled={future.length === 0} className="p-1.5 sm:p-2 text-[#1a2332] hover:bg-[#eef2f7] rounded-lg disabled:opacity-30 transition-colors cursor-pointer disabled:cursor-default" title="Redo">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5 sm:w-6 sm:h-6">
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M15 15l6-6m0 0l-6-6m6 6H9a6 6 0 000 12h3" />
                                 </svg>
                             </button>
                         </div>
-                        <h2 className="text-xl sm:text-2xl font-bold text-black text-center m-0">Cart Items</h2>
+                        <h2 className="text-xl sm:text-2xl font-bold text-[#1a2332] text-center m-0">Cart Items</h2>
                     </div>
                     {cartItems.length === 0 ? (
-                        <div className="flex flex-col items-center justify-center h-48 text-gray-600">
-                            <svg xmlns="http://www.w3.org/2000/svg" className="w-16 h-16 text-gray-400 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1}>
+                        <div className="flex flex-col items-center justify-center h-48 text-[#94a3b8]">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="w-16 h-16 text-[#cbd5e1] mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1}>
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 100 4 2 2 0 000-4z" />
                             </svg>
                             <p className="text-lg font-medium">Your cart is empty</p>
                         </div>
                     ) : (
                         Object.entries(grouped).map(([category, items]) => (
-                            <div key={category} className="mb-4 sm:mb-6">
-                                <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-2 sm:mb-3 border-b-2 border-gray-500 pb-1">{category}</h3>
-                                <div className="flex flex-col gap-2 sm:gap-3">
+                            <div key={category} className="mb-5 sm:mb-7">
+                                <h3 className="text-lg sm:text-xl font-semibold text-[#1a2332] mb-3 sm:mb-4 border-b border-[#e2e8f0] pb-2">{category}</h3>
+                                <div className="flex flex-col gap-2.5 sm:gap-3">
                                     {items.map((item, idx) => {
                                         const globalIndex = cartItems.indexOf(item);
                                         return (
-                                            <div key={idx} className="bg-gray-400/50 rounded-xl p-3 sm:p-4 flex items-center justify-between">
+                                            <div key={idx} className="bg-[#f8fafc] border border-[#e2e8f0] rounded-xl p-3.5 sm:p-4 flex items-center justify-between hover:shadow-sm transition-shadow">
                                                 <div>
-                                                    <p className="font-semibold text-black text-sm sm:text-base">
-                                                        {item.name} <span className="text-gray-700 font-normal ml-2">x{item.quantity}</span>
+                                                    <p className="font-semibold text-[#1a2332] text-sm sm:text-base">
+                                                        {item.name} <span className="text-[#64748b] font-normal ml-2">x{item.quantity}</span>
                                                     </p>
-                                                    <p className="text-amber-700 font-medium text-xs sm:text-sm">₱0.00</p>
+                                                    <p className="text-[#f59e0b] font-medium text-xs sm:text-sm">₱0.00</p>
                                                 </div>
                                                 <button
                                                     onClick={() => handleRemoveItem(globalIndex)}
@@ -282,8 +282,8 @@ export default function MyCart() {
                 </div>
 
                 {/* Right: Customer Info Form */}
-                <div className="w-full mx-auto lg:mx-0 max-w-[550px] bg-[#909090] border-2 border-gray-500 rounded-2xl sm:rounded-3xl p-4 sm:p-6 shadow-lg flex flex-col items-center">
-                    <h2 className="text-xl sm:text-2xl font-bold text-black mb-4 sm:mb-6 text-center">Customer Information</h2>
+                <div className="w-full mx-auto lg:mx-0 max-w-[550px] bg-white border border-[#e2e8f0] rounded-2xl p-5 sm:p-7 shadow-[0_1px_3px_rgba(0,0,0,0.08)] flex flex-col items-center">
+                    <h2 className="text-xl sm:text-2xl font-bold text-[#1a2332] mb-5 sm:mb-7 text-center">Customer Information</h2>
                     <div className="flex flex-col gap-4 sm:gap-5 w-full max-w-[400px] mx-auto">
                         <input
                             type="text"
@@ -291,7 +291,7 @@ export default function MyCart() {
                             placeholder="Fullname"
                             value={formData.fullname}
                             onChange={handleInputChange}
-                            className="w-full py-3 sm:py-4 px-4 sm:px-6 bg-gray-400/50 border-2 border-gray-500 rounded-full text-black font-medium text-sm sm:text-base placeholder-gray-600 focus:outline-none focus:border-amber-500 transition-colors"
+                            className="w-full py-3 sm:py-4 px-4 sm:px-6 bg-[#f8fafc] border border-[#e2e8f0] rounded-xl text-[#1a2332] font-medium text-sm sm:text-base placeholder-[#94a3b8] focus:outline-none focus:border-[#f59e0b] focus:ring-2 focus:ring-[#f59e0b]/20 transition-all"
                         />
                         <input
                             type="text"
@@ -299,7 +299,7 @@ export default function MyCart() {
                             placeholder="Contact Number"
                             value={formData.contactNumber}
                             onChange={handleInputChange}
-                            className="w-full py-3 sm:py-4 px-4 sm:px-6 bg-gray-400/50 border-2 border-gray-500 rounded-full text-black font-medium text-sm sm:text-base placeholder-gray-600 focus:outline-none focus:border-amber-500 transition-colors"
+                            className="w-full py-3 sm:py-4 px-4 sm:px-6 bg-[#f8fafc] border border-[#e2e8f0] rounded-xl text-[#1a2332] font-medium text-sm sm:text-base placeholder-[#94a3b8] focus:outline-none focus:border-[#f59e0b] focus:ring-2 focus:ring-[#f59e0b]/20 transition-all"
                         />
                         <input
                             type="text"
@@ -307,7 +307,7 @@ export default function MyCart() {
                             placeholder="Address"
                             value={formData.address}
                             onChange={handleInputChange}
-                            className="w-full py-3 sm:py-4 px-4 sm:px-6 bg-gray-400/50 border-2 border-gray-500 rounded-full text-black font-medium text-sm sm:text-base placeholder-gray-600 focus:outline-none focus:border-amber-500 transition-colors"
+                            className="w-full py-3 sm:py-4 px-4 sm:px-6 bg-[#f8fafc] border border-[#e2e8f0] rounded-xl text-[#1a2332] font-medium text-sm sm:text-base placeholder-[#94a3b8] focus:outline-none focus:border-[#f59e0b] focus:ring-2 focus:ring-[#f59e0b]/20 transition-all"
                         />
                         <input
                             type="email"
@@ -315,7 +315,7 @@ export default function MyCart() {
                             placeholder="Gmail (Optional)"
                             value={formData.gmail}
                             onChange={handleInputChange}
-                            className="w-full py-3 sm:py-4 px-4 sm:px-6 bg-gray-400/50 border-2 border-gray-500 rounded-full text-black font-medium text-sm sm:text-base placeholder-gray-600 focus:outline-none focus:border-amber-500 transition-colors"
+                            className="w-full py-3 sm:py-4 px-4 sm:px-6 bg-[#f8fafc] border border-[#e2e8f0] rounded-xl text-[#1a2332] font-medium text-sm sm:text-base placeholder-[#94a3b8] focus:outline-none focus:border-[#f59e0b] focus:ring-2 focus:ring-[#f59e0b]/20 transition-all"
                         />
                     </div>
                     {/* Cloudflare Turnstile */}
@@ -329,7 +329,7 @@ export default function MyCart() {
                     {/* Proceed Button */}
                     <button
                         onClick={handleProceed}
-                        className="w-full max-w-[400px] mx-auto mt-auto py-4 sm:py-5 bg-amber-500 hover:bg-amber-600 text-white font-bold text-lg sm:text-xl rounded-full transition-colors shadow-lg flex items-center justify-center gap-3"
+                        className="w-full max-w-[400px] mx-auto mt-auto py-4 sm:py-5 bg-[#f59e0b] hover:bg-[#d97706] text-white font-bold text-lg sm:text-xl rounded-xl transition-colors shadow-[0_2px_8px_rgba(245,158,11,0.3)] hover:shadow-[0_4px_12px_rgba(245,158,11,0.4)] flex items-center justify-center gap-3"
                     >
                         Proceed to Facebook
                     </button>
