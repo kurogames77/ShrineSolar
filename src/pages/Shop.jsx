@@ -63,7 +63,7 @@ export default function Shop() {
         </button>
 
         {/* Center Group: Search Bar and Filter */}
-        <div className="flex flex-1 items-center gap-2 sm:gap-3 min-w-0 sm:max-w-[560px] sm:justify-center sm:absolute sm:left-1/2 sm:-translate-x-1/2">
+        <div className="flex flex-1 items-center gap-2 sm:gap-3 min-w-0 w-full sm:max-w-[560px] sm:justify-center sm:absolute sm:left-1/2 sm:-translate-x-1/2">
           {/* Search Bar */}
           <div
             className="flex items-center flex-1 min-w-0 bg-white rounded-full shadow-md border border-gray-200 gap-2 transition-all duration-200 hover:shadow-lg"
@@ -73,7 +73,7 @@ export default function Shop() {
               type="text"
               value={searchText}
               onChange={(e) => setSearchText(e.target.value)}
-              className="flex-1 py-2 text-base text-gray-700 bg-transparent focus:outline-none placeholder-gray-400"
+              className="flex-1 min-w-[50px] py-2 text-base text-gray-700 bg-transparent focus:outline-none placeholder-gray-400"
               placeholder="Search..."
             />
             {/* Clear X Button */}
