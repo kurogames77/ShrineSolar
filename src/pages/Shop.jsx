@@ -213,10 +213,23 @@ export default function Shop() {
       {/* Quantity Selection Modal */}
       {quantityModal && (
         <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-[60] p-4" onClick={() => setQuantityModal(null)}>
-          <div className="bg-white rounded-2xl shadow-2xl w-full max-w-sm p-6 sm:p-8" onClick={(e) => e.stopPropagation()}>
-            <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2 text-center">{isInCart(quantityModal) ? 'Update Quantity' : 'Add to Cart'}</h3>
-            <p className="text-gray-500 text-center mb-6">Product {quantityModal} — Solar Panel</p>
-            <div className="flex items-center justify-center gap-4 mb-6">
+          <div className="bg-white rounded-2xl shadow-2xl w-full max-w-sm" style={{ padding: '24px' }} onClick={(e) => e.stopPropagation()}>
+            <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4 text-center">{isInCart(quantityModal) ? 'Update Quantity' : 'Add to Cart'}</h3>
+
+            {/* Product Image */}
+            <div className="w-full aspect-square bg-gray-100 rounded-xl flex items-center justify-center mb-4">
+              <svg xmlns="http://www.w3.org/2000/svg" className="w-16 h-16 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+            </div>
+
+            {/* Product Name */}
+            <p className="text-gray-700 font-medium text-center" style={{ marginBottom: '4px' }}>Product {quantityModal}</p>
+            {/* Stocks */}
+            <p className="text-xs text-gray-400 text-center" style={{ marginBottom: '16px' }}>100 Stocks</p>
+
+            {/* Quantity Selector */}
+            <div className="flex items-center justify-center gap-4" style={{ marginBottom: '12px' }}>
               <button
                 onClick={() => setQuantity(Math.max(1, quantity - 1))}
                 className="w-12 h-12 bg-gray-200 hover:bg-gray-300 rounded-full flex items-center justify-center text-2xl font-bold text-gray-700 transition-colors"
@@ -231,6 +244,12 @@ export default function Shop() {
                 +
               </button>
             </div>
+
+            {/* Total Line */}
+            <p className="text-sm text-gray-600 text-center" style={{ marginBottom: '16px' }}>
+              Total ({quantity} {quantity === 1 ? 'item' : 'items'}): <span className="font-bold text-orange-500">₱0.00</span>
+            </p>
+
             <button
               onClick={confirmAddToCart}
               className="w-full py-3 sm:py-4 bg-amber-500 hover:bg-amber-600 text-white font-bold text-lg rounded-xl transition-colors shadow-lg"
