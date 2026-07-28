@@ -46,9 +46,10 @@ export default function Shop() {
 
   return (
     <div className="w-full min-h-screen bg-[#eef2f7] flex flex-col items-center">
-      <div className="w-full flex-grow flex flex-col pt-8 sm:pt-16 px-4 sm:px-8 pb-16 items-center">
+      <div className="w-full flex-grow flex flex-col pt-[144px] sm:pt-[152px] px-4 sm:px-8 pb-16 items-center">
       {/* Header with Search Bar and Filter */}
-      <header className="sticky top-[56px] z-30 bg-[#eef2f7] w-full max-w-7xl flex items-center justify-between mb-6 sm:mb-10 px-4 sm:px-8 py-4 min-h-[64px]">
+      <header className="fixed top-[56px] left-0 right-0 z-30 bg-transparent w-full flex items-center justify-center px-4 sm:px-8 py-4 min-h-[72px]">
+        <div className="w-full max-w-7xl flex items-center justify-between relative">
 
         {/* Back Button — left */}
         <button
@@ -107,6 +108,7 @@ export default function Shop() {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
             </svg>
           </button>
+        </div>
         </div>
       </header>
 
