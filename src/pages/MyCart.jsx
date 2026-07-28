@@ -291,6 +291,18 @@ export default function MyCart() {
                             </div>
                         ))
                     )}
+
+                    {/* Totals Row */}
+                    {cartItems.length > 0 && (
+                        <div className="mt-4 pt-4 border-t border-[#e2e8f0] flex items-center justify-between">
+                            <span className="text-sm sm:text-base text-[#64748b] font-medium">
+                                Total ({cartItems.reduce((sum, item) => sum + (item.quantity || 1), 0)} item{cartItems.reduce((sum, item) => sum + (item.quantity || 1), 0) !== 1 ? 's' : ''}):
+                            </span>
+                            <span className="text-base sm:text-lg font-bold text-[#f59e0b]">
+                                ₱{cartItems.reduce((sum, item) => sum + ((item.price || 0) * (item.quantity || 1)), 0).toLocaleString('en-PH', { minimumFractionDigits: 2 })}
+                            </span>
+                        </div>
+                    )}
                 </div>
 
                 {/* Right: Customer Info Form */}
