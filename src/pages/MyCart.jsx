@@ -294,7 +294,7 @@ export default function MyCart() {
 
                     {/* Totals Row */}
                     {cartItems.length > 0 && (
-                        <div className="mt-4 pt-4 border-t border-[#e2e8f0] flex items-center justify-between">
+                        <div className="mt-8 flex items-center justify-between">
                             <span className="text-sm sm:text-base text-[#64748b] font-medium">
                                 Total ({cartItems.reduce((sum, item) => sum + (item.quantity || 1), 0)} item{cartItems.reduce((sum, item) => sum + (item.quantity || 1), 0) !== 1 ? 's' : ''}):
                             </span>
