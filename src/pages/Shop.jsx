@@ -64,7 +64,10 @@ export default function Shop() {
         {/* Center Group: Search Bar and Filter */}
         <div className="flex items-center gap-3 w-full max-w-[560px] justify-center absolute left-1/2 -translate-x-1/2">
           {/* Search Bar */}
-          <div className="flex items-center w-full bg-white rounded-full shadow-md border border-gray-200 py-2 pr-4 pl-8 gap-2 transition-all duration-200 hover:shadow-lg min-h-[56px]">
+          <div
+            className="flex items-center w-full bg-white rounded-full shadow-md border border-gray-200 gap-2 transition-all duration-200 hover:shadow-lg"
+            style={{ paddingLeft: '28px', paddingRight: '8px', paddingTop: '8px', paddingBottom: '8px', minHeight: '56px' }}
+          >
             <input
               type="text"
               value={searchText}
@@ -84,9 +87,9 @@ export default function Shop() {
                 </svg>
               </button>
             )}
-            {/* Circular Search Icon Button (Matches Filter Button Size) */}
+            {/* Circular Search Icon Button */}
             <button
-              className="w-11 h-11 flex-shrink-0 rounded-full bg-[#f87171] hover:bg-[#ef4444] flex items-center justify-center shadow transition-colors"
+              className="w-10 h-10 flex-shrink-0 rounded-full bg-[#f87171] hover:bg-[#ef4444] flex items-center justify-center shadow transition-colors"
               title="Search"
             >
               <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 text-white" viewBox="0 0 20 20" fill="currentColor">
