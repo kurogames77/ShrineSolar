@@ -48,7 +48,7 @@ export default function Shop() {
     <div className="w-full min-h-screen bg-[#eef2f7] flex flex-col items-center">
       <div className="w-full flex-grow flex flex-col pt-8 sm:pt-16 px-4 sm:px-8 pb-16 items-center">
       {/* Header with Search Bar and Filter */}
-      <header className="w-full max-w-7xl flex items-center justify-between mb-6 sm:mb-10 px-4 sm:px-8 pt-2 min-h-[64px]">
+      <header className="sticky top-[56px] z-30 bg-[#eef2f7] w-full max-w-7xl flex items-center justify-between mb-6 sm:mb-10 px-4 sm:px-8 py-4 min-h-[64px]">
 
         {/* Back Button — left */}
         <button
