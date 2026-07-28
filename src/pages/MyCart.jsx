@@ -284,39 +284,54 @@ export default function MyCart() {
                 {/* Right: Customer Info Form */}
                 <div className="w-full mx-auto lg:mx-0 max-w-[550px] bg-white border border-[#e2e8f0] rounded-2xl shadow-[0_1px_3px_rgba(0,0,0,0.08)] flex flex-col items-start" style={{padding: '28px 32px'}}>
                     <h2 className="text-xl sm:text-2xl font-bold text-[#1a2332] mb-6 sm:mb-8">Customer Information</h2>
-                    <div className="flex flex-col gap-4 sm:gap-5 w-full">
-                        <input
-                            type="text"
-                            name="fullname"
-                            placeholder="Fullname"
-                            value={formData.fullname}
-                            onChange={handleInputChange}
-                            className="w-full py-3 sm:py-4 px-4 sm:px-6 bg-[#f8fafc] border border-[#e2e8f0] rounded-xl text-[#1a2332] font-medium text-sm sm:text-base placeholder-[#94a3b8] focus:outline-none focus:border-[#f59e0b] focus:ring-2 focus:ring-[#f59e0b]/20 transition-all"
-                        />
-                        <input
-                            type="text"
-                            name="contactNumber"
-                            placeholder="Contact Number"
-                            value={formData.contactNumber}
-                            onChange={handleInputChange}
-                            className="w-full py-3 sm:py-4 px-4 sm:px-6 bg-[#f8fafc] border border-[#e2e8f0] rounded-xl text-[#1a2332] font-medium text-sm sm:text-base placeholder-[#94a3b8] focus:outline-none focus:border-[#f59e0b] focus:ring-2 focus:ring-[#f59e0b]/20 transition-all"
-                        />
-                        <input
-                            type="text"
-                            name="address"
-                            placeholder="Address"
-                            value={formData.address}
-                            onChange={handleInputChange}
-                            className="w-full py-3 sm:py-4 px-4 sm:px-6 bg-[#f8fafc] border border-[#e2e8f0] rounded-xl text-[#1a2332] font-medium text-sm sm:text-base placeholder-[#94a3b8] focus:outline-none focus:border-[#f59e0b] focus:ring-2 focus:ring-[#f59e0b]/20 transition-all"
-                        />
-                        <input
-                            type="email"
-                            name="gmail"
-                            placeholder="Gmail (Optional)"
-                            value={formData.gmail}
-                            onChange={handleInputChange}
-                            className="w-full py-3 sm:py-4 px-4 sm:px-6 bg-[#f8fafc] border border-[#e2e8f0] rounded-xl text-[#1a2332] font-medium text-sm sm:text-base placeholder-[#94a3b8] focus:outline-none focus:border-[#f59e0b] focus:ring-2 focus:ring-[#f59e0b]/20 transition-all"
-                        />
+                    <div className="flex flex-col gap-6 w-full">
+                        <div className="mycart-input-group">
+                            <input
+                                required
+                                type="text"
+                                name="fullname"
+                                autoComplete="off"
+                                value={formData.fullname}
+                                onChange={handleInputChange}
+                                className="mycart-input"
+                            />
+                            <label className="mycart-user-label">Fullname</label>
+                        </div>
+                        <div className="mycart-input-group">
+                            <input
+                                required
+                                type="text"
+                                name="contactNumber"
+                                autoComplete="off"
+                                value={formData.contactNumber}
+                                onChange={handleInputChange}
+                                className="mycart-input"
+                            />
+                            <label className="mycart-user-label">Contact Number</label>
+                        </div>
+                        <div className="mycart-input-group">
+                            <input
+                                required
+                                type="text"
+                                name="address"
+                                autoComplete="off"
+                                value={formData.address}
+                                onChange={handleInputChange}
+                                className="mycart-input"
+                            />
+                            <label className="mycart-user-label">Address</label>
+                        </div>
+                        <div className="mycart-input-group">
+                            <input
+                                type="email"
+                                name="gmail"
+                                autoComplete="off"
+                                value={formData.gmail}
+                                onChange={handleInputChange}
+                                className="mycart-input"
+                            />
+                            <label className="mycart-user-label">Gmail (Optional)</label>
+                        </div>
                     </div>
                     {/* Cloudflare Turnstile */}
                     <div className="mt-8 mb-8 min-h-[100px] flex items-center justify-center w-full">

@@ -435,3 +435,47 @@ body {
     line-height: 1.6 !important;
   }
 }
+
+/* ── Floating Label Inputs (Uiverse by alexruix – adapted for MyCart) ── */
+.mycart-input-group {
+  position: relative;
+  width: 100%;
+}
+
+.mycart-input {
+  width: 100%;
+  border: solid 1.5px #d1d5db;
+  border-radius: 0.875rem;
+  background: none;
+  padding: 1rem 1rem;
+  font-size: 1rem;
+  color: #1a2332;
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+  transition: border 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  outline: none;
+}
+
+.mycart-user-label {
+  position: absolute;
+  left: 15px;
+  top: 0;
+  color: #94a3b8;
+  pointer-events: none;
+  transform: translateY(1rem);
+  transition: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  font-size: 1rem;
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+}
+
+.mycart-input:focus {
+  border: 1.5px solid #f59e0b;
+}
+
+.mycart-input:focus ~ .mycart-user-label,
+.mycart-input:valid ~ .mycart-user-label {
+  transform: translateY(-50%) scale(0.8);
+  background-color: #ffffff;
+  padding: 0 0.25em;
+  color: #f59e0b;
+  font-weight: 600;
+}
