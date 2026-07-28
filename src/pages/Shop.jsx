@@ -64,7 +64,7 @@ export default function Shop() {
         {/* Center Group: Search Bar and Filter */}
         <div className="flex items-center gap-3 w-full max-w-[560px] justify-center absolute left-1/2 -translate-x-1/2">
           {/* Search Bar */}
-          <div className="flex items-center w-full bg-white rounded-full shadow-md border border-gray-200 p-2 pl-6 gap-2 transition-all duration-200 hover:shadow-lg min-h-[56px]">
+          <div className="flex items-center w-full bg-white rounded-full shadow-md border border-gray-200 py-2 pr-4 pl-8 gap-2 transition-all duration-200 hover:shadow-lg min-h-[56px]">
             <input
               type="text"
               value={searchText}
