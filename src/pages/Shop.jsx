@@ -60,16 +60,16 @@ export default function Shop() {
         </button>
 
         {/* Search Bar */}
-        <div className="relative flex-1 max-w-[560px] bg-white rounded-2xl shadow-md border border-gray-200 flex items-center px-4 gap-3 transition-all duration-150 hover:shadow-lg hover:scale-[1.01]">
+        <div className="relative flex-1 max-w-[560px] min-h-[60px] bg-white rounded-2xl shadow-md border border-gray-200 flex items-center px-4 gap-3 transition-all duration-150 hover:shadow-lg hover:scale-[1.01]">
           <svg className="h-5 w-5 text-gray-400 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
             <path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd" />
           </svg>
           <input
             type="text"
-            className="flex-1 py-4 text-base text-gray-700 bg-transparent focus:outline-none placeholder-gray-400"
+            className="flex-1 py-5 text-base text-gray-700 bg-transparent focus:outline-none placeholder-gray-400"
             placeholder="Search products..."
           />
-          <button className="py-2 px-5 bg-[#5044e4] hover:bg-[#3f35d4] text-white text-sm font-semibold rounded-xl transition-colors flex-shrink-0 focus:outline-none focus:ring-2 focus:ring-[#5044e4] focus:ring-offset-1">
+          <button className="py-3 px-5 bg-[#5044e4] hover:bg-[#3f35d4] text-white text-sm font-semibold rounded-xl transition-colors flex-shrink-0 focus:outline-none focus:ring-2 focus:ring-[#5044e4] focus:ring-offset-1">
             Search
           </button>
         </div>
