@@ -181,7 +181,7 @@ export default function Shop() {
       {/* Product Detail Modal */}
       {selectedProduct && (
         <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50" onClick={() => setSelectedProduct(null)}>
-          <div className="bg-white w-full h-full sm:h-[95vh] sm:w-[95vw] sm:max-w-7xl sm:rounded-3xl shadow-2xl flex flex-col overflow-hidden" onClick={(e) => e.stopPropagation()}>
+          <div className="bg-white w-full h-full sm:h-[95vh] sm:w-[95vw] sm:max-w-[1920px] sm:rounded-3xl shadow-2xl flex flex-col overflow-hidden" onClick={(e) => e.stopPropagation()}>
             <div className="relative flex-shrink-0">
               <button
                 onClick={() => setSelectedProduct(null)}
@@ -189,8 +189,8 @@ export default function Shop() {
               >
                 ✕
               </button>
-              <div className="w-full h-64 sm:h-[400px] bg-gray-300 flex items-center justify-center">
-                <svg xmlns="http://www.w3.org/2000/svg" className="w-20 h-20 sm:w-28 sm:h-28 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1}>
+              <div className="w-full h-64 sm:h-[600px] xl:h-[800px] bg-gray-300 flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" className="w-20 h-20 sm:w-40 sm:h-40 xl:w-56 xl:h-56 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                 </svg>
               </div>
