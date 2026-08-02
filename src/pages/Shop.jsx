@@ -474,7 +474,7 @@ export default function Shop() {
       {/* Filter Modal */}
       {isFilterOpen && (
         <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-[80] p-4" onClick={() => setIsFilterOpen(false)}>
-          <div className="bg-white w-full max-w-lg rounded-2xl shadow-2xl flex flex-col relative" style={{ padding: '24px' }} onClick={(e) => e.stopPropagation()}>
+          <div className="bg-white w-full max-w-lg rounded-2xl shadow-2xl flex flex-col relative gap-6" style={{ padding: '24px' }} onClick={(e) => e.stopPropagation()}>
             <button
               onClick={() => setIsFilterOpen(false)}
               className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors bg-gray-100 hover:bg-gray-200 rounded-full w-8 h-8 flex items-center justify-center"
@@ -482,9 +482,9 @@ export default function Shop() {
             >
               ✕
             </button>
-            <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-8 text-center">By Category</h3>
+            <h3 className="text-xl sm:text-2xl font-bold text-gray-900 text-center">By Category</h3>
             
-            <div className="overflow-y-auto mb-8" style={{ maxHeight: '60vh' }}>
+            <div className="overflow-y-auto" style={{ maxHeight: '60vh' }}>
               <div className="grid grid-cols-2 gap-3">
                 {filterCategoriesList.map((cat) => {
                   const isSelected = tempCategories.includes(cat);
