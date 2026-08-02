@@ -214,7 +214,7 @@ export default function Shop() {
             <div className="flex-shrink-0 bg-white" style={{ paddingLeft: '10px', paddingRight: '10px', paddingBottom: '10px', paddingTop: '10px' }}>
               <div className="w-full flex justify-center">
                 <button
-                  onClick={() => { setSelectedProduct(null); openQuantityModal(selectedProduct); }}
+                  onClick={() => openQuantityModal(selectedProduct)}
                   className="w-full sm:w-[400px] h-16 bg-amber-500 hover:bg-amber-600 text-white font-bold text-lg sm:text-xl rounded-2xl transition-colors shadow-lg flex items-center justify-center gap-3"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 sm:w-7 sm:h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
