@@ -24,6 +24,17 @@ export default function Shop() {
     setCartItems(JSON.parse(localStorage.getItem('shrine_cart') || '[]'));
   }, []);
 
+  useEffect(() => {
+    if (selectedProduct || quantityModal || imagePreview) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
+  }, [selectedProduct, quantityModal, imagePreview]);
+
   const openQuantityModal = (item) => {
     const existing = cartItems.find(c => c.name === `Product ${item}` && c.category === 'Shop');
     setQuantity(existing ? existing.quantity : 1);
