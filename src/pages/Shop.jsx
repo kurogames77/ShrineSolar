@@ -91,24 +91,65 @@ export default function Shop() {
   };
 
   const confirmAddToCart = () => {
-    const item = quantityModal;
-    const cart = JSON.parse(localStorage.getItem('shrine_cart') || '[]');
-    const existingIndex = cart.findIndex(c => c.name === `Product ${item}` && c.category === 'Shop');
-    if (existingIndex !== -1) {
-      cart[existingIndex].quantity = quantity;
-    } else {
-      cart.push({ name: `Product ${item}`, category: 'Shop', price: 0, quantity });
-    }
-    localStorage.setItem('shrine_cart', JSON.stringify(cart));
-    setCartItems(cart);
-    setQuantityModal(null);
     Swal.fire({
-      icon: 'success',
-      title: 'Added to Cart!',
-      text: `Product ${item} (x${quantity}) has been added to your cart successfully!`,
+      title: 'Are you sure?',
+      text: 'Do you want to confirm this quantity?',
+      icon: 'question',
+      showCancelButton: true,
       confirmButtonColor: '#f59e0b',
-      timer: 2000,
-      timerProgressBar: true,
+      cancelButtonColor: '#9ca3af',
+      confirmButtonText: 'Yes, confirm!',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const item = quantityModal;
+        const cart = JSON.parse(localStorage.getItem('shrine_cart') || '[]');
+        const existingIndex = cart.findIndex(c => c.name === `Product ${item}` && c.category === 'Shop');
+        if (existingIndex !== -1) {
+          cart[existingIndex].quantity = quantity;
+        } else {
+          cart.push({ name: `Product ${item}`, category: 'Shop', price: 0, quantity });
+        }
+        localStorage.setItem('shrine_cart', JSON.stringify(cart));
+        setCartItems(cart);
+        setQuantityModal(null);
+        Swal.fire({
+          icon: 'success',
+          title: 'Success!',
+          text: `Product ${item} (x${quantity}) has been updated in your cart!`,
+          confirmButtonColor: '#f59e0b',
+          timer: 2000,
+          timerProgressBar: true,
+        });
+      }
+    });
+  };
+
+  const removeFromCart = () => {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'Do you want to remove this item from your cart?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#ef4444',
+      cancelButtonColor: '#9ca3af',
+      confirmButtonText: 'Yes, remove it!',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const item = quantityModal;
+        let cart = JSON.parse(localStorage.getItem('shrine_cart') || '[]');
+        cart = cart.filter(c => !(c.name === `Product ${item}` && c.category === 'Shop'));
+        localStorage.setItem('shrine_cart', JSON.stringify(cart));
+        setCartItems(cart);
+        setQuantityModal(null);
+        Swal.fire({
+          icon: 'success',
+          title: 'Removed!',
+          text: `Product ${item} has been removed from your cart.`,
+          confirmButtonColor: '#f59e0b',
+          timer: 2000,
+          timerProgressBar: true,
+        });
+      }
     });
   };
 
@@ -353,6 +394,14 @@ export default function Shop() {
             >
               Confirm
             </button>
+            {isInCart(quantityModal) && (
+              <button
+                onClick={removeFromCart}
+                className="w-full py-3 sm:py-4 mt-3 bg-red-500 hover:bg-red-600 text-white font-bold text-lg rounded-xl transition-colors shadow-lg"
+              >
+                Remove Quantity
+              </button>
+            )}
           </div>
         </div>
       )}
