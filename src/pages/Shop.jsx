@@ -181,7 +181,7 @@ export default function Shop() {
       {/* Product Detail Modal */}
       {selectedProduct && (
         <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50" onClick={() => setSelectedProduct(null)}>
-          <div className="bg-white w-full h-full sm:h-[95vh] sm:w-[95vw] sm:max-w-[1920px] sm:rounded-3xl shadow-2xl flex flex-col overflow-hidden" onClick={(e) => e.stopPropagation()}>
+          <div className="bg-white w-full h-full sm:h-[95vh] sm:w-[95vw] sm:max-w-7xl sm:rounded-3xl shadow-2xl flex flex-col overflow-hidden" onClick={(e) => e.stopPropagation()}>
             <div className="relative flex-shrink-0">
               <button
                 onClick={() => setSelectedProduct(null)}
@@ -189,8 +189,8 @@ export default function Shop() {
               >
                 ✕
               </button>
-              <div className="w-full h-64 sm:h-[600px] xl:h-[800px] bg-gray-300 flex items-center justify-center">
-                <svg xmlns="http://www.w3.org/2000/svg" className="w-20 h-20 sm:w-40 sm:h-40 xl:w-56 xl:h-56 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1}>
+              <div className="w-full h-64 sm:h-[400px] bg-gray-300 flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" className="w-20 h-20 sm:w-28 sm:h-28 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                 </svg>
               </div>
@@ -213,9 +213,9 @@ export default function Shop() {
               <div className="mt-auto pt-4 flex-shrink-0">
                 <button
                   onClick={() => { setSelectedProduct(null); openQuantityModal(selectedProduct); }}
-                  className="w-full py-4 sm:py-5 bg-amber-500 hover:bg-amber-600 text-white font-bold text-lg sm:text-xl rounded-xl transition-colors shadow-lg flex items-center justify-center gap-3"
+                  className="w-full py-8 sm:py-10 bg-amber-500 hover:bg-amber-600 text-white font-bold text-2xl sm:text-3xl rounded-2xl transition-colors shadow-lg flex items-center justify-center gap-4"
                 >
-                  <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 sm:w-7 sm:h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8 sm:w-10 sm:h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 100 4 2 2 0 000-4z" />
                   </svg>
                   {isInCart(selectedProduct) ? 'Update Cart' : 'Add to Cart'}
