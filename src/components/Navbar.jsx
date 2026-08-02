@@ -93,7 +93,7 @@ export default function Navbar() {
                             <span className={`absolute left-0 -bottom-1 h-[2px] ${underlineColor} transition-all duration-300 ${location.pathname === '/my-cart' ? 'w-full' : 'w-0 group-hover:w-full'}`}></span>
                         </button>
                         <button
-                            onClick={() => { setIsShopOpen(false); setIsInquiryOpen(true); }}
+                            onClick={() => { setIsInquiryOpen(true); }}
                             className={`relative animate-fade-in font-bold tracking-wide transition-colors text-xs sm:text-sm group ${textClass}`}
                             style={{ ...textShadow, animationDelay: '0.4s' }}
                         >
