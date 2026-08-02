@@ -539,10 +539,10 @@ export default function Shop() {
                   <h4 className="text-sm font-bold text-gray-700 uppercase tracking-wider mb-3">Sort By</h4>
                   <div className="grid grid-cols-2 gap-3">
                     {[
-                      { id: 'none', label: 'None' },
-                      { id: 'name', label: 'Name' },
-                      { id: 'priceAsc', label: 'Low - High' },
-                      { id: 'stockDesc', label: 'Highest Stock' }
+                      { id: 'none', label: 'Default' },
+                      { id: 'name', label: 'Name (A-Z)' },
+                      { id: 'priceAsc', label: 'Price: Low to High' },
+                      { id: 'stockDesc', label: 'Highest Stock First' }
                     ].map((option) => {
                       const isSelected = tempSortBy === option.id;
                       return (
