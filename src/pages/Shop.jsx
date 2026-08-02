@@ -15,6 +15,15 @@ export default function Shop() {
   const [pan, setPan] = useState({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const [appliedCategories, setAppliedCategories] = useState([]);
+  const [tempCategories, setTempCategories] = useState([]);
+
+  const filterCategoriesList = [
+    "Inverters", "Accessories & Monitoring", "Solar Panels", 
+    "Energy Storage", "Solar Portable Power Station", "Wires", 
+    "PV Mounting Accessories", "Breakers & SPD's", "Rapid Shutdown Device"
+  ];
 
   const filteredItems = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].filter((item) =>
     `Product ${item}`.toLowerCase().includes(searchText.toLowerCase())
@@ -25,7 +34,7 @@ export default function Shop() {
   }, []);
 
   useEffect(() => {
-    if (selectedProduct || quantityModal || imagePreview) {
+    if (selectedProduct || quantityModal || imagePreview || isFilterOpen) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = 'auto';
@@ -33,7 +42,7 @@ export default function Shop() {
     return () => {
       document.body.style.overflow = 'auto';
     };
-  }, [selectedProduct, quantityModal, imagePreview]);
+  }, [selectedProduct, quantityModal, imagePreview, isFilterOpen]);
 
   const openQuantityModal = (item) => {
     const existing = cartItems.find(c => c.name === `Product ${item}` && c.category === 'Shop');
@@ -212,9 +221,17 @@ export default function Shop() {
 
           {/* Filter Button */}
           <button
-            className="flex items-center justify-center w-10 h-10 sm:w-11 sm:h-11 bg-white rounded-full border border-gray-300 transition-all duration-150 ease-in-out hover:scale-105 text-gray-500 hover:text-yellow-500 focus:outline-none flex-shrink-0"
+            onClick={() => { setTempCategories([...appliedCategories]); setIsFilterOpen(true); }}
+            className={`relative flex items-center justify-center w-10 h-10 sm:w-11 sm:h-11 rounded-full border transition-all duration-150 ease-in-out hover:scale-105 focus:outline-none flex-shrink-0 ${appliedCategories.length > 0 ? 'bg-orange-50 border-orange-500 text-orange-600' : 'bg-white border-gray-300 text-gray-500 hover:text-yellow-500'}`}
             title="Filter"
           >
+            {appliedCategories.length > 0 && (
+              <span className="absolute -top-1 -right-1 w-4 h-4 bg-orange-500 rounded-full flex items-center justify-center border-2 border-white">
+                <svg xmlns="http://www.w3.org/2000/svg" className="w-2.5 h-2.5 text-white" viewBox="0 0 20 20" fill="currentColor">
+                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                </svg>
+              </span>
+            )}
             <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
             </svg>
@@ -453,6 +470,76 @@ export default function Shop() {
         </div>
       )}
       </div>
+
+      {/* Filter Modal */}
+      {isFilterOpen && (
+        <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-[80] p-4" onClick={() => setIsFilterOpen(false)}>
+          <div className="bg-white w-full max-w-lg rounded-2xl shadow-2xl flex flex-col overflow-hidden" onClick={(e) => e.stopPropagation()}>
+            <div className="flex items-center justify-between border-b px-6 py-4">
+              <h3 className="text-xl font-bold text-gray-900">By Category</h3>
+              <button
+                onClick={() => setIsFilterOpen(false)}
+                className="text-gray-400 hover:text-gray-600 transition-colors bg-gray-100 hover:bg-gray-200 rounded-full w-8 h-8 flex items-center justify-center"
+              >
+                ✕
+              </button>
+            </div>
+            
+            <div className="p-6 overflow-y-auto" style={{ maxHeight: '60vh' }}>
+              <div className="grid grid-cols-2 gap-3">
+                {filterCategoriesList.map((cat) => {
+                  const isSelected = tempCategories.includes(cat);
+                  return (
+                    <button
+                      key={cat}
+                      onClick={() => {
+                        if (isSelected) {
+                          setTempCategories(tempCategories.filter(c => c !== cat));
+                        } else {
+                          setTempCategories([...tempCategories, cat]);
+                        }
+                      }}
+                      className={`relative overflow-hidden flex items-center justify-center text-center px-2 py-4 rounded-md border-2 transition-all ${isSelected ? 'border-orange-500 bg-white text-orange-600 font-bold' : 'border-transparent bg-gray-100 text-gray-700 hover:bg-gray-200'}`}
+                      style={{ minHeight: '60px' }}
+                    >
+                      {isSelected && (
+                        <div className="absolute top-0 left-0 w-0 h-0 border-t-[24px] border-t-orange-500 border-r-[24px] border-r-transparent">
+                          <svg xmlns="http://www.w3.org/2000/svg" className="absolute -top-[22px] left-[2px] w-3 h-3 text-white" viewBox="0 0 20 20" fill="currentColor">
+                            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                          </svg>
+                        </div>
+                      )}
+                      <span className="text-sm">{cat}</span>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
+            <div className="border-t p-4 flex gap-4 bg-white">
+              <button
+                onClick={() => {
+                  setTempCategories([]);
+                  setAppliedCategories([]);
+                  setIsFilterOpen(false);
+                }}
+                className="flex-1 py-3 bg-white border-2 border-orange-500 text-orange-500 font-bold text-lg rounded-xl transition-colors hover:bg-orange-50"
+              >
+                Reset
+              </button>
+              <button
+                onClick={() => {
+                  setAppliedCategories(tempCategories);
+                  setIsFilterOpen(false);
+                }}
+                className="flex-1 py-3 bg-orange-500 text-white font-bold text-lg rounded-xl transition-colors hover:bg-orange-600 border-2 border-orange-500"
+              >
+                Apply
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* ── Footer ── */}
       <footer
