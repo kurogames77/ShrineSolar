@@ -7,9 +7,7 @@ export default function Navbar() {
 
     const isHome = location.pathname === '/';
 
-    const [isShopOpen, setIsShopOpen] = useState(false);
     const [isInquiryOpen, setIsInquiryOpen] = useState(false);
-    const [isShopClosing, setIsShopClosing] = useState(false);
     const [isInquiryClosing, setIsInquiryClosing] = useState(false);
     const [cursorLabel, setCursorLabel] = useState(null);
     const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
@@ -19,11 +17,10 @@ export default function Navbar() {
         setCursorPos({ x: e.clientX, y: e.clientY });
     };
 
-    const closeShop = () => { setIsShopClosing(true); setTimeout(() => { setIsShopOpen(false); setIsShopClosing(false); }, 300); };
     const closeInquiry = () => { setIsInquiryClosing(true); setTimeout(() => { setIsInquiryOpen(false); setIsInquiryClosing(false); }, 300); };
 
     useEffect(() => {
-        const isAnyOpen = isShopOpen || isInquiryOpen;
+        const isAnyOpen = isInquiryOpen;
         if (isAnyOpen) {
             document.body.style.overflow = 'hidden';
         } else {
@@ -32,7 +29,7 @@ export default function Navbar() {
             document.body.style.overflow = '';
         }
         return () => { document.body.style.overflow = ''; };
-    }, [isShopOpen, isInquiryOpen]);
+    }, [isInquiryOpen]);
 
     // Transparent on home (hero image shows through), white on all other pages
     const bgClass = isHome
@@ -51,9 +48,7 @@ export default function Navbar() {
     const underlineColor = isHome ? 'bg-yellow-400' : 'bg-yellow-500';
 
     const handleNavigation = (path) => {
-        setIsShopOpen(false);
         setIsInquiryOpen(false);
-        setIsShopClosing(false);
         setIsInquiryClosing(false);
         navigate(path);
     };
@@ -79,15 +74,15 @@ export default function Navbar() {
                             style={{ ...textShadow, animationDelay: '0.1s' }}
                         >
                             Home
-                            <span className={`absolute left-0 -bottom-1 h-[2px] ${underlineColor} transition-all duration-300 ${!isShopOpen && !isInquiryOpen && location.pathname === '/' ? 'w-full' : 'w-0 group-hover:w-full'}`}></span>
+                            <span className={`absolute left-0 -bottom-1 h-[2px] ${underlineColor} transition-all duration-300 ${!isInquiryOpen && location.pathname === '/' ? 'w-full' : 'w-0 group-hover:w-full'}`}></span>
                         </button>
                         <button
-                            onClick={() => { setIsInquiryOpen(false); setIsShopOpen(true); }}
+                            onClick={() => handleNavigation('/shop')}
                             className={`relative animate-fade-in font-bold tracking-wide transition-colors text-xs sm:text-sm group ${textClass}`}
                             style={{ ...textShadow, animationDelay: '0.2s' }}
                         >
                             Shop
-                            <span className={`absolute left-0 -bottom-1 h-[2px] ${underlineColor} transition-all duration-300 ${isShopOpen ? 'w-full' : 'w-0 group-hover:w-full'}`}></span>
+                            <span className={`absolute left-0 -bottom-1 h-[2px] ${underlineColor} transition-all duration-300 ${location.pathname === '/shop' ? 'w-full' : 'w-0 group-hover:w-full'}`}></span>
                         </button>
                         <button
                             onClick={() => handleNavigation('/my-cart')}
@@ -109,25 +104,7 @@ export default function Navbar() {
                 </div>
             </nav>
 
-            {/* Shop Modal */}
-            {isShopOpen && (
-                <div className={`fixed inset-0 bg-black/40 flex items-center justify-center z-50 p-4 ${isShopClosing ? 'modal-backdrop-out' : 'modal-backdrop-in'}`} onClick={closeShop}>
-                    <div className={`border-4 border-yellow-300 rounded-3xl w-full max-w-5xl h-[85vh] sm:h-[75vh] flex flex-col shadow-2xl relative ${isShopClosing ? 'modal-panel-out' : 'modal-panel-in'}`} style={{ background: 'linear-gradient(160deg, #FFF9C4 0%, #FFFFFF 40%, #FFFFFF 100%)' }} onClick={(e) => e.stopPropagation()}>
-                        <button onClick={closeShop} className="absolute top-4 right-4 sm:top-6 sm:right-6 text-yellow-800 hover:text-yellow-900 hover:bg-yellow-200 w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center text-xl sm:text-2xl font-bold transition-colors z-10">✕</button>
-                        <div className="flex-grow flex flex-col md:flex-row items-center justify-center gap-6 sm:gap-12 p-8 pt-16 sm:p-12 sm:pt-24 w-full overflow-y-auto">
-                            <button onClick={() => handleNavigation('/solar-panel')} className="contact-card-anim animate-slide-up w-full max-w-[200px] sm:max-w-none sm:w-56 h-32 sm:h-56 flex items-center justify-center shadow-lg transition-all flex-shrink-0" style={{ animationDelay: '0.1s' }}>
-                                <span className="relative z-10 text-yellow-900 font-semibold text-xl sm:text-2xl">Solar Panel</span>
-                            </button>
-                            <button onClick={() => handleNavigation('/battery')} className="contact-card-anim animate-slide-up w-full max-w-[200px] sm:max-w-none sm:w-56 h-32 sm:h-56 flex items-center justify-center shadow-lg transition-all flex-shrink-0" style={{ animationDelay: '0.2s' }}>
-                                <span className="relative z-10 text-yellow-900 font-semibold text-xl sm:text-2xl">Battery</span>
-                            </button>
-                            <button onClick={() => handleNavigation('/accessories')} className="contact-card-anim animate-slide-up w-full max-w-[200px] sm:max-w-none sm:w-56 h-32 sm:h-56 flex items-center justify-center shadow-lg transition-all flex-shrink-0" style={{ animationDelay: '0.3s' }}>
-                                <span className="relative z-10 text-yellow-900 font-semibold text-xl sm:text-2xl">Accessories</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            )}
+
 
             {/* Inquiry Modal */}
             {isInquiryOpen && (
