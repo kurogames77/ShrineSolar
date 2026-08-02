@@ -122,7 +122,7 @@ export default function Battery() {
                 </svg>
               </div>
             </div>
-            <div className="p-6 sm:p-10">
+            <div className="px-6 py-6 sm:px-12 sm:py-10">
               <div className="flex items-center gap-4 mb-2">
                 <h2 className="text-2xl sm:text-4xl font-bold text-gray-900">Product {selectedProduct}</h2>
                 {isInCart(selectedProduct) && (
