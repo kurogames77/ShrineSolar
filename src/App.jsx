@@ -155,7 +155,7 @@ function App() {
             {/* Facebook embed — fades in after hero exits */}
             {showFacebook && (
               <div className="w-full flex flex-col items-center justify-center px-4 facebook-enter" onClick={(e) => e.stopPropagation()}>
-                <div className="bg-white/95 backdrop-blur-sm rounded-3xl shadow-2xl p-4 sm:p-8 w-full max-w-lg sm:max-w-3xl overflow-y-auto relative" style={{ maxHeight: '80vh' }}>
+                <div className="bg-white/95 backdrop-blur-sm rounded-3xl shadow-2xl p-4 sm:p-6 w-full max-w-lg overflow-y-auto relative" style={{ maxHeight: '75vh' }}>
                   {/* X button to close and return to hero text */}
                   <button
                     onClick={(e) => { e.stopPropagation(); setShowFacebook(false); setHeroExiting(false); }}
@@ -175,9 +175,9 @@ function App() {
                       allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
                     />
                     <iframe
-                      src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fshrinesolarservices&tabs=timeline&width=800&height=700&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId"
+                      src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fshrinesolarservices&tabs=timeline&width=500&height=700&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId"
                       className="hidden sm:block w-full"
-                      style={{ border: 'none', overflow: 'hidden', height: '650px' }}
+                      style={{ border: 'none', overflow: 'hidden', height: '500px' }}
                       scrolling="no"
                       frameBorder="0"
                       allowFullScreen={true}
