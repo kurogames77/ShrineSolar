@@ -18,6 +18,8 @@ export default function Shop() {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [appliedCategories, setAppliedCategories] = useState([]);
   const [tempCategories, setTempCategories] = useState([]);
+  const [sortBy, setSortBy] = useState('none');
+  const [tempSortBy, setTempSortBy] = useState('none');
 
   const filterCategoriesList = [
     "Inverters", "Accessories & Monitoring", "Solar Panels", 
@@ -37,9 +39,17 @@ export default function Shop() {
     { id: 9, name: "RSD Switch", category: "Rapid Shutdown Device", price: 2500, stock: 40 },
   ];
 
-  const filteredItems = allProducts.filter((item) =>
+  let filteredItems = allProducts.filter((item) =>
     item.name.toLowerCase().includes(searchText.toLowerCase())
   );
+
+  if (sortBy === 'name') {
+    filteredItems.sort((a, b) => a.name.localeCompare(b.name));
+  } else if (sortBy === 'priceAsc') {
+    filteredItems.sort((a, b) => a.price - b.price);
+  } else if (sortBy === 'stockDesc') {
+    filteredItems.sort((a, b) => b.stock - a.stock);
+  }
 
   useEffect(() => {
     setCartItems(JSON.parse(localStorage.getItem('shrine_cart') || '[]'));
@@ -233,11 +243,11 @@ export default function Shop() {
 
           {/* Filter Button */}
           <button
-            onClick={() => { setTempCategories([...appliedCategories]); setIsFilterOpen(true); }}
-            className={`relative flex items-center justify-center w-10 h-10 sm:w-11 sm:h-11 rounded-full border transition-all duration-150 ease-in-out hover:scale-105 focus:outline-none flex-shrink-0 ${appliedCategories.length > 0 ? 'bg-orange-50 border-orange-500 text-orange-600' : 'bg-white border-gray-300 text-gray-500 hover:text-yellow-500'}`}
-            title="Filter"
+            onClick={() => { setTempCategories([...appliedCategories]); setTempSortBy(sortBy); setIsFilterOpen(true); }}
+            className={`relative flex items-center justify-center w-10 h-10 sm:w-11 sm:h-11 rounded-full border transition-all duration-150 ease-in-out hover:scale-105 focus:outline-none flex-shrink-0 ${(appliedCategories.length > 0 || sortBy !== 'none') ? 'bg-orange-50 border-orange-500 text-orange-600' : 'bg-white border-gray-300 text-gray-500 hover:text-yellow-500'}`}
+            title="Filter & Sort"
           >
-            {appliedCategories.length > 0 && (
+            {(appliedCategories.length > 0 || sortBy !== 'none') && (
               <span className="absolute -top-1 -right-1 w-4 h-4 bg-orange-500 rounded-full flex items-center justify-center border-2 border-white">
                 <svg xmlns="http://www.w3.org/2000/svg" className="w-2.5 h-2.5 text-white" viewBox="0 0 20 20" fill="currentColor">
                   <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
@@ -510,36 +520,77 @@ export default function Shop() {
             >
               ✕
             </button>
-            <h3 className="text-xl sm:text-2xl font-bold text-gray-900 text-center">By Category</h3>
+            <h3 className="text-xl sm:text-2xl font-bold text-gray-900 text-center">Filter & Sort</h3>
             
-            <div className="overflow-y-auto" style={{ maxHeight: '60vh' }}>
-              <div className="grid grid-cols-2 gap-3">
-                {filterCategoriesList.map((cat) => {
-                  const isSelected = tempCategories.includes(cat);
-                  return (
+            <div className="overflow-y-auto pr-2" style={{ maxHeight: '65vh' }}>
+              <div className="flex flex-col gap-6">
+                
+                {/* Sort Section */}
+                <div>
+                  <h4 className="text-sm font-bold text-gray-700 uppercase tracking-wider mb-3">Sort By</h4>
+                  <div className="flex flex-wrap gap-2">
                     <button
-                      key={cat}
-                      onClick={() => {
-                        if (isSelected) {
-                          setTempCategories(tempCategories.filter(c => c !== cat));
-                        } else {
-                          setTempCategories([...tempCategories, cat]);
-                        }
-                      }}
-                      className={`relative overflow-hidden flex items-center justify-center text-center px-2 py-4 rounded-md border-2 transition-all ${isSelected ? 'border-orange-500 bg-white text-orange-600 font-bold' : 'border-transparent bg-gray-100 text-gray-700 hover:bg-gray-200'}`}
-                      style={{ minHeight: '60px' }}
+                      onClick={() => setTempSortBy('none')}
+                      className={`px-4 py-2 rounded-full border-2 text-sm font-medium transition-all ${tempSortBy === 'none' ? 'border-orange-500 bg-orange-50 text-orange-600' : 'border-gray-200 bg-white text-gray-600 hover:border-orange-300'}`}
                     >
-                      {isSelected && (
-                        <div className="absolute top-0 left-0 w-0 h-0 border-t-[24px] border-t-orange-500 border-r-[24px] border-r-transparent">
-                          <svg xmlns="http://www.w3.org/2000/svg" className="absolute -top-[22px] left-[2px] w-3 h-3 text-white" viewBox="0 0 20 20" fill="currentColor">
-                            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                          </svg>
-                        </div>
-                      )}
-                      <span className="text-sm">{cat}</span>
+                      None
                     </button>
-                  );
-                })}
+                    <button
+                      onClick={() => setTempSortBy('name')}
+                      className={`px-4 py-2 rounded-full border-2 text-sm font-medium transition-all ${tempSortBy === 'name' ? 'border-orange-500 bg-orange-50 text-orange-600' : 'border-gray-200 bg-white text-gray-600 hover:border-orange-300'}`}
+                    >
+                      Name
+                    </button>
+                    <button
+                      onClick={() => setTempSortBy('priceAsc')}
+                      className={`px-4 py-2 rounded-full border-2 text-sm font-medium transition-all ${tempSortBy === 'priceAsc' ? 'border-orange-500 bg-orange-50 text-orange-600' : 'border-gray-200 bg-white text-gray-600 hover:border-orange-300'}`}
+                    >
+                      Low - High
+                    </button>
+                    <button
+                      onClick={() => setTempSortBy('stockDesc')}
+                      className={`px-4 py-2 rounded-full border-2 text-sm font-medium transition-all ${tempSortBy === 'stockDesc' ? 'border-orange-500 bg-orange-50 text-orange-600' : 'border-gray-200 bg-white text-gray-600 hover:border-orange-300'}`}
+                    >
+                      Highest Stock
+                    </button>
+                  </div>
+                </div>
+
+                {/* Divider */}
+                <div className="w-full h-px bg-gray-200"></div>
+
+                {/* Categories Section */}
+                <div>
+                  <h4 className="text-sm font-bold text-gray-700 uppercase tracking-wider mb-3">By Category</h4>
+                  <div className="grid grid-cols-2 gap-3">
+                    {filterCategoriesList.map((cat) => {
+                      const isSelected = tempCategories.includes(cat);
+                      return (
+                        <button
+                          key={cat}
+                          onClick={() => {
+                            if (isSelected) {
+                              setTempCategories(tempCategories.filter(c => c !== cat));
+                            } else {
+                              setTempCategories([...tempCategories, cat]);
+                            }
+                          }}
+                          className={`relative overflow-hidden flex items-center justify-center text-center px-2 py-4 rounded-md border-2 transition-all ${isSelected ? 'border-orange-500 bg-white text-orange-600 font-bold' : 'border-transparent bg-gray-100 text-gray-700 hover:bg-gray-200'}`}
+                          style={{ minHeight: '60px' }}
+                        >
+                          {isSelected && (
+                            <div className="absolute top-0 left-0 w-0 h-0 border-t-[24px] border-t-orange-500 border-r-[24px] border-r-transparent">
+                              <svg xmlns="http://www.w3.org/2000/svg" className="absolute -top-[22px] left-[2px] w-3 h-3 text-white" viewBox="0 0 20 20" fill="currentColor">
+                                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                              </svg>
+                            </div>
+                          )}
+                          <span className="text-sm">{cat}</span>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -548,6 +599,8 @@ export default function Shop() {
                 onClick={() => {
                   setTempCategories([]);
                   setAppliedCategories([]);
+                  setTempSortBy('none');
+                  setSortBy('none');
                   setIsFilterOpen(false);
                 }}
                 className="flex-1 py-3 bg-white border-2 border-orange-500 text-orange-500 font-bold text-lg rounded-xl transition-colors hover:bg-orange-50"
@@ -557,6 +610,7 @@ export default function Shop() {
               <button
                 onClick={() => {
                   setAppliedCategories(tempCategories);
+                  setSortBy(tempSortBy);
                   setIsFilterOpen(false);
                 }}
                 className="flex-1 py-3 bg-orange-500 text-white font-bold text-lg rounded-xl transition-colors hover:bg-orange-600 border-2 border-orange-500"
