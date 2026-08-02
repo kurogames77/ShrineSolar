@@ -482,9 +482,9 @@ export default function Shop() {
             >
               ✕
             </button>
-            <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4 text-center pb-4 border-b">By Category</h3>
+            <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-8 text-center">By Category</h3>
             
-            <div className="overflow-y-auto mb-4" style={{ maxHeight: '60vh' }}>
+            <div className="overflow-y-auto mb-8" style={{ maxHeight: '60vh' }}>
               <div className="grid grid-cols-2 gap-3">
                 {filterCategoriesList.map((cat) => {
                   const isSelected = tempCategories.includes(cat);
