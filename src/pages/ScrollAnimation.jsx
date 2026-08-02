@@ -30,7 +30,7 @@ export default function ScrollAnimation() {
   };
 
   const slideshowImages = [
-    '/highqual1.jpg',
+    '/highqual_new.png',
     '/highqual2.jpg',
     '/highqual3.jpg',
     '/highqual4.jpg',
