@@ -45,13 +45,13 @@ function App() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Scroll to top on page refresh
+  // Scroll to top on route change
   useEffect(() => {
     if ('scrollRestoration' in history) {
       history.scrollRestoration = 'manual';
     }
     window.scrollTo(0, 0);
-  }, []);
+  }, [location.pathname]);
 
   // Reset Facebook view when leaving home
   useEffect(() => {
