@@ -181,8 +181,8 @@ export default function Shop() {
       {/* Product Detail Modal */}
       {selectedProduct && (
         <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50" onClick={() => setSelectedProduct(null)}>
-          <div className="bg-white w-full h-full sm:h-[90vh] sm:max-w-4xl sm:rounded-3xl shadow-2xl overflow-y-auto" onClick={(e) => e.stopPropagation()}>
-            <div className="relative">
+          <div className="bg-white w-full h-full sm:h-[95vh] sm:max-w-6xl sm:rounded-3xl shadow-2xl flex flex-col overflow-hidden" onClick={(e) => e.stopPropagation()}>
+            <div className="relative flex-shrink-0">
               <button
                 onClick={() => setSelectedProduct(null)}
                 className="absolute top-4 right-4 w-10 h-10 bg-black/40 hover:bg-black/60 text-white rounded-full flex items-center justify-center text-xl font-bold transition-colors z-10"
@@ -195,26 +195,30 @@ export default function Shop() {
                 </svg>
               </div>
             </div>
-            <div style={{ padding: '24px', paddingLeft: '10px', paddingRight: '10px' }}>
-              <div className="flex items-center gap-4 mb-2">
-                <h2 className="text-2xl sm:text-4xl font-bold text-gray-900">Product {selectedProduct}</h2>
-                {isInCart(selectedProduct) && (
-                  <svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8 text-green-600" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                  </svg>
-                )}
+            <div className="flex flex-col flex-1 overflow-hidden" style={{ padding: '24px', paddingLeft: '10px', paddingRight: '10px', paddingBottom: '10px' }}>
+              <div className="flex-1 overflow-y-auto pr-2">
+                <div className="flex items-center gap-4 mb-2">
+                  <h2 className="text-2xl sm:text-4xl font-bold text-gray-900">Product {selectedProduct}</h2>
+                  {isInCart(selectedProduct) && (
+                    <svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8 text-green-600" viewBox="0 0 20 20" fill="currentColor">
+                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                    </svg>
+                  )}
+                </div>
+                <p className="text-xl sm:text-2xl font-semibold text-amber-600 mb-4">₱0.00</p>
+                <p className="text-base sm:text-lg text-gray-500 mb-8">No Description Provided</p>
               </div>
-              <p className="text-xl sm:text-2xl font-semibold text-amber-600 mb-4">₱0.00</p>
-              <p className="text-base sm:text-lg text-gray-500 mb-8">No Description Provided</p>
-              <button
-                onClick={() => { setSelectedProduct(null); openQuantityModal(selectedProduct); }}
-                className="w-full py-4 sm:py-5 bg-amber-500 hover:bg-amber-600 text-white font-bold text-lg sm:text-xl rounded-xl transition-colors shadow-lg flex items-center justify-center gap-3"
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 sm:w-7 sm:h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 100 4 2 2 0 000-4z" />
-                </svg>
-                {isInCart(selectedProduct) ? 'Update Cart' : 'Add to Cart'}
-              </button>
+              <div className="mt-auto pt-4 flex-shrink-0">
+                <button
+                  onClick={() => { setSelectedProduct(null); openQuantityModal(selectedProduct); }}
+                  className="w-full py-4 sm:py-5 bg-amber-500 hover:bg-amber-600 text-white font-bold text-lg sm:text-xl rounded-xl transition-colors shadow-lg flex items-center justify-center gap-3"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 sm:w-7 sm:h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 100 4 2 2 0 000-4z" />
+                  </svg>
+                  {isInCart(selectedProduct) ? 'Update Cart' : 'Add to Cart'}
+                </button>
+              </div>
             </div>
           </div>
         </div>
