@@ -43,6 +43,11 @@ export default function ScrollAnimation() {
     '/endpage2.jpg',
     '/endpage3.jpg',
     '/endpage4.jpg',
+    '/endpage5.jpg',
+    '/endpage6.jpg',
+    '/endpage7.jpg',
+    '/endpage8.jpg',
+    '/endpage9.jpg',
   ];
 
   // Auto-advance main slideshow every 3 seconds
