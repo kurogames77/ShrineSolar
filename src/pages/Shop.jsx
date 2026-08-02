@@ -12,6 +12,9 @@ export default function Shop() {
   const [imagePreview, setImagePreview] = useState(false);
   const [zoomLevel, setZoomLevel] = useState(1);
   const [initialPinchDistance, setInitialPinchDistance] = useState(null);
+  const [pan, setPan] = useState({ x: 0, y: 0 });
+  const [isDragging, setIsDragging] = useState(false);
+  const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
 
   const filteredItems = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].filter((item) =>
     `Product ${item}`.toLowerCase().includes(searchText.toLowerCase())
@@ -27,12 +30,29 @@ export default function Shop() {
     setQuantityModal(item);
   };
 
+  const handleMouseDown = (e) => {
+    setIsDragging(true);
+    setDragStart({ x: e.clientX - pan.x, y: e.clientY - pan.y });
+  };
+
+  const handleMouseMove = (e) => {
+    if (!isDragging) return;
+    setPan({ x: e.clientX - dragStart.x, y: e.clientY - dragStart.y });
+  };
+
+  const handleMouseUp = () => {
+    setIsDragging(false);
+  };
+
   const handleTouchStart = (e) => {
     if (e.touches.length === 2) {
       const touch1 = e.touches[0];
       const touch2 = e.touches[1];
       const dist = Math.hypot(touch1.clientX - touch2.clientX, touch1.clientY - touch2.clientY);
       setInitialPinchDistance(dist);
+    } else if (e.touches.length === 1) {
+      setIsDragging(true);
+      setDragStart({ x: e.touches[0].clientX - pan.x, y: e.touches[0].clientY - pan.y });
     }
   };
 
@@ -49,11 +69,14 @@ export default function Shop() {
         setZoomLevel(prev => Math.max(0.5, prev - 0.1));
         setInitialPinchDistance(dist);
       }
+    } else if (e.touches.length === 1 && isDragging) {
+      setPan({ x: e.touches[0].clientX - dragStart.x, y: e.touches[0].clientY - dragStart.y });
     }
   };
 
   const handleTouchEnd = () => {
     setInitialPinchDistance(null);
+    setIsDragging(false);
   };
 
   const confirmAddToCart = () => {
@@ -224,7 +247,7 @@ export default function Shop() {
                 </button>
                 <div 
                   className="w-full h-64 sm:h-[400px] bg-gray-300 flex items-center justify-center cursor-pointer transition-opacity hover:opacity-90"
-                  onClick={() => { setImagePreview(true); setZoomLevel(1); }}
+                  onClick={() => { setImagePreview(true); setZoomLevel(1); setPan({ x: 0, y: 0 }); }}
                   title="Click to zoom image"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" className="w-20 h-20 sm:w-28 sm:h-28 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1}>
@@ -334,14 +357,21 @@ export default function Shop() {
             ✕
           </button>
           
-          <div className="flex-1 w-full flex items-center justify-center overflow-auto" onClick={(e) => e.stopPropagation()}>
+          <div 
+            className="flex-1 w-full flex items-center justify-center overflow-hidden" 
+            onClick={(e) => e.stopPropagation()}
+            onMouseMove={handleMouseMove}
+            onMouseUp={handleMouseUp}
+            onMouseLeave={handleMouseUp}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
+          >
             <div 
-              className="bg-gray-300 flex items-center justify-center transition-transform duration-200 shadow-2xl touch-none cursor-zoom-in" 
-              style={{ transform: `scale(${zoomLevel})`, width: '400px', height: '400px', minWidth: '400px', minHeight: '400px' }}
+              className={`bg-gray-300 flex items-center justify-center shadow-2xl touch-none select-none ${isDragging ? 'cursor-grabbing' : 'cursor-grab'} ${!isDragging ? 'transition-transform duration-200' : ''}`} 
+              style={{ transform: `translate(${pan.x}px, ${pan.y}px) scale(${zoomLevel})`, width: '400px', height: '400px', minWidth: '400px', minHeight: '400px' }}
               onDoubleClick={() => setZoomLevel(zoomLevel === 1 ? 2 : 1)}
+              onMouseDown={handleMouseDown}
               onTouchStart={handleTouchStart}
-              onTouchMove={handleTouchMove}
-              onTouchEnd={handleTouchEnd}
             >
               <svg xmlns="http://www.w3.org/2000/svg" className="w-40 h-40 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
