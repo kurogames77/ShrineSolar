@@ -181,7 +181,7 @@ export default function Shop() {
       {/* Product Detail Modal */}
       {selectedProduct && (
         <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50" onClick={() => setSelectedProduct(null)}>
-          <div className="bg-white w-full h-full sm:h-[95vh] sm:max-w-6xl sm:rounded-3xl shadow-2xl flex flex-col overflow-hidden" onClick={(e) => e.stopPropagation()}>
+          <div className="bg-white w-full h-full sm:h-[95vh] sm:w-[95vw] sm:max-w-7xl sm:rounded-3xl shadow-2xl flex flex-col overflow-hidden" onClick={(e) => e.stopPropagation()}>
             <div className="relative flex-shrink-0">
               <button
                 onClick={() => setSelectedProduct(null)}
@@ -206,7 +206,9 @@ export default function Shop() {
                   )}
                 </div>
                 <p className="text-xl sm:text-2xl font-semibold text-amber-600 mb-4">₱0.00</p>
-                <p className="text-base sm:text-lg text-gray-500 mb-8">No Description Provided</p>
+                <p className="text-base sm:text-lg text-gray-500 mb-8">
+                  Discover the ultimate in renewable energy with our cutting-edge solar panels. Designed for maximum efficiency and durability, these panels harness the power of the sun to provide a sustainable and cost-effective energy solution for your home or business. Featuring advanced photovoltaic technology, they ensure optimal performance even in low-light conditions. The sleek, low-profile design seamlessly integrates with any roof type, offering both aesthetic appeal and robust weather resistance. By switching to our solar panels, you not only significantly reduce your electricity bills but also contribute to a greener planet by lowering your carbon footprint. Easy to install and backed by an industry-leading warranty, this solar solution is your step towards energy independence and a sustainable future. Upgrade today and let the sun power your life!
+                </p>
               </div>
               <div className="mt-auto pt-4 flex-shrink-0">
                 <button
