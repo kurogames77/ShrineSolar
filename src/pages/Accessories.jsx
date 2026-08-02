@@ -122,7 +122,7 @@ export default function Accessories() {
                 </svg>
               </div>
             </div>
-            <div style={{ padding: '24px', paddingLeft: '20px', paddingRight: '20px' }}>
+            <div style={{ padding: '24px', paddingLeft: '10px', paddingRight: '10px' }}>
               <div className="flex items-center gap-4 mb-2">
                 <h2 className="text-2xl sm:text-4xl font-bold text-gray-900">Product {selectedProduct}</h2>
                 {isInCart(selectedProduct) && (
