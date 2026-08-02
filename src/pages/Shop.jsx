@@ -25,8 +25,20 @@ export default function Shop() {
     "PV Mounting Accessories", "Breakers & SPD's", "Rapid Shutdown Device"
   ];
 
-  const filteredItems = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].filter((item) =>
-    `Product ${item}`.toLowerCase().includes(searchText.toLowerCase())
+  const allProducts = [
+    { id: 1, name: "Inverter Model X", category: "Inverters", price: 15000, stock: 10 },
+    { id: 2, name: "Monitoring System Y", category: "Accessories & Monitoring", price: 5000, stock: 25 },
+    { id: 3, name: "Solar Panel 400W", category: "Solar Panels", price: 8000, stock: 50 },
+    { id: 4, name: "Lithium Battery 5kWh", category: "Energy Storage", price: 60000, stock: 5 },
+    { id: 5, name: "Portable Station 500W", category: "Solar Portable Power Station", price: 20000, stock: 15 },
+    { id: 6, name: "PV Wire 10AWG", category: "Wires", price: 100, stock: 200 },
+    { id: 7, name: "Mounting Rail 2m", category: "PV Mounting Accessories", price: 500, stock: 100 },
+    { id: 8, name: "DC Breaker 32A", category: "Breakers & SPD's", price: 300, stock: 80 },
+    { id: 9, name: "RSD Switch", category: "Rapid Shutdown Device", price: 2500, stock: 40 },
+  ];
+
+  const filteredItems = allProducts.filter((item) =>
+    item.name.toLowerCase().includes(searchText.toLowerCase())
   );
 
   useEffect(() => {
@@ -45,7 +57,7 @@ export default function Shop() {
   }, [selectedProduct, quantityModal, imagePreview, isFilterOpen]);
 
   const openQuantityModal = (item) => {
-    const existing = cartItems.find(c => c.name === `Product ${item}` && c.category === 'Shop');
+    const existing = cartItems.find(c => c.name === item.name && c.category === 'Shop');
     setQuantity(existing ? existing.quantity : 1);
     setQuantityModal(item);
   };
@@ -112,11 +124,11 @@ export default function Shop() {
       if (result.isConfirmed) {
         const item = quantityModal;
         const cart = JSON.parse(localStorage.getItem('shrine_cart') || '[]');
-        const existingIndex = cart.findIndex(c => c.name === `Product ${item}` && c.category === 'Shop');
+        const existingIndex = cart.findIndex(c => c.name === item.name && c.category === 'Shop');
         if (existingIndex !== -1) {
           cart[existingIndex].quantity = quantity;
         } else {
-          cart.push({ name: `Product ${item}`, category: 'Shop', price: 0, quantity });
+          cart.push({ name: item.name, category: 'Shop', price: item.price, quantity });
         }
         localStorage.setItem('shrine_cart', JSON.stringify(cart));
         setCartItems(cart);
@@ -124,7 +136,7 @@ export default function Shop() {
         Swal.fire({
           icon: 'success',
           title: 'Success!',
-          text: `Product ${item} (x${quantity}) has been updated in your cart!`,
+          text: `${item.name} (x${quantity}) has been updated in your cart!`,
           confirmButtonColor: '#f59e0b',
           timer: 2000,
           timerProgressBar: true,
@@ -146,14 +158,14 @@ export default function Shop() {
       if (result.isConfirmed) {
         const item = quantityModal;
         let cart = JSON.parse(localStorage.getItem('shrine_cart') || '[]');
-        cart = cart.filter(c => !(c.name === `Product ${item}` && c.category === 'Shop'));
+        cart = cart.filter(c => !(c.name === item.name && c.category === 'Shop'));
         localStorage.setItem('shrine_cart', JSON.stringify(cart));
         setCartItems(cart);
         setQuantityModal(null);
         Swal.fire({
           icon: 'success',
           title: 'Removed!',
-          text: `Product ${item} has been removed from your cart.`,
+          text: `${item.name} has been removed from your cart.`,
           confirmButtonColor: '#f59e0b',
           timer: 2000,
           timerProgressBar: true,
@@ -162,7 +174,7 @@ export default function Shop() {
     });
   };
 
-  const isInCart = (item) => cartItems.some(c => c.name === `Product ${item}` && c.category === 'Shop');
+  const isInCart = (item) => item ? cartItems.some(c => c.name === item.name && c.category === 'Shop') : false;
 
   return (
     <div className="w-full min-h-screen bg-[#eef2f7] flex flex-col items-center">
@@ -247,58 +259,70 @@ export default function Shop() {
             <p className="text-gray-500 text-lg">No products found matching "{searchText}"</p>
           </div>
         ) : (
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4 w-full">
-            {filteredItems.map((item) => (
-              <div
-                key={item}
-              className="group relative bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer border border-white"
-              onClick={() => setSelectedProduct(item)}
-            >
-              {/* Product Image Area */}
-              <div className="relative w-full aspect-square bg-gray-100 flex items-center justify-center overflow-hidden">
-                <svg xmlns="http://www.w3.org/2000/svg" className="w-16 h-16 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                </svg>
+          <div className="w-full flex flex-col gap-12">
+            {(appliedCategories.length > 0 ? appliedCategories : filterCategoriesList).map((cat) => {
+              const productsInCat = filteredItems.filter(p => p.category === cat);
+              if (productsInCat.length === 0) return null;
+              
+              return (
+                <div key={cat} className="w-full">
+                  <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 text-center mb-6">{cat}</h2>
+                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4 w-full">
+                    {productsInCat.map((item) => (
+                      <div
+                        key={item.id}
+                        className="group relative bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer border border-white"
+                        onClick={() => setSelectedProduct(item)}
+                      >
+                        {/* Product Image Area */}
+                        <div className="relative w-full aspect-square bg-gray-100 flex items-center justify-center overflow-hidden">
+                          <svg xmlns="http://www.w3.org/2000/svg" className="w-16 h-16 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1}>
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                          </svg>
 
-                {/* Cart Icon & Badge — top right */}
-                <div className="absolute top-2 right-2 z-10">
-                  <button
-                    onClick={(e) => { e.stopPropagation(); openQuantityModal(item); }}
-                    className="w-8 h-8 bg-white/90 hover:bg-amber-400 rounded-full flex items-center justify-center shadow-md transition-colors"
-                    title="Add to Cart"
-                  >
-                    <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 100 4 2 2 0 000-4z" />
-                    </svg>
-                  </button>
-                  {isInCart(item) && (
-                    <div className="absolute -top-1 -right-1 bg-white rounded-full">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 text-green-600" viewBox="0 0 20 20" fill="currentColor" title="Added to Cart">
-                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                      </svg>
-                    </div>
-                  )}
-                </div>
+                          {/* Cart Icon & Badge — top right */}
+                          <div className="absolute top-2 right-2 z-10">
+                            <button
+                              onClick={(e) => { e.stopPropagation(); openQuantityModal(item); }}
+                              className="w-8 h-8 bg-white/90 hover:bg-amber-400 rounded-full flex items-center justify-center shadow-md transition-colors"
+                              title="Add to Cart"
+                            >
+                              <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 100 4 2 2 0 000-4z" />
+                              </svg>
+                            </button>
+                            {isInCart(item) && (
+                              <div className="absolute -top-1 -right-1 bg-white rounded-full">
+                                <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 text-green-600" viewBox="0 0 20 20" fill="currentColor" title="Added to Cart">
+                                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                                </svg>
+                              </div>
+                            )}
+                          </div>
 
-                {/* Orange Hover Overlay with "View Product" */}
-                <div className="absolute inset-0 bg-orange-500/0 group-hover:bg-orange-500/20 transition-all duration-300 flex items-end justify-center">
-                  <div className="w-full bg-orange-500 text-white text-center py-2.5 font-semibold text-sm translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                    View Product
+                          {/* Orange Hover Overlay with "View Product" */}
+                          <div className="absolute inset-0 bg-orange-500/0 group-hover:bg-orange-500/20 transition-all duration-300 flex items-end justify-center">
+                            <div className="w-full bg-orange-500 text-white text-center py-2.5 font-semibold text-sm translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                              View Product
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Product Info */}
+                        <div style={{ padding: '8px' }}>
+                          <h3 className="text-sm font-medium text-gray-800 leading-tight mb-1 line-clamp-2" style={{ minHeight: '2.5em' }}>
+                            {item.name}
+                          </h3>
+                          <p className="text-base font-bold text-orange-600 mb-1">₱{item.price.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
+                          <p className="text-xs text-gray-400">{item.stock} Stocks</p>
+                        </div>
+                      </div>
+                    ))}
                   </div>
                 </div>
-              </div>
-
-              {/* Product Info */}
-              <div style={{ padding: '8px' }}>
-                <h3 className="text-sm font-medium text-gray-800 leading-tight mb-1 line-clamp-2" style={{ minHeight: '2.5em' }}>
-                  Product {item}
-                </h3>
-                <p className="text-base font-bold text-orange-600 mb-1">₱0.00</p>
-                <p className="text-xs text-gray-400">100 Stocks</p>
-              </div>
-            </div>
-          ))}
-        </div>
+              );
+            })}
+          </div>
         )}
       </div>
 
@@ -326,14 +350,14 @@ export default function Shop() {
               </div>
               <div style={{ padding: '24px', paddingLeft: '10px', paddingRight: '10px' }}>
                 <div className="flex items-center gap-4 mb-2">
-                  <h2 className="text-2xl sm:text-4xl font-bold text-gray-900">Product {selectedProduct}</h2>
+                  <h2 className="text-2xl sm:text-4xl font-bold text-gray-900">{selectedProduct.name}</h2>
                   {isInCart(selectedProduct) && (
                     <svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8 text-green-600" viewBox="0 0 20 20" fill="currentColor">
                       <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                     </svg>
                   )}
                 </div>
-                <p className="text-xl sm:text-2xl font-semibold text-amber-600 mb-4">₱0.00</p>
+                <p className="text-xl sm:text-2xl font-semibold text-amber-600 mb-4">₱{selectedProduct.price.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
                 <p className="text-base sm:text-lg text-gray-500 mb-8">
                   Discover the ultimate in renewable energy with our cutting-edge solar panels. Designed for maximum efficiency and durability, these panels harness the power of the sun to provide a sustainable and cost-effective energy solution for your home or business. Featuring advanced photovoltaic technology, they ensure optimal performance even in low-light conditions. The sleek, low-profile design seamlessly integrates with any roof type, offering both aesthetic appeal and robust weather resistance. By switching to our solar panels, you not only significantly reduce your electricity bills but also contribute to a greener planet by lowering your carbon footprint. Easy to install and backed by an industry-leading warranty, this solar solution is your step towards energy independence and a sustainable future. Upgrade today and let the sun power your life!
                 </p>
@@ -379,9 +403,9 @@ export default function Shop() {
             </div>
 
             {/* Product Name */}
-            <p className="text-gray-700 font-medium text-center" style={{ marginBottom: '4px' }}>Product {quantityModal}</p>
+            <p className="text-gray-700 font-medium text-center line-clamp-2" style={{ marginBottom: '4px' }}>{quantityModal.name}</p>
             {/* Stocks */}
-            <p className="text-xs text-gray-400 text-center" style={{ marginBottom: '16px' }}>100 Stocks</p>
+            <p className="text-xs text-gray-400 text-center" style={{ marginBottom: '16px' }}>{quantityModal.stock} Stocks</p>
 
             {/* Quantity Selector */}
             <div className="flex items-center justify-center gap-4" style={{ marginBottom: '12px' }}>
@@ -402,7 +426,7 @@ export default function Shop() {
 
             {/* Total Line */}
             <p className="text-sm text-gray-600 text-center" style={{ marginBottom: '16px' }}>
-              Total ({quantity} {quantity === 1 ? 'item' : 'items'}): <span className="font-bold text-orange-500">₱0.00</span>
+              Total ({quantity} {quantity === 1 ? 'item' : 'items'}): <span className="font-bold text-orange-500">₱{(quantityModal.price * quantity).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
             </p>
 
             <div className="px-4 sm:px-6 w-full pb-2 flex flex-col gap-3">
