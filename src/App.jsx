@@ -155,7 +155,7 @@ function App() {
             {/* Facebook embed — fades in after hero exits */}
             {showFacebook && (
               <div className="w-full flex flex-col items-center justify-center px-4 facebook-enter" onClick={(e) => e.stopPropagation()}>
-                <div className="bg-white/95 backdrop-blur-sm rounded-3xl shadow-2xl p-4 sm:p-6 w-full max-w-lg sm:max-w-[550px] overflow-y-auto relative" style={{ maxHeight: '75vh' }}>
+                <div className="bg-white/95 backdrop-blur-sm rounded-3xl shadow-2xl p-4 sm:p-6 w-full max-w-lg overflow-y-auto relative" style={{ maxHeight: '75vh' }}>
                   {/* X button to close and return to hero text */}
                   <button
                     onClick={(e) => { e.stopPropagation(); setShowFacebook(false); setHeroExiting(false); }}
