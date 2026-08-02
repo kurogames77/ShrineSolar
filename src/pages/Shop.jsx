@@ -266,9 +266,9 @@ export default function Shop() {
               
               return (
                 <div key={cat} className="w-full">
-                  <div className="flex items-center justify-center mb-6 px-4">
+                  <div className="flex items-center justify-center mb-10 px-4">
                     <div className="flex-grow border-t border-gray-300"></div>
-                    <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 mx-6 text-center">{cat}</h2>
+                    <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 mx-10 text-center">{cat}</h2>
                     <div className="flex-grow border-t border-gray-300"></div>
                   </div>
                   <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4 w-full">
