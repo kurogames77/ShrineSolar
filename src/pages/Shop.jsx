@@ -388,20 +388,22 @@ export default function Shop() {
               Total ({quantity} {quantity === 1 ? 'item' : 'items'}): <span className="font-bold text-orange-500">₱0.00</span>
             </p>
 
-            <button
-              onClick={confirmAddToCart}
-              className="w-full py-3 sm:py-4 bg-amber-500 hover:bg-amber-600 text-white font-bold text-lg rounded-xl transition-colors shadow-lg"
-            >
-              Confirm
-            </button>
-            {isInCart(quantityModal) && (
+            <div className="px-4 sm:px-6 w-full pb-2">
               <button
-                onClick={removeFromCart}
-                className="w-full py-3 sm:py-4 mt-3 bg-red-500 hover:bg-red-600 text-white font-bold text-lg rounded-xl transition-colors shadow-lg"
+                onClick={confirmAddToCart}
+                className="w-full py-3 sm:py-4 bg-amber-500 hover:bg-amber-600 text-white font-bold text-lg rounded-xl transition-colors shadow-lg"
               >
-                Remove Quantity
+                Confirm
               </button>
-            )}
+              {isInCart(quantityModal) && (
+                <button
+                  onClick={removeFromCart}
+                  className="w-full py-3 sm:py-4 mt-3 bg-red-500 hover:bg-red-600 text-white font-bold text-lg rounded-xl transition-colors shadow-lg"
+                >
+                  Remove Quantity
+                </button>
+              )}
+            </div>
           </div>
         </div>
       )}
