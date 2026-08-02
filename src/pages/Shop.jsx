@@ -29,14 +29,23 @@ export default function Shop() {
 
   const allProducts = [
     { id: 1, name: "Inverter Model X", category: "Inverters", price: 15000, stock: 10 },
+    { id: 10, name: "Grid-Tie Inverter 5kW", category: "Inverters", price: 25000, stock: 8 },
     { id: 2, name: "Monitoring System Y", category: "Accessories & Monitoring", price: 5000, stock: 25 },
+    { id: 11, name: "Smart Energy Meter", category: "Accessories & Monitoring", price: 3500, stock: 15 },
     { id: 3, name: "Solar Panel 400W", category: "Solar Panels", price: 8000, stock: 50 },
+    { id: 12, name: "Solar Panel 550W", category: "Solar Panels", price: 11000, stock: 40 },
     { id: 4, name: "Lithium Battery 5kWh", category: "Energy Storage", price: 60000, stock: 5 },
+    { id: 13, name: "Deep Cycle Battery 200Ah", category: "Energy Storage", price: 18000, stock: 12 },
     { id: 5, name: "Portable Station 500W", category: "Solar Portable Power Station", price: 20000, stock: 15 },
+    { id: 14, name: "Portable Power Station 1000W", category: "Solar Portable Power Station", price: 35000, stock: 8 },
     { id: 6, name: "PV Wire 10AWG", category: "Wires", price: 100, stock: 200 },
+    { id: 15, name: "PV Wire 12AWG", category: "Wires", price: 80, stock: 300 },
     { id: 7, name: "Mounting Rail 2m", category: "PV Mounting Accessories", price: 500, stock: 100 },
+    { id: 16, name: "L-Foot Bracket", category: "PV Mounting Accessories", price: 150, stock: 250 },
     { id: 8, name: "DC Breaker 32A", category: "Breakers & SPD's", price: 300, stock: 80 },
+    { id: 17, name: "AC Surge Protector", category: "Breakers & SPD's", price: 850, stock: 60 },
     { id: 9, name: "RSD Switch", category: "Rapid Shutdown Device", price: 2500, stock: 40 },
+    { id: 18, name: "RSD Transmitter", category: "Rapid Shutdown Device", price: 4500, stock: 20 },
   ];
 
   let filteredItems = allProducts.filter((item) =>
@@ -528,31 +537,32 @@ export default function Shop() {
                 {/* Sort Section */}
                 <div>
                   <h4 className="text-sm font-bold text-gray-700 uppercase tracking-wider mb-3">Sort By</h4>
-                  <div className="flex flex-wrap gap-2">
-                    <button
-                      onClick={() => setTempSortBy('none')}
-                      className={`px-4 py-2 rounded-full border-2 text-sm font-medium transition-all ${tempSortBy === 'none' ? 'border-orange-500 bg-orange-50 text-orange-600' : 'border-gray-200 bg-white text-gray-600 hover:border-orange-300'}`}
-                    >
-                      None
-                    </button>
-                    <button
-                      onClick={() => setTempSortBy('name')}
-                      className={`px-4 py-2 rounded-full border-2 text-sm font-medium transition-all ${tempSortBy === 'name' ? 'border-orange-500 bg-orange-50 text-orange-600' : 'border-gray-200 bg-white text-gray-600 hover:border-orange-300'}`}
-                    >
-                      Name
-                    </button>
-                    <button
-                      onClick={() => setTempSortBy('priceAsc')}
-                      className={`px-4 py-2 rounded-full border-2 text-sm font-medium transition-all ${tempSortBy === 'priceAsc' ? 'border-orange-500 bg-orange-50 text-orange-600' : 'border-gray-200 bg-white text-gray-600 hover:border-orange-300'}`}
-                    >
-                      Low - High
-                    </button>
-                    <button
-                      onClick={() => setTempSortBy('stockDesc')}
-                      className={`px-4 py-2 rounded-full border-2 text-sm font-medium transition-all ${tempSortBy === 'stockDesc' ? 'border-orange-500 bg-orange-50 text-orange-600' : 'border-gray-200 bg-white text-gray-600 hover:border-orange-300'}`}
-                    >
-                      Highest Stock
-                    </button>
+                  <div className="grid grid-cols-2 gap-3">
+                    {[
+                      { id: 'none', label: 'None' },
+                      { id: 'name', label: 'Name' },
+                      { id: 'priceAsc', label: 'Low - High' },
+                      { id: 'stockDesc', label: 'Highest Stock' }
+                    ].map((option) => {
+                      const isSelected = tempSortBy === option.id;
+                      return (
+                        <button
+                          key={option.id}
+                          onClick={() => setTempSortBy(option.id)}
+                          className={`relative overflow-hidden flex items-center justify-center text-center px-2 py-4 rounded-md border-2 transition-all ${isSelected ? 'border-orange-500 bg-white text-orange-600 font-bold' : 'border-transparent bg-gray-100 text-gray-700 hover:bg-gray-200'}`}
+                          style={{ minHeight: '60px' }}
+                        >
+                          {isSelected && (
+                            <div className="absolute top-0 left-0 w-0 h-0 border-t-[24px] border-t-orange-500 border-r-[24px] border-r-transparent">
+                              <svg xmlns="http://www.w3.org/2000/svg" className="absolute -top-[22px] left-[2px] w-3 h-3 text-white" viewBox="0 0 20 20" fill="currentColor">
+                                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                              </svg>
+                            </div>
+                          )}
+                          <span className="text-sm">{option.label}</span>
+                        </button>
+                      );
+                    })}
                   </div>
                 </div>
 
