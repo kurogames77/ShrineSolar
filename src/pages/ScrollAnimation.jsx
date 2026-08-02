@@ -31,7 +31,7 @@ export default function ScrollAnimation() {
 
   const slideshowImages = [
     '/highqual_new.png',
-    '/highqual2.jpg',
+    '/highqual_new2.jpg',
     '/highqual3.jpg',
     '/highqual4.jpg',
   ];
