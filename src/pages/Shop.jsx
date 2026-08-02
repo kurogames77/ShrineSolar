@@ -9,6 +9,8 @@ export default function Shop() {
   const [quantity, setQuantity] = useState(1);
   const [cartItems, setCartItems] = useState([]);
   const [searchText, setSearchText] = useState('');
+  const [imagePreview, setImagePreview] = useState(false);
+  const [zoomLevel, setZoomLevel] = useState(1);
 
   const filteredItems = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].filter((item) =>
     `Product ${item}`.toLowerCase().includes(searchText.toLowerCase())
@@ -190,7 +192,11 @@ export default function Shop() {
                 >
                   ✕
                 </button>
-                <div className="w-full h-64 sm:h-[400px] bg-gray-300 flex items-center justify-center">
+                <div 
+                  className="w-full h-64 sm:h-[400px] bg-gray-300 flex items-center justify-center cursor-pointer transition-opacity hover:opacity-90"
+                  onClick={() => { setImagePreview(true); setZoomLevel(1); }}
+                  title="Click to zoom image"
+                >
                   <svg xmlns="http://www.w3.org/2000/svg" className="w-20 h-20 sm:w-28 sm:h-28 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                   </svg>
@@ -282,6 +288,40 @@ export default function Shop() {
               className="w-full py-3 sm:py-4 bg-amber-500 hover:bg-amber-600 text-white font-bold text-lg rounded-xl transition-colors shadow-lg"
             >
               Confirm
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Image Preview Modal */}
+      {imagePreview && (
+        <div className="fixed inset-0 bg-black/90 flex flex-col items-center justify-center z-[70] p-4" onClick={() => setImagePreview(false)}>
+          <button
+            onClick={() => setImagePreview(false)}
+            className="absolute top-4 right-4 w-12 h-12 bg-white/20 hover:bg-white/40 text-white rounded-full flex items-center justify-center text-2xl font-bold transition-colors z-10"
+            title="Close"
+          >
+            ✕
+          </button>
+          
+          <div className="flex-1 w-full flex items-center justify-center overflow-auto" onClick={(e) => e.stopPropagation()}>
+            <div 
+              className="bg-gray-300 flex items-center justify-center transition-transform duration-200 shadow-2xl" 
+              style={{ transform: `scale(${zoomLevel})`, width: '400px', height: '400px', minWidth: '400px', minHeight: '400px' }}
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="w-40 h-40 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+            </div>
+          </div>
+
+          <div className="absolute bottom-8 flex items-center gap-6 bg-black/50 px-6 py-3 rounded-full" onClick={(e) => e.stopPropagation()}>
+            <button onClick={() => setZoomLevel(Math.max(0.5, zoomLevel - 0.25))} className="w-10 h-10 bg-white/20 hover:bg-white/40 rounded-full text-white text-2xl flex items-center justify-center transition-colors">
+              −
+            </button>
+            <span className="text-white text-lg font-medium min-w-[4ch] text-center">{Math.round(zoomLevel * 100)}%</span>
+            <button onClick={() => setZoomLevel(Math.min(3, zoomLevel + 0.25))} className="w-10 h-10 bg-white/20 hover:bg-white/40 rounded-full text-white text-2xl flex items-center justify-center transition-colors">
+              +
             </button>
           </div>
         </div>
