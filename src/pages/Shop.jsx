@@ -11,6 +11,7 @@ export default function Shop() {
   const [searchText, setSearchText] = useState('');
   const [imagePreview, setImagePreview] = useState(false);
   const [zoomLevel, setZoomLevel] = useState(1);
+  const [initialPinchDistance, setInitialPinchDistance] = useState(null);
 
   const filteredItems = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].filter((item) =>
     `Product ${item}`.toLowerCase().includes(searchText.toLowerCase())
@@ -24,6 +25,35 @@ export default function Shop() {
     const existing = cartItems.find(c => c.name === `Product ${item}` && c.category === 'Shop');
     setQuantity(existing ? existing.quantity : 1);
     setQuantityModal(item);
+  };
+
+  const handleTouchStart = (e) => {
+    if (e.touches.length === 2) {
+      const touch1 = e.touches[0];
+      const touch2 = e.touches[1];
+      const dist = Math.hypot(touch1.clientX - touch2.clientX, touch1.clientY - touch2.clientY);
+      setInitialPinchDistance(dist);
+    }
+  };
+
+  const handleTouchMove = (e) => {
+    if (e.touches.length === 2 && initialPinchDistance !== null) {
+      const touch1 = e.touches[0];
+      const touch2 = e.touches[1];
+      const dist = Math.hypot(touch1.clientX - touch2.clientX, touch1.clientY - touch2.clientY);
+      
+      if (dist > initialPinchDistance + 10) {
+        setZoomLevel(prev => Math.min(3, prev + 0.1));
+        setInitialPinchDistance(dist);
+      } else if (dist < initialPinchDistance - 10) {
+        setZoomLevel(prev => Math.max(0.5, prev - 0.1));
+        setInitialPinchDistance(dist);
+      }
+    }
+  };
+
+  const handleTouchEnd = () => {
+    setInitialPinchDistance(null);
   };
 
   const confirmAddToCart = () => {
@@ -306,8 +336,12 @@ export default function Shop() {
           
           <div className="flex-1 w-full flex items-center justify-center overflow-auto" onClick={(e) => e.stopPropagation()}>
             <div 
-              className="bg-gray-300 flex items-center justify-center transition-transform duration-200 shadow-2xl" 
+              className="bg-gray-300 flex items-center justify-center transition-transform duration-200 shadow-2xl touch-none cursor-zoom-in" 
               style={{ transform: `scale(${zoomLevel})`, width: '400px', height: '400px', minWidth: '400px', minHeight: '400px' }}
+              onDoubleClick={() => setZoomLevel(zoomLevel === 1 ? 2 : 1)}
+              onTouchStart={handleTouchStart}
+              onTouchMove={handleTouchMove}
+              onTouchEnd={handleTouchEnd}
             >
               <svg xmlns="http://www.w3.org/2000/svg" className="w-40 h-40 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
