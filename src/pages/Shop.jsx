@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
@@ -20,6 +20,14 @@ export default function Shop() {
   const [tempCategories, setTempCategories] = useState([]);
   const [sortBy, setSortBy] = useState('none');
   const [tempSortBy, setTempSortBy] = useState('none');
+
+  /* ─── Animation closing states ─── */
+  const [productModalClosing, setProductModalClosing] = useState(false);
+  const [quantityModalClosing, setQuantityModalClosing] = useState(false);
+  const [filterModalClosing, setFilterModalClosing] = useState(false);
+  const [imagePreviewClosing, setImagePreviewClosing] = useState(false);
+
+  const observerRef = useRef(null);
 
   const filterCategoriesList = [
     "Inverters", "Accessories & Monitoring", "Solar Panels", 
@@ -74,6 +82,35 @@ export default function Shop() {
       document.body.style.overflow = 'auto';
     };
   }, [selectedProduct, quantityModal, imagePreview, isFilterOpen]);
+
+  /* ─── Scroll-reveal IntersectionObserver ─── */
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            requestAnimationFrame(() => {
+              entry.target.classList.add('shop-visible');
+            });
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.08, rootMargin: '0px 0px -40px 0px' }
+    );
+    observerRef.current = observer;
+
+    const timer = setTimeout(() => {
+      document.querySelectorAll('.shop-scroll-reveal:not(.shop-visible), .shop-cat-reveal:not(.shop-visible)').forEach((el) => {
+        observer.observe(el);
+      });
+    }, 60);
+
+    return () => {
+      clearTimeout(timer);
+      observer.disconnect();
+    };
+  }, [searchText, appliedCategories, sortBy]);
 
   const openQuantityModal = (item) => {
     const existing = cartItems.find(c => c.name === item.name && c.category === 'Shop');
@@ -195,8 +232,172 @@ export default function Shop() {
 
   const isInCart = (item) => item ? cartItems.some(c => c.name === item.name && c.category === 'Shop') : false;
 
+  /* ─── Animated close helpers ─── */
+  const closeProductModal = () => {
+    if (productModalClosing) return;
+    setProductModalClosing(true);
+    setTimeout(() => {
+      setSelectedProduct(null);
+      setProductModalClosing(false);
+    }, 380);
+  };
+
+  const closeQuantityModal = () => {
+    if (quantityModalClosing) return;
+    setQuantityModalClosing(true);
+    setTimeout(() => {
+      setQuantityModal(null);
+      setQuantityModalClosing(false);
+    }, 320);
+  };
+
+  const closeFilterModal = () => {
+    if (filterModalClosing) return;
+    setFilterModalClosing(true);
+    setTimeout(() => {
+      setIsFilterOpen(false);
+      setFilterModalClosing(false);
+    }, 320);
+  };
+
+  const closeImagePreview = () => {
+    if (imagePreviewClosing) return;
+    setImagePreviewClosing(true);
+    setTimeout(() => {
+      setImagePreview(false);
+      setImagePreviewClosing(false);
+    }, 320);
+  };
+
   return (
     <div className="w-full min-h-screen bg-[#eef2f7] flex flex-col items-center">
+      {/* ═══ Cinematic Animation Styles ═══ */}
+      <style>{`
+        /* ── Scroll Reveal (product cards) ── */
+        .shop-scroll-reveal {
+          opacity: 0;
+          transform: translateY(50px);
+          will-change: opacity, transform;
+        }
+        .shop-scroll-reveal.shop-visible {
+          opacity: 1;
+          transform: none;
+          animation: shopRevealIn 0.7s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+        }
+        @keyframes shopRevealIn {
+          from { opacity: 0; transform: translateY(50px); }
+        }
+
+        /* ── Product Card Hover Lift ── */
+        .shop-scroll-reveal.shop-visible:hover {
+          transform: translateY(-6px);
+          transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease;
+          box-shadow: 0 20px 40px -8px rgba(0,0,0,0.15);
+        }
+
+        /* ── Category Header Reveal ── */
+        .shop-cat-reveal {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        .shop-cat-reveal.shop-visible {
+          opacity: 1;
+          transform: none;
+          animation: shopCatIn 0.8s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+        }
+        @keyframes shopCatIn {
+          from { opacity: 0; transform: translateY(30px); }
+        }
+        .shop-cat-reveal .shop-line {
+          transform: scaleX(0);
+          transition: transform 1s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .shop-cat-reveal.shop-visible .shop-line {
+          transform: scaleX(1);
+          transition-delay: 0.3s;
+        }
+
+        /* ── Product Detail Modal ── */
+        @keyframes shopOverlayIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+        @keyframes shopOverlayOut {
+          from { opacity: 1; }
+          to { opacity: 0; }
+        }
+        @keyframes shopDetailIn {
+          from { opacity: 0; transform: scale(0.92) translateY(30px); }
+          to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+        @keyframes shopDetailOut {
+          from { opacity: 1; transform: scale(1) translateY(0); }
+          to { opacity: 0; transform: scale(0.92) translateY(30px); }
+        }
+        @keyframes shopFadeUp {
+          from { opacity: 0; transform: translateY(25px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        .shop-detail-open .shop-stagger-1 {
+          animation: shopFadeUp 0.55s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both;
+        }
+        .shop-detail-open .shop-stagger-2 {
+          animation: shopFadeUp 0.55s cubic-bezier(0.22, 1, 0.36, 1) 0.28s both;
+        }
+        .shop-detail-open .shop-stagger-3 {
+          animation: shopFadeUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.38s both;
+        }
+
+        /* ── Quantity Modal ── */
+        @keyframes shopQuantityIn {
+          0%   { opacity: 0; transform: scale(0.75) translateY(50px); }
+          70%  { opacity: 1; transform: scale(1.03) translateY(-3px); }
+          100% { opacity: 1; transform: scale(1) translateY(0); }
+        }
+        @keyframes shopQuantityOut {
+          from { opacity: 1; transform: scale(1) translateY(0); }
+          to   { opacity: 0; transform: scale(0.85) translateY(40px); }
+        }
+
+        /* ── Filter Modal ── */
+        @keyframes shopFilterIn {
+          from { opacity: 0; transform: translateY(80px) scale(0.95); }
+          to   { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        @keyframes shopFilterOut {
+          from { opacity: 1; transform: translateY(0) scale(1); }
+          to   { opacity: 0; transform: translateY(80px) scale(0.95); }
+        }
+
+        /* ── Image Preview ── */
+        @keyframes shopPreviewBgIn {
+          from { opacity: 0; }
+          to   { opacity: 1; }
+        }
+        @keyframes shopPreviewBgOut {
+          from { opacity: 1; }
+          to   { opacity: 0; }
+        }
+        @keyframes shopPreviewZoomIn {
+          from { opacity: 0; transform: scale(0.4); }
+          to   { opacity: 1; transform: scale(1); }
+        }
+        @keyframes shopPreviewZoomOut {
+          from { opacity: 1; transform: scale(1); }
+          to   { opacity: 0; transform: scale(0.4); }
+        }
+
+        /* ── Cart Badge Pop ── */
+        @keyframes shopBadgePop {
+          0%   { transform: scale(0); }
+          60%  { transform: scale(1.35); }
+          100% { transform: scale(1); }
+        }
+        .shop-badge-pop {
+          animation: shopBadgePop 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+      `}</style>
+
       <div className="w-full flex-grow flex flex-col pb-16 items-center" style={{ paddingTop: '100px', paddingLeft: '16px', paddingRight: '16px' }}>
       {/* Header with Search Bar and Filter */}
       <header className="fixed top-[56px] left-0 right-0 z-30 bg-transparent w-full flex items-center justify-center py-3 sm:py-4" style={{ paddingLeft: '16px', paddingRight: '16px', paddingTop: '12px' }}>
@@ -285,16 +486,18 @@ export default function Shop() {
               
               return (
                 <div key={cat} className="w-full">
-                  <div className="flex items-center justify-center px-4 gap-6 sm:gap-10" style={{ marginBottom: '48px' }}>
-                    <div className="flex-grow h-[1px] bg-gray-300"></div>
+                  {/* ── Animated category header ── */}
+                  <div className="shop-cat-reveal flex items-center justify-center px-4 gap-6 sm:gap-10" style={{ marginBottom: '48px' }}>
+                    <div className="shop-line flex-grow h-[1px] bg-gray-300"></div>
                     <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 text-center shrink-0">{cat}</h2>
-                    <div className="flex-grow h-[1px] bg-gray-300"></div>
+                    <div className="shop-line flex-grow h-[1px] bg-gray-300"></div>
                   </div>
                   <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4 w-full">
-                    {productsInCat.map((item) => (
+                    {productsInCat.map((item, idx) => (
                       <div
                         key={item.id}
-                        className="group relative bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer border border-white"
+                        className="shop-scroll-reveal group relative bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer border border-white"
+                        style={{ animationDelay: `${Math.min(idx * 150, 800)}ms` }}
                         onClick={() => setSelectedProduct(item)}
                       >
                         {/* Product Image Area */}
@@ -315,7 +518,7 @@ export default function Shop() {
                               </svg>
                             </button>
                             {isInCart(item) && (
-                              <div className="absolute -top-1 -right-1 bg-white rounded-full">
+                              <div className="shop-badge-pop absolute -top-1 -right-1 bg-white rounded-full">
                                 <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 text-green-600" viewBox="0 0 20 20" fill="currentColor" title="Added to Cart">
                                   <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                                 </svg>
@@ -351,18 +554,34 @@ export default function Shop() {
 
       {/* Product Detail Modal */}
       {selectedProduct && (
-        <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50" onClick={() => setSelectedProduct(null)}>
-          <div className="bg-white w-full h-full sm:h-[95vh] sm:w-[95vw] sm:max-w-7xl sm:rounded-3xl shadow-2xl flex flex-col overflow-hidden" onClick={(e) => e.stopPropagation()}>
+        <div
+          className="fixed inset-0 bg-black/70 flex items-center justify-center z-50"
+          onClick={closeProductModal}
+          style={{
+            animation: productModalClosing
+              ? 'shopOverlayOut 0.35s cubic-bezier(0.22,1,0.36,1) forwards'
+              : 'shopOverlayIn 0.4s cubic-bezier(0.22,1,0.36,1) forwards',
+          }}
+        >
+          <div
+            className={`bg-white w-full h-full sm:h-[95vh] sm:w-[95vw] sm:max-w-7xl sm:rounded-3xl shadow-2xl flex flex-col overflow-hidden ${!productModalClosing ? 'shop-detail-open' : ''}`}
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              animation: productModalClosing
+                ? 'shopDetailOut 0.35s cubic-bezier(0.22,1,0.36,1) forwards'
+                : 'shopDetailIn 0.45s cubic-bezier(0.22,1,0.36,1) forwards',
+            }}
+          >
             <div className="flex-1 overflow-y-auto">
               <div className="relative">
                 <button
-                  onClick={() => setSelectedProduct(null)}
+                  onClick={closeProductModal}
                   className="absolute top-4 right-4 w-10 h-10 bg-black/40 hover:bg-black/60 text-white rounded-full flex items-center justify-center text-xl font-bold transition-colors z-10"
                 >
                   ✕
                 </button>
                 <div 
-                  className="w-full h-64 sm:h-[400px] bg-gray-300 flex items-center justify-center cursor-pointer transition-opacity hover:opacity-90"
+                  className="shop-stagger-1 w-full h-64 sm:h-[400px] bg-gray-300 flex items-center justify-center cursor-pointer transition-opacity hover:opacity-90"
                   onClick={() => { setImagePreview(true); setZoomLevel(1); setPan({ x: 0, y: 0 }); }}
                   title="Click to zoom image"
                 >
@@ -371,7 +590,7 @@ export default function Shop() {
                   </svg>
                 </div>
               </div>
-              <div style={{ padding: '24px', paddingLeft: '10px', paddingRight: '10px' }}>
+              <div className="shop-stagger-2" style={{ padding: '24px', paddingLeft: '10px', paddingRight: '10px' }}>
                 <div className="flex items-center gap-4 mb-2">
                   <h2 className="text-2xl sm:text-4xl font-bold text-gray-900">{selectedProduct.name}</h2>
                   {isInCart(selectedProduct) && (
@@ -386,7 +605,7 @@ export default function Shop() {
                 </p>
               </div>
             </div>
-            <div className="flex-shrink-0 bg-white" style={{ paddingLeft: '10px', paddingRight: '10px', paddingBottom: '10px', paddingTop: '10px' }}>
+            <div className="shop-stagger-3 flex-shrink-0 bg-white" style={{ paddingLeft: '10px', paddingRight: '10px', paddingBottom: '10px', paddingTop: '10px' }}>
               <div className="w-full flex justify-center">
                 <button
                   onClick={() => openQuantityModal(selectedProduct)}
@@ -405,10 +624,27 @@ export default function Shop() {
 
       {/* Quantity Selection Modal */}
       {quantityModal && (
-        <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-[60] p-4" onClick={() => setQuantityModal(null)}>
-          <div className="bg-white rounded-2xl shadow-2xl w-full max-w-sm relative" style={{ padding: '24px' }} onClick={(e) => e.stopPropagation()}>
+        <div
+          className="fixed inset-0 bg-black/60 flex items-center justify-center z-[60] p-4"
+          onClick={closeQuantityModal}
+          style={{
+            animation: quantityModalClosing
+              ? 'shopOverlayOut 0.3s cubic-bezier(0.22,1,0.36,1) forwards'
+              : 'shopOverlayIn 0.35s cubic-bezier(0.22,1,0.36,1) forwards',
+          }}
+        >
+          <div
+            className="bg-white rounded-2xl shadow-2xl w-full max-w-sm relative"
+            style={{
+              padding: '24px',
+              animation: quantityModalClosing
+                ? 'shopQuantityOut 0.3s cubic-bezier(0.22,1,0.36,1) forwards'
+                : 'shopQuantityIn 0.45s cubic-bezier(0.22,1,0.36,1) forwards',
+            }}
+            onClick={(e) => e.stopPropagation()}
+          >
             <button
-              onClick={() => setQuantityModal(null)}
+              onClick={closeQuantityModal}
               className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors bg-gray-100 hover:bg-gray-200 rounded-full w-8 h-8 flex items-center justify-center"
               title="Close"
             >
@@ -474,9 +710,17 @@ export default function Shop() {
 
       {/* Image Preview Modal */}
       {imagePreview && (
-        <div className="fixed inset-0 bg-black/90 flex flex-col items-center justify-center z-[70] p-4" onClick={() => setImagePreview(false)}>
+        <div
+          className="fixed inset-0 bg-black/90 flex flex-col items-center justify-center z-[70] p-4"
+          onClick={closeImagePreview}
+          style={{
+            animation: imagePreviewClosing
+              ? 'shopPreviewBgOut 0.3s cubic-bezier(0.22,1,0.36,1) forwards'
+              : 'shopPreviewBgIn 0.35s cubic-bezier(0.22,1,0.36,1) forwards',
+          }}
+        >
           <button
-            onClick={() => setImagePreview(false)}
+            onClick={closeImagePreview}
             className="absolute top-4 right-4 w-12 h-12 bg-white/20 hover:bg-white/40 text-white rounded-full flex items-center justify-center text-2xl font-bold transition-colors z-10"
             title="Close"
           >
@@ -491,6 +735,11 @@ export default function Shop() {
             onMouseLeave={handleMouseUp}
             onTouchMove={handleTouchMove}
             onTouchEnd={handleTouchEnd}
+            style={{
+              animation: imagePreviewClosing
+                ? 'shopPreviewZoomOut 0.3s cubic-bezier(0.22,1,0.36,1) forwards'
+                : 'shopPreviewZoomIn 0.4s cubic-bezier(0.22,1,0.36,1) forwards',
+            }}
           >
             <div 
               className={`bg-gray-300 flex items-center justify-center shadow-2xl touch-none select-none ${isDragging ? 'cursor-grabbing' : 'cursor-grab'} ${!isDragging ? 'transition-transform duration-200' : ''}`} 
@@ -520,10 +769,27 @@ export default function Shop() {
 
       {/* Filter Modal */}
       {isFilterOpen && (
-        <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-[80] p-4" onClick={() => setIsFilterOpen(false)}>
-          <div className="bg-white w-full max-w-lg rounded-2xl shadow-2xl flex flex-col relative gap-6" style={{ padding: '24px' }} onClick={(e) => e.stopPropagation()}>
+        <div
+          className="fixed inset-0 bg-black/60 flex items-center justify-center z-[80] p-4"
+          onClick={closeFilterModal}
+          style={{
+            animation: filterModalClosing
+              ? 'shopOverlayOut 0.3s cubic-bezier(0.22,1,0.36,1) forwards'
+              : 'shopOverlayIn 0.35s cubic-bezier(0.22,1,0.36,1) forwards',
+          }}
+        >
+          <div
+            className="bg-white w-full max-w-lg rounded-2xl shadow-2xl flex flex-col relative gap-6"
+            style={{
+              padding: '24px',
+              animation: filterModalClosing
+                ? 'shopFilterOut 0.3s cubic-bezier(0.22,1,0.36,1) forwards'
+                : 'shopFilterIn 0.4s cubic-bezier(0.22,1,0.36,1) forwards',
+            }}
+            onClick={(e) => e.stopPropagation()}
+          >
             <button
-              onClick={() => setIsFilterOpen(false)}
+              onClick={closeFilterModal}
               className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors bg-gray-100 hover:bg-gray-200 rounded-full w-8 h-8 flex items-center justify-center"
               title="Close"
             >
@@ -611,7 +877,7 @@ export default function Shop() {
                   setAppliedCategories([]);
                   setTempSortBy('none');
                   setSortBy('none');
-                  setIsFilterOpen(false);
+                  closeFilterModal();
                 }}
                 className="flex-1 py-3 bg-white border-2 border-orange-500 text-orange-500 font-bold text-lg rounded-xl transition-colors hover:bg-orange-50"
               >
@@ -621,7 +887,7 @@ export default function Shop() {
                 onClick={() => {
                   setAppliedCategories(tempCategories);
                   setSortBy(tempSortBy);
-                  setIsFilterOpen(false);
+                  closeFilterModal();
                 }}
                 className="flex-1 py-3 bg-orange-500 text-white font-bold text-lg rounded-xl transition-colors hover:bg-orange-600 border-2 border-orange-500"
               >
