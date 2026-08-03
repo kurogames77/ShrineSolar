@@ -40,7 +40,8 @@ export default function MyCart() {
                         requestAnimationFrame(() => {
                             entry.target.classList.add('cart-visible');
                         });
-                        observer.unobserve(entry.target);
+                    } else {
+                        entry.target.classList.remove('cart-visible');
                     }
                 });
             },
@@ -49,7 +50,7 @@ export default function MyCart() {
         observerRef.current = observer;
 
         const timer = setTimeout(() => {
-            document.querySelectorAll('.cart-scroll-reveal:not(.cart-visible)').forEach((el) => {
+            document.querySelectorAll('.cart-scroll-reveal').forEach((el) => {
                 observer.observe(el);
             });
         }, 80);

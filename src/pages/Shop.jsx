@@ -92,7 +92,8 @@ export default function Shop() {
             requestAnimationFrame(() => {
               entry.target.classList.add('shop-visible');
             });
-            observer.unobserve(entry.target);
+          } else {
+            entry.target.classList.remove('shop-visible');
           }
         });
       },
@@ -101,7 +102,7 @@ export default function Shop() {
     observerRef.current = observer;
 
     const timer = setTimeout(() => {
-      document.querySelectorAll('.shop-scroll-reveal:not(.shop-visible), .shop-cat-reveal:not(.shop-visible)').forEach((el) => {
+      document.querySelectorAll('.shop-scroll-reveal, .shop-cat-reveal').forEach((el) => {
         observer.observe(el);
       });
     }, 60);
