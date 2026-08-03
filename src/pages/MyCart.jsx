@@ -469,7 +469,9 @@ export default function MyCart() {
                                                     <p className="font-semibold text-[#1a2332] text-sm sm:text-base truncate">
                                                         {item.name} <span className="text-[#64748b] font-normal ml-2">x{item.quantity}</span>
                                                     </p>
-                                                    <p className="text-[#f59e0b] font-medium text-xs sm:text-sm mt-0.5">₱0.00</p>
+                                                    <p className="text-[#f59e0b] font-medium text-xs sm:text-sm mt-0.5">
+                                                        ₱{(item.price || 0).toLocaleString('en-PH', { minimumFractionDigits: 2 })} x {item.quantity || 1} = ₱{((item.price || 0) * (item.quantity || 1)).toLocaleString('en-PH', { minimumFractionDigits: 2 })}
+                                                    </p>
                                                 </div>
                                                 <button
                                                     onClick={() => handleRemoveItem(globalIndex)}
