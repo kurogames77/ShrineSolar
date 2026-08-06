@@ -177,34 +177,34 @@ export default function MyCart() {
 
             if (customerError) throw customerError;
 
-            // 2. Insert Order
-            // Compile product details into a string
-            const productDetails = cartItems.map(item => `${item.name} (x${item.quantity})`).join(', ');
-            const totalQty = cartItems.reduce((acc, item) => acc + (parseInt(item.quantity) || 1), 0);
-            
-            const orderId = crypto.randomUUID();
+            // 2. Insert one order per cart item
+            for (const item of cartItems) {
+                const productDetails = `${item.name} (x${item.quantity})`;
+                const qty = parseInt(item.quantity) || 1;
 
-            const { error: orderError } = await supabase
-                .from('orders')
-                .insert({
-                    id: orderId,
-                    customer_id: customerId,
-                    order_category: 'Website Cart',
-                    product_details: productDetails,
-                    size_or_qty: totalQty,
-                    total_amount: 0 // You can calculate this if you have prices later
-                });
+                const { error: orderError } = await supabase
+                    .from('orders')
+                    .insert({
+                        id: crypto.randomUUID(),
+                        customer_id: customerId,
+                        order_category: item.category || 'Website Cart',
+                        product_details: productDetails,
+                        size_or_qty: qty,
+                        total_amount: 0
+                    });
 
-            if (orderError) throw orderError;
+                if (orderError) throw orderError;
+            }
 
             // 3. Insert Activity Log
+            const allProductDetails = cartItems.map(item => `${item.name} (x${item.quantity})`).join(', ');
             const { error: logError } = await supabase
                 .from('activity_log')
                 .insert({
                     action: 'Placed New Order',
                     entity_type: 'Order',
                     entity_name: `Order by ${formData.fullname}`,
-                    details: `Products: ${productDetails}`
+                    details: `Products: ${allProductDetails} (${cartItems.length} separate order(s))`
                     // user_id is omitted because this is a public user
                 });
 
