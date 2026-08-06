@@ -190,7 +190,7 @@ export default function MyCart() {
                         order_category: item.category || 'Website Cart',
                         product_details: productDetails,
                         size_or_qty: qty,
-                        total_amount: 0
+                        total_amount: (parseFloat(item.price) || 0) * qty
                     });
 
                 if (orderError) throw orderError;
