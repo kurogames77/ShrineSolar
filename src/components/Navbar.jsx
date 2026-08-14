@@ -61,9 +61,9 @@ export default function Navbar() {
             >
                 <div className="flex items-center justify-center sm:justify-between w-full" style={{ paddingLeft: '40px', paddingRight: '40px', paddingTop: '12px', paddingBottom: '12px' }}>
                     <img
-                        src="/logo.png"
+                        src="/banner.png"
                         alt="Shrine Solar Logo"
-                        className="hidden sm:block h-7 sm:h-8 w-auto cursor-pointer"
+                        className="hidden sm:block h-12 sm:h-14 w-auto object-contain scale-110 sm:scale-125 origin-left cursor-pointer transition-transform"
                         onClick={() => handleNavigation('/')}
                         style={{ filter: isHome ? 'drop-shadow(0 0 8px rgba(255,200,0,0.9)) drop-shadow(0 0 16px rgba(255,180,0,0.5))' : 'none' }}
                     />
