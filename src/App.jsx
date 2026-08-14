@@ -5,6 +5,7 @@ import Battery from './pages/Battery'
 import Accessories from './pages/Accessories'
 import MyCart from './pages/MyCart'
 import Shop from './pages/Shop'
+import Maintenance from './pages/Maintenance'
 import CinematicIntro from './pages/CinematicIntro'
 import ScrollAnimation from './pages/ScrollAnimation'
 import Navbar from './components/Navbar'
@@ -98,7 +99,7 @@ function App() {
         </div>
       )}
 
-      <div className={`min-h-screen ${location.pathname === '/my-cart' || location.pathname === '/shop' ? 'bg-[#eef2f7]' : 'bg-[#a8a8a8]'} flex flex-col`}>
+      <div className={`min-h-screen ${location.pathname === '/my-cart' || location.pathname === '/shop' || location.pathname === '/maintenance' ? 'bg-[#eef2f7]' : 'bg-[#a8a8a8]'} flex flex-col`}>
         {/* Global Navbar */}
         <Navbar />
 
@@ -199,6 +200,7 @@ function App() {
             <Route path="/accessories" element={<Accessories />} />
             <Route path="/shop" element={<Shop />} />
             <Route path="/my-cart" element={<MyCart />} />
+            <Route path="/maintenance" element={<Maintenance />} />
           </Routes>
         </main>
         {/* Facebook Modal */}
