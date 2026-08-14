@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { supabase } from '../supabaseClient';
 import { Turnstile } from '@marsidev/react-turnstile';
+import zamboangaData from '../data/zamboanga.json';
 export default function MyCart() {
     const navigate = useNavigate();
     const [cartItems, setCartItems] = useState([]);
@@ -12,9 +13,17 @@ export default function MyCart() {
     const [formData, setFormData] = useState({
         fullname: '',
         contactNumber: '',
-        address: '',
         gmail: '',
     });
+    
+    const [selectedCityCode, setSelectedCityCode] = useState('');
+    const [selectedCityName, setSelectedCityName] = useState('');
+    const [selectedBarangayName, setSelectedBarangayName] = useState('');
+    
+    const cities = zamboangaData.cities.sort((a, b) => a.name.localeCompare(b.name));
+    const barangays = selectedCityCode && zamboangaData.barangays[selectedCityCode]
+        ? [...zamboangaData.barangays[selectedCityCode]].sort((a, b) => a.name.localeCompare(b.name))
+        : [];
 
     /* ─── Animation: track page-loaded state ─── */
     const [pageLoaded, setPageLoaded] = useState(false);
@@ -114,11 +123,11 @@ export default function MyCart() {
     };
 
     const handleProceed = async () => {
-        if (!formData.fullname || !formData.contactNumber) {
+        if (!formData.fullname || !formData.contactNumber || !selectedCityName || !selectedBarangayName) {
             Swal.fire({
                 icon: 'error',
                 title: 'Incomplete',
-                text: 'Please fill in your Fullname and Contact Number.',
+                text: 'Please fill in your Fullname, Contact Number, and select your City and Barangay.',
                 confirmButtonColor: '#f59e0b',
             });
             return;
@@ -172,7 +181,7 @@ export default function MyCart() {
                     last_name: lastName,
                     email: email,
                     phone: formData.contactNumber,
-                    address_line1: formData.address
+                    address_line1: [selectedBarangayName, selectedCityName].filter(Boolean).join(', ')
                 });
 
             if (customerError) throw customerError;
@@ -536,18 +545,47 @@ export default function MyCart() {
                             />
                             <label className="mycart-user-label">Contact Number</label>
                         </div>
-                        <div className={`cart-form-field ${pageLoaded ? 'cart-loaded' : ''} mycart-input-group`} style={{ animationDelay: '0.55s' }}>
-                            <input
-                                required
-                                type="text"
-                                name="address"
-                                autoComplete="off"
-                                placeholder=" "
-                                value={formData.address}
-                                onChange={handleInputChange}
-                                className="mycart-input"
-                            />
-                            <label className="mycart-user-label">Address</label>
+                        <div className={`cart-form-field ${pageLoaded ? 'cart-loaded' : ''} grid grid-cols-1 sm:grid-cols-2 gap-4`} style={{ animationDelay: '0.55s' }}>
+                            <div className="mycart-input-group">
+                                <select
+                                    required
+                                    className="mycart-input bg-white"
+                                    value={selectedCityCode}
+                                    onChange={(e) => {
+                                        const code = e.target.value;
+                                        setSelectedCityCode(code);
+                                        const city = cities.find(c => c.code === code);
+                                        setSelectedCityName(city ? city.name : '');
+                                        setSelectedBarangayName(''); // Reset barangay when city changes
+                                    }}
+                                >
+                                    <option value="" disabled hidden></option>
+                                    {cities.map((city) => (
+                                        <option key={city.code} value={city.code}>
+                                            {city.name}
+                                        </option>
+                                    ))}
+                                </select>
+                                <label className="mycart-user-label" style={{ top: selectedCityCode ? '-0.5rem' : '1rem', fontSize: selectedCityCode ? '0.85rem' : '1rem', color: selectedCityCode ? '#f59e0b' : '#9ca3af' }}>City / Municipality</label>
+                            </div>
+                            
+                            <div className="mycart-input-group">
+                                <select
+                                    required
+                                    className="mycart-input bg-white disabled:bg-gray-50 disabled:cursor-not-allowed"
+                                    value={selectedBarangayName}
+                                    onChange={(e) => setSelectedBarangayName(e.target.value)}
+                                    disabled={!selectedCityCode}
+                                >
+                                    <option value="" disabled hidden></option>
+                                    {barangays.map((brgy) => (
+                                        <option key={brgy.name} value={brgy.name}>
+                                            {brgy.name}
+                                        </option>
+                                    ))}
+                                </select>
+                                <label className="mycart-user-label" style={{ top: selectedBarangayName ? '-0.5rem' : '1rem', fontSize: selectedBarangayName ? '0.85rem' : '1rem', color: selectedBarangayName ? '#f59e0b' : '#9ca3af' }}>Barangay</label>
+                            </div>
                         </div>
                         <div className={`cart-form-field ${pageLoaded ? 'cart-loaded' : ''} mycart-input-group`} style={{ animationDelay: '0.65s' }}>
                             <input
