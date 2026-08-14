@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import { supabase } from '../supabaseClient';
 
 export default function Shop() {
   const navigate = useNavigate();
@@ -35,26 +36,34 @@ export default function Shop() {
     "PV Mounting Accessories", "Breakers & SPD's", "Rapid Shutdown Device"
   ];
 
-  const allProducts = [
-    { id: 1, name: "Inverter Model X", category: "Inverters", price: 15000, stock: 10 },
-    { id: 10, name: "Grid-Tie Inverter 5kW", category: "Inverters", price: 25000, stock: 8 },
-    { id: 2, name: "Monitoring System Y", category: "Accessories & Monitoring", price: 5000, stock: 25 },
-    { id: 11, name: "Smart Energy Meter", category: "Accessories & Monitoring", price: 3500, stock: 15 },
-    { id: 3, name: "Solar Panel 400W", category: "Solar Panels", price: 8000, stock: 50 },
-    { id: 12, name: "Solar Panel 550W", category: "Solar Panels", price: 11000, stock: 40 },
-    { id: 4, name: "Lithium Battery 5kWh", category: "Energy Storage", price: 60000, stock: 5 },
-    { id: 13, name: "Deep Cycle Battery 200Ah", category: "Energy Storage", price: 18000, stock: 12 },
-    { id: 5, name: "Portable Station 500W", category: "Solar Portable Power Station", price: 20000, stock: 15 },
-    { id: 14, name: "Portable Power Station 1000W", category: "Solar Portable Power Station", price: 35000, stock: 8 },
-    { id: 6, name: "PV Wire 10AWG", category: "Wires", price: 100, stock: 200 },
-    { id: 15, name: "PV Wire 12AWG", category: "Wires", price: 80, stock: 300 },
-    { id: 7, name: "Mounting Rail 2m", category: "PV Mounting Accessories", price: 500, stock: 100 },
-    { id: 16, name: "L-Foot Bracket", category: "PV Mounting Accessories", price: 150, stock: 250 },
-    { id: 8, name: "DC Breaker 32A", category: "Breakers & SPD's", price: 300, stock: 80 },
-    { id: 17, name: "AC Surge Protector", category: "Breakers & SPD's", price: 850, stock: 60 },
-    { id: 9, name: "RSD Switch", category: "Rapid Shutdown Device", price: 2500, stock: 40 },
-    { id: 18, name: "RSD Transmitter", category: "Rapid Shutdown Device", price: 4500, stock: 20 },
-  ];
+  const [allProducts, setAllProducts] = useState([]);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      const { data, error } = await supabase
+        .from('products')
+        .select('*')
+        .eq('is_active', true)
+        .order('created_at', { ascending: false });
+      
+      if (!error && data) {
+        setAllProducts(data);
+      }
+    };
+
+    fetchProducts();
+
+    const channel = supabase
+      .channel('public:products')
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'products' }, (payload) => {
+        fetchProducts();
+      })
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, []);
 
   let filteredItems = allProducts.filter((item) =>
     item.name.toLowerCase().includes(searchText.toLowerCase())
@@ -65,7 +74,7 @@ export default function Shop() {
   } else if (sortBy === 'priceAsc') {
     filteredItems.sort((a, b) => a.price - b.price);
   } else if (sortBy === 'stockDesc') {
-    filteredItems.sort((a, b) => b.stock - a.stock);
+    filteredItems.sort((a, b) => b.stock_quantity - a.stock_quantity);
   }
 
   useEffect(() => {
@@ -503,9 +512,13 @@ export default function Shop() {
                       >
                         {/* Product Image Area */}
                         <div className="relative w-full aspect-square bg-gray-100 flex items-center justify-center overflow-hidden">
-                          <svg xmlns="http://www.w3.org/2000/svg" className="w-16 h-16 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1}>
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                          </svg>
+                          {item.image_url ? (
+                            <img src={item.image_url} alt={item.name} className="w-full h-full object-cover" />
+                          ) : (
+                            <svg xmlns="http://www.w3.org/2000/svg" className="w-16 h-16 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1}>
+                              <path strokeLinecap="round" strokeLinejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                            </svg>
+                          )}
 
                           {/* Cart Icon & Badge — top right */}
                           <div className="absolute top-2 right-2 z-10">
@@ -541,7 +554,7 @@ export default function Shop() {
                             {item.name}
                           </h3>
                           <p className="text-base font-bold text-orange-600 mb-1">₱{item.price.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
-                          <p className="text-xs text-gray-400">{item.stock} Stocks</p>
+                          <p className="text-xs text-gray-400">{item.stock_quantity} Stocks</p>
                         </div>
                       </div>
                     ))}
@@ -582,13 +595,17 @@ export default function Shop() {
                   ✕
                 </button>
                 <div 
-                  className="shop-stagger-1 w-full h-64 sm:h-[400px] bg-gray-300 flex items-center justify-center cursor-pointer transition-opacity hover:opacity-90"
+                  className="shop-stagger-1 w-full h-64 sm:h-[400px] bg-gray-300 flex items-center justify-center cursor-pointer transition-opacity hover:opacity-90 overflow-hidden"
                   onClick={() => { setImagePreview(true); setZoomLevel(1); setPan({ x: 0, y: 0 }); }}
                   title="Click to zoom image"
                 >
-                  <svg xmlns="http://www.w3.org/2000/svg" className="w-20 h-20 sm:w-28 sm:h-28 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                  </svg>
+                  {selectedProduct.image_url ? (
+                    <img src={selectedProduct.image_url} alt={selectedProduct.name} className="w-full h-full object-cover" />
+                  ) : (
+                    <svg xmlns="http://www.w3.org/2000/svg" className="w-20 h-20 sm:w-28 sm:h-28 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                  )}
                 </div>
               </div>
               <div className="shop-stagger-2" style={{ padding: '24px', paddingLeft: '10px', paddingRight: '10px' }}>
@@ -601,8 +618,8 @@ export default function Shop() {
                   )}
                 </div>
                 <p className="text-xl sm:text-2xl font-semibold text-amber-600 mb-4">₱{selectedProduct.price.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
-                <p className="text-base sm:text-lg text-gray-500 mb-8">
-                  Discover the ultimate in renewable energy with our cutting-edge solar panels. Designed for maximum efficiency and durability, these panels harness the power of the sun to provide a sustainable and cost-effective energy solution for your home or business. Featuring advanced photovoltaic technology, they ensure optimal performance even in low-light conditions. The sleek, low-profile design seamlessly integrates with any roof type, offering both aesthetic appeal and robust weather resistance. By switching to our solar panels, you not only significantly reduce your electricity bills but also contribute to a greener planet by lowering your carbon footprint. Easy to install and backed by an industry-leading warranty, this solar solution is your step towards energy independence and a sustainable future. Upgrade today and let the sun power your life!
+                <p className="text-base sm:text-lg text-gray-500 mb-8 whitespace-pre-wrap">
+                  {selectedProduct.description || 'No description available for this product.'}
                 </p>
               </div>
             </div>
@@ -656,16 +673,20 @@ export default function Shop() {
             <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4 text-center">{isInCart(quantityModal) ? 'Update Quantity' : 'Add to Cart'}</h3>
 
             {/* Product Image */}
-            <div className="w-full aspect-square bg-gray-100 rounded-xl flex items-center justify-center mb-4">
-              <svg xmlns="http://www.w3.org/2000/svg" className="w-16 h-16 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-              </svg>
+            <div className="w-full aspect-square bg-gray-100 rounded-xl flex items-center justify-center mb-4 overflow-hidden">
+              {quantityModal.image_url ? (
+                <img src={quantityModal.image_url} alt={quantityModal.name} className="w-full h-full object-cover" />
+              ) : (
+                <svg xmlns="http://www.w3.org/2000/svg" className="w-16 h-16 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+              )}
             </div>
 
             {/* Product Name */}
             <p className="text-gray-700 font-medium text-center line-clamp-2" style={{ marginBottom: '4px' }}>{quantityModal.name}</p>
             {/* Stocks */}
-            <p className="text-xs text-gray-400 text-center" style={{ marginBottom: '16px' }}>{quantityModal.stock} Stocks</p>
+            <p className="text-xs text-gray-400 text-center" style={{ marginBottom: '16px' }}>{quantityModal.stock_quantity} Stocks</p>
 
             {/* Quantity Selector */}
             <div className="flex items-center justify-center gap-4" style={{ marginBottom: '12px' }}>
