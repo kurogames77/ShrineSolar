@@ -19,6 +19,8 @@ export default function MyCart() {
     const [selectedCityCode, setSelectedCityCode] = useState('');
     const [selectedCityName, setSelectedCityName] = useState('');
     const [selectedBarangayName, setSelectedBarangayName] = useState('');
+    const [isCityOpen, setIsCityOpen] = useState(false);
+    const [isBrgyOpen, setIsBrgyOpen] = useState(false);
     
     const cities = zamboangaData.cities.sort((a, b) => a.name.localeCompare(b.name));
     const barangays = selectedCityCode && zamboangaData.barangays[selectedCityCode]
@@ -546,45 +548,77 @@ export default function MyCart() {
                             <label className="mycart-user-label">Contact Number</label>
                         </div>
                         <div className={`cart-form-field ${pageLoaded ? 'cart-loaded' : ''} grid grid-cols-1 sm:grid-cols-2 gap-4`} style={{ animationDelay: '0.55s' }}>
-                            <div className="mycart-input-group">
-                                <select
-                                    required
-                                    className="mycart-input bg-white"
-                                    value={selectedCityCode}
-                                    onChange={(e) => {
-                                        const code = e.target.value;
-                                        setSelectedCityCode(code);
-                                        const city = cities.find(c => c.code === code);
-                                        setSelectedCityName(city ? city.name : '');
-                                        setSelectedBarangayName(''); // Reset barangay when city changes
-                                    }}
+                            <div className="mycart-input-group relative">
+                                <div 
+                                    className="mycart-input bg-white flex items-center justify-between cursor-pointer"
+                                    onClick={() => { setIsCityOpen(!isCityOpen); setIsBrgyOpen(false); }}
                                 >
-                                    <option value="" disabled hidden></option>
-                                    {cities.map((city) => (
-                                        <option key={city.code} value={city.code}>
-                                            {city.name}
-                                        </option>
-                                    ))}
-                                </select>
-                                <label className="mycart-user-label" style={{ top: selectedCityCode ? '-0.5rem' : '1rem', fontSize: selectedCityCode ? '0.85rem' : '1rem', color: selectedCityCode ? '#f59e0b' : '#9ca3af' }}>City / Municipality</label>
+                                    <span>{selectedCityName || ' '}</span>
+                                    <svg className={`w-4 h-4 text-gray-400 transition-transform ${isCityOpen ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                                    </svg>
+                                </div>
+                                <label className="mycart-user-label pointer-events-none" style={{ top: selectedCityName ? '-0.5rem' : '1rem', fontSize: selectedCityName ? '0.85rem' : '1rem', color: selectedCityName ? '#f59e0b' : '#9ca3af' }}>City / Municipality</label>
+                                
+                                {isCityOpen && (
+                                    <>
+                                        <div className="fixed inset-0 z-[9998]" onClick={() => setIsCityOpen(false)}></div>
+                                        <ul className="absolute z-[9999] top-[calc(100%+4px)] left-0 w-full bg-white border border-gray-200 rounded-lg shadow-xl max-h-60 overflow-y-auto py-1">
+                                            {cities.map((city) => (
+                                                <li 
+                                                    key={city.code} 
+                                                    className="px-4 py-2 hover:bg-yellow-50 cursor-pointer text-gray-700"
+                                                    onClick={() => {
+                                                        setSelectedCityCode(city.code);
+                                                        setSelectedCityName(city.name);
+                                                        setSelectedBarangayName('');
+                                                        setIsCityOpen(false);
+                                                    }}
+                                                >
+                                                    {city.name}
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </>
+                                )}
                             </div>
                             
-                            <div className="mycart-input-group">
-                                <select
-                                    required
-                                    className="mycart-input bg-white disabled:bg-gray-50 disabled:cursor-not-allowed"
-                                    value={selectedBarangayName}
-                                    onChange={(e) => setSelectedBarangayName(e.target.value)}
-                                    disabled={!selectedCityCode}
+                            <div className="mycart-input-group relative">
+                                <div 
+                                    className={`mycart-input flex items-center justify-between ${!selectedCityCode ? 'bg-gray-50 cursor-not-allowed' : 'bg-white cursor-pointer'}`}
+                                    onClick={() => {
+                                        if (selectedCityCode) {
+                                            setIsBrgyOpen(!isBrgyOpen);
+                                            setIsCityOpen(false);
+                                        }
+                                    }}
                                 >
-                                    <option value="" disabled hidden></option>
-                                    {barangays.map((brgy) => (
-                                        <option key={brgy.name} value={brgy.name}>
-                                            {brgy.name}
-                                        </option>
-                                    ))}
-                                </select>
-                                <label className="mycart-user-label" style={{ top: selectedBarangayName ? '-0.5rem' : '1rem', fontSize: selectedBarangayName ? '0.85rem' : '1rem', color: selectedBarangayName ? '#f59e0b' : '#9ca3af' }}>Barangay</label>
+                                    <span>{selectedBarangayName || ' '}</span>
+                                    <svg className={`w-4 h-4 text-gray-400 transition-transform ${isBrgyOpen ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                                    </svg>
+                                </div>
+                                <label className="mycart-user-label pointer-events-none" style={{ top: selectedBarangayName ? '-0.5rem' : '1rem', fontSize: selectedBarangayName ? '0.85rem' : '1rem', color: selectedBarangayName ? '#f59e0b' : '#9ca3af' }}>Barangay</label>
+                                
+                                {isBrgyOpen && selectedCityCode && (
+                                    <>
+                                        <div className="fixed inset-0 z-[9998]" onClick={() => setIsBrgyOpen(false)}></div>
+                                        <ul className="absolute z-[9999] top-[calc(100%+4px)] left-0 w-full bg-white border border-gray-200 rounded-lg shadow-xl max-h-60 overflow-y-auto py-1">
+                                            {barangays.map((brgy) => (
+                                                <li 
+                                                    key={brgy.name} 
+                                                    className="px-4 py-2 hover:bg-yellow-50 cursor-pointer text-gray-700"
+                                                    onClick={() => {
+                                                        setSelectedBarangayName(brgy.name);
+                                                        setIsBrgyOpen(false);
+                                                    }}
+                                                >
+                                                    {brgy.name}
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </>
+                                )}
                             </div>
                         </div>
                         <div className={`cart-form-field ${pageLoaded ? 'cart-loaded' : ''} mycart-input-group`} style={{ animationDelay: '0.65s' }}>
