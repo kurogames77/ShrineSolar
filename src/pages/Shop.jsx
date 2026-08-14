@@ -120,7 +120,7 @@ export default function Shop() {
       clearTimeout(timer);
       observer.disconnect();
     };
-  }, [searchText, appliedCategories, sortBy]);
+  }, [searchText, appliedCategories, sortBy, allProducts]);
 
   const openQuantityModal = (item) => {
     const existing = cartItems.find(c => c.name === item.name && c.category === 'Shop');
