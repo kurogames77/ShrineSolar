@@ -410,7 +410,7 @@ export default function MyCart() {
             `}</style>
 
             {/* Header */}
-            <header className={`cart-header-enter ${pageLoaded ? 'cart-loaded' : ''} w-full max-w-7xl flex justify-center items-center pt-8 sm:pt-12 pb-4 sm:pb-8 px-4 sm:px-8 relative`}>
+            <header className={`cart-header-enter ${pageLoaded ? 'cart-loaded' : ''} w-full max-w-7xl flex justify-center items-center pt-[90px] sm:pt-[110px] pb-4 sm:pb-8 px-4 sm:px-8 relative`}>
                 {/* Invisible spacer to preserve header height */}
                 <div className="flex items-center gap-3 invisible" aria-hidden="true">
                     <div className="w-8 h-8 sm:w-10 sm:h-10" />
