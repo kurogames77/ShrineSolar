@@ -258,7 +258,7 @@ export default function MyCart() {
     }, {});
 
     return (
-        <div className="w-full min-h-screen bg-[#eef2f7] flex flex-col items-center" style={{ paddingTop: '80px' }}>
+        <div className="w-full min-h-screen bg-[#eef2f7] flex flex-col items-center" style={{ paddingTop: '100px' }}>
             {/* ═══ Cinematic Animation Styles ═══ */}
             <style>{`
                 /* ── Page entrance: panels slide up ── */

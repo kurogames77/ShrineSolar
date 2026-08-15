@@ -101,7 +101,7 @@ export default function Maintenance() {
     };
 
     return (
-        <div className="w-full min-h-screen bg-[#eef2f7] flex flex-col items-center pb-16" style={{ paddingTop: '80px' }}>
+        <div className="w-full min-h-screen bg-[#eef2f7] flex flex-col items-center pb-16" style={{ paddingTop: '100px' }}>
             <style>{`
                 @keyframes slideUpIn {
                     from { opacity: 0; transform: translateY(30px); }
@@ -133,7 +133,7 @@ export default function Maintenance() {
             {/* Main Form Container */}
             <main className="w-full max-w-2xl px-4 sm:px-8">
                 <div 
-                    className={`anim-slide-up ${pageLoaded ? 'loaded' : ''} w-full bg-white rounded-2xl shadow-sm border border-[#e2e8f0] p-6 sm:p-10`}
+                    className={`anim-slide-up ${pageLoaded ? 'loaded' : ''} w-full bg-white rounded-2xl shadow-sm border border-[#e2e8f0] p-8 sm:p-14`}
                     style={{ animationDelay: '0.1s' }}
                 >
                     <div className="text-center mb-8">
@@ -153,7 +153,7 @@ export default function Maintenance() {
                                 placeholder=" "
                                 className="mycart-input bg-white" 
                             />
-                            <label className="mycart-user-label">Full Name *</label>
+                            <label className="mycart-user-label">Full Name</label>
                         </div>
 
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6">
@@ -167,7 +167,7 @@ export default function Maintenance() {
                                     placeholder=" "
                                     className="mycart-input bg-white" 
                                 />
-                                <label className="mycart-user-label">Contact Number *</label>
+                                <label className="mycart-user-label">Contact Number</label>
                             </div>
                             
                             <div className="mycart-input-group">
@@ -217,7 +217,7 @@ export default function Maintenance() {
                                 rows={4}
                                 className="mycart-input bg-white resize-none" 
                             ></textarea>
-                            <label className="mycart-user-label">Describe the Issue *</label>
+                            <label className="mycart-user-label">Describe the Issue</label>
                         </div>
 
                         <button 
