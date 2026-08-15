@@ -101,7 +101,7 @@ export default function Maintenance() {
     };
 
     return (
-        <div className="w-full min-h-screen bg-[#eef2f7] flex flex-col items-center pb-16">
+        <div className="w-full min-h-screen bg-[#eef2f7] flex flex-col items-center pb-16" style={{ paddingTop: '80px' }}>
             <style>{`
                 @keyframes slideUpIn {
                     from { opacity: 0; transform: translateY(30px); }
@@ -117,10 +117,7 @@ export default function Maintenance() {
             `}</style>
 
             {/* Header Area */}
-            <header 
-                className={`anim-slide-up ${pageLoaded ? 'loaded' : ''} w-full max-w-4xl flex justify-center items-center pb-8 px-4 sm:px-8 relative`}
-                style={{ paddingTop: '100px' }}
-            >
+            <header className={`anim-slide-up ${pageLoaded ? 'loaded' : ''} w-full max-w-4xl flex justify-center items-center py-6 px-4 sm:px-8 relative`}>
                 <button
                     onClick={() => navigate(-1)}
                     className="absolute left-4 sm:left-8 text-[#64748b] hover:text-[#1a2332] border-2 border-[#cbd5e1] hover:border-[#94a3b8] hover:bg-white/60 w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center transition-colors"
@@ -144,7 +141,7 @@ export default function Maintenance() {
                         <p className="text-gray-500 text-sm sm:text-base">Fill out the form below and our team will get back to you to schedule an assessment or repair.</p>
                     </div>
 
-                    <form onSubmit={handleSubmit} className="flex flex-col gap-6 sm:gap-8">
+                    <form onSubmit={handleSubmit} className="flex flex-col gap-5 sm:gap-6">
                         
                         <div className="mycart-input-group">
                             <input 
