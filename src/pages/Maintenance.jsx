@@ -114,35 +114,6 @@ export default function Maintenance() {
                 .anim-slide-up.loaded {
                     animation: slideUpIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
                 }
-                .mycart-input {
-                    width: 100%;
-                    padding: 12px 16px;
-                    border: 1px solid #e2e8f0;
-                    border-radius: 12px;
-                    background-color: transparent;
-                    color: #1a2332;
-                    font-size: 1rem;
-                    outline: none;
-                    transition: all 0.2s ease;
-                }
-                .mycart-input:focus {
-                    border-color: #f59e0b;
-                    box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.1);
-                    background-color: #fff;
-                }
-                .mycart-input-group {
-                    position: relative;
-                    width: 100%;
-                }
-                .mycart-user-label {
-                    position: absolute;
-                    left: 16px;
-                    transition: all 0.2s ease;
-                    pointer-events: none;
-                    background: white;
-                    padding: 0 4px;
-                    color: #9ca3af;
-                }
             `}</style>
 
             {/* Header Area */}
@@ -177,9 +148,10 @@ export default function Maintenance() {
                                 value={formData.customer_name}
                                 onChange={handleChange}
                                 required
+                                placeholder=" "
                                 className="mycart-input bg-white" 
                             />
-                            <label className="mycart-user-label" style={{ top: formData.customer_name ? '-0.5rem' : '0.8rem', fontSize: formData.customer_name ? '0.85rem' : '1rem', color: formData.customer_name ? '#f59e0b' : '#9ca3af' }}>Full Name *</label>
+                            <label className="mycart-user-label">Full Name *</label>
                         </div>
 
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6">
@@ -190,9 +162,10 @@ export default function Maintenance() {
                                     value={formData.customer_phone}
                                     onChange={handleChange}
                                     required
+                                    placeholder=" "
                                     className="mycart-input bg-white" 
                                 />
-                                <label className="mycart-user-label" style={{ top: formData.customer_phone ? '-0.5rem' : '0.8rem', fontSize: formData.customer_phone ? '0.85rem' : '1rem', color: formData.customer_phone ? '#f59e0b' : '#9ca3af' }}>Contact Number *</label>
+                                <label className="mycart-user-label">Contact Number *</label>
                             </div>
                             
                             <div className="mycart-input-group">
@@ -201,9 +174,10 @@ export default function Maintenance() {
                                     name="customer_email"
                                     value={formData.customer_email}
                                     onChange={handleChange}
+                                    placeholder=" "
                                     className="mycart-input bg-white" 
                                 />
-                                <label className="mycart-user-label" style={{ top: formData.customer_email ? '-0.5rem' : '0.8rem', fontSize: formData.customer_email ? '0.85rem' : '1rem', color: formData.customer_email ? '#f59e0b' : '#9ca3af' }}>Email Address (Optional)</label>
+                                <label className="mycart-user-label">Email Address (Optional)</label>
                             </div>
                         </div>
 
@@ -213,9 +187,10 @@ export default function Maintenance() {
                                 name="system_details"
                                 value={formData.system_details}
                                 onChange={handleChange}
+                                placeholder=" "
                                 className="mycart-input bg-white" 
                             />
-                            <label className="mycart-user-label" style={{ top: formData.system_details ? '-0.5rem' : '0.8rem', fontSize: formData.system_details ? '0.85rem' : '1rem', color: formData.system_details ? '#f59e0b' : '#9ca3af' }}>System Details / Model (Optional)</label>
+                            <label className="mycart-user-label">System Details / Model (Optional)</label>
                         </div>
 
                         <div className="mycart-input-group">
@@ -224,9 +199,10 @@ export default function Maintenance() {
                                 name="preferred_date"
                                 value={formData.preferred_date}
                                 onChange={handleChange}
+                                placeholder=" "
                                 className="mycart-input bg-white text-gray-700" 
                             />
-                            <label className="mycart-user-label" style={{ top: '-0.5rem', fontSize: '0.85rem', color: formData.preferred_date ? '#f59e0b' : '#9ca3af' }}>Preferred Date (Optional)</label>
+                            <label className="mycart-user-label" style={formData.preferred_date ? {} : { transform: 'translateY(-50%) scale(0.8)', backgroundColor: '#ffffff', padding: '0 0.25em' }}>Preferred Date (Optional)</label>
                         </div>
 
                         <div className="mycart-input-group">
@@ -235,10 +211,11 @@ export default function Maintenance() {
                                 value={formData.issue_description}
                                 onChange={handleChange}
                                 required
+                                placeholder=" "
                                 rows={4}
                                 className="mycart-input bg-white resize-none" 
                             ></textarea>
-                            <label className="mycart-user-label" style={{ top: formData.issue_description ? '-0.5rem' : '0.8rem', fontSize: formData.issue_description ? '0.85rem' : '1rem', color: formData.issue_description ? '#f59e0b' : '#9ca3af' }}>Describe the Issue *</label>
+                            <label className="mycart-user-label">Describe the Issue *</label>
                         </div>
 
                         <button 
