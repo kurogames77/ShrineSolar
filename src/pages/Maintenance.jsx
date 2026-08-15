@@ -118,8 +118,8 @@ export default function Maintenance() {
 
             {/* Header Area */}
             <header 
-                className={`anim-slide-up ${pageLoaded ? 'loaded' : ''} w-full max-w-4xl flex justify-center items-center pb-6 px-4 sm:px-8 relative`}
-                style={{ paddingTop: '140px' }}
+                className={`anim-slide-up ${pageLoaded ? 'loaded' : ''} w-full max-w-4xl flex justify-center items-center pb-8 px-4 sm:px-8 relative`}
+                style={{ paddingTop: '100px' }}
             >
                 <button
                     onClick={() => navigate(-1)}
@@ -139,10 +139,12 @@ export default function Maintenance() {
                     className={`anim-slide-up ${pageLoaded ? 'loaded' : ''} w-full bg-white rounded-2xl shadow-sm border border-[#e2e8f0] p-6 sm:p-10`}
                     style={{ animationDelay: '0.1s' }}
                 >
-                    <h2 className="text-xl sm:text-2xl font-bold text-[#1a2332] mb-2">Request Service</h2>
-                    <p className="text-gray-500 mb-8 text-sm sm:text-base">Fill out the form below and our team will get back to you to schedule an assessment or repair.</p>
+                    <div className="text-center mb-8">
+                        <h2 className="text-xl sm:text-2xl font-bold text-[#1a2332] mb-3">Request Service</h2>
+                        <p className="text-gray-500 text-sm sm:text-base">Fill out the form below and our team will get back to you to schedule an assessment or repair.</p>
+                    </div>
 
-                    <form onSubmit={handleSubmit} className="flex flex-col gap-5 sm:gap-6">
+                    <form onSubmit={handleSubmit} className="flex flex-col gap-6 sm:gap-8">
                         
                         <div className="mycart-input-group">
                             <input 
