@@ -117,7 +117,10 @@ export default function Maintenance() {
             `}</style>
 
             {/* Header Area */}
-            <header className={`anim-slide-up ${pageLoaded ? 'loaded' : ''} w-full max-w-4xl flex justify-center items-center pt-[130px] sm:pt-[150px] pb-6 px-4 sm:px-8 relative`}>
+            <header 
+                className={`anim-slide-up ${pageLoaded ? 'loaded' : ''} w-full max-w-4xl flex justify-center items-center pb-6 px-4 sm:px-8 relative`}
+                style={{ paddingTop: '140px' }}
+            >
                 <button
                     onClick={() => navigate(-1)}
                     className="absolute left-4 sm:left-8 text-[#64748b] hover:text-[#1a2332] border-2 border-[#cbd5e1] hover:border-[#94a3b8] hover:bg-white/60 w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center transition-colors"
