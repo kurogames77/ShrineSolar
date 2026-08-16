@@ -258,7 +258,7 @@ export default function MyCart() {
     }, {});
 
     return (
-        <div className="w-full min-h-screen bg-[#eef2f7] flex flex-col items-center" style={{ paddingTop: '100px' }}>
+        <div className="w-full min-h-screen bg-[#eef2f7] flex flex-col items-center pt-[72px] sm:pt-[80px]">
             {/* ═══ Cinematic Animation Styles ═══ */}
             <style>{`
                 /* ── Page entrance: panels slide up ── */
@@ -410,7 +410,7 @@ export default function MyCart() {
             `}</style>
 
             {/* Header */}
-            <header className={`cart-header-enter ${pageLoaded ? 'cart-loaded' : ''} w-full max-w-7xl flex justify-center items-center py-6 sm:py-8 px-4 sm:px-8 relative`}>
+            <header className={`cart-header-enter ${pageLoaded ? 'cart-loaded' : ''} w-full max-w-7xl flex justify-center items-center py-3 sm:py-4 px-4 sm:px-8 relative`} style={{ paddingTop: '12px' }}>
                 {/* Invisible spacer to preserve header height */}
                 <div className="flex items-center gap-3 invisible" aria-hidden="true">
                     <div className="w-8 h-8 sm:w-10 sm:h-10" />
