@@ -133,8 +133,8 @@ export default function Maintenance() {
             {/* Main Form Container */}
             <main className="w-full max-w-2xl px-4 sm:px-8">
                 <div 
-                    className={`anim-slide-up ${pageLoaded ? 'loaded' : ''} w-full bg-white rounded-2xl shadow-sm border border-[#e2e8f0] p-8 sm:p-14`}
-                    style={{ animationDelay: '0.1s' }}
+                    className={`anim-slide-up ${pageLoaded ? 'loaded' : ''} w-full bg-white rounded-2xl shadow-sm border border-[#e2e8f0]`}
+                    style={{ padding: '28px 32px', animationDelay: '0.1s' }}
                 >
                     <div className="text-center mb-8">
                         <h2 className="text-xl sm:text-2xl font-bold text-[#1a2332] mb-3">Request Service</h2>
@@ -151,9 +151,9 @@ export default function Maintenance() {
                                 onChange={handleChange}
                                 required
                                 placeholder=" "
-                                className="mycart-input bg-white" 
+                                className="mycart-input px-4" 
                             />
-                            <label className="mycart-user-label">Full Name</label>
+                            <label className="mycart-user-label ml-2">Full Name</label>
                         </div>
 
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6">
@@ -165,9 +165,9 @@ export default function Maintenance() {
                                     onChange={handleChange}
                                     required
                                     placeholder=" "
-                                    className="mycart-input bg-white" 
+                                    className="mycart-input px-4" 
                                 />
-                                <label className="mycart-user-label">Contact Number</label>
+                                <label className="mycart-user-label ml-2">Contact Number</label>
                             </div>
                             
                             <div className="mycart-input-group">
@@ -177,9 +177,9 @@ export default function Maintenance() {
                                     value={formData.customer_email}
                                     onChange={handleChange}
                                     placeholder=" "
-                                    className="mycart-input bg-white" 
+                                    className="mycart-input px-4" 
                                 />
-                                <label className="mycart-user-label">Email Address (Optional)</label>
+                                <label className="mycart-user-label ml-2">Email Address (Optional)</label>
                             </div>
                         </div>
 
@@ -190,9 +190,9 @@ export default function Maintenance() {
                                 value={formData.system_details}
                                 onChange={handleChange}
                                 placeholder=" "
-                                className="mycart-input bg-white" 
+                                className="mycart-input px-4" 
                             />
-                            <label className="mycart-user-label">System Details / Model (Optional)</label>
+                            <label className="mycart-user-label ml-2">System Details / Model (Optional)</label>
                         </div>
 
                         <div className="mycart-input-group">
@@ -202,9 +202,9 @@ export default function Maintenance() {
                                 value={formData.preferred_date}
                                 onChange={handleChange}
                                 placeholder=" "
-                                className="mycart-input bg-white text-gray-700" 
+                                className="mycart-input px-4 text-gray-700" 
                             />
-                            <label className="mycart-user-label" style={formData.preferred_date ? {} : { transform: 'translateY(-50%) scale(0.8)', backgroundColor: '#ffffff', padding: '0 0.25em' }}>Preferred Date (Optional)</label>
+                            <label className="mycart-user-label ml-2" style={formData.preferred_date ? {} : { transform: 'translateY(-50%) scale(0.8)', backgroundColor: '#ffffff', padding: '0 0.25em' }}>Preferred Date (Optional)</label>
                         </div>
 
                         <div className="mycart-input-group">
@@ -215,9 +215,9 @@ export default function Maintenance() {
                                 required
                                 placeholder=" "
                                 rows={4}
-                                className="mycart-input bg-white resize-none" 
+                                className="mycart-input px-4 resize-none" 
                             ></textarea>
-                            <label className="mycart-user-label">Describe the Issue</label>
+                            <label className="mycart-user-label ml-2">Describe the Issue</label>
                         </div>
 
                         <button 
