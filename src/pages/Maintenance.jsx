@@ -101,7 +101,7 @@ export default function Maintenance() {
     };
 
     return (
-        <div className="w-full min-h-screen bg-[#eef2f7] flex flex-col items-center pb-16 pt-[72px] sm:pt-[80px]">
+        <div className="w-full min-h-screen bg-[#eef2f7] flex flex-col items-center pb-16 pt-[88px] sm:pt-[96px]">
             <style>{`
                 @keyframes slideUpIn {
                     from { opacity: 0; transform: translateY(30px); }
