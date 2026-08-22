@@ -2,11 +2,13 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { supabase } from '../supabaseClient';
+import { Turnstile } from '@marsidev/react-turnstile';
 
 export default function Maintenance() {
     const navigate = useNavigate();
     const [pageLoaded, setPageLoaded] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [turnstileToken, setTurnstileToken] = useState(null);
     const [formData, setFormData] = useState({
         customer_name: '',
         customer_phone: '',
@@ -37,6 +39,16 @@ export default function Maintenance() {
                 icon: 'warning',
                 title: 'Missing Fields',
                 text: 'Please fill in all required fields.',
+                confirmButtonColor: '#f59e0b',
+            });
+            return;
+        }
+
+        if (!turnstileToken) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Captcha Required',
+                text: 'Please complete the Cloudflare captcha before proceeding.',
                 confirmButtonColor: '#f59e0b',
             });
             return;
@@ -86,6 +98,7 @@ export default function Maintenance() {
                 preferred_date: '',
                 issue_description: ''
             });
+            setTurnstileToken(null);
 
         } catch (error) {
             console.error('Supabase Error:', error);
@@ -184,15 +197,27 @@ export default function Maintenance() {
                         </div>
 
                         <div className="mycart-input-group">
-                            <input 
-                                type="text" 
+                            <select 
                                 name="system_details"
                                 value={formData.system_details}
                                 onChange={handleChange}
-                                placeholder=" "
-                                className="mycart-input px-4" 
-                            />
-                            <label className="mycart-user-label ml-2">System Details / Model (Optional)</label>
+                                className="mycart-input px-4 bg-white" 
+                            >
+                                <option value="" disabled hidden></option>
+                                <option value="Solar Panel System">Solar Panel System</option>
+                                <option value="Inverter">Inverter</option>
+                                <option value="Battery Storage">Battery Storage</option>
+                                <option value="Charge Controller">Charge Controller</option>
+                                <option value="Mounting / Racking">Mounting / Racking</option>
+                                <option value="Electrical & Wiring">Electrical & Wiring</option>
+                                <option value="Other">Other</option>
+                            </select>
+                            <label 
+                                className="mycart-user-label ml-2" 
+                                style={formData.system_details ? { transform: 'translateY(-50%) scale(0.8)', backgroundColor: '#ffffff', padding: '0 0.25em' } : {}}
+                            >
+                                System Details / Model (Optional)
+                            </label>
                         </div>
 
                         <div className="mycart-input-group">
@@ -218,6 +243,15 @@ export default function Maintenance() {
                                 className="mycart-input px-4 resize-none" 
                             ></textarea>
                             <label className="mycart-user-label ml-2">Describe the Issue</label>
+                        </div>
+
+                        {/* Cloudflare Turnstile */}
+                        <div className="mt-2 mb-2 min-h-[100px] flex items-center justify-center w-full">
+                            <Turnstile 
+                                siteKey="0x4AAAAAAD6EPzOFjE9_pvVF" 
+                                onSuccess={(token) => setTurnstileToken(token)}
+                                options={{ theme: 'light' }}
+                            />
                         </div>
 
                         <button 
