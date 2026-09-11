@@ -11,6 +11,7 @@ export default function Maintenance() {
     const [turnstileToken, setTurnstileToken] = useState(null);
     const [formData, setFormData] = useState({
         customer_name: '',
+        customer_address: '',
         customer_phone: '',
         customer_email: '',
         system_details: '',
@@ -34,7 +35,7 @@ export default function Maintenance() {
         e.preventDefault();
 
         // Basic validation
-        if (!formData.customer_name || !formData.customer_phone || !formData.issue_description) {
+        if (!formData.customer_name || !formData.customer_address || !formData.customer_phone || !formData.issue_description) {
             Swal.fire({
                 icon: 'warning',
                 title: 'Missing Fields',
@@ -71,6 +72,7 @@ export default function Maintenance() {
                 .insert({
                     id: crypto.randomUUID(),
                     customer_name: formData.customer_name.trim(),
+                    customer_address: formData.customer_address.trim(),
                     customer_email: formData.customer_email.trim() || null,
                     customer_phone: formData.customer_phone.trim(),
                     system_details: formData.system_details.trim() || null,
@@ -92,6 +94,7 @@ export default function Maintenance() {
             // Clear form
             setFormData({
                 customer_name: '',
+                customer_address: '',
                 customer_phone: '',
                 customer_email: '',
                 system_details: '',
@@ -167,6 +170,19 @@ export default function Maintenance() {
                                 className="mycart-input px-4" 
                             />
                             <label className="mycart-user-label ml-2">Full Name</label>
+                        </div>
+
+                        <div className="mycart-input-group">
+                            <input 
+                                type="text" 
+                                name="customer_address"
+                                value={formData.customer_address}
+                                onChange={handleChange}
+                                required
+                                placeholder=" "
+                                className="mycart-input px-4" 
+                            />
+                            <label className="mycart-user-label ml-2">Address</label>
                         </div>
 
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6">
