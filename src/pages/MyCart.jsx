@@ -409,25 +409,28 @@ export default function MyCart() {
                 }
             `}</style>
 
-            {/* Header (Back button aligned with Cart Items) */}
-            <div className={`cart-header-enter ${pageLoaded ? 'cart-loaded' : ''} w-full max-w-7xl px-6 sm:px-10 pt-8 sm:pt-12 flex flex-col lg:flex-row gap-6 sm:gap-10 justify-center items-start`}>
-                <div className="w-full mx-auto lg:mx-0 max-w-[550px] flex justify-start">
-                    <button
-                        onClick={() => navigate(-1)}
-                        className="text-[#64748b] hover:text-[#1a2332] border-2 border-[#cbd5e1] hover:border-[#94a3b8] hover:bg-white/60 w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center transition-colors"
-                        title="Go Back"
-                    >
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 sm:w-6 sm:h-6">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
-                        </svg>
-                    </button>
-                </div>
-                {/* Spacer to balance the flex layout */}
-                <div className="w-full mx-auto lg:mx-0 max-w-[550px] hidden lg:block"></div>
-            </div>
-
             {/* Main Content */}
-            <div className="flex-grow w-full max-w-7xl px-6 sm:px-10 pb-8 pt-4 sm:pt-6 flex flex-col lg:flex-row gap-6 sm:gap-10 justify-center items-start">
+            <div className="relative flex-grow w-full max-w-7xl px-6 sm:px-10 pb-8 pt-6 sm:pt-10 flex flex-col lg:flex-row gap-6 sm:gap-10 justify-center items-start">
+                {/* Back button aligned vertically with the Cart Items box on the left side */}
+                <button
+                    onClick={() => navigate(-1)}
+                    className="absolute left-4 sm:left-6 lg:left-8 top-6 sm:top-10 text-[#64748b] hover:text-[#1a2332] border-2 border-[#cbd5e1] hover:border-[#94a3b8] hover:bg-white/60 w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center transition-colors z-10 hidden md:flex"
+                    title="Go Back"
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 sm:w-6 sm:h-6">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+                    </svg>
+                </button>
+                {/* Mobile back button (positioned at top left of content for small screens where absolute left would overlap) */}
+                <button
+                    onClick={() => navigate(-1)}
+                    className="self-start md:hidden mb-2 text-[#64748b] hover:text-[#1a2332] border-2 border-[#cbd5e1] hover:border-[#94a3b8] hover:bg-white/60 w-10 h-10 rounded-full flex items-center justify-center transition-colors"
+                    title="Go Back"
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+                    </svg>
+                </button>
                 {/* Left: Cart Items */}
                 <div
                     className={`cart-panel-enter ${pageLoaded ? 'cart-loaded' : ''} w-full mx-auto lg:mx-0 max-w-[550px] bg-white border border-[#e2e8f0] rounded-2xl shadow-[0_1px_3px_rgba(0,0,0,0.08)] overflow-y-auto max-h-[60vh] lg:max-h-[70vh]`}
