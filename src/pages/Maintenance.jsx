@@ -216,7 +216,7 @@ export default function Maintenance() {
                                 className="mycart-user-label ml-2" 
                                 style={formData.system_details ? { transform: 'translateY(-50%) scale(0.8)', backgroundColor: '#ffffff', padding: '0 0.25em' } : {}}
                             >
-                                System Details / Model (Optional)
+                                System Details / Model
                             </label>
                         </div>
 
@@ -229,7 +229,7 @@ export default function Maintenance() {
                                 placeholder=" "
                                 className="mycart-input px-4 text-gray-700" 
                             />
-                            <label className="mycart-user-label ml-2" style={formData.preferred_date ? {} : { transform: 'translateY(-50%) scale(0.8)', backgroundColor: '#ffffff', padding: '0 0.25em' }}>Preferred Date (Optional)</label>
+                            <label className="mycart-user-label ml-2" style={formData.preferred_date ? {} : { transform: 'translateY(-50%) scale(0.8)', backgroundColor: '#ffffff', padding: '0 0.25em' }}>Preferred Date</label>
                         </div>
 
                         <div className="mycart-input-group">
@@ -257,7 +257,7 @@ export default function Maintenance() {
                         <button 
                             type="submit" 
                             disabled={isSubmitting}
-                            className="mt-4 w-full bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-4 rounded-xl shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
+                            className="mt-4 w-full bg-yellow-500 hover:bg-yellow-600 text-white font-bold text-lg py-5 rounded-xl shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
                         >
                             {isSubmitting ? (
                                 <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
