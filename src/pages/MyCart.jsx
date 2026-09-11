@@ -410,11 +410,11 @@ export default function MyCart() {
             `}</style>
 
             {/* Main Content */}
-            <div className="relative flex-grow w-full max-w-7xl px-6 sm:px-10 pb-8 pt-6 sm:pt-10 flex flex-col lg:flex-row gap-6 sm:gap-10 justify-center items-start">
+            <div className="relative flex-grow w-full max-w-[1400px] px-6 sm:px-10 md:px-16 lg:px-24 xl:px-32 pb-8 pt-6 sm:pt-10 flex flex-col lg:flex-row gap-6 sm:gap-10 justify-center items-start">
                 {/* Back button aligned vertically with the Cart Items box on the left side */}
                 <button
                     onClick={() => navigate(-1)}
-                    className="absolute left-4 sm:left-6 lg:left-8 top-6 sm:top-10 text-[#64748b] hover:text-[#1a2332] border-2 border-[#cbd5e1] hover:border-[#94a3b8] hover:bg-white/60 w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center transition-colors z-10 hidden md:flex"
+                    className="absolute md:left-2 lg:left-6 xl:left-10 top-6 sm:top-10 text-[#64748b] hover:text-[#1a2332] border-2 border-[#cbd5e1] hover:border-[#94a3b8] hover:bg-white/60 w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center transition-colors z-10 hidden md:flex"
                     title="Go Back"
                 >
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 sm:w-6 sm:h-6">
